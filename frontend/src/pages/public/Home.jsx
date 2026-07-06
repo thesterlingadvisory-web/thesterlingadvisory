@@ -101,7 +101,7 @@ export default function Home() {
         <div className="max-w-4xl mx-auto px-6 text-center">
           <h2 className="text-4xl md:text-6xl font-heading mb-8">Let's Build Better Businesses.</h2>
           <p className="text-gray-400 mb-12 max-w-xl mx-auto text-lg">
-            Partner with TheSterlingAdvisory for strategic guidance that transforms your business trajectory.
+            Partner with Sterling Advisory for strategic guidance that transforms your business trajectory.
           </p>
           <Link to="/contact" className="inline-flex items-center justify-center px-8 py-4 text-sm font-medium text-text-main bg-white hover:bg-gray-100 transition-colors rounded-sm">
             Book a Consultation

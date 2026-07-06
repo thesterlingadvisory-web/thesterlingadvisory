@@ -26,7 +26,7 @@ export default function PublicLayout() {
       <header className="sticky top-0 z-50 bg-primary/90 backdrop-blur-md border-b border-border-main">
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
           <Link to="/" className="text-xl md:text-2xl font-heading font-semibold tracking-tight z-50 relative">
-            TheSterlingAdvisory
+            Sterling Advisory
           </Link>
           
           <nav className="hidden md:flex items-center gap-8 text-sm font-medium">
@@ -76,7 +76,7 @@ export default function PublicLayout() {
       <footer className="border-t border-border-main bg-white py-16">
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
           <div className="sm:col-span-2 lg:col-span-1">
-            <h3 className="text-xl font-heading font-semibold mb-4">TheSterlingAdvisory</h3>
+            <h3 className="text-xl font-heading font-semibold mb-4">Sterling Advisory</h3>
             <p className="text-sm text-text-muted leading-relaxed">
               Strategic, financial, regulatory, and operational advisory that drives sustainable growth.
             </p>
@@ -107,7 +107,7 @@ export default function PublicLayout() {
           </div>
         </div>
         <div className="max-w-7xl mx-auto px-6 mt-16 pt-8 border-t border-border-main text-xs text-text-muted flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-center md:text-left">© {new Date().getFullYear()} TheSterlingAdvisory. All rights reserved.</p>
+          <p className="text-center md:text-left">© {new Date().getFullYear()} Sterling Advisory. All rights reserved.</p>
           <div className="flex gap-6">
             <Link to="/privacy">Privacy Policy</Link>
             <Link to="/terms">Terms of Service</Link>
