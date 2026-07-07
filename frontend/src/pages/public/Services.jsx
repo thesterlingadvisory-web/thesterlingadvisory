@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { serviceCategories } from '../../data/services';
 import { Landmark, BarChart2, Users, Shield, CheckCircle2, TrendingUp } from 'lucide-react';
 
@@ -13,22 +13,38 @@ const iconMap = {
 };
 
 export default function Services() {
+  const [searchParams] = useSearchParams();
+  const categoryFilter = searchParams.get('category');
+
+  const displayedCategories = categoryFilter 
+    ? serviceCategories.filter(c => c.id === categoryFilter)
+    : serviceCategories;
+
   return (
     <div className="w-full bg-primary min-h-screen">
       {/* Header */}
       <section className="pt-24 pb-16 px-6 text-center">
         <div className="max-w-3xl mx-auto">
-          <h1 className="text-5xl md:text-6xl font-heading mb-6 tracking-tight">Our Services</h1>
+          <h1 className="text-5xl md:text-6xl font-heading mb-6 tracking-tight">
+            {categoryFilter && displayedCategories.length > 0 ? displayedCategories[0].title : "Our Services"}
+          </h1>
           <p className="text-lg text-text-muted">
-            Explore our comprehensive suite of registration and compliance services designed to build, protect, and scale your business.
+            {categoryFilter && displayedCategories.length > 0 
+              ? displayedCategories[0].description 
+              : "Explore our comprehensive suite of registration and compliance services designed to build, protect, and scale your business."}
           </p>
+          {categoryFilter && (
+            <Link to="/services" className="inline-block mt-6 text-sm font-bold text-accent hover:text-text-main transition-colors">
+              ← View All Services
+            </Link>
+          )}
         </div>
       </section>
 
       {/* Categories Grid */}
       <section className="pb-32 px-6 max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {serviceCategories.map((category) => (
+          {displayedCategories.map((category) => (
             <div key={category.id} className="bg-white p-8 md:p-10 border border-border-main rounded-none hover:shadow-xl hover:shadow-black/5 transition-all duration-500">
               <div className="flex items-start md:items-center gap-4 mb-8 flex-col md:flex-row">
                 <div className="w-14 h-14 bg-primary flex items-center justify-center text-accent shrink-0 rounded-none border border-border-main">
