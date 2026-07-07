@@ -4,8 +4,8 @@ import AdminLayout from './components/layout/AdminLayout';
 
 // Public Pages
 import Home from './pages/public/Home';
-import Capabilities from './pages/public/Capabilities';
-import CapabilityDetail from './pages/public/CapabilityDetail';
+import Services from './pages/public/Services';
+import ServiceDetail from './pages/public/ServiceDetail';
 import Industries from './pages/public/Industries';
 import IndustryDetail from './pages/public/IndustryDetail';
 import Insights from './pages/public/Insights';
@@ -26,8 +26,8 @@ function App() {
         {/* Public Routes */}
         <Route element={<PublicLayout />}>
           <Route path="/" element={<Home />} />
-          <Route path="/capabilities" element={<Capabilities />} />
-          <Route path="/capabilities/:slug" element={<CapabilityDetail />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/services/:slug" element={<ServiceDetail />} />
           <Route path="/industries" element={<Industries />} />
           <Route path="/industries/:slug" element={<IndustryDetail />} />
           <Route path="/insights" element={<Insights />} />

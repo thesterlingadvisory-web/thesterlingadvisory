@@ -37,7 +37,7 @@ export default function PublicLayout() {
           </nav>
 
           <div className="flex items-center gap-4">
-            <Link to="/contact" className="hidden md:inline-flex items-center justify-center px-6 py-2.5 text-sm font-medium text-white bg-text-main hover:bg-black hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 rounded-sm shadow-sm">
+            <Link to="/contact" className="hidden md:inline-flex items-center justify-center px-6 py-2.5 text-sm font-bold text-white bg-text-main hover:bg-accent hover:-translate-y-0.5 transition-all duration-300 rounded-none">
               Book Consultation
             </Link>
             <button 
@@ -62,7 +62,7 @@ export default function PublicLayout() {
           </nav>
           
           <div className="mt-8">
-            <Link to="/contact" className="w-full flex items-center justify-center px-6 py-4 text-base font-medium text-white bg-text-main rounded-sm">
+            <Link to="/contact" className="w-full flex items-center justify-center px-6 py-4 text-base font-bold text-white bg-text-main rounded-none">
               Book Consultation
             </Link>
           </div>

@@ -3,14 +3,14 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import { CheckCircle2, ArrowRight, FileText, Clock, CreditCard, ShieldAlert } from 'lucide-react';
 import { getServiceBySlug } from '../../data/services';
 
-export default function CapabilityDetail() {
+export default function ServiceDetail() {
   const { slug } = useParams();
   const navigate = useNavigate();
   const serviceData = getServiceBySlug(slug);
 
   useEffect(() => {
     if (!serviceData) {
-      navigate('/capabilities', { replace: true });
+      navigate('/services', { replace: true });
     }
   }, [serviceData, navigate]);
 
@@ -40,7 +40,7 @@ export default function CapabilityDetail() {
       {/* Hero Section */}
       <section className="bg-white border-b border-border-main pt-24 pb-16 px-6">
         <div className="max-w-4xl mx-auto">
-          <Link to="/capabilities" className="text-xs font-mono tracking-widest uppercase text-text-muted hover:text-accent transition-colors mb-6 inline-block">
+          <Link to="/services" className="text-xs font-mono tracking-widest uppercase text-text-muted hover:text-accent transition-colors mb-6 inline-block">
             ← Back to {serviceData.category}
           </Link>
           <h1 className="text-4xl md:text-6xl font-heading font-medium mb-6 text-text-main tracking-tight">{title}</h1>

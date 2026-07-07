@@ -1,21 +1,22 @@
 @import "tailwindcss";
 
 @theme {
-  /* Colors */
-  --color-primary: #F7F5F2; /* Background */
-  --color-text-main: #101828; /* Primary Text */
-  --color-text-muted: #475467; /* Secondary Text */
-  --color-accent: #8B6B3E; /* Accent */
-  --color-border-main: #E5E7EB; /* Borders */
+  /* Option 1: Swiss Minimalist Colors */
+  --color-primary: #FFFFFF; /* Pure White Background */
+  --color-secondary: #F8FAFC; /* Light Cool Gray Alt Background */
+  --color-text-main: #09090B; /* Pitch Black Primary Text */
+  --color-text-muted: #52525B; /* Slate Gray Secondary Text */
+  --color-accent: #1D4ED8; /* Royal Blue Accent */
+  --color-border-main: #E4E4E7; /* Crisp Borders */
 
-  /* Fonts */
-  --font-heading: 'Cormorant Garamond', serif;
+  /* Fonts - All Sans Serif for Minimalist Corporate look */
+  --font-heading: 'Inter', sans-serif;
   --font-body: 'Inter', sans-serif;
   --font-mono: 'IBM Plex Mono', monospace;
 }
 
 @layer base {
-  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@300;400;500;600;700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@300;400;500;600;700;800&display=swap');
 
   body {
     background-color: var(--color-primary);
@@ -26,14 +27,14 @@
   }
 
   ::selection {
-    background-color: var(--color-accent);
+    background-color: var(--color-text-main);
     color: #ffffff;
   }
 
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading);
-    font-weight: 500;
-    letter-spacing: -0.02em; 
+    font-weight: 700;
+    letter-spacing: -0.03em; 
     line-height: 1.1;
   }
 
@@ -53,10 +54,10 @@
     background: var(--color-primary); 
   }
   ::-webkit-scrollbar-thumb {
-    background: #d1d5db; 
-    border-radius: 8px;
+    background: #E4E4E7; 
+    border-radius: 0px; /* Sharp edges */
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: var(--color-accent); 
+    background: var(--color-text-muted); 
   }
 }
