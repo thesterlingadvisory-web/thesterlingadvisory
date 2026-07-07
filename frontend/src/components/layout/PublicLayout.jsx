@@ -23,7 +23,7 @@ export default function PublicLayout() {
 
   return (
     <div className="min-h-screen flex flex-col font-body bg-primary text-text-main">
-      <header className="sticky top-0 z-50 bg-primary/90 backdrop-blur-md border-b border-border-main">
+      <header className="sticky top-0 z-50 bg-primary/80 backdrop-blur-lg border-b border-border-main shadow-sm">
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
           <Link to="/" className="text-xl md:text-2xl font-heading font-semibold tracking-tight z-50 relative">
             Sterling Advisory
@@ -37,7 +37,7 @@ export default function PublicLayout() {
           </nav>
 
           <div className="flex items-center gap-4">
-            <Link to="/contact" className="hidden md:inline-flex items-center justify-center px-6 py-2.5 text-sm font-medium text-white bg-text-main hover:bg-black transition-colors rounded-sm shadow-sm">
+            <Link to="/contact" className="hidden md:inline-flex items-center justify-center px-6 py-2.5 text-sm font-medium text-white bg-text-main hover:bg-black hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 rounded-sm shadow-sm">
               Book Consultation
             </Link>
             <button 

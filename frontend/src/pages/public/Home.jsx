@@ -36,10 +36,10 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-4"
           >
-            <Link to="/contact" className="w-full sm:w-auto px-8 py-4 bg-text-main text-white text-sm font-medium hover:bg-black transition-colors rounded-sm flex items-center justify-center gap-2">
-              Talk to an Advisor <ArrowRight size={16} />
+            <Link to="/contact" className="group w-full sm:w-auto px-8 py-4 bg-text-main text-white text-sm font-medium hover:bg-black hover:shadow-xl hover:shadow-black/10 hover:-translate-y-0.5 transition-all duration-300 rounded-sm flex items-center justify-center gap-2">
+              Talk to an Advisor <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform duration-300" />
             </Link>
-            <Link to="/capabilities" className="w-full sm:w-auto px-8 py-4 bg-transparent border border-border-main text-text-main text-sm font-medium hover:border-text-main transition-colors rounded-sm">
+            <Link to="/capabilities" className="w-full sm:w-auto px-8 py-4 bg-transparent border border-border-main text-text-main text-sm font-medium hover:border-text-main hover:bg-black/5 hover:-translate-y-0.5 transition-all duration-300 rounded-sm">
               Explore Solutions
             </Link>
           </motion.div>
@@ -77,19 +77,26 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
-              { icon: <Landmark/>, title: "Business Setup", desc: "Private Limited, LLP, OPC, and NGO registrations with end-to-end guidance." },
-              { icon: <BarChart2/>, title: "Tax & Statutory", desc: "Comprehensive GST, PAN, TAN, and Professional Tax registrations." },
-              { icon: <Users/>, title: "Workforce & Labour", desc: "EPF, ESIC, CLRA, and State Establishment registrations for scaling teams." },
-              { icon: <Shield/>, title: "Intellectual Property", desc: "Protect your brand with specialized trademark, copyright, and patent filings." },
-              { icon: <TrendingUp/>, title: "Industry Licensing", desc: "FSSAI, Drug Licences, RERA, and Environmental approvals simplified." },
-              { icon: <CheckCircle2/>, title: "Digital & Compliance", desc: "Digital Signatures, DINs, MCA KYC, and ongoing annual compliance filings." }
+              { icon: <Landmark/>, title: "Business Setup", desc: "Private Limited, LLP, OPC, and NGO registrations with end-to-end guidance.", tags: ['Private Limited', 'LLP', 'Proprietorship'] },
+              { icon: <BarChart2/>, title: "Tax & Statutory", desc: "Comprehensive GST, PAN, TAN, and Professional Tax registrations.", tags: ['GST', 'Professional Tax', 'TDS'] },
+              { icon: <Users/>, title: "Workforce & Labour", desc: "EPF, ESIC, CLRA, and State Establishment registrations for scaling teams.", tags: ['EPF', 'ESIC', 'Shops & Est.'] },
+              { icon: <Shield/>, title: "Intellectual Property", desc: "Protect your brand with specialized trademark, copyright, and patent filings.", tags: ['Trademark', 'Copyright', 'Patent'] },
+              { icon: <TrendingUp/>, title: "Industry Licensing", desc: "FSSAI, Drug Licences, RERA, and Environmental approvals simplified.", tags: ['FSSAI', 'Drug Licence', 'Fire NOC'] },
+              { icon: <CheckCircle2/>, title: "Digital & Compliance", desc: "Digital Signatures, DINs, MCA KYC, and ongoing annual compliance filings.", tags: ['DSC', 'DIN', 'MCA KYC'] }
             ].map((cap, i) => (
-              <Link to={`/capabilities/${cap.title.toLowerCase().replace(/ /g, '-').replace('&', 'and')}`} key={i} className="group p-8 bg-white border border-border-main hover:border-accent/50 transition-all duration-300 flex flex-col h-full rounded-sm">
-                <div className="w-12 h-12 bg-primary flex items-center justify-center text-text-main mb-8 group-hover:bg-accent group-hover:text-white transition-colors">
+              <Link to="/capabilities" key={i} className="group p-10 bg-white border border-border-main hover:border-accent/30 hover:shadow-xl hover:shadow-black/5 hover:-translate-y-1 transition-all duration-500 flex flex-col h-full rounded-sm">
+                <div className="w-12 h-12 bg-primary flex items-center justify-center text-text-main mb-8 group-hover:bg-accent group-hover:text-white transition-colors duration-500">
                   {cap.icon}
                 </div>
-                <h3 className="text-xl font-heading font-medium mb-3 group-hover:text-accent transition-colors">{cap.title}</h3>
-                <p className="text-sm text-text-muted leading-relaxed mt-auto">{cap.desc}</p>
+                <h3 className="text-2xl font-heading font-medium mb-3 group-hover:text-accent transition-colors duration-300">{cap.title}</h3>
+                <p className="text-sm text-text-muted leading-relaxed mb-6">{cap.desc}</p>
+                <div className="mt-auto flex flex-wrap gap-2">
+                  {cap.tags.map((tag, j) => (
+                    <span key={j} className="text-xs font-medium px-2.5 py-1 bg-primary/50 text-text-muted group-hover:bg-primary group-hover:text-text-main transition-colors rounded-sm">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
               </Link>
             ))}
           </div>
@@ -103,7 +110,7 @@ export default function Home() {
           <p className="text-gray-400 mb-12 max-w-xl mx-auto text-lg">
             Partner with Sterling Advisory for strategic guidance that transforms your business trajectory.
           </p>
-          <Link to="/contact" className="inline-flex items-center justify-center px-8 py-4 text-sm font-medium text-text-main bg-white hover:bg-gray-100 transition-colors rounded-sm">
+          <Link to="/contact" className="inline-flex items-center justify-center px-8 py-4 text-sm font-medium text-text-main bg-white hover:bg-gray-100 hover:shadow-2xl hover:shadow-white/10 hover:-translate-y-0.5 transition-all duration-300 rounded-sm">
             Book a Consultation
           </Link>
         </div>

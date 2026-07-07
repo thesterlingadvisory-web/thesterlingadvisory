@@ -25,12 +25,38 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
+  ::selection {
+    background-color: var(--color-accent);
+    color: #ffffff;
+  }
+
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading);
     font-weight: 500;
+    letter-spacing: -0.02em; 
+    line-height: 1.1;
+  }
+
+  p {
+    line-height: 1.7;
   }
 
   code, pre, .mono {
     font-family: var(--font-mono);
+  }
+
+  /* Premium Scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--color-primary); 
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #d1d5db; 
+    border-radius: 8px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-accent); 
   }
 }
