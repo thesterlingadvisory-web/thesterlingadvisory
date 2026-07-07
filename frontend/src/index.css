@@ -1,22 +1,22 @@
 @import "tailwindcss";
 
 @theme {
-  /* Option 1: Swiss Minimalist Colors */
+  /* Classy Light Theme */
   --color-primary: #FFFFFF; /* Pure White Background */
-  --color-secondary: #F8FAFC; /* Light Cool Gray Alt Background */
-  --color-text-main: #09090B; /* Pitch Black Primary Text */
-  --color-text-muted: #52525B; /* Slate Gray Secondary Text */
-  --color-accent: #1D4ED8; /* Royal Blue Accent */
-  --color-border-main: #E4E4E7; /* Crisp Borders */
+  --color-secondary: #FAFAFA; /* Ultra Light Gray Alt Background */
+  --color-text-main: #111827; /* Deep Charcoal Primary Text */
+  --color-text-muted: #6B7280; /* Elegant Slate Secondary Text */
+  --color-accent: #1E3A8A; /* Deep Institutional Navy Accent */
+  --color-border-main: #E5E7EB; /* Very subtle borders */
 
-  /* Fonts - All Sans Serif for Minimalist Corporate look */
-  --font-heading: 'Inter', sans-serif;
+  /* Fonts - Serif for Headings, Sans for Body */
+  --font-heading: 'Playfair Display', serif;
   --font-body: 'Inter', sans-serif;
   --font-mono: 'IBM Plex Mono', monospace;
 }
 
 @layer base {
-  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@300;400;500;600;700;800&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap');
 
   body {
     background-color: var(--color-primary);
@@ -27,19 +27,19 @@
   }
 
   ::selection {
-    background-color: var(--color-text-main);
+    background-color: var(--color-accent);
     color: #ffffff;
   }
 
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading);
-    font-weight: 700;
-    letter-spacing: -0.03em; 
-    line-height: 1.1;
+    font-weight: 500; /* Medium weight for elegance */
+    letter-spacing: -0.01em; 
+    line-height: 1.15;
   }
 
   p {
-    line-height: 1.7;
+    line-height: 1.8;
   }
 
   code, pre, .mono {
@@ -54,7 +54,7 @@
     background: var(--color-primary); 
   }
   ::-webkit-scrollbar-thumb {
-    background: #E4E4E7; 
+    background: var(--color-border-main); 
     border-radius: 0px; /* Sharp edges */
   }
   ::-webkit-scrollbar-thumb:hover {
