@@ -19,20 +19,20 @@ export default function Home() {
             initial="hidden" animate="visible" variants={FADE_UP}
             className="text-5xl md:text-7xl lg:text-[5.5rem] font-heading font-medium leading-[1.1] text-text-main mb-8"
           >
-            Definitive Guidance. <br/> Precise Execution.
+            Expert Corporate <br/> Advisory & Compliance.
           </motion.h1>
           <motion.p 
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4, duration: 1 }}
             className="text-lg md:text-xl text-text-muted leading-relaxed mb-16 mx-auto max-w-2xl font-body font-light"
           >
-            We provide elite registration, compliance, and corporate structuring solutions for enterprises that demand nothing but absolute precision.
+            Comprehensive business registration, tax structuring, and statutory compliance services tailored for modern enterprises.
           </motion.p>
           <motion.div 
             initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6, duration: 0.8 }}
             className="flex justify-center"
           >
             <Link to="/contact" className="group flex items-center gap-4 text-sm font-bold uppercase tracking-widest text-accent hover:text-text-main transition-colors duration-500">
-              <span className="border-b border-accent pb-1 group-hover:border-text-main transition-colors">Initiate Engagement</span>
+              <span className="border-b border-accent pb-1 group-hover:border-text-main transition-colors">Consult Our Experts</span>
               <ArrowRight size={18} className="group-hover:translate-x-2 transition-transform duration-500" />
             </Link>
           </motion.div>
@@ -98,12 +98,12 @@ export default function Home() {
       {/* 3. Refined Call To Action */}
       <section className="py-32 bg-primary border-t border-border-main">
         <div className="max-w-3xl mx-auto px-6 text-center">
-          <h2 className="text-4xl md:text-6xl font-heading font-medium mb-8 text-text-main">Partner with Sterling.</h2>
+          <h2 className="text-4xl md:text-6xl font-heading font-medium mb-8 text-text-main">Take the next step.</h2>
           <p className="text-text-muted mb-12 max-w-xl mx-auto text-lg font-light leading-relaxed">
-            Professional corporate services and definitive compliance solutions tailored for businesses that demand excellence.
+            Connect with our advisory team to discuss your corporate registration and statutory compliance needs.
           </p>
           <Link to="/contact" className="inline-flex items-center justify-center px-10 py-5 text-sm font-bold uppercase tracking-widest text-white bg-text-main hover:bg-accent transition-colors duration-500 rounded-none">
-            Book a Consultation
+            Schedule a Consultation
           </Link>
         </div>
       </section>
