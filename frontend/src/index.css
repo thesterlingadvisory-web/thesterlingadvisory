@@ -2,13 +2,15 @@
 @import "tailwindcss";
 
 @theme {
-  /* Classy Structural Theme */
-  --color-primary: #FFFFFF; /* Pure White Background */
-  --color-secondary: #F8F9FA; /* Ultra Light Gray Alt Background */
-  --color-text-main: #111111; /* Deep Charcoal Primary Text */
-  --color-text-muted: #555555; /* Elegant Slate Secondary Text */
-  --color-accent: #0A1F44; /* Deep Institutional Navy Accent */
-  --color-border-main: #E5E7EB; /* Very subtle borders */
+  /* Premium Institutional Theme */
+  --color-primary: #FFFFFF; /* Pure White */
+  --color-secondary: #F4F6F9; /* Slate White Alt Background */
+  --color-text-main: #0A101D; /* Deep Charcoal with Navy tint */
+  --color-text-muted: #475569; /* Slate Secondary Text */
+  --color-accent: #04142C; /* Inky Deep Navy Accent */
+  --color-accent-hover: #1E3A8A; /* Royal Blue for interactions */
+  --color-highlight: #C4A962; /* Muted Gold Highlight */
+  --color-border-main: #E2E8F0; /* Cool subtle borders */
 
   /* Fonts - Unified Premium Typography */
   --font-heading: 'Inter', sans-serif;

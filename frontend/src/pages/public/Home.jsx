@@ -146,7 +146,7 @@ export default function Home() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
             >
-              <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-accent mb-4 block">
+              <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-highlight mb-4 block">
                 Corporate Advisory & Compliance
               </span>
             </motion.div>
@@ -210,7 +210,7 @@ export default function Home() {
                   initial={shouldAnimate ? { scale: 0, opacity: 0 } : false}
                   animate={{ scale: 1, opacity: 1 }}
                   transition={{ duration: 0.8, delay: shouldAnimate ? 0.5 : 0, ease: [0.22, 1, 0.36, 1] }}
-                  className="absolute w-5 h-5 bg-accent rounded-full z-10 shadow-[0_0_0_4px_rgba(10,31,68,0.1)]"
+                  className="absolute w-5 h-5 bg-highlight rounded-full z-10 shadow-[0_0_0_4px_rgba(196,169,98,0.15)]"
                 />
 
                 {/* Node 1: Top (Business Setup) */}
@@ -345,7 +345,7 @@ export default function Home() {
           >
             {expertiseCards.map((card, i) => (
               <motion.div key={i} variants={FADE_UP} className="group bg-primary p-10 hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)] hover:-translate-y-[3px] transition-all duration-200">
-                <span className="text-xs font-mono text-text-muted mb-4 block">0{i+1}</span>
+                <span className="text-xs font-mono font-medium text-highlight mb-4 block tracking-widest">0{i+1}</span>
                 <h3 className="text-2xl md:text-3xl font-heading font-medium mb-4 text-text-main">{card.title}</h3>
                 <p className="text-text-muted font-light leading-relaxed mb-8">{card.desc}</p>
                 <Link to={card.link} className="group/link inline-flex items-center text-sm font-bold text-accent hover:text-text-main transition-colors gap-2 link-underline pb-1">
