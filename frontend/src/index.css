@@ -10,8 +10,8 @@
   --color-accent: #0A1F44; /* Deep Institutional Navy Accent */
   --color-border-main: #E5E7EB; /* Very subtle borders */
 
-  /* Fonts - Structural Sans for Headings, Sans for Body */
-  --font-heading: 'Outfit', sans-serif;
+  /* Fonts - Unified Premium Typography */
+  --font-heading: 'Inter', sans-serif;
   --font-body: 'Inter', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 }

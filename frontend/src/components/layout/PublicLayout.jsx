@@ -40,10 +40,10 @@ export default function PublicLayout() {
 
   return (
     <div className="min-h-screen flex flex-col font-body bg-primary text-text-main">
-      <header className={`sticky top-0 z-50 bg-primary border-b border-border-main shadow-none transition-all duration-300 ${isScrolled ? 'py-0' : 'py-2'}`}>
+      <header className={`sticky top-0 z-50 transition-all duration-300 border-b ${isScrolled ? 'bg-white/85 backdrop-blur-md border-border-main shadow-[0_2px_20px_rgba(0,0,0,0.04)] py-0' : 'bg-primary border-border-main/50 py-3'}`}>
         <div className={`max-w-7xl mx-auto px-6 flex items-center justify-between transition-all duration-300 ${isScrolled ? 'h-16' : 'h-20'}`}>
           <motion.div initial={shouldAnimate ? { opacity: 0 } : false} animate={{ opacity: 1 }} transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}>
-            <Link to="/" className="text-xl md:text-2xl font-heading font-semibold tracking-tight z-50 relative block">
+            <Link to="/" className="text-[1.35rem] font-heading font-semibold tracking-tight z-50 relative block text-accent">
               Sterling Advisory
             </Link>
           </motion.div>
@@ -52,12 +52,12 @@ export default function PublicLayout() {
             initial={shouldAnimate ? { opacity: 0 } : false} 
             animate={{ opacity: 1 }} 
             transition={{ duration: 0.4, delay: shouldAnimate ? 1.03 : 0, ease: [0.22, 1, 0.36, 1] }}
-            className="hidden md:flex items-center gap-8 text-sm font-medium"
+            className="hidden md:flex items-center gap-9 text-[13px] font-semibold tracking-wide uppercase text-text-muted"
           >
-            <Link to="/services" className="link-underline hover:text-accent transition-colors">Services</Link>
-            <Link to="/industries" className="link-underline hover:text-accent transition-colors">Industries</Link>
-            <Link to="/insights" className="link-underline hover:text-accent transition-colors">Knowledge Hub</Link>
-            <Link to="/about" className="link-underline hover:text-accent transition-colors">About</Link>
+            <Link to="/services" className="hover:text-accent transition-colors duration-300">Services</Link>
+            <Link to="/industries" className="hover:text-accent transition-colors duration-300">Industries</Link>
+            <Link to="/insights" className="hover:text-accent transition-colors duration-300">Knowledge Hub</Link>
+            <Link to="/about" className="hover:text-accent transition-colors duration-300">About</Link>
           </motion.nav>
 
           <motion.div 
@@ -66,7 +66,7 @@ export default function PublicLayout() {
             transition={{ duration: 0.4, delay: shouldAnimate ? 1.03 : 0, ease: [0.22, 1, 0.36, 1] }}
             className="flex items-center gap-4"
           >
-            <Link to="/contact" className="hidden md:inline-flex items-center justify-center px-6 py-2.5 text-sm font-bold text-white bg-text-main btn-hover rounded-none">
+            <Link to="/contact" className="hidden md:inline-flex items-center justify-center px-6 py-2.5 text-[13px] font-bold tracking-wide uppercase text-white bg-accent btn-hover rounded-none">
               Book Consultation
             </Link>
             <button 
