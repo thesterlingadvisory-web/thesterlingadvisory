@@ -19,11 +19,14 @@ import NotFound from './pages/public/NotFound';
 import AdminDashboard from './pages/admin/AdminDashboard';
 import HomepageBuilder from './pages/admin/HomepageBuilder';
 
+import SmoothScroll from './components/layout/SmoothScroll';
+
 function App() {
   return (
     <Router>
-      <Routes>
-        {/* Public Routes */}
+      <SmoothScroll>
+        <Routes>
+          {/* Public Routes */}
         <Route element={<PublicLayout />}>
           <Route path="/" element={<Home />} />
           <Route path="/services" element={<Services />} />
@@ -44,6 +47,7 @@ function App() {
           <Route path="homepage-builder" element={<HomepageBuilder />} />
         </Route>
       </Routes>
+      </SmoothScroll>
     </Router>
   );
 }
