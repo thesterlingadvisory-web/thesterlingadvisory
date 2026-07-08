@@ -11,6 +11,12 @@ export default function ServiceDetail() {
   useEffect(() => {
     if (!serviceData) {
       navigate('/services', { replace: true });
+    } else {
+      document.title = `${serviceData.title} — Sterling Advisory`;
+      const metaDesc = document.querySelector('meta[name="description"]');
+      if (metaDesc) {
+        metaDesc.setAttribute('content', `${serviceData.shortDesc || serviceData.title} — Professional advisory and registration services by Sterling Advisory.`);
+      }
     }
   }, [serviceData, navigate]);
 
