@@ -26,7 +26,7 @@ export const serviceCategories = [
         title: 'Partnership Firm Registration',
         slug: 'partnership-firm-registration',
         shortDesc: 'Formalize a business with two or more co-founders via a Registered Deed.',
-        documents: ['Drafted Partnership Deed*', 'PAN & Aadhaar of all partners', 'Office Address Proof (Utility Bill)', 'NOC from Premises Owner'],
+        documents: ['Partnership Deed*', 'PAN & Aadhaar of all partners', 'Office Address Proof (Utility Bill)', 'NOC from Premises Owner'],
         fees: 'Approx ₹1,500 - ₹3,000 Govt Fee (Varies significantly by State Registrar of Firms).',
         timeline: '7-12 Business Days',
       },
