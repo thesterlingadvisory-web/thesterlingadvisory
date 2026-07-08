@@ -209,19 +209,12 @@ export default function Home() {
               initial={shouldAnimate ? { opacity: 0 } : false} 
               animate={{ opacity: 1 }} 
               transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1], delay: shouldAnimate ? 1.03 : 0 }}
-              className="flex flex-col gap-5"
+              className="flex items-center"
             >
               <Link to="/contact" className="group flex items-center gap-4 text-sm font-bold uppercase tracking-widest text-accent hover:text-text-main transition-colors duration-500 w-max">
                 <span className="link-underline pb-1">Consult Our Experts</span>
                 <ArrowRight size={18} className="group-hover:translate-x-2 transition-transform duration-500" />
               </Link>
-              
-              <div className="flex flex-wrap gap-2.5">
-                <Link to="/services?category=business-registrations" className="px-4 py-1.5 border border-border-main rounded-full text-xs font-medium text-text-muted hover:border-text-main hover:text-text-main transition-colors bg-white/50 backdrop-blur-sm">Private Limited</Link>
-                <Link to="/services?category=tax-registrations" className="px-4 py-1.5 border border-border-main rounded-full text-xs font-medium text-text-muted hover:border-text-main hover:text-text-main transition-colors bg-white/50 backdrop-blur-sm">GST Registration</Link>
-                <Link to="/services?category=intellectual-property" className="px-4 py-1.5 border border-border-main rounded-full text-xs font-medium text-text-muted hover:border-text-main hover:text-text-main transition-colors bg-white/50 backdrop-blur-sm">Trademark Filing</Link>
-                <Link to="/services?category=industry-licensing" className="px-4 py-1.5 border border-border-main rounded-full text-xs font-medium text-text-muted hover:border-text-main hover:text-text-main transition-colors bg-white/50 backdrop-blur-sm">MSME / Udyam</Link>
-              </div>
             </motion.div>
           </div>
 
