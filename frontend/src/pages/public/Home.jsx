@@ -125,7 +125,7 @@ export default function Home() {
     <div className="w-full bg-primary selection:bg-accent selection:text-white">
       
       {/* 1. Hero Section (Asymmetric Split Layout) */}
-      <section className="relative min-h-[90vh] flex items-center justify-center border-b border-border-main bg-primary overflow-hidden pt-20 pb-20 md:pt-0 md:pb-0">
+      <section className="relative min-h-[80vh] flex items-center border-b border-border-main bg-primary overflow-hidden py-16 lg:py-0">
         {/* Subtle Background Texture */}
         <div 
           className="absolute inset-0 z-0 opacity-[0.03] pointer-events-none" 
@@ -141,24 +141,24 @@ export default function Home() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
             >
-              <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-accent mb-6 block">
+              <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-accent mb-4 block">
                 Corporate Advisory & Compliance
               </span>
             </motion.div>
             
-            <h1 className="text-5xl md:text-6xl lg:text-[4.2rem] font-heading font-medium leading-[1.1] text-text-main mb-8">
-              <span className="block overflow-hidden pb-2">
+            <h1 className="text-4xl md:text-5xl lg:text-[3.5rem] font-heading font-medium leading-[1.15] text-text-main mb-5">
+              <span className="block overflow-hidden pb-1">
                 <motion.span className="block" initial={shouldAnimate ? { y: "100%", opacity: 0 } : false} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: shouldAnimate ? 0.08 : 0 }}>
                   Structuring businesses.
                 </motion.span>
               </span>
-              <span className="block overflow-hidden pb-2">
-                <motion.span className="block text-text-muted" initial={shouldAnimate ? { y: "100%", opacity: 0 } : false} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: shouldAnimate ? 0.16 : 0 }}>
+              <span className="block overflow-hidden pb-1">
+                <motion.span className="block" initial={shouldAnimate ? { y: "100%", opacity: 0 } : false} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: shouldAnimate ? 0.16 : 0 }}>
                   Securing compliance.
                 </motion.span>
               </span>
-              <span className="block overflow-hidden pb-2">
-                <motion.span className="block" initial={shouldAnimate ? { y: "100%", opacity: 0 } : false} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: shouldAnimate ? 0.24 : 0 }}>
+              <span className="block overflow-hidden pb-1">
+                <motion.span className="block text-accent" initial={shouldAnimate ? { y: "100%", opacity: 0 } : false} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: shouldAnimate ? 0.24 : 0 }}>
                   Scaling with confidence.
                 </motion.span>
               </span>
@@ -168,7 +168,7 @@ export default function Home() {
               initial={shouldAnimate ? { opacity: 0, y: 20 } : false} 
               animate={{ opacity: 1, y: 0 }} 
               transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: shouldAnimate ? 0.88 : 0 }}
-              className="text-lg text-text-muted leading-relaxed mb-12 max-w-xl font-body font-light"
+              className="text-base md:text-lg text-text-muted leading-relaxed mb-8 max-w-xl font-body font-light"
             >
               Comprehensive entity registration, complex tax advisory, robust IP protection, and complete labour law compliance tailored for modern Indian enterprises.
             </motion.p>
@@ -187,17 +187,17 @@ export default function Home() {
           </div>
 
           {/* Right Side: Visual Icon Map */}
-          <div className="w-full hidden lg:flex items-center justify-center h-full min-h-[500px]">
-             <div className="relative w-[360px] h-[360px] flex items-center justify-center ml-12">
+          <div className="w-full hidden lg:flex items-center justify-center">
+             <div className="relative w-[320px] h-[320px] flex items-center justify-center ml-8 mb-8">
                 {/* Connecting Lines */}
                 <motion.svg 
                    initial={shouldAnimate ? { opacity: 0 } : false}
-                   animate={{ opacity: 0.5 }}
+                   animate={{ opacity: 1 }}
                    transition={{ duration: 1, delay: shouldAnimate ? 0.6 : 0 }}
-                   className="absolute inset-0 w-full h-full text-border-main"
+                   className="absolute inset-0 w-full h-full" style={{ color: 'rgba(0,0,0,0.18)' }}
                 >
-                   <line x1="180" y1="0" x2="180" y2="360" stroke="currentColor" strokeWidth="1.5" strokeDasharray="4 4" />
-                   <line x1="0" y1="180" x2="360" y2="180" stroke="currentColor" strokeWidth="1.5" strokeDasharray="4 4" />
+                   <line x1="160" y1="0" x2="160" y2="320" stroke="currentColor" strokeWidth="1.5" strokeDasharray="4 4" />
+                   <line x1="0" y1="160" x2="320" y2="160" stroke="currentColor" strokeWidth="1.5" strokeDasharray="4 4" />
                 </motion.svg>
 
                 {/* Center Core */}
@@ -205,10 +205,8 @@ export default function Home() {
                   initial={shouldAnimate ? { scale: 0, opacity: 0 } : false}
                   animate={{ scale: 1, opacity: 1 }}
                   transition={{ duration: 0.8, delay: shouldAnimate ? 0.5 : 0, ease: [0.22, 1, 0.36, 1] }}
-                  className="absolute w-20 h-20 bg-primary border border-border-main rounded-full flex items-center justify-center z-10 shadow-[0_8px_30px_rgb(0,0,0,0.04)]"
-                >
-                  <Compass size={28} strokeWidth={1.5} className="text-accent" />
-                </motion.div>
+                  className="absolute w-5 h-5 bg-accent rounded-full z-10 shadow-[0_0_0_4px_rgba(10,31,68,0.1)]"
+                />
 
                 {/* Node 1: Top (Business Setup) */}
                 <motion.div 
@@ -241,7 +239,7 @@ export default function Home() {
                   initial={shouldAnimate ? { scale: 0, opacity: 0 } : false}
                   animate={{ scale: 1, opacity: 1 }}
                   transition={{ duration: 0.6, delay: shouldAnimate ? 0.9 : 0, ease: [0.22, 1, 0.36, 1] }}
-                  className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 flex flex-col items-center gap-4"
+                  className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 flex flex-col items-center gap-3 mb-2"
                 >
                    <span className="text-[10px] font-mono tracking-widest text-text-muted uppercase text-center whitespace-nowrap">Tax & Statutory</span>
                    <div className="w-16 h-16 bg-white border border-border-main rounded-full flex items-center justify-center shadow-sm">
