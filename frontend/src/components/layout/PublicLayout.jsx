@@ -39,7 +39,7 @@ export default function PublicLayout() {
 
   return (
     <div className="min-h-screen flex flex-col font-body bg-primary text-text-main">
-      <header className={`sticky top-0 z-50 bg-primary/80 backdrop-blur-lg border-b border-border-main shadow-sm transition-all duration-300 ${isScrolled ? 'py-0' : 'py-2'}`}>
+      <header className={`sticky top-0 z-50 bg-primary border-b border-border-main shadow-none transition-all duration-300 ${isScrolled ? 'py-0' : 'py-2'}`}>
         <div className={`max-w-7xl mx-auto px-6 flex items-center justify-between transition-all duration-300 ${isScrolled ? 'h-16' : 'h-20'}`}>
           <motion.div initial={shouldAnimate ? { opacity: 0 } : false} animate={{ opacity: 1 }} transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}>
             <Link to="/" className="text-xl md:text-2xl font-heading font-semibold tracking-tight z-50 relative block">

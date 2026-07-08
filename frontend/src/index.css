@@ -1,22 +1,22 @@
 @import "tailwindcss";
 
 @theme {
-  /* Classy Light Theme */
+  /* Classy Structural Theme */
   --color-primary: #FFFFFF; /* Pure White Background */
-  --color-secondary: #FAFAFA; /* Ultra Light Gray Alt Background */
-  --color-text-main: #111827; /* Deep Charcoal Primary Text */
-  --color-text-muted: #6B7280; /* Elegant Slate Secondary Text */
-  --color-accent: #1E3A8A; /* Deep Institutional Navy Accent */
+  --color-secondary: #F8F9FA; /* Ultra Light Gray Alt Background */
+  --color-text-main: #111111; /* Deep Charcoal Primary Text */
+  --color-text-muted: #555555; /* Elegant Slate Secondary Text */
+  --color-accent: #0A1F44; /* Deep Institutional Navy Accent */
   --color-border-main: #E5E7EB; /* Very subtle borders */
 
-  /* Fonts - Serif for Headings, Sans for Body */
-  --font-heading: 'Playfair Display', serif;
+  /* Fonts - Structural Sans for Headings, Sans for Body */
+  --font-heading: 'Outfit', sans-serif;
   --font-body: 'Inter', sans-serif;
-  --font-mono: 'IBM Plex Mono', monospace;
+  --font-mono: 'JetBrains Mono', monospace;
 }
 
 @layer base {
-  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 
   body {
     background-color: var(--color-primary);
@@ -33,9 +33,9 @@
 
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading);
-    font-weight: 500; /* Medium weight for elegance */
-    letter-spacing: -0.01em; 
-    line-height: 1.15;
+    font-weight: 500; 
+    letter-spacing: -0.02em; 
+    line-height: 1.1;
   }
 
   p {
@@ -85,18 +85,28 @@
   }
   
   .btn-hover {
-    transition: transform 150ms ease, box-shadow 150ms ease !important;
+    transition: all 250ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    position: relative;
+    overflow: hidden;
   }
   .btn-hover:hover {
-    transform: scale(1.02);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    background-color: var(--color-accent);
+    color: var(--color-primary);
   }
 
   .card-hover {
-    transition: transform 200ms ease, box-shadow 200ms ease;
+    transition: all 300ms ease;
+    border: 1px solid transparent;
   }
   .card-hover:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    background-color: var(--color-secondary);
+    border-color: var(--color-border-main);
+  }
+
+  /* Sharp structural borders for grid items */
+  .grid-border-item {
+    border: 1px solid var(--color-border-main);
+    margin-top: -1px;
+    margin-left: -1px;
   }
 }

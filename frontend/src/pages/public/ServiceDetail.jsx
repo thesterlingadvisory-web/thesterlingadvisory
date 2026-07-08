@@ -69,7 +69,7 @@ export default function ServiceDetail() {
                     <div className="w-12 h-12 rounded-full bg-white border border-border-main flex items-center justify-center shrink-0 shadow-sm relative z-10 group-hover:border-accent transition-colors">
                       <span className="text-xs font-mono text-text-muted group-hover:text-accent transition-colors">0{i+1}</span>
                     </div>
-                    <div className="flex-1 p-5 bg-white rounded-none hover:shadow-[0_1px_3px_rgba(0,0,0,0.06)] hover:-translate-y-[2px] transition-all duration-200 border border-transparent group-hover:border-border-main/50">
+                    <div className="flex-1 p-5 bg-white border border-border-main card-hover">
                       <span className="text-sm font-medium">{item}</span>
                     </div>
                   </li>
@@ -82,7 +82,7 @@ export default function ServiceDetail() {
             <h2 className="text-2xl font-heading mb-6 flex items-center gap-3">
               <FileText className="text-accent" /> Required Documents
             </h2>
-            <div className="bg-white p-8 rounded-none shadow-[0_4px_24px_rgba(0,0,0,0.04)] card-hover border border-transparent hover:border-border-main/50">
+            <div className="bg-white p-8 border border-border-main card-hover">
               <ul className="space-y-4">
                 {documents.map((doc, i) => (
                   <li key={i} className="flex items-start gap-3 text-sm text-text-muted">
@@ -98,7 +98,7 @@ export default function ServiceDetail() {
 
         {/* Sidebar (Timeline, Pricing, CTA) */}
         <div className="space-y-6">
-          <div className="bg-white p-8 rounded-none shadow-[0_4px_24px_rgba(0,0,0,0.04)] space-y-8 sticky top-28 card-hover">
+          <div className="bg-white p-8 border border-border-main space-y-8 sticky top-28 card-hover">
             <div>
               <h3 className="text-xs font-mono uppercase tracking-widest text-text-muted mb-3 flex items-center gap-2">
                 <Clock size={14} /> Estimated Timeline

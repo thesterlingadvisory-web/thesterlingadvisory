@@ -44,12 +44,12 @@ export default function Services() {
       {/* Grid Area */}
       <section className="pb-40 px-6 max-w-7xl mx-auto">
         {categoryFilter && displayedCategories.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 border-t border-l border-border-main">
             {displayedCategories[0].services.map((service) => (
               <Link 
                 key={service.id} 
                 to={`/services/${service.slug}`}
-                className="bg-white p-8 hover:-translate-y-[3px] hover:shadow-[0_1px_3px_rgba(0,0,0,0.06)] transition-all duration-200 flex flex-col group rounded-none"
+                className="bg-white p-10 border-r border-b border-border-main card-hover flex flex-col group rounded-none"
               >
                 <h3 className="text-xl font-heading font-bold mb-3 group-hover:text-accent transition-colors link-underline pb-1 w-max">{service.title}</h3>
                 <p className="text-sm text-text-muted leading-relaxed mb-6 flex-grow">{service.shortDesc}</p>
@@ -60,9 +60,9 @@ export default function Services() {
             ))}
           </div>
         ) : (
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 border-t border-l border-border-main">
             {displayedCategories.map((category) => (
-              <div key={category.id} className="bg-white p-8 md:p-10 rounded-none hover:-translate-y-[3px] hover:shadow-[0_1px_3px_rgba(0,0,0,0.06)] transition-all duration-200">
+              <div key={category.id} className="bg-white p-10 md:p-12 border-r border-b border-border-main card-hover rounded-none">
                 <div className="flex items-start md:items-center gap-4 mb-8 flex-col md:flex-row">
                   <div className="w-14 h-14 bg-primary flex items-center justify-center shrink-0 rounded-none">
                     {iconMap[category.icon] || <CheckCircle2 className="w-6 h-6 text-accent" strokeWidth={1.5} />}

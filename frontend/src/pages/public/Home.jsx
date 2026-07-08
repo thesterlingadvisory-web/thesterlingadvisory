@@ -82,14 +82,14 @@ export default function Home() {
             variants={{
               visible: { transition: { staggerChildren: 0.1 } }
             }}
-            className="grid grid-cols-1 md:grid-cols-3 gap-x-12 gap-y-16"
+            className="grid grid-cols-1 md:grid-cols-3 border-t border-l border-border-main"
           >
             
             {/* Area 1 */}
-            <motion.div variants={FADE_UP} className="group p-8 bg-primary rounded-sm card-hover">
-              <span className="text-xs font-mono text-text-muted mb-4 block">01</span>
+            <motion.div variants={FADE_UP} className="group p-10 bg-primary border-r border-b border-border-main card-hover">
+              <span className="text-xs font-mono text-text-muted mb-6 block">01</span>
               <h3 className="text-3xl font-heading font-medium mb-4 text-text-main">Business Setup</h3>
-              <p className="text-text-muted font-light leading-relaxed mb-8">
+              <p className="text-text-muted font-light leading-relaxed mb-10">
                 End-to-end entity incorporation and structuring for Private Limited Companies, LLPs, and Proprietorships.
               </p>
               <Link to="/services?category=business-registrations" className="inline-flex items-center text-sm font-bold text-accent hover:text-text-main transition-colors gap-2 link-underline pb-1">
@@ -98,10 +98,10 @@ export default function Home() {
             </motion.div>
 
             {/* Area 2 */}
-            <motion.div variants={FADE_UP} className="group p-8 bg-primary rounded-sm card-hover">
-              <span className="text-xs font-mono text-text-muted mb-4 block">02</span>
+            <motion.div variants={FADE_UP} className="group p-10 bg-primary border-r border-b border-border-main card-hover">
+              <span className="text-xs font-mono text-text-muted mb-6 block">02</span>
               <h3 className="text-3xl font-heading font-medium mb-4 text-text-main">Intellectual Property</h3>
-              <p className="text-text-muted font-light leading-relaxed mb-8">
+              <p className="text-text-muted font-light leading-relaxed mb-10">
                 Comprehensive protection of your corporate assets, including Trademarks, Copyrights, and Patents.
               </p>
               <Link to="/services?category=intellectual-property" className="inline-flex items-center text-sm font-bold text-accent hover:text-text-main transition-colors gap-2 link-underline pb-1">
@@ -110,10 +110,10 @@ export default function Home() {
             </motion.div>
 
             {/* Area 3 */}
-            <motion.div variants={FADE_UP} className="group p-8 bg-primary rounded-sm card-hover">
-              <span className="text-xs font-mono text-text-muted mb-4 block">03</span>
+            <motion.div variants={FADE_UP} className="group p-10 bg-primary border-r border-b border-border-main card-hover">
+              <span className="text-xs font-mono text-text-muted mb-6 block">03</span>
               <h3 className="text-3xl font-heading font-medium mb-4 text-text-main">Tax & Statutory</h3>
-              <p className="text-text-muted font-light leading-relaxed mb-8">
+              <p className="text-text-muted font-light leading-relaxed mb-10">
                 Definitive compliance solutions covering GST, PAN, TAN, and essential state-specific Professional Taxes.
               </p>
               <Link to="/services?category=tax-registrations" className="inline-flex items-center text-sm font-bold text-accent hover:text-text-main transition-colors gap-2 link-underline pb-1">
@@ -132,13 +132,13 @@ export default function Home() {
       </section>
 
       {/* 3. Refined Call To Action */}
-      <section className="py-40 bg-[#0A1F44]">
+      <section className="py-40 bg-accent">
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }} className="max-w-3xl mx-auto px-6 text-center">
           <h2 className="text-4xl md:text-6xl font-heading font-medium mb-8 text-white">Take the next step.</h2>
           <p className="text-white/80 mb-12 max-w-xl mx-auto text-lg font-light leading-relaxed">
             Connect with our advisory team to discuss your corporate registration and statutory compliance needs.
           </p>
-          <Link to="/contact" className="inline-flex items-center justify-center px-10 py-5 text-sm font-bold uppercase tracking-widest text-text-main bg-white hover:bg-white/90 btn-hover rounded-none">
+          <Link to="/contact" className="inline-flex items-center justify-center px-10 py-5 text-sm font-bold uppercase tracking-widest text-text-main bg-white btn-hover rounded-none">
             Schedule a Consultation
           </Link>
         </motion.div>
