@@ -135,7 +135,7 @@ export const serviceCategories = [
         title: 'Trademark Registration',
         slug: 'trademark-registration',
         shortDesc: 'Protect your brand name, logo, or slogan from infringement.',
-        documents: ['Logo/Brand Name Image', 'Applicant PAN & Aadhaar', 'Valid Udyam (MSME) Certificate (to claim 50% fee discount)', 'Signed Form TM-48 (Power of Attorney)*', 'User Affidavit (if claiming prior use)*'],
+        documents: ['Logo/Brand Name Image', 'Applicant PAN & Aadhaar', 'Valid Udyam (MSME) Certificate (to claim 50% fee discount)', 'Form TM-48 (Power of Attorney)*', 'User Affidavit (if claiming prior use)*'],
         fees: '₹4,500 per class (MSME/Startups/Individuals) | ₹9,000 per class (Companies/LLPs/Others).',
         timeline: 'Filing: 1-3 Days | Registry Approval: 6-12 Months (if no objections)',
       },
