@@ -24,7 +24,7 @@ const StackedCard = ({ card, i, totalCards, progress, shouldReduceMotion }) => {
     >
       <motion.div 
         style={shouldReduceMotion ? {} : { scale, opacity }}
-        className="w-full bg-primary border border-border-main p-10 md:p-16 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] flex flex-col md:flex-row gap-8 md:gap-16 origin-top"
+        className="w-full bg-primary p-10 md:p-16 shadow-none hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)] hover:-translate-y-[3px] transition-all duration-200 ease-out flex flex-col md:flex-row gap-8 md:gap-16 origin-top"
       >
         <div className="md:w-1/3">
            <span className="text-xs font-mono text-text-muted mb-6 block">0{i+1}</span>
@@ -153,8 +153,8 @@ export default function Home() {
                    transition={{ duration: 1, delay: shouldAnimate ? 0.6 : 0 }}
                    className="absolute inset-0 w-full h-full text-border-main"
                 >
-                   <line x1="180" y1="0" x2="180" y2="360" stroke="currentColor" strokeWidth="1" strokeDasharray="4 4" />
-                   <line x1="0" y1="180" x2="360" y2="180" stroke="currentColor" strokeWidth="1" strokeDasharray="4 4" />
+                   <line x1="180" y1="0" x2="180" y2="360" stroke="currentColor" strokeWidth="1.5" strokeDasharray="4 4" />
+                   <line x1="0" y1="180" x2="360" y2="180" stroke="currentColor" strokeWidth="1.5" strokeDasharray="4 4" />
                 </motion.svg>
 
                 {/* Center Core */}
@@ -164,7 +164,7 @@ export default function Home() {
                   transition={{ duration: 0.8, delay: shouldAnimate ? 0.5 : 0, ease: [0.22, 1, 0.36, 1] }}
                   className="absolute w-20 h-20 bg-primary border border-border-main rounded-full flex items-center justify-center z-10 shadow-[0_8px_30px_rgb(0,0,0,0.04)]"
                 >
-                  <Compass size={28} strokeWidth={1} className="text-accent" />
+                  <Compass size={28} strokeWidth={1.5} className="text-accent" />
                 </motion.div>
 
                 {/* Node 1: Top (Business Setup) */}
@@ -175,7 +175,7 @@ export default function Home() {
                   className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center gap-4"
                 >
                    <div className="w-16 h-16 bg-white border border-border-main rounded-full flex items-center justify-center shadow-sm">
-                      <Building2 size={24} strokeWidth={1} className="text-text-main" />
+                      <Building2 size={24} strokeWidth={1.5} className="text-text-main" />
                    </div>
                    <span className="text-[10px] font-mono tracking-widest text-text-muted uppercase text-center whitespace-nowrap">Business Setup</span>
                 </motion.div>
@@ -188,7 +188,7 @@ export default function Home() {
                   className="absolute right-0 top-1/2 translate-x-1/2 -translate-y-1/2 flex flex-row items-center gap-4"
                 >
                    <div className="w-16 h-16 bg-white border border-border-main rounded-full flex items-center justify-center shadow-sm z-10">
-                      <ShieldCheck size={24} strokeWidth={1} className="text-text-main" />
+                      <ShieldCheck size={24} strokeWidth={1.5} className="text-text-main" />
                    </div>
                    <span className="text-[10px] font-mono tracking-widest text-text-muted uppercase text-left w-24">Intellectual<br/>Property</span>
                 </motion.div>
@@ -202,7 +202,7 @@ export default function Home() {
                 >
                    <span className="text-[10px] font-mono tracking-widest text-text-muted uppercase text-center whitespace-nowrap">Tax & Statutory</span>
                    <div className="w-16 h-16 bg-white border border-border-main rounded-full flex items-center justify-center shadow-sm">
-                      <Calculator size={24} strokeWidth={1} className="text-text-main" />
+                      <Calculator size={24} strokeWidth={1.5} className="text-text-main" />
                    </div>
                 </motion.div>
 
@@ -214,7 +214,7 @@ export default function Home() {
                   className="absolute left-0 top-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-row-reverse items-center gap-4"
                 >
                    <div className="w-16 h-16 bg-white border border-border-main rounded-full flex items-center justify-center shadow-sm z-10">
-                      <Scale size={24} strokeWidth={1} className="text-text-main" />
+                      <Scale size={24} strokeWidth={1.5} className="text-text-main" />
                    </div>
                    <span className="text-[10px] font-mono tracking-widest text-text-muted uppercase text-right w-24">Industry<br/>Licensing</span>
                 </motion.div>
@@ -224,7 +224,7 @@ export default function Home() {
       </section>
 
       {/* 2. Areas of Expertise (Sticky Stack Layout) */}
-      <section className="py-32 bg-secondary">
+      <section className="py-44 bg-secondary">
         <div className="max-w-7xl mx-auto px-6 mb-24 text-center">
           <motion.div 
             initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }}
@@ -255,7 +255,7 @@ export default function Home() {
       </section>
 
       {/* 3. Refined Call To Action */}
-      <section className="py-40 bg-accent">
+      <section className="py-52 bg-accent">
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }} className="max-w-3xl mx-auto px-6 text-center">
           <h2 className="text-4xl md:text-6xl font-heading font-medium mb-8 text-white">Take the next step.</h2>
           <p className="text-white/80 mb-12 max-w-xl mx-auto text-lg font-light leading-relaxed">
