@@ -4,12 +4,12 @@ import { serviceCategories } from '../../data/services';
 import { Landmark, BarChart2, Users, Shield, CheckCircle2, TrendingUp, ArrowRight } from 'lucide-react';
 
 const iconMap = {
-  Landmark: <Landmark className="w-6 h-6" />,
-  BarChart2: <BarChart2 className="w-6 h-6" />,
-  Users: <Users className="w-6 h-6" />,
-  Shield: <Shield className="w-6 h-6" />,
-  CheckCircle2: <CheckCircle2 className="w-6 h-6" />,
-  TrendingUp: <TrendingUp className="w-6 h-6" />
+  Landmark: <Landmark className="w-6 h-6 text-accent" strokeWidth={1.5} />,
+  BarChart2: <BarChart2 className="w-6 h-6 text-accent" strokeWidth={1.5} />,
+  Users: <Users className="w-6 h-6 text-accent" strokeWidth={1.5} />,
+  Shield: <Shield className="w-6 h-6 text-accent" strokeWidth={1.5} />,
+  CheckCircle2: <CheckCircle2 className="w-6 h-6 text-accent" strokeWidth={1.5} />,
+  TrendingUp: <TrendingUp className="w-6 h-6 text-accent" strokeWidth={1.5} />
 };
 
 export default function Services() {
@@ -23,7 +23,7 @@ export default function Services() {
   return (
     <div className="w-full bg-primary min-h-screen">
       {/* Header */}
-      <section className="pt-24 pb-16 px-6 text-center">
+      <section className="pt-32 pb-24 px-6 text-center">
         <div className="max-w-3xl mx-auto">
           <h1 className="text-5xl md:text-6xl font-heading mb-6 tracking-tight">
             {categoryFilter && displayedCategories.length > 0 ? displayedCategories[0].title : "Our Services"}
@@ -42,16 +42,16 @@ export default function Services() {
       </section>
 
       {/* Grid Area */}
-      <section className="pb-32 px-6 max-w-7xl mx-auto">
+      <section className="pb-40 px-6 max-w-7xl mx-auto">
         {categoryFilter && displayedCategories.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {displayedCategories[0].services.map((service) => (
               <Link 
                 key={service.id} 
                 to={`/services/${service.slug}`}
-                className="bg-white p-8 border border-border-main hover:border-accent hover:shadow-lg hover:shadow-black/5 transition-all duration-300 flex flex-col group rounded-none"
+                className="bg-white p-8 hover:-translate-y-[3px] hover:shadow-[0_1px_3px_rgba(0,0,0,0.06)] transition-all duration-200 flex flex-col group rounded-none"
               >
-                <h3 className="text-xl font-heading font-bold mb-3 group-hover:text-accent transition-colors">{service.title}</h3>
+                <h3 className="text-xl font-heading font-bold mb-3 group-hover:text-accent transition-colors link-underline pb-1 w-max">{service.title}</h3>
                 <p className="text-sm text-text-muted leading-relaxed mb-6 flex-grow">{service.shortDesc}</p>
                 <div className="flex items-center text-xs font-bold text-accent group-hover:translate-x-1 transition-transform">
                   View Details <ArrowRight size={14} className="ml-1" />
@@ -60,12 +60,12 @@ export default function Services() {
             ))}
           </div>
         ) : (
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {displayedCategories.map((category) => (
-              <div key={category.id} className="bg-white p-8 md:p-10 border border-border-main rounded-none hover:shadow-xl hover:shadow-black/5 transition-all duration-500">
+              <div key={category.id} className="bg-white p-8 md:p-10 rounded-none hover:-translate-y-[3px] hover:shadow-[0_1px_3px_rgba(0,0,0,0.06)] transition-all duration-200">
                 <div className="flex items-start md:items-center gap-4 mb-8 flex-col md:flex-row">
-                  <div className="w-14 h-14 bg-primary flex items-center justify-center text-accent shrink-0 rounded-none border border-border-main">
-                    {iconMap[category.icon] || <CheckCircle2 className="w-6 h-6" />}
+                  <div className="w-14 h-14 bg-primary flex items-center justify-center shrink-0 rounded-none">
+                    {iconMap[category.icon] || <CheckCircle2 className="w-6 h-6 text-accent" strokeWidth={1.5} />}
                   </div>
                   <div>
                     <h2 className="text-2xl font-heading font-bold text-text-main mb-1">{category.title}</h2>
@@ -73,14 +73,14 @@ export default function Services() {
                   </div>
                 </div>
                 
-                <div className="flex flex-wrap gap-2.5">
+                <div className="flex flex-wrap gap-3 mt-4">
                   {category.services.map((service) => (
                     <Link 
                       key={service.id} 
                       to={`/services/${service.slug}`}
-                      className="inline-flex items-center px-4 py-2 text-sm font-bold border border-border-main text-text-main bg-primary/30 hover:bg-accent hover:text-white hover:border-accent transition-all duration-300 rounded-none"
+                      className="inline-flex items-center px-4 py-2 text-sm font-medium border border-border-main text-text-main bg-white hover:text-accent transition-colors duration-200 rounded-none"
                     >
-                      {service.title}
+                      <span className="link-underline pb-0.5">{service.title}</span>
                     </Link>
                   ))}
                 </div>

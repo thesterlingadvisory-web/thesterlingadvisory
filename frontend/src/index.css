@@ -61,3 +61,42 @@
     background: var(--color-text-muted); 
   }
 }
+
+@layer utilities {
+  .link-underline {
+    position: relative;
+    text-decoration: none;
+  }
+  .link-underline::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 1px;
+    bottom: -2px;
+    left: 0;
+    background-color: currentColor;
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+  }
+  .link-underline:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+  }
+  
+  .btn-hover {
+    transition: transform 150ms ease, box-shadow 150ms ease !important;
+  }
+  .btn-hover:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+
+  .card-hover {
+    transition: transform 200ms ease, box-shadow 200ms ease;
+  }
+  .card-hover:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  }
+}

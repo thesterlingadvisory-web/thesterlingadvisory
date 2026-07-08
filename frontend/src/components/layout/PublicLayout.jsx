@@ -3,8 +3,16 @@ import { Outlet, Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 
 export default function PublicLayout() {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   // Close mobile menu when route changes
   useEffect(() => {
@@ -23,21 +31,21 @@ export default function PublicLayout() {
 
   return (
     <div className="min-h-screen flex flex-col font-body bg-primary text-text-main">
-      <header className="sticky top-0 z-50 bg-primary/80 backdrop-blur-lg border-b border-border-main shadow-sm">
-        <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+      <header className={`sticky top-0 z-50 bg-primary/80 backdrop-blur-lg border-b border-border-main shadow-sm transition-all duration-300 ${isScrolled ? 'py-0' : 'py-2'}`}>
+        <div className={`max-w-7xl mx-auto px-6 flex items-center justify-between transition-all duration-300 ${isScrolled ? 'h-16' : 'h-20'}`}>
           <Link to="/" className="text-xl md:text-2xl font-heading font-semibold tracking-tight z-50 relative">
             Sterling Advisory
           </Link>
           
           <nav className="hidden md:flex items-center gap-8 text-sm font-medium">
-            <Link to="/services" className="hover:text-accent transition-colors">Services</Link>
-            <Link to="/industries" className="hover:text-accent transition-colors">Industries</Link>
-            <Link to="/insights" className="hover:text-accent transition-colors">Knowledge Hub</Link>
-            <Link to="/about" className="hover:text-accent transition-colors">About</Link>
+            <Link to="/services" className="link-underline hover:text-accent transition-colors">Services</Link>
+            <Link to="/industries" className="link-underline hover:text-accent transition-colors">Industries</Link>
+            <Link to="/insights" className="link-underline hover:text-accent transition-colors">Knowledge Hub</Link>
+            <Link to="/about" className="link-underline hover:text-accent transition-colors">About</Link>
           </nav>
 
           <div className="flex items-center gap-4">
-            <Link to="/contact" className="hidden md:inline-flex items-center justify-center px-6 py-2.5 text-sm font-bold text-white bg-text-main hover:bg-accent hover:-translate-y-0.5 transition-all duration-300 rounded-none">
+            <Link to="/contact" className="hidden md:inline-flex items-center justify-center px-6 py-2.5 text-sm font-bold text-white bg-text-main btn-hover rounded-none">
               Book Consultation
             </Link>
             <button 
@@ -55,14 +63,14 @@ export default function PublicLayout() {
       {isMobileMenuOpen && (
         <div className="fixed inset-0 z-40 bg-primary flex flex-col pt-28 px-6 pb-6 md:hidden animate-in fade-in slide-in-from-top-4 duration-300">
           <nav className="flex flex-col gap-8 text-2xl font-heading mb-auto">
-            <Link to="/services" className="border-b border-border-main pb-4 hover:text-accent transition-colors">Services</Link>
-            <Link to="/industries" className="border-b border-border-main pb-4 hover:text-accent transition-colors">Industries</Link>
-            <Link to="/insights" className="border-b border-border-main pb-4 hover:text-accent transition-colors">Knowledge Hub</Link>
-            <Link to="/about" className="border-b border-border-main pb-4 hover:text-accent transition-colors">About</Link>
+            <Link to="/services" className="w-max link-underline pb-1 hover:text-accent transition-colors">Services</Link>
+            <Link to="/industries" className="w-max link-underline pb-1 hover:text-accent transition-colors">Industries</Link>
+            <Link to="/insights" className="w-max link-underline pb-1 hover:text-accent transition-colors">Knowledge Hub</Link>
+            <Link to="/about" className="w-max link-underline pb-1 hover:text-accent transition-colors">About</Link>
           </nav>
           
           <div className="mt-8">
-            <Link to="/contact" className="w-full flex items-center justify-center px-6 py-4 text-base font-bold text-white bg-text-main rounded-none">
+            <Link to="/contact" className="w-full flex items-center justify-center px-6 py-4 text-base font-bold text-white bg-text-main rounded-none btn-hover">
               Book Consultation
             </Link>
           </div>
@@ -83,34 +91,34 @@ export default function PublicLayout() {
           </div>
           <div>
             <h4 className="text-xs font-mono tracking-widest text-text-muted uppercase mb-4">Corporate Services</h4>
-            <ul className="space-y-3 text-sm">
-              <li><Link to="/services/business-setup" className="hover:text-accent">Business Setup</Link></li>
-              <li><Link to="/services/tax-statutory" className="hover:text-accent">Tax & Statutory</Link></li>
-              <li><Link to="/services/intellectual-property" className="hover:text-accent">Intellectual Property</Link></li>
-              <li><Link to="/services/industry-licensing" className="hover:text-accent">Industry Licensing</Link></li>
+            <ul className="space-y-3 text-sm flex flex-col items-start">
+              <li><Link to="/services/business-setup" className="link-underline hover:text-accent">Business Setup</Link></li>
+              <li><Link to="/services/tax-statutory" className="link-underline hover:text-accent">Tax & Statutory</Link></li>
+              <li><Link to="/services/intellectual-property" className="link-underline hover:text-accent">Intellectual Property</Link></li>
+              <li><Link to="/services/industry-licensing" className="link-underline hover:text-accent">Industry Licensing</Link></li>
             </ul>
           </div>
           <div>
             <h4 className="text-xs font-mono tracking-widest text-text-muted uppercase mb-4">The Firm</h4>
-            <ul className="space-y-3 text-sm">
-              <li><Link to="/about" className="hover:text-accent">About Us</Link></li>
-              <li><Link to="/insights" className="hover:text-accent">Knowledge Hub</Link></li>
-              <li><Link to="/contact" className="hover:text-accent">Contact</Link></li>
+            <ul className="space-y-3 text-sm flex flex-col items-start">
+              <li><Link to="/about" className="link-underline hover:text-accent">About Us</Link></li>
+              <li><Link to="/insights" className="link-underline hover:text-accent">Knowledge Hub</Link></li>
+              <li><Link to="/contact" className="link-underline hover:text-accent">Contact</Link></li>
             </ul>
           </div>
           <div>
             <h4 className="text-xs font-mono tracking-widest text-text-muted uppercase mb-4">Connect</h4>
-            <ul className="space-y-3 text-sm">
-              <li><a href="#" className="hover:text-accent">LinkedIn</a></li>
-              <li><a href="#" className="hover:text-accent">Twitter</a></li>
+            <ul className="space-y-3 text-sm flex flex-col items-start">
+              <li><a href="#" className="link-underline hover:text-accent">LinkedIn</a></li>
+              <li><a href="#" className="link-underline hover:text-accent">Twitter</a></li>
             </ul>
           </div>
         </div>
         <div className="max-w-7xl mx-auto px-6 mt-16 pt-8 border-t border-border-main text-xs text-text-muted flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-center md:text-left">© {new Date().getFullYear()} Sterling Advisory. All rights reserved.</p>
           <div className="flex gap-6">
-            <Link to="/privacy">Privacy Policy</Link>
-            <Link to="/terms">Terms of Service</Link>
+            <Link to="/privacy" className="link-underline">Privacy Policy</Link>
+            <Link to="/terms" className="link-underline">Terms of Service</Link>
           </div>
         </div>
       </footer>

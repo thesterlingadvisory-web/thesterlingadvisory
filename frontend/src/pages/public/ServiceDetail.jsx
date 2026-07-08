@@ -36,11 +36,11 @@ export default function ServiceDetail() {
   ];
 
   return (
-    <div className="w-full bg-primary pb-24 min-h-screen">
+    <div className="w-full bg-primary pb-32 min-h-screen">
       {/* Hero Section */}
-      <section className="bg-white border-b border-border-main pt-24 pb-16 px-6">
+      <section className="bg-white border-b border-border-main pt-32 pb-24 px-6">
         <div className="max-w-4xl mx-auto">
-          <Link to="/services" className="text-xs font-mono tracking-widest uppercase text-text-muted hover:text-accent transition-colors mb-6 inline-block">
+          <Link to="/services" className="text-xs font-mono tracking-widest uppercase text-text-muted hover:text-accent transition-colors mb-6 inline-block link-underline pb-0.5">
             ← Back to {serviceData.category}
           </Link>
           <h1 className="text-4xl md:text-6xl font-heading font-medium mb-6 text-text-main tracking-tight">{title}</h1>
@@ -51,30 +51,38 @@ export default function ServiceDetail() {
       </section>
 
       {/* Content Grid */}
-      <section className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 lg:grid-cols-3 gap-12">
+      <section className="max-w-7xl mx-auto px-6 py-24 grid grid-cols-1 lg:grid-cols-3 gap-12">
         
         {/* Main Content (Deliverables & Documents) */}
-        <div className="lg:col-span-2 space-y-16">
+        <div className="lg:col-span-2 space-y-24">
           
           <div>
             <h2 className="text-2xl font-heading mb-6 flex items-center gap-3">
               <CheckCircle2 className="text-accent" /> What's Included
             </h2>
-            <ul className="space-y-4">
-              {deliverables.map((item, i) => (
-                <li key={i} className="flex items-start gap-4 p-5 bg-white border border-border-main rounded-sm shadow-sm hover:shadow-md transition-shadow">
-                  <span className="text-xs font-mono text-text-muted mt-1">0{i+1}</span>
-                  <span className="text-sm font-medium">{item}</span>
-                </li>
-              ))}
-            </ul>
+            <div className="relative pl-6">
+              {/* Vertical line connecting steps */}
+              <div className="absolute left-[3.25rem] top-6 bottom-6 w-px bg-border-main"></div>
+              <ul className="relative space-y-6">
+                {deliverables.map((item, i) => (
+                  <li key={i} className="relative flex items-center gap-6 group z-10">
+                    <div className="w-12 h-12 rounded-full bg-white border border-border-main flex items-center justify-center shrink-0 shadow-sm relative z-10 group-hover:border-accent transition-colors">
+                      <span className="text-xs font-mono text-text-muted group-hover:text-accent transition-colors">0{i+1}</span>
+                    </div>
+                    <div className="flex-1 p-5 bg-white rounded-none hover:shadow-[0_1px_3px_rgba(0,0,0,0.06)] hover:-translate-y-[2px] transition-all duration-200 border border-transparent group-hover:border-border-main/50">
+                      <span className="text-sm font-medium">{item}</span>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
 
           <div>
             <h2 className="text-2xl font-heading mb-6 flex items-center gap-3">
               <FileText className="text-accent" /> Required Documents
             </h2>
-            <div className="bg-white border border-border-main p-8 rounded-sm shadow-sm">
+            <div className="bg-white p-8 rounded-none shadow-[0_4px_24px_rgba(0,0,0,0.04)] card-hover border border-transparent hover:border-border-main/50">
               <ul className="space-y-4">
                 {documents.map((doc, i) => (
                   <li key={i} className="flex items-start gap-3 text-sm text-text-muted">
@@ -90,7 +98,7 @@ export default function ServiceDetail() {
 
         {/* Sidebar (Timeline, Pricing, CTA) */}
         <div className="space-y-6">
-          <div className="bg-white border border-border-main p-8 rounded-sm shadow-sm space-y-8 sticky top-28">
+          <div className="bg-white p-8 rounded-none shadow-[0_4px_24px_rgba(0,0,0,0.04)] space-y-8 sticky top-28 card-hover">
             <div>
               <h3 className="text-xs font-mono uppercase tracking-widest text-text-muted mb-3 flex items-center gap-2">
                 <Clock size={14} /> Estimated Timeline
@@ -99,10 +107,10 @@ export default function ServiceDetail() {
             </div>
             
             <div className="pt-6 border-t border-border-main">
-              <h3 className="text-xs font-mono uppercase tracking-widest text-text-muted mb-3 flex items-center gap-2">
+              <h3 className="text-xs font-mono uppercase tracking-widest text-text-muted mb-4 flex items-center gap-2">
                 <CreditCard size={14} /> Fees & Charges
               </h3>
-              <div className="bg-primary/50 p-4 rounded-sm border border-border-main mb-3">
+              <div className="mb-4">
                 <p className="text-sm font-medium text-text-main mb-1">Government Fees</p>
                 <p className="text-sm text-text-muted">{fees}</p>
               </div>
@@ -113,7 +121,7 @@ export default function ServiceDetail() {
             </div>
 
             <div className="pt-6 border-t border-border-main">
-              <Link to="/contact" className="w-full flex items-center justify-center gap-2 px-6 py-4 bg-text-main text-white text-sm font-medium hover:bg-black hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 rounded-sm">
+              <Link to="/contact" className="w-full flex items-center justify-center gap-2 px-6 py-4 bg-text-main text-white text-sm font-medium btn-hover rounded-none">
                 Initiate Engagement <ArrowRight size={16} />
               </Link>
             </div>
