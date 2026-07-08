@@ -1,10 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { Outlet, Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 export default function PublicLayout() {
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
+  const [shouldAnimate] = useState(() => location.pathname === '/' && !sessionStorage.getItem('hasPlayedIntro'));
+
+  useEffect(() => {
+    if (shouldAnimate) {
+      sessionStorage.setItem('hasPlayedIntro', 'true');
+    }
+  }, [shouldAnimate]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -33,18 +41,30 @@ export default function PublicLayout() {
     <div className="min-h-screen flex flex-col font-body bg-primary text-text-main">
       <header className={`sticky top-0 z-50 bg-primary/80 backdrop-blur-lg border-b border-border-main shadow-sm transition-all duration-300 ${isScrolled ? 'py-0' : 'py-2'}`}>
         <div className={`max-w-7xl mx-auto px-6 flex items-center justify-between transition-all duration-300 ${isScrolled ? 'h-16' : 'h-20'}`}>
-          <Link to="/" className="text-xl md:text-2xl font-heading font-semibold tracking-tight z-50 relative">
-            Sterling Advisory
-          </Link>
+          <motion.div initial={shouldAnimate ? { opacity: 0 } : false} animate={{ opacity: 1 }} transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}>
+            <Link to="/" className="text-xl md:text-2xl font-heading font-semibold tracking-tight z-50 relative block">
+              Sterling Advisory
+            </Link>
+          </motion.div>
           
-          <nav className="hidden md:flex items-center gap-8 text-sm font-medium">
+          <motion.nav 
+            initial={shouldAnimate ? { opacity: 0 } : false} 
+            animate={{ opacity: 1 }} 
+            transition={{ duration: 0.4, delay: shouldAnimate ? 1.03 : 0, ease: [0.22, 1, 0.36, 1] }}
+            className="hidden md:flex items-center gap-8 text-sm font-medium"
+          >
             <Link to="/services" className="link-underline hover:text-accent transition-colors">Services</Link>
             <Link to="/industries" className="link-underline hover:text-accent transition-colors">Industries</Link>
             <Link to="/insights" className="link-underline hover:text-accent transition-colors">Knowledge Hub</Link>
             <Link to="/about" className="link-underline hover:text-accent transition-colors">About</Link>
-          </nav>
+          </motion.nav>
 
-          <div className="flex items-center gap-4">
+          <motion.div 
+            initial={shouldAnimate ? { opacity: 0 } : false} 
+            animate={{ opacity: 1 }} 
+            transition={{ duration: 0.4, delay: shouldAnimate ? 1.03 : 0, ease: [0.22, 1, 0.36, 1] }}
+            className="flex items-center gap-4"
+          >
             <Link to="/contact" className="hidden md:inline-flex items-center justify-center px-6 py-2.5 text-sm font-bold text-white bg-text-main btn-hover rounded-none">
               Book Consultation
             </Link>
@@ -55,7 +75,7 @@ export default function PublicLayout() {
             >
               {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
-          </div>
+          </motion.div>
         </div>
       </header>
 

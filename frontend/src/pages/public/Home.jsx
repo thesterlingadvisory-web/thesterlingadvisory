@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
@@ -9,6 +9,8 @@ const FADE_UP = {
 };
 
 export default function Home() {
+  const [shouldAnimate] = useState(() => !sessionStorage.getItem('hasPlayedIntro'));
+
   return (
     <div className="w-full bg-primary selection:bg-accent selection:text-white">
       
@@ -20,20 +22,40 @@ export default function Home() {
           style={{ backgroundImage: 'radial-gradient(#000 1px, transparent 1px)', backgroundSize: '24px 24px' }}
         ></div>
         <div className="relative z-10 w-full max-w-5xl mx-auto px-6 text-center mt-12">
-          <motion.h1 
-            initial="hidden" animate="visible" variants={FADE_UP}
-            className="text-5xl md:text-7xl lg:text-[5.5rem] font-heading font-medium leading-[1.1] text-text-main mb-8"
-          >
-            Expert Corporate <br/> Advisory & Compliance.
-          </motion.h1>
+          <h1 className="text-5xl md:text-7xl lg:text-[5.5rem] font-heading font-medium leading-[1.1] text-text-main mb-8">
+            <span className="block overflow-hidden pb-2">
+              <motion.span 
+                className="block"
+                initial={shouldAnimate ? { y: "100%", opacity: 0 } : false}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: shouldAnimate ? 0 : 0 }}
+              >
+                Expert Corporate
+              </motion.span>
+            </span>
+            <span className="block overflow-hidden pb-2">
+              <motion.span 
+                className="block"
+                initial={shouldAnimate ? { y: "100%", opacity: 0 } : false}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: shouldAnimate ? 0.08 : 0 }}
+              >
+                Advisory & Compliance.
+              </motion.span>
+            </span>
+          </h1>
           <motion.p 
-            initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4, duration: 1 }}
+            initial={shouldAnimate ? { opacity: 0, y: 20 } : false} 
+            animate={{ opacity: 1, y: 0 }} 
+            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: shouldAnimate ? 0.88 : 0 }}
             className="text-lg md:text-xl text-text-muted leading-relaxed mb-16 mx-auto max-w-2xl font-body font-light"
           >
             Comprehensive business registration, tax structuring, and statutory compliance services tailored for modern enterprises.
           </motion.p>
           <motion.div 
-            initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6, duration: 0.8 }}
+            initial={shouldAnimate ? { opacity: 0 } : false} 
+            animate={{ opacity: 1 }} 
+            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1], delay: shouldAnimate ? 1.03 : 0 }}
             className="flex justify-center"
           >
             <Link to="/contact" className="group flex items-center gap-4 text-sm font-bold uppercase tracking-widest text-accent hover:text-text-main transition-colors duration-500">
