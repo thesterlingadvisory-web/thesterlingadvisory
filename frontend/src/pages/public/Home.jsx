@@ -1,44 +1,11 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { motion, AnimatePresence, useScroll, useTransform, useReducedMotion } from 'framer-motion';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { ArrowRight, Building2, Calculator, ShieldCheck, Scale, Compass, ChevronDown, User, Users, Heart, ShoppingCart, Briefcase, BookOpen, FileCheck, Send } from 'lucide-react';
 
 const FADE_UP = {
   hidden: { opacity: 0, y: 30 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.25, 0.1, 0.25, 1] } }
-};
-
-const StackedCard = ({ card, i, totalCards, progress, shouldReduceMotion }) => {
-  const targetScale = 1 - ((totalCards - 1 - i) * 0.04);
-  const targetOpacity = 1 - ((totalCards - 1 - i) * 0.3);
-  
-  const scale = useTransform(progress, [i * (1/totalCards), 1], [1, targetScale]);
-  const opacity = useTransform(progress, [i * (1/totalCards), 1], [1, targetOpacity]);
-
-  const topOffset = 120 + (i * 20); 
-
-  return (
-    <div 
-      className="sticky flex items-center justify-center w-full" 
-      style={{ top: `${topOffset}px`, marginBottom: i === totalCards - 1 ? '0' : '60vh' }}
-    >
-      <motion.div 
-        style={shouldReduceMotion ? {} : { scale, opacity }}
-        className="w-full bg-primary p-10 md:p-16 shadow-none hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)] hover:-translate-y-[3px] transition-all duration-200 ease-out flex flex-col md:flex-row gap-8 md:gap-16 origin-top"
-      >
-        <div className="md:w-1/3">
-           <span className="text-xs font-mono text-text-muted mb-6 block">0{i+1}</span>
-           <h3 className="text-3xl md:text-4xl font-heading font-medium text-text-main">{card.title}</h3>
-        </div>
-        <div className="md:w-2/3 flex flex-col justify-center">
-           <p className="text-lg text-text-muted font-light leading-relaxed mb-8">{card.desc}</p>
-           <Link to={card.link} className="group inline-flex items-center text-sm font-bold text-accent hover:text-text-main transition-colors gap-2 link-underline pb-1 w-max">
-             {card.linkText} <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
-           </Link>
-        </div>
-      </motion.div>
-    </div>
-  );
 };
 
 const finderOptions = [
@@ -124,11 +91,6 @@ const insightsPreview = [
 export default function Home() {
   const [shouldAnimate] = useState(() => !sessionStorage.getItem('hasPlayedIntro'));
   const shouldReduceMotion = useReducedMotion();
-  const expertiseRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: expertiseRef,
-    offset: ['start start', 'end end']
-  });
   const [finderSelection, setFinderSelection] = useState(null);
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
 
@@ -140,16 +102,22 @@ export default function Home() {
       linkText: "Explore Setup"
     },
     {
+      title: "Tax & Statutory",
+      desc: "Definitive compliance solutions covering GST, PAN, TAN, and essential state-specific Professional Taxes.",
+      link: "/services?category=tax-registrations",
+      linkText: "Explore Tax"
+    },
+    {
       title: "Intellectual Property",
       desc: "Comprehensive protection of your corporate assets, including Trademarks, Copyrights, and Patents.",
       link: "/services?category=intellectual-property",
       linkText: "Explore IP"
     },
     {
-      title: "Tax & Statutory",
-      desc: "Definitive compliance solutions covering GST, PAN, TAN, and essential state-specific Professional Taxes.",
-      link: "/services?category=tax-registrations",
-      linkText: "Explore Tax"
+      title: "Industry Licensing",
+      desc: "Specialized licence procurement for FSSAI, Import-Export, Drug, PSARA, and other sector-specific authorizations.",
+      link: "/services?category=industry-licensing",
+      linkText: "Explore Licensing"
     }
   ];
 
@@ -356,34 +324,33 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 3. Areas of Expertise (Sticky Stack Layout) */}
+      {/* 3. Areas of Expertise (Clean 2x2 Grid) */}
       <section className="py-44 bg-secondary">
-        <div className="max-w-7xl mx-auto px-6 mb-24 text-center">
+        <div className="max-w-7xl mx-auto px-6">
           <motion.div 
             initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }}
+            className="mb-20 text-center"
           >
             <span className="text-xs font-bold uppercase tracking-widest text-text-muted mb-4 block">Our Expertise</span>
             <h2 className="text-4xl md:text-5xl font-heading font-medium text-text-main">Specialized Practice Areas</h2>
           </motion.div>
-        </div>
 
-        <div ref={expertiseRef} className="max-w-5xl mx-auto px-6 relative pb-32">
-          {expertiseCards.map((card, i) => (
-            <StackedCard 
-              key={i} 
-              card={card} 
-              i={i} 
-              totalCards={expertiseCards.length} 
-              progress={scrollYProgress} 
-              shouldReduceMotion={shouldReduceMotion} 
-            />
-          ))}
-          
-          <div className="mt-32 text-center relative z-10">
-             <Link to="/services" className="inline-flex items-center text-sm font-bold text-text-main link-underline pb-1 hover:text-accent transition-colors">
-               View Full Catalog
-             </Link>
-          </div>
+          <motion.div 
+            initial="hidden" whileInView="visible" viewport={{ once: true }}
+            variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
+            className="grid grid-cols-1 md:grid-cols-2 gap-6"
+          >
+            {expertiseCards.map((card, i) => (
+              <motion.div key={i} variants={FADE_UP} className="group bg-primary p-10 hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)] hover:-translate-y-[3px] transition-all duration-200">
+                <span className="text-xs font-mono text-text-muted mb-4 block">0{i+1}</span>
+                <h3 className="text-2xl md:text-3xl font-heading font-medium mb-4 text-text-main">{card.title}</h3>
+                <p className="text-text-muted font-light leading-relaxed mb-8">{card.desc}</p>
+                <Link to={card.link} className="group/link inline-flex items-center text-sm font-bold text-accent hover:text-text-main transition-colors gap-2 link-underline pb-1">
+                  {card.linkText} <ArrowRight size={14} className="transition-transform group-hover/link:translate-x-1" />
+                </Link>
+              </motion.div>
+            ))}
+          </motion.div>
         </div>
       </section>
 
