@@ -151,20 +151,20 @@ export default function Home() {
               </span>
             </motion.div>
             
-            <h1 className="text-4xl md:text-5xl lg:text-[3.5rem] font-heading font-medium leading-[1.15] text-text-main mb-5">
+            <h1 className="text-5xl md:text-6xl lg:text-[4.5rem] font-heading font-normal leading-[1.05] text-text-main mb-6 tracking-tight">
               <span className="block overflow-hidden pb-1">
                 <motion.span className="block" initial={shouldAnimate ? { y: "100%", opacity: 0 } : false} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: shouldAnimate ? 0.08 : 0 }}>
-                  Structuring businesses.
+                  Structuring <span className="italic">businesses.</span>
                 </motion.span>
               </span>
               <span className="block overflow-hidden pb-1">
                 <motion.span className="block" initial={shouldAnimate ? { y: "100%", opacity: 0 } : false} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: shouldAnimate ? 0.16 : 0 }}>
-                  Securing compliance.
+                  Securing <span className="italic">compliance.</span>
                 </motion.span>
               </span>
               <span className="block overflow-hidden pb-1">
                 <motion.span className="block text-accent" initial={shouldAnimate ? { y: "100%", opacity: 0 } : false} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: shouldAnimate ? 0.24 : 0 }}>
-                  Scaling with confidence.
+                  Scaling with <span className="italic">confidence.</span>
                 </motion.span>
               </span>
             </h1>
