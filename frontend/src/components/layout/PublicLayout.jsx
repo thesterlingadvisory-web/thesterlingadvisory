@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 
 export default function PublicLayout() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
   const [shouldAnimate] = useState(() => location.pathname === '/' && !sessionStorage.getItem('hasPlayedIntro'));
 
