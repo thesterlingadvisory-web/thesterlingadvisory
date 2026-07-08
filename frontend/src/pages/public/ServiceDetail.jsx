@@ -97,6 +97,12 @@ export default function ServiceDetail() {
                   </li>
                 ))}
               </ul>
+              {documents.some(doc => doc.includes('*')) && (
+                <p className="mt-6 text-xs text-text-muted italic flex items-start gap-1">
+                  <span className="text-accent font-bold mt-0.5">*</span>
+                  These documents will be drafted and prepared by our experts or under our guidance as part of the engagement.
+                </p>
+              )}
             </div>
           </div>
 
