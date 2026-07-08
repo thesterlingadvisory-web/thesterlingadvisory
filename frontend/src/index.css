@@ -13,7 +13,7 @@
   --color-border-main: #E2E8F0; /* Cool subtle borders */
 
   /* Fonts - Unified Premium Typography */
-  --font-heading: 'Playfair Display', serif;
+  --font-heading: 'Inter', sans-serif;
   --font-body: 'Inter', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 }
