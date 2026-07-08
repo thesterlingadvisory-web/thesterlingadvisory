@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
-import { ArrowRight, Building2, Calculator, ShieldCheck, Scale, Compass, ChevronDown, User, Users, Heart, ShoppingCart, Briefcase, BookOpen, FileCheck, Send } from 'lucide-react';
+import { ArrowRight, Building2, Calculator, ShieldCheck, Scale, Compass, ChevronDown, User, Users, Heart, ShoppingCart, Briefcase, BookOpen, FileCheck, Send, Store } from 'lucide-react';
 
 const FADE_UP = {
   hidden: { opacity: 0, y: 30 },
@@ -33,6 +33,11 @@ const finderOptions = [
     { name: 'GST Return Filing', link: '/services/gst-return-filing' },
     { name: 'Professional Tax Registration', link: '/services/professional-tax-registration' },
     { name: 'FSSAI License', link: '/services/fssai-license' },
+  ]},
+  { id: 'retail', label: 'Retail / Physical Store', icon: Store, results: [
+    { name: 'Shops & Establishments', link: '/services/shops-establishments' },
+    { name: 'FSSAI Licence', link: '/services/fssai-licence' },
+    { name: 'GST Registration', link: '/services/gst-registration' },
   ]},
 ];
 
