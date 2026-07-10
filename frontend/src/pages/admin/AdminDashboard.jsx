@@ -5,6 +5,7 @@ import {
   CheckCircle, Clock, AlertCircle, ExternalLink, ChevronDown, 
   Save, RefreshCw, Briefcase, Calendar, ShieldCheck, Sparkles 
 } from 'lucide-react';
+import { getApiUrl } from '../../utils/api';
 
 const SAMPLE_LEADS = [
   {
@@ -63,7 +64,7 @@ export default function AdminDashboard() {
   const fetchLeads = async () => {
     setLoading(true);
     try {
-      const res = await fetch('http://localhost:5000/api/leads');
+      const res = await fetch(getApiUrl('/api/leads'));
       const json = await res.json();
       if (json && json.success && json.data.length > 0) {
         setLeads(json.data);
@@ -89,7 +90,7 @@ export default function AdminDashboard() {
     }
 
     try {
-      await fetch(`http://localhost:5000/api/leads/${leadId}`, {
+      await fetch(getApiUrl(`/api/leads/${leadId}`), {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ status: newStatus })
@@ -107,7 +108,7 @@ export default function AdminDashboard() {
     setSelectedLead(updatedLead);
 
     try {
-      await fetch(`http://localhost:5000/api/leads/${selectedLead.id}`, {
+      await fetch(getApiUrl(`/api/leads/${selectedLead.id}`), {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ notes: editingNotes })

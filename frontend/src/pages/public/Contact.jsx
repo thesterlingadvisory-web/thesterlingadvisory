@@ -4,6 +4,7 @@ import {
   Phone, Mail, MapPin, CheckCircle2, ShieldCheck, Clock, 
   Send, Sparkles, MessageSquare, ArrowRight, Building2, User 
 } from 'lucide-react';
+import { getApiUrl } from '../../utils/api';
 
 const BUSINESS_STAGES = [
   "Solo Founder / Freelancer",
@@ -74,7 +75,7 @@ export default function Contact() {
     };
 
     try {
-      const res = await fetch('http://localhost:5000/api/leads', {
+      const res = await fetch(getApiUrl('/api/leads'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)

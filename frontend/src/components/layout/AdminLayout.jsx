@@ -4,6 +4,7 @@ import {
   Users, LayoutDashboard, FileText, Settings, ExternalLink, 
   ShieldCheck, Bell, ChevronRight, LogOut, RefreshCw, Lock, KeyRound, ArrowRight, Eye, EyeOff 
 } from 'lucide-react';
+import { getApiUrl } from '../../utils/api';
 
 export default function AdminLayout() {
   const location = useLocation();
@@ -42,7 +43,7 @@ export default function AdminLayout() {
   const fetchLeadsCount = async () => {
     if (!isLoggedIn) return;
     try {
-      const res = await fetch('http://localhost:5000/api/leads');
+      const res = await fetch(getApiUrl('/api/leads'));
       const json = await res.json();
       if (json && json.success) {
         setLeadsCount(json.data.length);
