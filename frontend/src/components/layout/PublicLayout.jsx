@@ -465,13 +465,13 @@ export default function PublicLayout() {
         transition={{ delay: 2, duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
         className="pulse-gold"
         style={{
-          position: 'fixed', bottom: '1.5rem', right: '1.5rem', zIndex: 50,
+          position: 'fixed', bottom: '2.5rem', right: '2rem', zIndex: 99999,
           width: '56px', height: '56px',
           borderRadius: '50%',
           background: '#25D366',
           color: '#ffffff',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
-          boxShadow: '0 4px 20px rgba(37, 211, 102, 0.4)',
+          boxShadow: '0 6px 25px rgba(37, 211, 102, 0.5)',
           transition: 'transform 200ms ease',
         }}
         onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.1)'}
