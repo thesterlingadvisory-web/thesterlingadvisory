@@ -8,15 +8,16 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
-// Routes will be imported here
-// const capabilityRoutes = require('./routes/capabilityRoutes');
+// Routes
+const leadRoutes = require('./routes/leadRoutes');
 
 // Health Check
 app.get('/health', (req, res) => {
   res.status(200).json({ status: 'ok', message: 'TheSterlingAdvisory API is running' });
 });
 
-// app.use('/api/capabilities', capabilityRoutes);
+app.use('/api/leads', leadRoutes);
+app.use('/api/contact', leadRoutes);
 
 app.use((err, req, res, next) => {
   console.error(err.stack);
