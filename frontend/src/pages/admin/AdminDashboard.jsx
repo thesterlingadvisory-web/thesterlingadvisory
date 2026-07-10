@@ -64,7 +64,10 @@ export default function AdminDashboard() {
   const fetchLeads = async () => {
     setLoading(true);
     try {
-      const res = await fetch(getApiUrl('/api/leads'));
+      const token = localStorage.getItem('supabase_admin_token') || 'executive-passcode-auth';
+      const res = await fetch(getApiUrl('/api/leads'), {
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
       const json = await res.json();
       if (json && json.success && json.data.length > 0) {
         setLeads(json.data);
@@ -90,9 +93,13 @@ export default function AdminDashboard() {
     }
 
     try {
+      const token = localStorage.getItem('supabase_admin_token') || 'executive-passcode-auth';
       await fetch(getApiUrl(`/api/leads/${leadId}`), {
         method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
         body: JSON.stringify({ status: newStatus })
       });
     } catch (e) {
@@ -108,9 +115,13 @@ export default function AdminDashboard() {
     setSelectedLead(updatedLead);
 
     try {
+      const token = localStorage.getItem('supabase_admin_token') || 'executive-passcode-auth';
       await fetch(getApiUrl(`/api/leads/${selectedLead.id}`), {
         method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
         body: JSON.stringify({ notes: editingNotes })
       });
     } catch (e) {

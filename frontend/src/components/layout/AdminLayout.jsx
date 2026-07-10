@@ -5,6 +5,7 @@ import {
   ShieldCheck, Bell, ChevronRight, LogOut, RefreshCw, Lock, KeyRound, ArrowRight, Eye, EyeOff 
 } from 'lucide-react';
 import { getApiUrl } from '../../utils/api';
+import { supabase } from '../../utils/supabase';
 
 export default function AdminLayout() {
   const location = useLocation();
@@ -20,22 +21,48 @@ export default function AdminLayout() {
   const [showPasscode, setShowPasscode] = useState(false);
   const [loginError, setLoginError] = useState('');
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     setLoginError('');
-    // Accept standard admin credentials or deep kalra email
+
+    // 1. Attempt official Supabase Auth Login
+    try {
+      if (loginId.includes('@')) {
+        const { data, error } = await supabase.auth.signInWithPassword({
+          email: loginId.trim(),
+          password: loginPass.trim()
+        });
+        if (!error && data?.session) {
+          localStorage.setItem('supabase_admin_token', data.session.access_token);
+          localStorage.setItem('sterling_admin_auth', 'true');
+          setIsLoggedIn(true);
+          return;
+        }
+      }
+    } catch (err) {
+      console.warn('Supabase auth login check fallback:', err.message);
+    }
+
+    // 2. Executive Passcode Fallback (ensures zero lockout during initial Supabase Auth user setup)
     const validIds = ['admin', 'thesterlingadvisory@gmail.com', 'deepkalra', 'sterling'];
     const validPass = ['Sterling@2026', 'admin123', 'sterling123'];
 
     if (validIds.includes(loginId.toLowerCase().trim()) && validPass.includes(loginPass.trim())) {
+      localStorage.setItem('supabase_admin_token', 'executive-passcode-auth');
       localStorage.setItem('sterling_admin_auth', 'true');
       setIsLoggedIn(true);
     } else {
-      setLoginError('Invalid Admin ID or Passcode. Hint: ID="admin", Passcode="Sterling@2026" or "admin123"');
+      setLoginError('Invalid Admin ID or Passcode. Hint: ID="admin", Passcode="Sterling@2026" or your Supabase Auth credentials.');
     }
   };
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    try {
+      await supabase.auth.signOut();
+    } catch (e) {
+      // ignore
+    }
+    localStorage.removeItem('supabase_admin_token');
     localStorage.removeItem('sterling_admin_auth');
     setIsLoggedIn(false);
   };
@@ -43,7 +70,12 @@ export default function AdminLayout() {
   const fetchLeadsCount = async () => {
     if (!isLoggedIn) return;
     try {
-      const res = await fetch(getApiUrl('/api/leads'));
+      const token = localStorage.getItem('supabase_admin_token') || 'executive-passcode-auth';
+      const res = await fetch(getApiUrl('/api/leads'), {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
       const json = await res.json();
       if (json && json.success) {
         setLeadsCount(json.data.length);
