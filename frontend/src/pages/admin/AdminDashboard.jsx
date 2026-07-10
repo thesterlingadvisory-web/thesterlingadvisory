@@ -102,8 +102,9 @@ export default function AdminDashboard() {
   const handleSaveNotes = async () => {
     if (!selectedLead) return;
     setSavingNotes(true);
-    setLeads(prev => prev.map(l => l.id === selectedLead.id ? { ...l, notes: editingNotes } : l));
-    setSelectedLead(prev => ({ ...prev, notes: editingNotes }));
+    const updatedLead = { ...selectedLead, notes: editingNotes };
+    setLeads(prev => prev.map(l => l.id === selectedLead.id ? updatedLead : l));
+    setSelectedLead(updatedLead);
 
     try {
       await fetch(`http://localhost:5000/api/leads/${selectedLead.id}`, {
@@ -112,7 +113,7 @@ export default function AdminDashboard() {
         body: JSON.stringify({ notes: editingNotes })
       });
     } catch (e) {
-      console.warn('Notes update error:', e.message);
+      console.warn('Notes patch update error:', e.message);
     } finally {
       setSavingNotes(false);
     }
@@ -134,37 +135,37 @@ export default function AdminDashboard() {
   const getStatusBadge = (status) => {
     switch (status) {
       case 'NEW':
-        return { bg: 'rgba(223, 186, 115, 0.15)', border: '#DFBA73', text: '#DFBA73', label: 'NEW INQUIRY' };
+        return { bg: '#FEF3C7', border: '#FDE68A', text: '#D97706', label: 'NEW INQUIRY' };
       case 'CONTACTED':
-        return { bg: 'rgba(59, 130, 246, 0.15)', border: '#3b82f6', text: '#60a5fa', label: 'CONTACTED' };
+        return { bg: '#DBEAFE', border: '#BFDBFE', text: '#2563EB', label: 'CONTACTED' };
       case 'IN_PROGRESS':
-        return { bg: 'rgba(168, 85, 247, 0.15)', border: '#a855f7', text: '#c084fc', label: 'IN PROGRESS' };
+        return { bg: '#F3E8FF', border: '#E9D5FF', text: '#9333EA', label: 'IN PROGRESS' };
       case 'CONVERTED':
-        return { bg: 'rgba(34, 197, 94, 0.15)', border: '#22c55e', text: '#4ade80', label: 'CONVERTED / WON' };
+        return { bg: '#D1FAE5', border: '#A7F3D0', text: '#059669', label: 'CONVERTED / WON' };
       case 'CLOSED':
-        return { bg: 'rgba(100, 116, 139, 0.15)', border: '#64748b', text: '#94a3b8', label: 'CLOSED' };
+        return { bg: '#F1F5F9', border: '#E2E8F0', text: '#64748B', label: 'CLOSED' };
       default:
-        return { bg: 'rgba(255, 255, 255, 0.1)', border: '#ffffff', text: '#ffffff', label: status };
+        return { bg: '#F8FAFC', border: '#CBD5E1', text: '#334155', label: status };
     }
   };
 
   return (
-    <div style={{ padding: '2.5rem', maxWidth: '96rem', margin: '0 auto', color: '#ffffff', fontFamily: 'var(--font-body)' }}>
+    <div style={{ padding: '2.5rem', maxWidth: '96rem', margin: '0 auto', color: '#0F172A', fontFamily: 'var(--font-body)' }}>
       {/* ── Top Title & Stats Bar ── */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '2.5rem', flexWrap: 'wrap', gap: '1rem' }}>
         <div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '0.5rem' }}>
-            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.7rem', color: '#DFBA73', letterSpacing: '0.15em', textTransform: 'uppercase', fontWeight: 700 }}>
+            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.7rem', color: '#D97706', letterSpacing: '0.15em', textTransform: 'uppercase', fontWeight: 700 }}>
               Client Acquisition Desk
             </span>
-            <span style={{ background: '#0A0F1D', border: '1px solid #334155', padding: '2px 8px', fontSize: '0.65rem', borderRadius: '10px', color: '#4ade80', fontWeight: 600 }}>
-              ● Real-time Sync
+            <span style={{ background: '#D1FAE5', border: '1px solid #A7F3D0', padding: '2px 8px', fontSize: '0.65rem', borderRadius: '10px', color: '#059669', fontWeight: 700 }}>
+              ● Live CRM Active
             </span>
           </div>
-          <h1 style={{ fontFamily: 'var(--font-heading)', fontSize: '2.25rem', fontWeight: 700, color: '#ffffff', marginBottom: '0.5rem' }}>
+          <h1 style={{ fontFamily: 'var(--font-heading)', fontSize: '2.25rem', fontWeight: 800, color: '#0F172A', marginBottom: '0.5rem' }}>
             Leads & Consultation Pipeline
           </h1>
-          <p style={{ color: '#94A3B8', fontSize: '0.9375rem' }}>
+          <p style={{ color: '#64748B', fontSize: '0.95rem' }}>
             Track qualification data, manage consultation follow-ups, and connect instantly with prospective clients.
           </p>
         </div>
@@ -172,84 +173,86 @@ export default function AdminDashboard() {
         <button
           onClick={() => fetchLeads()}
           style={{
-            display: 'flex', alignItems: 'center', gap: '8px', padding: '0.625rem 1.25rem',
-            background: '#0A0F1D', border: '1px solid #DFBA73', borderRadius: '8px',
-            color: '#DFBA73', fontWeight: 600, fontSize: '0.85rem', cursor: 'pointer', transition: 'all 200ms ease'
+            display: 'flex', alignItems: 'center', gap: '8px', padding: '0.65rem 1.25rem',
+            background: '#FFFFFF', border: '1px solid #CBD5E1', borderRadius: '10px',
+            color: '#0F172A', fontWeight: 700, fontSize: '0.85rem', cursor: 'pointer', transition: 'all 200ms ease',
+            boxShadow: '0 2px 6px rgba(15, 23, 42, 0.04)'
           }}
-          onMouseEnter={e => e.currentTarget.style.background = 'rgba(223, 186, 115, 0.12)'}
-          onMouseLeave={e => e.currentTarget.style.background = '#0A0F1D'}
+          onMouseEnter={e => { e.currentTarget.style.borderColor = '#C59B27'; e.currentTarget.style.background = '#FFFBEB'; }}
+          onMouseLeave={e => { e.currentTarget.style.borderColor = '#CBD5E1'; e.currentTarget.style.background = '#FFFFFF'; }}
         >
-          <RefreshCw size={15} style={{ color: '#DFBA73' }} />
-          <span>Refresh Leads</span>
+          <RefreshCw size={15} style={{ color: '#D97706' }} />
+          <span>Refresh Database</span>
         </button>
       </div>
 
       {/* ── Stats Grid ── */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1.25rem', marginBottom: '2.5rem' }}>
-        <div style={{ background: '#0A0F1D', border: '1px solid #1E293B', padding: '1.5rem', borderRadius: '12px' }}>
+        <div style={{ background: '#FFFFFF', border: '1px solid #E2E8F0', padding: '1.5rem', borderRadius: '14px', boxShadow: '0 4px 12px rgba(15, 23, 42, 0.03)' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
-            <span style={{ fontSize: '0.75rem', fontFamily: 'var(--font-mono)', color: '#94A3B8', textTransform: 'uppercase', fontWeight: 600 }}>Total Inquiries</span>
-            <Users size={18} style={{ color: '#94A3B8' }} />
+            <span style={{ fontSize: '0.75rem', fontFamily: 'var(--font-mono)', color: '#64748B', textTransform: 'uppercase', fontWeight: 700 }}>Total Inquiries</span>
+            <Users size={18} style={{ color: '#64748B' }} />
           </div>
-          <div style={{ fontFamily: 'var(--font-heading)', fontSize: '2.25rem', fontWeight: 800, color: '#ffffff' }}>{leads.length}</div>
-          <div style={{ fontSize: '0.75rem', color: '#DFBA73', marginTop: '0.25rem', fontWeight: 500 }}>Active database leads</div>
+          <div style={{ fontFamily: 'var(--font-heading)', fontSize: '2.25rem', fontWeight: 800, color: '#0F172A' }}>{leads.length}</div>
+          <div style={{ fontSize: '0.75rem', color: '#D97706', marginTop: '0.25rem', fontWeight: 600 }}>Active client database</div>
         </div>
 
-        <div style={{ background: '#0A0F1D', border: '1px solid #DFBA73', padding: '1.5rem', borderRadius: '12px', boxShadow: '0 0 24px -6px rgba(223, 186, 115, 0.25)' }}>
+        <div style={{ background: '#FFFFFF', border: '1.5px solid #FDE68A', padding: '1.5rem', borderRadius: '14px', boxShadow: '0 8px 24px rgba(217, 119, 6, 0.08)' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
-            <span style={{ fontSize: '0.75rem', fontFamily: 'var(--font-mono)', color: '#DFBA73', textTransform: 'uppercase', fontWeight: 700 }}>New (Uncontacted)</span>
-            <Sparkles size={18} style={{ color: '#DFBA73' }} />
+            <span style={{ fontSize: '0.75rem', fontFamily: 'var(--font-mono)', color: '#D97706', textTransform: 'uppercase', fontWeight: 700 }}>New (Uncontacted)</span>
+            <Sparkles size={18} style={{ color: '#D97706' }} />
           </div>
-          <div style={{ fontFamily: 'var(--font-heading)', fontSize: '2.25rem', fontWeight: 800, color: '#ffffff' }}>
+          <div style={{ fontFamily: 'var(--font-heading)', fontSize: '2.25rem', fontWeight: 800, color: '#0F172A' }}>
             {leads.filter(l => l.status === 'NEW').length}
           </div>
-          <div style={{ fontSize: '0.75rem', color: '#4ade80', marginTop: '0.25rem', fontWeight: 500 }}>Requires immediate follow-up</div>
+          <div style={{ fontSize: '0.75rem', color: '#059669', marginTop: '0.25rem', fontWeight: 600 }}>Requires immediate follow-up</div>
         </div>
 
-        <div style={{ background: '#0A0F1D', border: '1px solid #1E293B', padding: '1.5rem', borderRadius: '12px' }}>
+        <div style={{ background: '#FFFFFF', border: '1px solid #E2E8F0', padding: '1.5rem', borderRadius: '14px', boxShadow: '0 4px 12px rgba(15, 23, 42, 0.03)' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
-            <span style={{ fontSize: '0.75rem', fontFamily: 'var(--font-mono)', color: '#94A3B8', textTransform: 'uppercase', fontWeight: 600 }}>In Progress / Contacted</span>
-            <Clock size={18} style={{ color: '#60a5fa' }} />
+            <span style={{ fontSize: '0.75rem', fontFamily: 'var(--font-mono)', color: '#64748B', textTransform: 'uppercase', fontWeight: 700 }}>In Progress / Contacted</span>
+            <Clock size={18} style={{ color: '#2563EB' }} />
           </div>
-          <div style={{ fontFamily: 'var(--font-heading)', fontSize: '2.25rem', fontWeight: 800, color: '#ffffff' }}>
+          <div style={{ fontFamily: 'var(--font-heading)', fontSize: '2.25rem', fontWeight: 800, color: '#0F172A' }}>
             {leads.filter(l => l.status === 'CONTACTED' || l.status === 'IN_PROGRESS').length}
           </div>
-          <div style={{ fontSize: '0.75rem', color: '#94A3B8', marginTop: '0.25rem' }}>Active client discussions</div>
+          <div style={{ fontSize: '0.75rem', color: '#64748B', marginTop: '0.25rem', fontWeight: 500 }}>Active client discussions</div>
         </div>
 
-        <div style={{ background: '#0A0F1D', border: '1px solid #1E293B', padding: '1.5rem', borderRadius: '12px' }}>
+        <div style={{ background: '#FFFFFF', border: '1px solid #E2E8F0', padding: '1.5rem', borderRadius: '14px', boxShadow: '0 4px 12px rgba(15, 23, 42, 0.03)' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
-            <span style={{ fontSize: '0.75rem', fontFamily: 'var(--font-mono)', color: '#94A3B8', textTransform: 'uppercase', fontWeight: 600 }}>Converted Clients</span>
-            <CheckCircle size={18} style={{ color: '#4ade80' }} />
+            <span style={{ fontSize: '0.75rem', fontFamily: 'var(--font-mono)', color: '#64748B', textTransform: 'uppercase', fontWeight: 700 }}>Converted Clients</span>
+            <CheckCircle size={18} style={{ color: '#059669' }} />
           </div>
-          <div style={{ fontFamily: 'var(--font-heading)', fontSize: '2.25rem', fontWeight: 800, color: '#ffffff' }}>
+          <div style={{ fontFamily: 'var(--font-heading)', fontSize: '2.25rem', fontWeight: 800, color: '#0F172A' }}>
             {leads.filter(l => l.status === 'CONVERTED').length}
           </div>
-          <div style={{ fontSize: '0.75rem', color: '#4ade80', marginTop: '0.25rem', fontWeight: 500 }}>Successfully onboarded</div>
+          <div style={{ fontSize: '0.75rem', color: '#059669', marginTop: '0.25rem', fontWeight: 600 }}>Successfully onboarded</div>
         </div>
       </div>
 
       {/* ── Search & Filter Bar ── */}
       <div style={{ 
-        background: '#0A0F1D', border: '1px solid #1E293B',
-        padding: '1.25rem 1.5rem', borderRadius: '12px', marginBottom: '1.5rem',
-        display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem'
+        background: '#FFFFFF', border: '1px solid #E2E8F0',
+        padding: '1.25rem 1.5rem', borderRadius: '14px', marginBottom: '1.5rem',
+        display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem',
+        boxShadow: '0 4px 12px rgba(15, 23, 42, 0.02)'
       }}>
         {/* Search */}
         <div style={{ position: 'relative', width: '380px', maxWidth: '100%' }}>
-          <Search size={16} style={{ position: 'absolute', left: '1rem', top: '50%', transform: 'translateY(-50%)', color: '#94A3B8' }} />
+          <Search size={16} style={{ position: 'absolute', left: '1rem', top: '50%', transform: 'translateY(-50%)', color: '#64748B' }} />
           <input
             type="text"
             placeholder="Search by name, company, phone, ID..."
             value={search}
             onChange={e => setSearch(e.target.value)}
             style={{
-              width: '100%', background: '#05080F', border: '1px solid #334155',
-              padding: '0.625rem 1rem 0.625rem 2.75rem', borderRadius: '8px', color: '#ffffff', fontSize: '0.875rem',
-              outline: 'none', fontFamily: 'var(--font-body)'
+              width: '100%', background: '#F8FAFC', border: '1.5px solid #CBD5E1',
+              padding: '0.625rem 1rem 0.625rem 2.75rem', borderRadius: '10px', color: '#0F172A', fontSize: '0.875rem',
+              outline: 'none', fontFamily: 'var(--font-body)', transition: 'border-color 200ms ease'
             }}
-            onFocus={e => e.target.style.borderColor = '#DFBA73'}
-            onBlur={e => e.target.style.borderColor = '#334155'}
+            onFocus={e => e.target.style.borderColor = '#C59B27'}
+            onBlur={e => e.target.style.borderColor = '#CBD5E1'}
           />
         </div>
 
@@ -262,11 +265,11 @@ export default function AdminDashboard() {
                 key={st}
                 onClick={() => setFilterStatus(st)}
                 style={{
-                  padding: '0.5rem 0.875rem', borderRadius: '6px', fontSize: '0.75rem', fontWeight: 700,
+                  padding: '0.5rem 0.875rem', borderRadius: '8px', fontSize: '0.75rem', fontWeight: 700,
                   fontFamily: 'var(--font-mono)', cursor: 'pointer', transition: 'all 200ms ease',
-                  background: isSelected ? '#DFBA73' : '#05080F',
-                  color: isSelected ? '#000000' : '#94A3B8',
-                  border: isSelected ? '1px solid #DFBA73' : '1px solid #1E293B',
+                  background: isSelected ? '#0F172A' : '#F8FAFC',
+                  color: isSelected ? '#FFFFFF' : '#475569',
+                  border: isSelected ? '1px solid #0F172A' : '1px solid #CBD5E1',
                 }}
               >
                 {st.replace('_', ' ')}
@@ -279,25 +282,25 @@ export default function AdminDashboard() {
       {/* ── Main Layout: Table List & Detail Tray ── */}
       <div style={{ display: 'grid', gridTemplateColumns: selectedLead ? '1fr 440px' : '1fr', gap: '1.5rem', transition: 'all 300ms ease' }}>
         {/* Left Side: Leads Table Card */}
-        <div style={{ background: '#0A0F1D', border: '1px solid #1E293B', borderRadius: '12px', overflow: 'hidden' }}>
+        <div style={{ background: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: '14px', overflow: 'hidden', boxShadow: '0 6px 18px rgba(15, 23, 42, 0.03)' }}>
           {loading ? (
-            <div style={{ padding: '4rem', textAlign: 'center', color: '#94A3B8' }}>
+            <div style={{ padding: '4rem', textAlign: 'center', color: '#64748B' }}>
               Loading latest consultation requests...
             </div>
           ) : filteredLeads.length === 0 ? (
-            <div style={{ padding: '4rem', textAlign: 'center', color: '#94A3B8' }}>
+            <div style={{ padding: '4rem', textAlign: 'center', color: '#64748B' }}>
               No leads match your search criteria.
             </div>
           ) : (
             <div style={{ overflowX: 'auto' }}>
               <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
                 <thead>
-                  <tr style={{ background: '#05080F', borderBottom: '1px solid #1E293B' }}>
-                    <th style={{ padding: '1rem 1.25rem', fontSize: '0.75rem', fontFamily: 'var(--font-mono)', color: '#94A3B8', textTransform: 'uppercase', fontWeight: 700 }}>Ticket & Client</th>
-                    <th style={{ padding: '1rem 1.25rem', fontSize: '0.75rem', fontFamily: 'var(--font-mono)', color: '#94A3B8', textTransform: 'uppercase', fontWeight: 700 }}>Business Stage</th>
-                    <th style={{ padding: '1rem 1.25rem', fontSize: '0.75rem', fontFamily: 'var(--font-mono)', color: '#94A3B8', textTransform: 'uppercase', fontWeight: 700 }}>Services Requested</th>
-                    <th style={{ padding: '1rem 1.25rem', fontSize: '0.75rem', fontFamily: 'var(--font-mono)', color: '#94A3B8', textTransform: 'uppercase', fontWeight: 700 }}>Status</th>
-                    <th style={{ padding: '1rem 1.25rem', fontSize: '0.75rem', fontFamily: 'var(--font-mono)', color: '#94A3B8', textTransform: 'uppercase', fontWeight: 700 }}>Actions</th>
+                  <tr style={{ background: '#F8FAFC', borderBottom: '1px solid #E2E8F0' }}>
+                    <th style={{ padding: '1rem 1.25rem', fontSize: '0.75rem', fontFamily: 'var(--font-mono)', color: '#475569', textTransform: 'uppercase', fontWeight: 700 }}>Ticket & Client</th>
+                    <th style={{ padding: '1rem 1.25rem', fontSize: '0.75rem', fontFamily: 'var(--font-mono)', color: '#475569', textTransform: 'uppercase', fontWeight: 700 }}>Business Stage</th>
+                    <th style={{ padding: '1rem 1.25rem', fontSize: '0.75rem', fontFamily: 'var(--font-mono)', color: '#475569', textTransform: 'uppercase', fontWeight: 700 }}>Services Requested</th>
+                    <th style={{ padding: '1rem 1.25rem', fontSize: '0.75rem', fontFamily: 'var(--font-mono)', color: '#475569', textTransform: 'uppercase', fontWeight: 700 }}>Status</th>
+                    <th style={{ padding: '1rem 1.25rem', fontSize: '0.75rem', fontFamily: 'var(--font-mono)', color: '#475569', textTransform: 'uppercase', fontWeight: 700 }}>Actions</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -309,31 +312,31 @@ export default function AdminDashboard() {
                         key={l.id}
                         onClick={() => { setSelectedLead(l); setEditingNotes(l.notes || ''); }}
                         style={{
-                          borderBottom: '1px solid #1E293B',
-                          background: isSelected ? 'rgba(223, 186, 115, 0.1)' : 'transparent',
+                          borderBottom: '1px solid #E2E8F0',
+                          background: isSelected ? '#FEF3C7' : 'transparent',
                           cursor: 'pointer', transition: 'background 150ms ease'
                         }}
                       >
                         {/* Client & ID */}
                         <td style={{ padding: '1.125rem 1.25rem' }}>
-                          <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.725rem', color: '#DFBA73', fontWeight: 700, marginBottom: '3px' }}>
+                          <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.725rem', color: '#D97706', fontWeight: 700, marginBottom: '3px' }}>
                             {l.id}
                           </div>
-                          <div style={{ fontSize: '0.95rem', fontWeight: 700, color: '#ffffff', marginBottom: '2px' }}>
+                          <div style={{ fontSize: '0.95rem', fontWeight: 700, color: '#0F172A', marginBottom: '2px' }}>
                             {l.name}
                           </div>
-                          <div style={{ fontSize: '0.8125rem', color: '#94A3B8' }}>
+                          <div style={{ fontSize: '0.8125rem', color: '#64748B' }}>
                             {l.company_name}
                           </div>
                         </td>
 
                         {/* Stage */}
                         <td style={{ padding: '1.125rem 1.25rem' }}>
-                          <span style={{ fontSize: '0.85rem', color: '#ffffff', fontWeight: 500, display: 'block', marginBottom: '4px' }}>
+                          <span style={{ fontSize: '0.85rem', color: '#0F172A', fontWeight: 600, display: 'block', marginBottom: '4px' }}>
                             {l.business_type}
                           </span>
-                          <span style={{ fontSize: '0.75rem', color: '#94A3B8' }}>
-                            Timeline: <strong style={{ color: '#60a5fa' }}>{l.timeline}</strong>
+                          <span style={{ fontSize: '0.75rem', color: '#64748B' }}>
+                            Timeline: <strong style={{ color: '#2563EB' }}>{l.timeline}</strong>
                           </span>
                         </td>
 
@@ -342,8 +345,8 @@ export default function AdminDashboard() {
                           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px', maxWidth: '280px' }}>
                             {(Array.isArray(l.interested_in) ? l.interested_in : [l.interested_in]).map((srv, idx) => (
                               <span key={idx} style={{
-                                background: '#05080F', border: '1px solid #334155',
-                                padding: '3px 8px', borderRadius: '4px', fontSize: '0.725rem', color: '#E2E8F0', fontWeight: 500
+                                background: '#F1F5F9', border: '1px solid #CBD5E1',
+                                padding: '3px 8px', borderRadius: '6px', fontSize: '0.725rem', color: '#334155', fontWeight: 600
                               }}>
                                 {srv}
                               </span>
@@ -357,17 +360,17 @@ export default function AdminDashboard() {
                             value={l.status}
                             onChange={e => handleStatusChange(l.id, e.target.value)}
                             style={{
-                              background: badge.bg, border: `1px solid ${badge.border}`,
-                              color: badge.text, padding: '0.4rem 0.625rem', borderRadius: '6px',
+                              background: badge.bg, border: `1.5px solid ${badge.border}`,
+                              color: badge.text, padding: '0.4rem 0.625rem', borderRadius: '8px',
                               fontSize: '0.75rem', fontWeight: 700, fontFamily: 'var(--font-mono)',
                               cursor: 'pointer', outline: 'none'
                             }}
                           >
-                            <option value="NEW" style={{ background: '#05080f', color: '#ffffff' }}>NEW INQUIRY</option>
-                            <option value="CONTACTED" style={{ background: '#05080f', color: '#ffffff' }}>CONTACTED</option>
-                            <option value="IN_PROGRESS" style={{ background: '#05080f', color: '#ffffff' }}>IN PROGRESS</option>
-                            <option value="CONVERTED" style={{ background: '#05080f', color: '#ffffff' }}>CONVERTED / WON</option>
-                            <option value="CLOSED" style={{ background: '#05080f', color: '#ffffff' }}>CLOSED</option>
+                            <option value="NEW">NEW INQUIRY</option>
+                            <option value="CONTACTED">CONTACTED</option>
+                            <option value="IN_PROGRESS">IN PROGRESS</option>
+                            <option value="CONVERTED">CONVERTED / WON</option>
+                            <option value="CLOSED">CLOSED</option>
                           </select>
                         </td>
 
@@ -381,8 +384,8 @@ export default function AdminDashboard() {
                                 rel="noreferrer"
                                 title="Chat on WhatsApp"
                                 style={{
-                                  padding: '6px 10px', background: 'rgba(34, 197, 94, 0.15)',
-                                  border: '1px solid #22c55e', borderRadius: '6px', color: '#4ade80',
+                                  padding: '6px 10px', background: '#D1FAE5',
+                                  border: '1px solid #10B981', borderRadius: '8px', color: '#059669',
                                   display: 'flex', alignItems: 'center', gap: '4px', fontSize: '0.75rem', textDecoration: 'none',
                                   fontWeight: 700
                                 }}
@@ -394,9 +397,10 @@ export default function AdminDashboard() {
                               href={`mailto:${l.email}?subject=Consultation Follow-up - Sterling Advisory (${l.id})`}
                               title="Send Email"
                               style={{
-                                padding: '6px 10px', background: '#05080F',
-                                border: '1px solid #334155', borderRadius: '6px', color: '#ffffff',
-                                display: 'flex', alignItems: 'center', gap: '4px', fontSize: '0.75rem', textDecoration: 'none'
+                                padding: '6px 10px', background: '#F8FAFC',
+                                border: '1px solid #CBD5E1', borderRadius: '8px', color: '#0F172A',
+                                display: 'flex', alignItems: 'center', gap: '4px', fontSize: '0.75rem', textDecoration: 'none',
+                                fontWeight: 600
                               }}
                             >
                               <Mail size={14} />
@@ -420,24 +424,24 @@ export default function AdminDashboard() {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: 20 }}
               style={{
-                background: '#0A0F1D', border: '1px solid #DFBA73',
-                borderRadius: '12px', padding: '1.75rem', display: 'flex', flexDirection: 'column',
+                background: '#FFFFFF', border: '1.5px solid #FDE68A',
+                borderRadius: '14px', padding: '1.75rem', display: 'flex', flexDirection: 'column',
                 position: 'sticky', top: '6rem', maxHeight: 'calc(100vh - 8rem)', overflowY: 'auto',
-                boxShadow: '0 16px 40px rgba(0,0,0,0.6)'
+                boxShadow: '0 20px 50px rgba(15, 23, 42, 0.08)'
               }}
             >
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1.25rem', borderBottom: '1px solid #1E293B', paddingBottom: '1rem' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1.25rem', borderBottom: '1px solid #E2E8F0', paddingBottom: '1rem' }}>
                 <div>
-                  <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.725rem', color: '#DFBA73', fontWeight: 700 }}>
+                  <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.725rem', color: '#D97706', fontWeight: 700 }}>
                     {selectedLead.id}
                   </span>
-                  <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.35rem', fontWeight: 800, color: '#ffffff', marginTop: '2px' }}>
+                  <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.35rem', fontWeight: 800, color: '#0F172A', marginTop: '2px' }}>
                     {selectedLead.name}
                   </h3>
                 </div>
                 <button
                   onClick={() => setSelectedLead(null)}
-                  style={{ background: 'none', border: 'none', color: '#94A3B8', cursor: 'pointer', fontSize: '1.2rem' }}
+                  style={{ background: 'none', border: 'none', color: '#64748B', cursor: 'pointer', fontSize: '1.2rem' }}
                 >
                   ✕
                 </button>
@@ -446,26 +450,26 @@ export default function AdminDashboard() {
               {/* Client Profile Details */}
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.875rem', marginBottom: '1.5rem' }}>
                 <div>
-                  <div style={{ fontSize: '0.75rem', color: '#94A3B8', fontWeight: 600 }}>Company / Entity</div>
-                  <div style={{ fontSize: '0.95rem', color: '#ffffff', fontWeight: 700 }}>{selectedLead.company_name}</div>
+                  <div style={{ fontSize: '0.75rem', color: '#64748B', fontWeight: 600 }}>Company / Entity</div>
+                  <div style={{ fontSize: '0.95rem', color: '#0F172A', fontWeight: 700 }}>{selectedLead.company_name}</div>
                 </div>
                 <div>
-                  <div style={{ fontSize: '0.75rem', color: '#94A3B8', fontWeight: 600 }}>Contact Information</div>
-                  <div style={{ fontSize: '0.9rem', color: '#ffffff', fontWeight: 500 }}>{selectedLead.phone}</div>
-                  <div style={{ fontSize: '0.9rem', color: '#DFBA73', fontWeight: 500 }}>{selectedLead.email}</div>
+                  <div style={{ fontSize: '0.75rem', color: '#64748B', fontWeight: 600 }}>Contact Information</div>
+                  <div style={{ fontSize: '0.9rem', color: '#0F172A', fontWeight: 600 }}>{selectedLead.phone}</div>
+                  <div style={{ fontSize: '0.9rem', color: '#D97706', fontWeight: 600 }}>{selectedLead.email}</div>
                 </div>
                 <div>
-                  <div style={{ fontSize: '0.75rem', color: '#94A3B8', fontWeight: 600 }}>Business Stage & Timeline</div>
-                  <div style={{ fontSize: '0.9rem', color: '#ffffff' }}>{selectedLead.business_type} • <span style={{ color: '#60a5fa', fontWeight: 600 }}>{selectedLead.timeline}</span></div>
+                  <div style={{ fontSize: '0.75rem', color: '#64748B', fontWeight: 600 }}>Business Stage & Timeline</div>
+                  <div style={{ fontSize: '0.9rem', color: '#0F172A' }}>{selectedLead.business_type} • <span style={{ color: '#2563EB', fontWeight: 600 }}>{selectedLead.timeline}</span></div>
                 </div>
               </div>
 
               {/* Specific Requirements / Message */}
               <div style={{ marginBottom: '1.5rem' }}>
-                <div style={{ fontSize: '0.75rem', color: '#94A3B8', fontWeight: 600, marginBottom: '0.375rem' }}>Client Specific Message</div>
+                <div style={{ fontSize: '0.75rem', color: '#64748B', fontWeight: 600, marginBottom: '0.375rem' }}>Client Specific Message</div>
                 <div style={{
-                  padding: '1rem', background: '#05080F', border: '1px solid #1E293B',
-                  borderRadius: '8px', fontSize: '0.875rem', color: '#E2E8F0', lineHeight: '1.6'
+                  padding: '1rem', background: '#F8FAFC', border: '1px solid #CBD5E1',
+                  borderRadius: '10px', fontSize: '0.875rem', color: '#334155', lineHeight: '1.6'
                 }}>
                   {selectedLead.message || 'No specific notes entered during submission.'}
                 </div>
@@ -474,31 +478,31 @@ export default function AdminDashboard() {
               {/* Admin Internal CRM Notes */}
               <div style={{ flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
-                  <span style={{ fontSize: '0.75rem', fontWeight: 700, color: '#DFBA73', fontFamily: 'var(--font-mono)', textTransform: 'uppercase' }}>
+                  <span style={{ fontSize: '0.75rem', fontWeight: 700, color: '#D97706', fontFamily: 'var(--font-mono)', textTransform: 'uppercase' }}>
                     Staff Follow-up Notes
                   </span>
-                  <span style={{ fontSize: '0.65rem', color: '#94A3B8' }}>Internal Private Record</span>
+                  <span style={{ fontSize: '0.65rem', color: '#64748B' }}>Internal Private Record</span>
                 </div>
                 <textarea
                   value={editingNotes}
                   onChange={e => setEditingNotes(e.target.value)}
                   placeholder="Record your phone discussion, quote sent, or next follow-up date here..."
                   style={{
-                    width: '100%', minHeight: '120px', background: '#05080F', border: '1px solid #334155',
-                    borderRadius: '8px', padding: '0.75rem', color: '#ffffff', fontSize: '0.875rem', outline: 'none',
-                    resize: 'vertical', fontFamily: 'var(--font-body)', marginBottom: '0.75rem'
+                    width: '100%', minHeight: '120px', background: '#F8FAFC', border: '1.5px solid #CBD5E1',
+                    borderRadius: '10px', padding: '0.75rem', color: '#0F172A', fontSize: '0.875rem', outline: 'none',
+                    resize: 'vertical', fontFamily: 'var(--font-body)', marginBottom: '0.75rem', transition: 'border-color 200ms ease'
                   }}
-                  onFocus={e => e.target.style.borderColor = '#DFBA73'}
-                  onBlur={e => e.target.style.borderColor = '#334155'}
+                  onFocus={e => e.target.style.borderColor = '#C59B27'}
+                  onBlur={e => e.target.style.borderColor = '#CBD5E1'}
                 />
                 <button
                   onClick={handleSaveNotes}
                   disabled={savingNotes}
                   style={{
-                    display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', padding: '0.75rem',
-                    background: 'linear-gradient(135deg, #DFBA73 0%, #A6823B 100%)', border: 'none', borderRadius: '8px',
-                    color: '#000000', fontWeight: 800, fontSize: '0.9rem', cursor: savingNotes ? 'not-allowed' : 'pointer',
-                    fontFamily: 'var(--font-heading)'
+                    display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', padding: '0.85rem',
+                    background: 'linear-gradient(135deg, #DFBA73 0%, #A6823B 100%)', border: 'none', borderRadius: '10px',
+                    color: '#0F172A', fontWeight: 800, fontSize: '0.9rem', cursor: savingNotes ? 'not-allowed' : 'pointer',
+                    fontFamily: 'var(--font-heading)', boxShadow: '0 4px 14px rgba(223, 186, 115, 0.35)'
                   }}
                 >
                   <Save size={16} />
