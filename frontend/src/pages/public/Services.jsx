@@ -131,11 +131,11 @@ export default function Services() {
             style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '1.25rem' }}
           >
             {displayedCategories[0].services.map((service) => (
-              <motion.div key={service.id} variants={FADE_UP}>
+              <motion.div key={service.id} variants={FADE_UP} style={{ display: 'flex', height: '100%' }}>
                 <Link
                   to={`/services/${service.slug}`}
                   className="card-premium"
-                  style={{ display: 'flex', flexDirection: 'column', padding: '2rem', background: 'var(--color-secondary)', height: '100%' }}
+                  style={{ display: 'flex', flexDirection: 'column', width: '100%', padding: '2rem', background: 'var(--color-secondary)', height: '100%' }}
                 >
                   <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.1875rem', fontWeight: 600, color: 'var(--color-navy)', marginBottom: '0.75rem' }}>
                     {service.title}

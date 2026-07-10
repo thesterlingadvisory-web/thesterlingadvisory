@@ -102,7 +102,7 @@ export default function Home() {
       ═══════════════════════════════════════════ */}
       <section style={{
         minHeight: '92vh',
-        background: 'radial-gradient(ellipse 80% 50% at 50% -20%, rgba(223, 186, 115, 0.16), transparent), linear-gradient(180deg, #05080F 0%, #0A0F1D 60%, #05080F 100%)',
+        background: 'radial-gradient(ellipse 80% 60% at 50% -10%, rgba(223, 186, 115, 0.22), transparent), linear-gradient(180deg, #0F172A 0%, #16223A 60%, #0F172A 100%)',
         display: 'flex', flexDirection: 'column', justifyContent: 'center',
         position: 'relative', overflow: 'hidden',
         padding: '6rem 0 4rem',
@@ -479,29 +479,31 @@ export default function Home() {
             {featuredServices.map((service, i) => {
               const Icon = service.icon;
               return (
-                <motion.div key={i} variants={FADE_UP}>
+                <motion.div key={i} variants={FADE_UP} style={{ display: 'flex', height: '100%' }}>
                   <Link
                     to={`/services/${service.slug}`}
                     className="card-premium"
-                    style={{ display: 'block', padding: '2rem', background: 'var(--color-secondary)' }}
+                    style={{ display: 'flex', flexDirection: 'column', width: '100%', height: '100%', padding: '2rem', background: 'var(--color-secondary)' }}
                   >
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1.25rem' }}>
-                      <div style={{ width: '48px', height: '48px', background: 'rgba(10,22,40,0.06)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                        <Icon size={22} strokeWidth={1.5} style={{ color: 'var(--color-navy)' }} />
+                    <div>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1.25rem' }}>
+                        <div style={{ width: '48px', height: '48px', background: 'rgba(10,22,40,0.06)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                          <Icon size={22} strokeWidth={1.5} style={{ color: 'var(--color-navy)' }} />
+                        </div>
+                        <span style={{
+                          fontSize: '0.6rem', fontWeight: 700, letterSpacing: '0.15em',
+                          textTransform: 'uppercase', color: 'var(--color-gold)',
+                          border: '1px solid rgba(223,186,115,0.35)',
+                          padding: '0.25rem 0.625rem',
+                        }}>{service.tag}</span>
                       </div>
-                      <span style={{
-                        fontSize: '0.6rem', fontWeight: 700, letterSpacing: '0.15em',
-                        textTransform: 'uppercase', color: 'var(--color-gold)',
-                        border: '1px solid rgba(223,186,115,0.35)',
-                        padding: '0.25rem 0.625rem',
-                      }}>{service.tag}</span>
+                      <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.1875rem', fontWeight: 600, color: 'var(--color-navy)', marginBottom: '0.625rem' }}>
+                        {service.title}
+                      </h3>
+                      <p style={{ fontSize: '0.875rem', color: 'var(--color-text-muted)', lineHeight: '1.65', marginBottom: '1.5rem', flexGrow: 1 }}>
+                        {service.desc}
+                      </p>
                     </div>
-                    <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.1875rem', fontWeight: 600, color: 'var(--color-navy)', marginBottom: '0.625rem' }}>
-                      {service.title}
-                    </h3>
-                    <p style={{ fontSize: '0.875rem', color: 'var(--color-text-muted)', lineHeight: '1.65', marginBottom: '1.25rem' }}>
-                      {service.desc}
-                    </p>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.75rem', fontWeight: 700, color: 'var(--color-gold)', letterSpacing: '0.08em', textTransform: 'uppercase' }}>
                       Learn More <ArrowRight size={13} />
                     </div>
@@ -817,11 +819,13 @@ export default function Home() {
               { title: 'GST Registration: Who Needs It and When', excerpt: 'Threshold limits, voluntary registration benefits, and common mistakes to avoid.', tag: 'Tax & Compliance' },
               { title: 'Protecting Your Brand: A Guide to Trademark Filing in India', excerpt: 'The step-by-step process, timelines, and why you should file before scaling.', tag: 'Intellectual Property' },
             ].map((post, i) => (
-              <motion.div key={i} variants={FADE_UP}>
-                <Link to="/insights" className="card-premium" style={{ display: 'block', padding: '2rem', background: 'var(--color-secondary)' }}>
-                  <span style={{ fontSize: '0.65rem', fontFamily: 'var(--font-mono)', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--color-gold)', marginBottom: '1rem', display: 'block' }}>{post.tag}</span>
-                  <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.125rem', fontWeight: 600, color: 'var(--color-navy)', marginBottom: '0.75rem', lineHeight: 1.3 }}>{post.title}</h3>
-                  <p style={{ fontSize: '0.875rem', color: 'var(--color-text-muted)', marginBottom: '1.5rem', lineHeight: '1.65' }}>{post.excerpt}</p>
+              <motion.div key={i} variants={FADE_UP} style={{ display: 'flex', height: '100%' }}>
+                <Link to="/insights" className="card-premium" style={{ display: 'flex', flexDirection: 'column', width: '100%', height: '100%', padding: '2rem', background: 'var(--color-secondary)' }}>
+                  <div>
+                    <span style={{ fontSize: '0.65rem', fontFamily: 'var(--font-mono)', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--color-gold)', marginBottom: '1rem', display: 'block' }}>{post.tag}</span>
+                    <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.125rem', fontWeight: 600, color: 'var(--color-navy)', marginBottom: '0.75rem', lineHeight: 1.3 }}>{post.title}</h3>
+                    <p style={{ fontSize: '0.875rem', color: 'var(--color-text-muted)', marginBottom: '1.5rem', lineHeight: '1.65', flexGrow: 1 }}>{post.excerpt}</p>
+                  </div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.75rem', fontWeight: 700, color: 'var(--color-gold)', letterSpacing: '0.08em', textTransform: 'uppercase' }}>
                     Read More <ArrowRight size={13} />
                   </div>
