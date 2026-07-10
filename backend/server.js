@@ -26,8 +26,8 @@ const frontendBuildPath = path.join(__dirname, '../frontend/dist');
 app.use(express.static(frontendBuildPath));
 
 // SPA Fallback: handle any route like /services by serving index.html
-app.get('*', (req, res, next) => {
-  if (req.path.startsWith('/api')) return next();
+app.use((req, res, next) => {
+  if (req.path.startsWith('/api') || req.path === '/health') return next();
   res.sendFile(path.join(frontendBuildPath, 'index.html'), (err) => {
     if (err) {
       res.status(404).send('Frontend build not found. Please run "npm run build" in the frontend directory or use the Vite dev server.');
