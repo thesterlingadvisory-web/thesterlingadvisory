@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Outlet, Link, useLocation } from 'react-router-dom';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import ChatWidget from '../ui/ChatWidget';
 
 const megaMenuCategories = [
   {
@@ -614,6 +615,8 @@ export default function PublicLayout() {
         <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#25D366', display: 'inline-block' }} />
         Chat with Us
       </a>
+
+      <ChatWidget />
     </div>
   );
 }

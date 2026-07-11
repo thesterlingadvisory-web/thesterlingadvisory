@@ -10,6 +10,7 @@ app.use(express.json());
 
 // Routes
 const leadRoutes = require('./routes/leadRoutes');
+const chatRoutes = require('./routes/chatRoutes');
 
 // Health Check
 app.get('/health', (req, res) => {
@@ -20,6 +21,7 @@ const path = require('path');
 
 app.use('/api/leads', leadRoutes);
 app.use('/api/contact', leadRoutes);
+app.use('/api/chat', chatRoutes);
 
 // Serve static frontend build if available
 const frontendBuildPath = path.join(__dirname, '../frontend/dist');
