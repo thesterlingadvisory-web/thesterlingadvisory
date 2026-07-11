@@ -611,29 +611,29 @@ export default function PublicLayout() {
         </div>
       </footer>
 
-      {/* WhatsApp Action Button (Clean, no pulsing AI loop) */}
+      {/* Premium Stacked WhatsApp Icon */}
       <a
         href="https://wa.me/918448803143?text=Hi%2C%20I'd%20like%20to%20consult%20with%20your%20advisory%20team."
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Direct Counsel via WhatsApp"
         style={{
-          position: 'fixed', bottom: '2rem', left: '2rem', zIndex: 900,
-          padding: '0.625rem 1rem',
-          borderRadius: 'var(--radius-md)',
+          position: 'fixed', bottom: '6.85rem', right: '2.15rem', zIndex: 890,
+          width: '56px', height: '56px',
+          borderRadius: '50%',
           background: '#128C7E',
           color: '#ffffff',
-          display: 'flex', alignItems: 'center', gap: '8px',
-          fontSize: '0.8125rem', fontWeight: 600,
-          boxShadow: 'var(--shadow-lg)',
-          border: '1px solid rgba(255,255,255,0.15)',
-          transition: 'background-color 160ms ease, transform 160ms ease',
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          boxShadow: '0 8px 24px rgba(18, 140, 126, 0.35)',
+          border: '2px solid rgba(255,255,255,0.15)',
+          transition: 'all 200ms ease',
         }}
-        onMouseEnter={e => { e.currentTarget.style.backgroundColor = '#075E54'; e.currentTarget.style.transform = 'translateY(-1px)'; }}
-        onMouseLeave={e => { e.currentTarget.style.backgroundColor = '#128C7E'; e.currentTarget.style.transform = 'translateY(0)'; }}
+        onMouseEnter={e => { e.currentTarget.style.backgroundColor = '#075E54'; e.currentTarget.style.transform = 'scale(1.08)'; e.currentTarget.style.boxShadow = '0 12px 28px rgba(18, 140, 126, 0.45)'; }}
+        onMouseLeave={e => { e.currentTarget.style.backgroundColor = '#128C7E'; e.currentTarget.style.transform = 'scale(1)'; e.currentTarget.style.boxShadow = '0 8px 24px rgba(18, 140, 126, 0.35)'; }}
       >
-        <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#25D366', display: 'inline-block' }} />
-        Chat with Us
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+        </svg>
       </a>
 
       <ChatWidget />
