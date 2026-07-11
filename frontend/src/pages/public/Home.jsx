@@ -125,9 +125,9 @@ export default function Home() {
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
 
   const activeHubData = heroHubTabs.find(t => t.id === activeHeroTab) || heroHubTabs[0];
-  const filteredServices = matrixCategory === 'all' 
+  const filteredServices = (matrixCategory === 'all' 
     ? servicesMatrix.filter(s => s.featured) 
-    : servicesMatrix.filter(s => s.category === matrixCategory);
+    : servicesMatrix.filter(s => s.category === matrixCategory)).slice(0, 10);
 
   return (
     <div style={{ width: '100%', background: 'var(--color-primary)' }}>

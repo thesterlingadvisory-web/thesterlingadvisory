@@ -204,6 +204,10 @@ const serviceContent = {
     overview: 'Legal Entity Identifier (LEI) is a 20-character global code mandated by the Reserve Bank of India for corporate entities executing transactions exceeding ₹50 Crore.',
     whyUs: ['CCIL / Global LEI foundation filing', 'Corporate documentation preparation', 'Expedited LEI code allocation', 'Annual LEI statutory renewal tracking'],
   },
+  'annual-compliance': {
+    overview: 'Complete end-to-end statutory compliance for Private Limited Companies and LLPs, including MCA annual returns, AOC-4, MGT-7, director KYC, and corporate tax audits.',
+    whyUs: ['Dedicated Senior Advisory statutory audits', 'Automated MCA/ROC compliance calendars', 'Financial statement preparation & filing', 'Zero-penalty statutory guarantee'],
+  }
 };
 
 export default function ServiceDetail() {

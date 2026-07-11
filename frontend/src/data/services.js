@@ -90,7 +90,8 @@ export const serviceCategories = [
       { id: 'gst-amendment', title: 'GST Amendment & Jurisdictional Transfer', slug: 'gst-amendment', shortDesc: 'Modification of core and non-core registration attributes.' },
       { id: 'pan-tan', title: 'Corporate PAN & TAN Allocation', slug: 'pan-tan-application', shortDesc: 'Permanent Account & Tax Deduction Account assignment.' },
       { id: 'pt', title: 'Professional Tax Enrolment', slug: 'professional-tax', shortDesc: 'State-mandated employer and employee tax registration.' },
-      { id: 'tds', title: 'TDS Registration & Return Retainer', slug: 'tds-registration', shortDesc: 'Tax deduction at source compliance and quarterly filing.' }
+      { id: 'tds', title: 'TDS Registration & Return Retainer', slug: 'tds-registration', shortDesc: 'Tax deduction at source compliance and quarterly filing.' },
+      { id: 'annual-compliance', title: 'Annual ROC Compliance', slug: 'annual-compliance', shortDesc: 'Complete annual statutory audits and MCA/ROC secretarial filings.' }
     ]
   },
   {
