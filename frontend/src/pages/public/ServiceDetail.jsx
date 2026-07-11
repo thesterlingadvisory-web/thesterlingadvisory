@@ -10,589 +10,687 @@ import {
 import { getServiceBySlug, serviceCategories } from '../../data/services';
 
 const FADE_UP = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } }
+  hidden: { opacity: 0, y: 16 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] } }
 };
 
-/* ── Map category icon strings to components ── */
 const categoryIconMap = {
   Landmark, BarChart2, Users, Shield: ShieldCheck, CheckCircle2, TrendingUp,
 };
 
-/* ── Rich content per service (whyUs, overview) ── */
 const serviceContent = {
   'proprietorship-setup': {
-    overview: 'A Proprietorship is the simplest and quickest form of business registration in India, ideal for solo entrepreneurs and freelancers wanting to formalize their operations without complex legal overhead.',
-    whyUs: ['Fast 2-4 day turnaround', 'MSME/Udyam registration included', 'GST guidance post-registration', 'Free post-registration checklist'],
+    overview: 'In Indian corporate law, a Sole Proprietorship has no separate legal existence distinct from the individual proprietor and cannot be incorporated with the ROC. Formalizing a legitimate Sole Proprietorship requires obtaining specific statutory licenses—namely Udyam (MSME) Registration, GST Identification Number (GSTIN), and Shops & Establishment Act License (Gumasta)—which enable the proprietor to open a commercial bank current account under RBI KYC guidelines and legally execute business contracts under their personal PAN.',
+    whyUs: [
+      'Udyam (MSME) Registration & Central Priority Certificate Allocation',
+      'GST Identification Number (GSTIN) Registration & Jurisdictional Setup',
+      'Shops & Establishment Act (State Municipal / Gumasta) Commercial Licensing',
+      'Bank Current Account Onboarding Documentation & RBI KYC Advisory'
+    ],
   },
   'partnership-firm-registration': {
-    overview: 'A Partnership Firm is formed when two or more individuals co-own a business under a registered deed. It offers shared responsibility, simpler management, and straightforward profit distribution.',
-    whyUs: ['Partnership deed drafted by our legal team', 'State-specific compliance guidance', 'PAN & TAN application included', 'Full follow-up with Registrar of Firms'],
+    overview: 'A Partnership Deed formalizes multi-founder governance, capital contributions, and profit allocation under the Indian Partnership Act 1932, registered with the State Registrar of Firms.',
+    whyUs: ['Custom constitutional partnership deed drafting', 'State-specific Registrar of Firms representation', 'Corporate PAN & TAN allocation', 'Retainer-led statutory follow-up'],
   },
   'llp-registration': {
-    overview: 'A Limited Liability Partnership (LLP) combines the flexibility of a partnership with limited liability protection for partners. It is a preferred choice for service professionals and small businesses.',
-    whyUs: ['DSC procurement assistance', 'MCA filing by experienced CSs', 'LLP agreement drafting', 'Annual compliance calendar provided'],
+    overview: 'Limited Liability Partnership (LLP) architecture isolates personal liability while preserving flexible internal governance under the LLP Act 2008. Ideal for professional service groups and joint ventures.',
+    whyUs: ['Class 3 DSC and Designated Partner DIN allocation', 'Precision MCA FiLLiP statutory filing', 'LLP Agreement constitutional drafting', 'Permanent annual ROC compliance tracking'],
   },
   'private-limited-company': {
-    overview: 'A Private Limited Company is the most preferred business structure for startups and growth-oriented businesses in India. It offers limited liability, ease of fundraising, and a strong corporate identity.',
-    whyUs: ['SPICe+ form filing by certified professionals', 'MoA & AoA drafting included', 'DIN & DSC for all directors', 'Bank account opening guidance'],
+    overview: 'Private Limited incorporation establishes an independent corporate legal entity governed by the Companies Act 2013. It is the mandatory institutional structure for venture capital financing, equity dilution, and ESOP pools.',
+    whyUs: ['Complete SPICe+ constitutional incorporation', 'Memorandum & Articles (MoA & AoA) drafting', 'Director Identification Number (DIN) & DSC allocation', 'Statutory bank account opening authorization'],
   },
   'opc-registration': {
-    overview: 'One Person Company (OPC) is a unique corporate structure in India that allows a single entrepreneur to enjoy the benefits of a company while operating as a sole owner.',
-    whyUs: ['Complete MCA filing support', 'Conversion to Pvt Ltd guidance', 'Director KYC included', 'Post-incorporation compliance brief'],
+    overview: 'One Person Company (OPC) isolates sole founder liability within a corporate structure under the Companies Act 2013, with streamlined statutory pathways to convert into a multi-director Private Limited entity.',
+    whyUs: ['Complete MCA incorporation execution', 'Statutory nominee identification drafting', 'Director DIR-3 KYC compliance', 'Annual statutory filing roadmap'],
   },
   'section-8-company': {
-    overview: 'A Section 8 Company is a non-profit organization set up under the Companies Act 2013, aimed at promoting charitable objectives such as education, arts, commerce, sports, religion, or environmental protection.',
-    whyUs: ['12A & 80G registration guidance', 'FCRA eligibility advisory', 'MOA & AOA for non-profits', 'CSR compliance support'],
+    overview: 'Section 8 incorporation establishes a statutory non-profit entity dedicated to charitable, educational, social welfare, or environmental objectives under the Companies Act 2013.',
+    whyUs: ['Section 8 statutory license procurement', '12A & 80G tax exemption structuring', 'FCRA eligibility advisory', 'Annual non-profit statutory audit retainers'],
   },
   'trust-registration': {
-    overview: 'A Trust is a legal arrangement for managing and distributing assets or charitable activities. Public trusts are governed by state-specific laws and are commonly used for educational, religious, and welfare objectives.',
-    whyUs: ['Trust deed drafting by our legal team', 'Sub-registrar filing assistance', '12A & 80G advisory', 'Multi-state trust expertise'],
+    overview: 'A Trust Deed establishes fiduciary asset governance for private estates or charitable foundations under the Indian Trusts Act 1882 or state public trust statutory frameworks.',
+    whyUs: ['Fiduciary trust deed drafting by specialized counsel', 'Sub-registrar jurisdictional representation', '12A & 80G tax exemption filings', 'Multi-state charitable trust compliance'],
   },
   'society-registration': {
-    overview: 'A Society is a group of individuals united for a common objective such as literary, cultural, scientific, charitable or social welfare purposes, registered under the Societies Registration Act.',
-    whyUs: ['Memorandum & rules drafting', 'Registrar of Societies filing', 'Committee structure advisory', 'Renewal compliance support'],
+    overview: 'Society Incorporation establishes a registered collective under the Societies Registration Act 1860 for cultural, scientific, educational, or charitable governance.',
+    whyUs: ['Constitutional memorandum & rules drafting', 'Registrar of Societies statutory filing', 'Governing body compliance advisory', 'Annual list of governing body filings'],
   },
   'gst-registration': {
-    overview: 'GST Registration is mandatory for businesses exceeding the annual turnover threshold (₹40L for goods, ₹20L for services) and for any inter-state supply of goods or services.',
-    whyUs: ['Aadhaar authentication handled', 'GSTIN in 3-7 days', 'Multiple state registrations', 'Post-registration filing guidance'],
+    overview: 'Goods and Services Tax (GST) registration is mandatory for commercial entities crossing statutory turnover thresholds or engaging in inter-state e-commerce supply chains.',
+    whyUs: ['Aadhaar verification and officer representation', 'Pan-India multi-jurisdictional filings', 'Principal Place of Business structuring', 'Ongoing monthly & quarterly return retainers'],
   },
   'gst-amendment': {
-    overview: 'GST Amendment or Cancellation services cover changes to your existing GST registration — such as adding business verticals, changing address, or voluntarily cancelling when business closes.',
-    whyUs: ['Amendment filed within 24 hours', 'Cancellation advisory', 'Liability assessment before closure', 'Final return filing support'],
+    overview: 'GST Amendment & Jurisdictional Transfer retainers regularize core and non-core registration modifications, additional place of business additions, and formal statutory closures.',
+    whyUs: ['Rapid jurisdictional amendment filings', 'Pre-cancellation liability audits', 'Final GSTR-10 statutory return filing', 'Authority notice representation'],
   },
   'pan-tan-application': {
-    overview: 'A Permanent Account Number (PAN) is required for all tax-related transactions. Tax Deduction Account Number (TAN) is mandatory for businesses that deduct TDS from payments.',
-    whyUs: ['PAN for individuals, firms & companies', 'TAN registration via TIN-NSDL', 'Urgent processing available', 'PAN corrections handled'],
+    overview: 'Permanent Account Number (PAN) establishes corporate tax identity, while Tax Deduction Account Number (TAN) is mandatory for entities deducting tax at source across payroll and vendor disbursements.',
+    whyUs: ['Corporate PAN & TAN allotment', 'NSDL & UTIITSL direct integration', 'Retrospective PAN correction filings', 'Statutory deduction compliance mapping'],
   },
   'professional-tax': {
-    overview: 'Professional Tax is a state-level tax levied on individuals earning income from employment or professions. Employers must register and deduct PT from employee salaries.',
-    whyUs: ['State-specific PT registration', 'Employee deduction setup', 'Monthly return filing', 'Multi-state employer support'],
+    overview: 'Professional Tax (PT) is a state-mandated statutory compliance for employers and salaried professionals, requiring registration with state commercial tax authorities.',
+    whyUs: ['State-specific Employer & Employee PT Enrolment', 'Monthly salary deduction matrix setup', 'Statutory monthly & annual return filing', 'Multi-state enterprise compliance'],
   },
   'tds-registration': {
-    overview: 'TDS (Tax Deducted at Source) registration requires obtaining a TAN (Tax Deduction Account Number) for businesses that make payments to vendors, employees, or contractors where TDS is applicable.',
-    whyUs: ['TAN registration in 3-5 days', 'TDS payment and return guidance', 'Form 16/16A generation support', 'TDS audit assistance'],
+    overview: 'Tax Deduction at Source (TDS) statutory compliance requires TAN allocation, timely deduction across vendor contracts, and quarterly electronic return filings.',
+    whyUs: ['Rapid TAN allocation', 'Quarterly Form 24Q & 26Q return filing', 'Form 16 / 16A certificate generation', 'TDS assessment and notice defense'],
   },
   'epf-registration': {
-    overview: 'Employee Provident Fund (EPF) registration is mandatory for establishments employing 20 or more persons. It provides retirement and social security benefits to employees.',
-    whyUs: ['Shram Suvidha portal filing', 'DSC-based registration', 'Employee enrollment guidance', 'Monthly PF return compliance'],
+    overview: 'Employee Provident Fund (EPF) registration under the Shram Suvidha portal is mandatory for organizations employing 20+ headcount, securing long-term workforce retirement equity.',
+    whyUs: ['Shram Suvidha unified portal registration', 'DSC-authenticated establishment filing', 'Monthly ECR return management', 'PF inspection and audit defense'],
   },
   'esic-registration': {
-    overview: 'ESIC (Employee State Insurance Corporation) registration is mandatory for establishments with 10 or more employees earning below ₹21,000/month, providing health and maternity benefits.',
-    whyUs: ['Shram Suvidha portal registration', 'Employee IP generation', 'Monthly ESI return filing', 'Challan payment guidance'],
+    overview: 'Employee State Insurance Corporation (ESIC) statutory enrolment provides medical and social security coverage for workforce personnel earning within statutory wage limits.',
+    whyUs: ['Shram Suvidha ESIC code allocation', 'Employee Insurance Number (IP) generation', 'Monthly contribution return filings', 'Accident and medical compliance tracking'],
   },
   'lin-registration': {
-    overview: 'Labour Identification Number (LIN) is a unique identifier for businesses under the Unified Shram Suvidha Platform for managing all labour law compliances centrally.',
-    whyUs: ['USSP portal registration', 'Multiple labour law mapping', 'Inspection compliance advisory', 'Annual return guidance'],
+    overview: 'Labour Identification Number (LIN) consolidates multi-law workforce registrations under a unified national Shram Suvidha statutory identifier.',
+    whyUs: ['Unified Shram Suvidha allocation', 'Multi-law statutory mapping', 'Inspection readiness audits', 'Annual consolidated labour returns'],
   },
   'clra-registration': {
-    overview: 'The Contract Labour (Regulation & Abolition) Act requires establishments that employ 20+ contract labourers to obtain a Certificate of Registration from the appropriate authority.',
-    whyUs: ['Principal employer registration', 'Contractor licence guidance', 'State-specific compliance', 'Annual return support'],
+    overview: 'Contract Labour (Regulation & Abolition) Act compliance mandates Principal Employer registration and contractor licensing for establishments deploying 20+ contract personnel.',
+    whyUs: ['Principal Employer statutory registration', 'Contractor licensing supervision', 'State labour commissioner liaison', 'Annual contract labour return filing'],
   },
   'shops-establishments': {
-    overview: 'Shops & Establishments Registration is a municipal compliance requirement for all commercial establishments — shops, offices, restaurants, and other service enterprises.',
-    whyUs: ['Municipal registration within 7 days', 'State-specific expertise', 'Employee register compliance', 'Renewal reminders'],
+    overview: 'Shops & Establishments municipal registration is the foundational statutory operating permit required for commercial offices, retail outlets, and administrative establishments.',
+    whyUs: ['Rapid municipal registration filing', 'Pan-India state labour compliance', 'Statutory operating hours & leave policies', 'Permit renewal tracking'],
   },
   'trade-licence': {
-    overview: 'A Trade Licence is issued by the local municipal authority granting permission to carry out a specific trade or business from a particular location.',
-    whyUs: ['Municipal authority liaison', 'Fire NOC advisory', 'Location compliance check', 'Annual renewal support'],
+    overview: 'Municipal Trade License grants civic authorization to conduct commercial operations within designated urban and municipal zoning jurisdictions.',
+    whyUs: ['Municipal corporation liaison', 'Zoning & occupancy verification', 'Health & safety compliance mapping', 'Annual trade license renewal'],
   },
   'factory-licence': {
-    overview: 'A Factory Licence is required for any premises with 10+ workers using power or 20+ workers without power for manufacturing activity, under the Factories Act 1948.',
-    whyUs: ['State Factories Act compliance', 'Plan approval assistance', 'Inspector liaison', 'Annual renewal filing'],
+    overview: 'Factory License under the Factories Act 1948 is the mandatory industrial safety and operational authorization for manufacturing plants and processing units.',
+    whyUs: ['State Chief Inspector of Factories representation', 'Engineering layout blueprint approval', 'Industrial safety audit prep', 'Annual factory license renewal'],
   },
   'trademark-registration': {
-    overview: 'Trademark Registration protects your brand identity — name, logo, slogan, or any distinctive mark — giving you exclusive rights to use it and legal remedies against infringers.',
-    whyUs: ['Class search & availability check', 'TM-A filing within 24 hours', 'Objection response handled', 'Portfolio management for multiple marks'],
+    overview: 'Trademark filing and prosecution secures statutory ownership over brand wordmarks, logos, and taglines across 45 nice classification classes under the Trade Marks Act 1999.',
+    whyUs: ['Comprehensive class & phonetic clearance search', 'Priority TM-A filing within 24 hours', 'Statutory examination report defense', 'Brand portfolio maintenance retainers'],
   },
   'copyright-registration': {
-    overview: 'Copyright Registration provides legal proof of ownership for creative works — literary, artistic, musical, cinematic, or software code — and helps in enforcement and licensing.',
-    whyUs: ['Copyright Office e-filing', 'Examination response support', 'Software & web copyright', 'Literary & artistic works'],
+    overview: 'Copyright registration establishes indisputable statutory ownership over software source code, architectural plans, literary publications, and artistic assets.',
+    whyUs: ['Copyright Office electronic filing', 'Source code & literary deposit preparation', 'Discrepancy notice representation', 'Licensing & assignment deed drafting'],
   },
   'design-registration': {
-    overview: 'Design Registration protects the unique visual appearance of a product under the Designs Act 2000, preventing unauthorized copying of your product\'s shape, configuration, or ornamentation.',
-    whyUs: ['Design Office filing support', 'Novelty search included', 'Restoration of lapsed designs', '10-year protection guidance'],
+    overview: 'Industrial Design registration under the Designs Act 2000 grants exclusive statutory monopoly over the visual ergonomics, shape, and aesthetic configuration of manufactured products.',
+    whyUs: ['Design Office priority filing', 'Novelty & prior art evaluation', 'Examination objection defense', '10-year statutory protection tracking'],
   },
   'patent-filing': {
-    overview: 'Patent protection secures exclusive rights to your novel invention or process for up to 20 years, preventing others from making, using, or selling it without your authorization.',
-    whyUs: ['Prior art search included', 'Provisional patent filing', 'Complete specification drafting', 'PCT international filing guidance'],
+    overview: 'Patent prosecution secures a 20-year statutory monopoly over novel technological inventions, processes, and chemical formulations under the Patents Act 1970.',
+    whyUs: ['Specialized prior art & patentability search', 'Provisional & complete specification drafting', 'Indian Patent Office representation', 'PCT international patent cooperation advisory'],
   },
   'udyam-registration': {
-    overview: 'Udyam (MSME) Registration gives your business access to government subsidies, priority lending, trademark fee discounts, and preference in government tenders.',
-    whyUs: ['Same-day registration', 'Aadhaar-linked process', 'NIC code selection assistance', 'Benefits advisory included'],
+    overview: 'Udyam (MSME) registration accredits enterprises under the Ministry of Micro, Small & Medium Enterprises, unlocking priority lending, interest subsidies, and trademark fee reductions.',
+    whyUs: ['Instant Aadhaar-authenticated filing', 'Precision NIC activity classification', '50% trademark fee reduction linkage', 'Government procurement tender eligibility'],
   },
   'gem-registration': {
-    overview: 'GeM (Government e-Marketplace) Seller Registration allows your business to supply goods and services directly to government departments, ministries, and PSUs.',
-    whyUs: ['Seller profile setup & verification', 'Product listing assistance', 'OEM/Reseller categorization', 'Bid advisory support'],
+    overview: 'Government e-Marketplace (GeM) seller accreditation authorizes commercial entities to participate in central and state government direct procurement and bidding tenders.',
+    whyUs: ['Complete GeM seller profile verification', 'OEM & reseller catalogue structuring', 'Tender bidding compliance advisory', 'Caution money & EMD exemption support'],
   },
   'nsic-registration': {
-    overview: 'NSIC Registration provides MSMEs with benefits such as credit facilitation, marketing support, and access to raw materials through the National Small Industries Corporation.',
-    whyUs: ['NSIC Single Point Registration', 'Tender fee exemption guidance', 'EMD waiver advisory', 'Renewal support'],
+    overview: 'National Small Industries Corporation (NSIC) enlistment qualifies MSMEs for single-point government purchase registration and tender fee waivers.',
+    whyUs: ['Single-point enlistment documentation', 'Technical inspection preparation', 'Tender fee exemption structuring', 'Annual enlistment renewal'],
   },
   'startup-india-recognition': {
-    overview: 'Startup India Recognition (DPIIT) provides tax benefits under Section 80-IAC, easier compliance, and access to the Fund of Funds for qualified startups.',
-    whyUs: ['DPIIT application preparation', 'Eligibility assessment', '3-year tax holiday guidance', 'Self-certification compliance'],
+    overview: 'DPIIT Startup India accreditation formally registers innovative entities with the Ministry of Commerce and Industry, enabling Section 80-IAC tax holiday and angel tax exemptions.',
+    whyUs: ['DPIIT application & pitch deck structuring', 'Innovation & scalability assessment', 'Section 80-IAC tax holiday application', 'Self-certification compliance retainers'],
   },
   'dpiit-recognition': {
-    overview: 'DPIIT (Department for Promotion of Industry and Internal Trade) Recognition is the official gateway to Startup India benefits, including tax exemptions and regulatory relaxations.',
-    whyUs: ['Eligibility evaluation', 'Application documentation', 'Fast-track processing', 'Ongoing compliance advisory'],
+    overview: 'DPIIT recognition is the mandatory regulatory prerequisite for early-stage ventures seeking tax exemptions, government grant eligibility, and fast-track patent filings.',
+    whyUs: ['Eligibility auditing & documentation', 'Inter-Ministerial Board representation', 'Fast-track IP discount enablement', 'Annual DPIIT compliance advisory'],
   },
   'zed-certification': {
-    overview: 'ZED (Zero Defect Zero Effect) Certification helps MSMEs achieve quality excellence and reduce environmental impact, unlocking access to export markets and government incentives.',
-    whyUs: ['ZED portal registration', 'Bronze to Diamond level guidance', 'Quality process advisory', 'Incentive subsidy support'],
+    overview: 'Zero Defect Zero Effect (ZED) accreditation verifies world-class manufacturing quality and environmental sustainability, qualifying plants for export subsidies.',
+    whyUs: ['ZED portal evaluation and registration', 'Bronze, Silver & Gold maturity mapping', 'Quality engineering advisory', 'Government financial incentive claims'],
   },
   'fssai-licence': {
-    overview: 'FSSAI (Food Safety and Standards Authority of India) Licence is mandatory for all food businesses — manufacturers, processors, retailers, distributors, and cloud kitchens.',
-    whyUs: ['Basic, State & Central licence expertise', 'FoSCoS portal application', 'Inspection preparation', 'Annual renewal & modification'],
+    overview: 'FSSAI food safety licensing under the Food Safety and Standards Act 2006 is mandatory for food manufacturers, cloud kitchens, retail chains, and import/export distributors.',
+    whyUs: ['Basic, State & Central license categorization', 'FoSCoS portal application management', 'Food safety inspection preparation', 'Annual statutory return & renewal retainers'],
   },
   'drug-licence': {
-    overview: 'A Drug Licence is required for retail pharmacies, wholesale drug distributors, and drug manufacturers under the Drugs and Cosmetics Act 1940.',
-    whyUs: ['State Drug Controller filing', 'Retail & wholesale licence', 'Manufacturing licence guidance', 'Annual renewal support'],
+    overview: 'Drug & Cosmetics licensing under the Drugs and Cosmetics Act 1940 is required for pharmaceutical distribution, retail pharmacies, and drug manufacturing facilities.',
+    whyUs: ['State Drug Controller representation', 'Retail, wholesale & distribution licenses', 'Pharmacist compliance auditing', 'Annual drug license renewal tracking'],
   },
   'cosmetics-licence': {
-    overview: 'Cosmetics Manufacturing Licence is required under the Drugs and Cosmetics Act for businesses manufacturing beauty and personal care products in India.',
-    whyUs: ['GMP compliance guidance', 'State Drug Authority filing', 'Import licence advisory', 'Label compliance review'],
+    overview: 'Cosmetics Manufacturing Permit ensures statutory CDSCO compliance for formulation, packaging, and distribution of personal care products within Indian jurisdiction.',
+    whyUs: ['CDSCO & State Drug Controller filing', 'GMP manufacturing facility compliance', 'Cosmetic formulation dossier auditing', 'Product label statutory compliance'],
   },
   'legal-metrology': {
-    overview: 'Legal Metrology Registration is mandatory for manufacturers and importers of packaged goods, weights, and measuring instruments under the Legal Metrology Act 2009.',
-    whyUs: ['Packager registration support', 'Model approval guidance', 'Dealer & repairer licence', 'Label compliance check'],
+    overview: 'Legal Metrology registration mandates statutory compliance for pre-packaged commodities, weighing instruments, and measurement accuracy standards across consumer markets.',
+    whyUs: ['Packer & importer statutory registration', 'Model approval application management', 'Product label statutory declaration review', 'Weights & measures inspection defense'],
   },
   'fire-noc': {
-    overview: 'A Fire No Objection Certificate (NOC) is mandatory for commercial establishments, hospitals, malls, and factories from the State Fire Department before commencing operations.',
-    whyUs: ['Fire safety compliance audit', 'Application filing support', 'Drawing & layout assistance', 'Renewal advisory'],
+    overview: 'Fire Safety No Objection Certificate (NOC) verifies compliance with National Building Code safety standards before commercial occupancy and industrial operation.',
+    whyUs: ['Comprehensive fire safety architecture check', 'State Fire Department application filing', 'Inspection & testing representation', 'Annual Fire NOC statutory renewal'],
   },
   'pollution-control': {
-    overview: 'Consent to Establish (CTE) and Consent to Operate (CTO) from the State Pollution Control Board are mandatory for manufacturing and industrial units under the Water and Air Acts.',
-    whyUs: ['CTE & CTO application support', 'Environmental impact advisory', 'ETP compliance guidance', 'Annual return filing'],
+    overview: 'State Pollution Control Board Consent to Establish (CTE) and Consent to Operate (CTO) authorize industrial manufacturing operations under Water and Air prevention acts.',
+    whyUs: ['CTE & CTO statutory filings', 'Environmental engineering documentation', 'Effluent treatment plant (ETP) compliance', 'Annual environmental audit reports'],
   },
   'iec-registration': {
-    overview: 'Import Export Code (IEC) is a mandatory 10-digit code issued by the DGFT (Directorate General of Foreign Trade) for any business engaging in international trade.',
-    whyUs: ['DGFT portal e-application', 'IEC in 2-4 days', 'Modification & linkage support', 'AD Code advisory'],
+    overview: 'Import Export Code (IEC) is the mandatory 10-digit DGFT identifier required by customs authorities for all cross-border commercial trade and foreign remittance processing.',
+    whyUs: ['Instant DGFT portal allocation', 'Authorized Dealer (AD) code integration', 'Pan-India customs port mapping', 'Annual DGFT IEC statutory update'],
   },
   'dgft-authorizations': {
-    overview: 'DGFT Authorizations include Advance Licences, MEIS/SEIS Schemes, Export Promotion Capital Goods (EPCG), and other export incentive schemes administered by DGFT.',
-    whyUs: ['Scheme eligibility assessment', 'Application & documentation', 'Export obligation advisory', 'EODC filing support'],
+    overview: 'DGFT authorizations and export incentive retainers optimize duty drawback, RoDTEP, and Advance Authorization schemes for international trading enterprises.',
+    whyUs: ['Export incentive eligibility auditing', 'Advance Authorization & EPCG filings', 'Export obligation redemption (EODC)', 'DGFT dispute representation'],
   },
   'rcmc-registration': {
-    overview: 'RCMC (Registration-cum-Membership Certificate) is issued by Export Promotion Councils and is required for claiming export benefits and concessions from the Indian government.',
-    whyUs: ['Council-specific registration', 'Export product classification', 'Member services advisory', 'Annual renewal'],
+    overview: 'Registration-cum-Membership Certificate (RCMC) issued by Export Promotion Councils qualifies exporters for tariff concessions and government export promotion schemes.',
+    whyUs: ['Commodity-specific council identification', 'Export Promotion Council filing', 'Market access initiative eligibility', 'Annual RCMC membership renewal'],
   },
   'ad-code': {
-    overview: 'AD Code Registration links your bank account with customs for tracking foreign exchange transactions related to imports and exports.',
-    whyUs: ['Bank liaison for AD code letter', 'ICEGATE linking assistance', 'Customs registration support', 'Export drawback guidance'],
+    overview: 'Authorized Dealer (AD) Code registration registers your bank branch with customs ports on ICEGATE, enabling automated export remittance and drawback tracking.',
+    whyUs: ['Bank AD code letter coordination', 'ICEGATE customs port registration', 'Multi-port EDI linking', 'Drawback account verification'],
   },
   'icegate-registration': {
-    overview: 'ICEGATE (Indian Customs Electronic Gateway) Registration is mandatory for importers, exporters, and customs agents to file electronic customs declarations.',
-    whyUs: ['ICEGATE portal registration', 'DSC linking', 'IEC & AD code integration', 'EDI filing guidance'],
+    overview: 'ICEGATE customs portal enrolment authorizes electronic filing of Bills of Entry and Shipping Bills for international freight clearing and customs compliance.',
+    whyUs: ['Complete ICEGATE user registration', 'DSC authentication linking', 'Customs broker integration advisory', 'Real-time customs clearance tracking'],
   },
   'dsc-registration': {
-    overview: 'A Digital Signature Certificate (DSC) is an electronic signature used for authenticating documents filed with MCA, GST, and Income Tax portals.',
-    whyUs: ['Class 3 DSC procurement', '1/2-year validity options', 'Doorstep delivery', 'eSign integration advisory'],
+    overview: 'Class 3 Digital Signature Certificate (DSC) provides encrypted statutory authentication for Ministry of Corporate Affairs, GSTN, and Income Tax e-filing portals.',
+    whyUs: ['Encrypted Class 3 DSC token issuance', '1-year and 2-year statutory validity', 'Aadhaar / PAN paperless verification', 'Express secure token delivery'],
   },
   'din-registration': {
-    overview: 'Director Identification Number (DIN) is a unique identifier for company directors, required before appointment and for MCA annual filings.',
-    whyUs: ['SPICe+ integrated DIN', 'DIN KYC (DIR-3 KYC)', 'Reactivation of deactivated DIN', 'Annual DIR-3 KYC filing'],
+    overview: 'Director Identification Number (DIN) is the mandatory statutory identifier assigned by the Ministry of Corporate Affairs to individuals appointed as corporate directors.',
+    whyUs: ['SPICe+ integrated DIN allotment', 'Standalone DIR-3 application filing', 'Deactivated DIN regularisation', 'DIR-3 KYC annual maintenance'],
   },
   'mca-kyc': {
-    overview: 'MCA KYC (DIR-3 KYC) is mandatory for all DIN holders every year to keep their DIN active and avoid penalty.',
-    whyUs: ['Annual KYC filing on time', 'OTP and DSC-based verification', 'Bulk filing for multiple directors', 'Deactivation recovery support'],
+    overview: 'Annual Director KYC (Form DIR-3 KYC) is the mandatory annual statutory verification required to prevent DIN deactivation and personal director disqualification.',
+    whyUs: ['On-time annual statutory submission', 'DSC and OTP authenticated filing', 'Multi-director corporate bulk execution', 'Deactivated DIN restoration retainers'],
   },
   'lei-registration': {
-    overview: 'Legal Entity Identifier (LEI) is a 20-digit global reference code for legal entities participating in financial transactions above ₹50 crore.',
-    whyUs: ['LEI India registration support', 'Annual renewal reminder', 'Regulatory compliance advisory', 'SWIFT/correspondent bank guidance'],
+    overview: 'Legal Entity Identifier (LEI) is a 20-character global code mandated by the Reserve Bank of India for corporate entities executing transactions exceeding ₹50 Crore.',
+    whyUs: ['CCIL / Global LEI foundation filing', 'Corporate documentation preparation', 'Expedited LEI code allocation', 'Annual LEI statutory renewal tracking'],
   },
 };
-
-/* ── Get default content ── */
-function getContent(slug) {
-  return serviceContent[slug] || {
-    overview: 'We provide end-to-end professional guidance for this registration, ensuring strict compliance and operational efficiency from day one.',
-    whyUs: ['Expert handling by qualified professionals', 'Fast turnaround with real-time updates', 'Transparent pricing — no hidden costs', 'Free post-registration compliance brief'],
-  };
-}
-
-/* ── Related services for sidebar ── */
-function getRelatedServices(slug, category, count = 4) {
-  const cat = serviceCategories.find(c => c.title === category);
-  if (!cat) return [];
-  return cat.services.filter(s => s.slug !== slug).slice(0, count);
-}
 
 export default function ServiceDetail() {
   const { slug } = useParams();
   const navigate = useNavigate();
-  const serviceData = getServiceBySlug(slug);
+  const [serviceData, setServiceData] = useState(null);
 
   useEffect(() => {
-    if (!serviceData) {
-      navigate('/services', { replace: true });
+    const found = getServiceBySlug(slug);
+    if (found) {
+      setServiceData(found);
     } else {
-      document.title = `${serviceData.title} — Sterling Advisory`;
-      window.scrollTo(0, 0);
+      navigate('/services', { replace: true });
     }
-  }, [serviceData, navigate, slug]);
+  }, [slug, navigate]);
 
   if (!serviceData) return null;
 
-  const content = getContent(slug);
-  const related = getRelatedServices(slug, serviceData.category);
+  const content = serviceContent[slug] || {
+    overview: serviceData.shortDesc || 'Comprehensive statutory representation and execution retainer.',
+    whyUs: [
+      'Senior Corporate Advisory & Legal supervision',
+      'Secure digital documentation without physical visits',
+      'Transparent fixed-scope professional fees',
+      'Ongoing post-filing statutory compliance support'
+    ]
+  };
 
-  const deliverables = [
-    'Initial Consultation & Strategy Session',
-    'Document Collection & Verification',
-    'Application Preparation & Review',
-    'Government Portal Filing',
-    'Liaison with Regulatory Authorities',
-    'Certificate Delivery & Post-Registration Brief',
-  ];
+  const IconComponent = categoryIconMap[serviceData.categoryIcon] || CheckCircle2;
+
+  const related = serviceCategories
+    .find(c => c.title === serviceData.category)
+    ?.services.filter(s => s.slug !== slug).slice(0, 4) || [];
 
   return (
-    <div style={{ width: '100%', background: 'var(--color-primary)', minHeight: '100vh' }}>
+    <div style={{ width: '100%', minHeight: '100vh', background: 'var(--color-primary)' }}>
 
-      {/* ── Hero ── */}
-      <section style={{
-        background: 'radial-gradient(ellipse 80% 50% at 50% -20%, rgba(223, 186, 115, 0.15), transparent), linear-gradient(180deg, #05080F 0%, #0A0F1D 60%, #05080F 100%)',
-        paddingTop: '8rem', paddingBottom: '4rem', paddingLeft: '1.5rem', paddingRight: '1.5rem',
-        position: 'relative', overflow: 'hidden',
+      {/* ── Institutional Breadcrumb & Header ── */}
+      {/* ── Institutional Compact Header (Sleek Agency Banner) ── */}
+      <section className="bg-institutional-grid" style={{
+        paddingTop: '3.25rem', paddingBottom: '2.25rem',
+        borderBottom: '1px solid rgba(255,255,255,0.08)'
       }}>
-        <div style={{
-          position: 'absolute', inset: 0,
-          backgroundImage: 'linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)',
-          backgroundSize: '64px 64px', pointerEvents: 'none',
-        }} />
-
-        <div style={{ maxWidth: '88rem', margin: '0 auto', position: 'relative', zIndex: 1 }}>
-          {/* Breadcrumb */}
-          <motion.div
-            initial={{ opacity: 0, y: -8 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4 }}
-            style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '2rem', flexWrap: 'wrap' }}
-          >
-            <Link to="/services" style={{ fontSize: '0.75rem', fontFamily: 'var(--font-mono)', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.35)', transition: 'color 200ms ease' }}
-              onMouseEnter={e => e.currentTarget.style.color = 'var(--color-gold)'}
-              onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.35)'}
-            >
-              Services
-            </Link>
-            <ChevronRight size={12} style={{ color: 'rgba(255,255,255,0.2)' }} />
-            <Link
-              to={`/services?category=${serviceCategories.find(c => c.title === serviceData.category)?.id}`}
-              style={{ fontSize: '0.75rem', fontFamily: 'var(--font-mono)', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.35)', transition: 'color 200ms ease' }}
-              onMouseEnter={e => e.currentTarget.style.color = 'var(--color-gold)'}
-              onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.35)'}
-            >
-              {serviceData.category}
-            </Link>
-            <ChevronRight size={12} style={{ color: 'rgba(255,255,255,0.2)' }} />
-            <span style={{ fontSize: '0.75rem', fontFamily: 'var(--font-mono)', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--color-gold)' }}>
-              {serviceData.title}
-            </span>
-          </motion.div>
-
-          <div style={{ maxWidth: '800px' }}>
-            <motion.span
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.05 }}
-              style={{ fontFamily: 'var(--font-mono)', fontSize: '0.65rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--color-gold)', marginBottom: '0.875rem', display: 'block' }}
-            >
-              ✦ {serviceData.category}
-            </motion.span>
-
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-              style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(2rem, 5vw, 3.5rem)', fontWeight: 600, color: '#ffffff', marginBottom: '1.25rem', lineHeight: 1.1 }}
-            >
-              {serviceData.title}
-            </motion.h1>
-
-            <motion.p
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.18, duration: 0.5 }}
-              style={{ fontSize: '1.0625rem', color: 'rgba(255,255,255,0.55)', lineHeight: '1.75', maxWidth: '620px' }}
-            >
-              {content.overview}
-            </motion.p>
-
-            {/* Quick stats row */}
-            <motion.div
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.28 }}
-              style={{ display: 'flex', gap: '2rem', marginTop: '2rem', flexWrap: 'wrap' }}
-            >
-              {serviceData.timeline && (
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <Clock size={15} style={{ color: 'var(--color-gold)' }} />
-                  <span style={{ fontSize: '0.875rem', color: 'rgba(255,255,255,0.5)' }}>{serviceData.timeline}</span>
-                </div>
-              )}
-              {serviceData.fees && (
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <CreditCard size={15} style={{ color: 'var(--color-gold)' }} />
-                  <span style={{ fontSize: '0.875rem', color: 'rgba(255,255,255,0.5)', maxWidth: '280px' }}>{serviceData.fees}</span>
-                </div>
-              )}
-            </motion.div>
+        <div style={{ maxWidth: '88rem', margin: '0 auto', padding: '0 2rem' }}>
+          
+          {/* Breadcrumbs */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.8125rem', color: 'var(--color-text-light)', marginBottom: '1.25rem', flexWrap: 'wrap' }}>
+            <Link to="/" style={{ color: 'var(--color-text-light)', transition: 'color 160ms ease' }} onMouseEnter={e => e.currentTarget.style.color = '#ffffff'} onMouseLeave={e => e.currentTarget.style.color = 'var(--color-text-light)'}>Home</Link>
+            <ChevronRight size={13} style={{ color: 'rgba(255,255,255,0.3)' }} />
+            <Link to="/services" style={{ color: 'var(--color-text-light)', transition: 'color 160ms ease' }} onMouseEnter={e => e.currentTarget.style.color = '#ffffff'} onMouseLeave={e => e.currentTarget.style.color = 'var(--color-text-light)'}>Services</Link>
+            <ChevronRight size={13} style={{ color: 'rgba(255,255,255,0.3)' }} />
+            <span style={{ color: 'var(--color-gold)', fontWeight: 600 }}>{serviceData.title}</span>
           </div>
+
+          {/* Balanced Horizontal Layout (Left: Overview, Right: Practice Passport) */}
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'stretch', flexWrap: 'wrap', gap: '2.5rem' }}>
+            
+            {/* Left Column: Title & Overview */}
+            <div style={{ flex: '1 1 480px', maxWidth: '62ch', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '0.75rem' }}>
+                <div style={{ width: '28px', height: '28px', backgroundColor: 'var(--color-gold)', borderRadius: 'var(--radius-sm)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                  <IconComponent size={15} style={{ color: 'var(--color-navy)' }} />
+                </div>
+                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--color-gold)' }}>
+                  {serviceData.category || 'Statutory Discipline'}
+                </span>
+              </div>
+
+              <h1 style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(2.1rem, 4vw, 3.25rem)', fontWeight: 800, color: '#ffffff', marginBottom: '1rem', lineHeight: 1.12, letterSpacing: '-0.03em' }}>
+                {serviceData.title}
+              </h1>
+
+              <p style={{ fontSize: '1.05rem', color: 'rgba(255,255,255,0.72)', lineHeight: '1.65', margin: 0, fontFamily: 'var(--font-body)' }}>
+                {content.overview}
+              </p>
+            </div>
+
+            {/* Right Column: Institutional Practice Credentials Card (Fills empty top space while anchoring pills below) */}
+            <div style={{
+              flex: '1 1 360px',
+              maxWidth: '450px',
+              backgroundColor: 'rgba(255,255,255,0.03)',
+              border: '1px solid rgba(255,255,255,0.1)',
+              borderRadius: 'var(--radius-xl)',
+              padding: '1.5rem',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'space-between',
+              boxShadow: '0 12px 32px -8px rgba(0,0,0,0.4)'
+            }}>
+              {/* Top Authority & Practice Credentials */}
+              <div>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1rem', paddingBottom: '0.75rem', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    <ShieldCheck size={15} style={{ color: 'var(--color-gold)' }} />
+                    <span style={{ fontSize: '0.72rem', fontFamily: 'var(--font-mono)', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--color-gold)', fontWeight: 700 }}>
+                      Practice Credentials
+                    </span>
+                  </div>
+                  <span style={{ fontSize: '0.68rem', fontWeight: 600, color: 'rgba(255,255,255,0.5)', backgroundColor: 'rgba(255,255,255,0.06)', padding: '2px 8px', borderRadius: '4px' }}>
+                    Government Liaison
+                  </span>
+                </div>
+
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', marginBottom: '1.25rem' }}>
+                  <div style={{ display: 'flex', gap: '10px', alignItems: 'flex-start' }}>
+                    <div style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: 'var(--color-gold)', marginTop: '6px', flexShrink: 0 }} />
+                    <div>
+                      <span style={{ fontSize: '0.82rem', fontWeight: 700, color: '#ffffff' }}>Direct Authority Submission: </span>
+                      <span style={{ fontSize: '0.82rem', color: 'rgba(255,255,255,0.65)' }}>Filed before central and state regulatory registries.</span>
+                    </div>
+                  </div>
+                  <div style={{ display: 'flex', gap: '10px', alignItems: 'flex-start' }}>
+                    <div style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: 'var(--color-gold)', marginTop: '6px', flexShrink: 0 }} />
+                    <div>
+                      <span style={{ fontSize: '0.82rem', fontWeight: 700, color: '#ffffff' }}>Senior Practice Counsel: </span>
+                      <span style={{ fontSize: '0.82rem', color: 'rgba(255,255,255,0.65)' }}>Dedicated Senior Advisory supervision across all milestones.</span>
+                    </div>
+                  </div>
+                  <div style={{ display: 'flex', gap: '10px', alignItems: 'flex-start' }}>
+                    <div style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: 'var(--color-gold)', marginTop: '6px', flexShrink: 0 }} />
+                    <div>
+                      <span style={{ fontSize: '0.82rem', fontWeight: 700, color: '#ffffff' }}>Pre-Filing Document Audit: </span>
+                      <span style={{ fontSize: '0.82rem', color: 'rgba(255,255,255,0.65)' }}>Zero-rejection verification before official processing.</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Bottom Governance Pills */}
+              <div style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(3, 1fr)',
+                gap: '0.75rem',
+                paddingTop: '1rem',
+                borderTop: '1px solid rgba(255,255,255,0.08)'
+              }}>
+                <div>
+                  <span style={{ fontSize: '0.65rem', color: 'rgba(255,255,255,0.45)', display: 'block', fontFamily: 'var(--font-mono)', textTransform: 'uppercase', letterSpacing: '0.06em', fontWeight: 600 }}>Supervision</span>
+                  <span style={{ fontSize: '0.82rem', fontWeight: 700, color: '#ffffff', marginTop: '2px', display: 'block' }}>Senior Advisory & Counsel</span>
+                </div>
+                <div style={{ borderLeft: '1px solid rgba(255,255,255,0.08)', paddingLeft: '0.75rem' }}>
+                  <span style={{ fontSize: '0.65rem', color: 'rgba(255,255,255,0.45)', display: 'block', fontFamily: 'var(--font-mono)', textTransform: 'uppercase', letterSpacing: '0.06em', fontWeight: 600 }}>Jurisdiction</span>
+                  <span style={{ fontSize: '0.82rem', fontWeight: 700, color: 'var(--color-gold)', marginTop: '2px', display: 'block' }}>All 28 States</span>
+                </div>
+                <div style={{ borderLeft: '1px solid rgba(255,255,255,0.08)', paddingLeft: '0.75rem' }}>
+                  <span style={{ fontSize: '0.65rem', color: 'rgba(255,255,255,0.45)', display: 'block', fontFamily: 'var(--font-mono)', textTransform: 'uppercase', letterSpacing: '0.06em', fontWeight: 600 }}>Execution</span>
+                  <span style={{ fontSize: '0.82rem', fontWeight: 700, color: '#ffffff', marginTop: '2px', display: 'block' }}>100% Digital</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
       </section>
 
-      {/* ── Main Content ── */}
-      <section style={{ maxWidth: '88rem', margin: '0 auto', padding: '4rem 1.5rem 6rem' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 340px', gap: '3.5rem', alignItems: 'start' }}>
+      {/* ── Main Engagement Content & Retainer Dashboard ── */}
+      <section style={{ padding: '4.5rem 0 6.5rem', maxWidth: '88rem', margin: '0 auto' }}>
+        <div style={{ padding: '0 2rem' }}>
+          <div className="grid-service-tier" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(360px, 1fr))', gap: '4rem', alignItems: 'flex-start' }}>
 
-          {/* ── LEFT: Main Content ── */}
-          <div>
+            {/* Left Column: Architectural Practice Dossier */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '4.5rem' }}>
 
-            {/* Why Choose Sterling for This Service */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              style={{ marginBottom: '3.5rem' }}
-            >
-              <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.5rem', fontWeight: 600, color: 'var(--color-navy)', marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '12px' }}>
-                <Star size={22} style={{ color: 'var(--color-gold)' }} />
-                Why Choose Sterling Advisory
-              </h2>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1rem' }}>
-                {content.whyUs.map((item, i) => (
-                  <div key={i} style={{
-                    display: 'flex', alignItems: 'flex-start', gap: '12px',
-                    padding: '1.25rem',
-                    background: 'var(--color-secondary)',
-                    border: '1px solid var(--color-border-main)',
-                    borderLeft: '3px solid var(--color-gold)',
-                  }}>
-                    <CheckCircle size={17} style={{ color: 'var(--color-gold)', flexShrink: 0, marginTop: '1px' }} />
-                    <span style={{ fontSize: '0.9rem', fontWeight: 500, color: 'var(--color-navy)' }}>{item}</span>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-
-            {/* What's Included */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              style={{ marginBottom: '3.5rem' }}
-            >
-              <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.5rem', fontWeight: 600, color: 'var(--color-navy)', marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '12px' }}>
-                <CheckCircle2 size={22} style={{ color: 'var(--color-gold)' }} />
-                What's Included
-              </h2>
-
-              <div style={{ position: 'relative', paddingLeft: '1.5rem' }}>
-                {/* Vertical line */}
+              {/* 1. 4-Stage Execution Protocol (Architectural Blueprint Grid) */}
+              <motion.div variants={FADE_UP} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '0.75rem' }}>
+                  <span className="section-label" style={{ margin: 0 }}>Practice Workflow</span>
+                  <div style={{ height: '1px', flex: 1, backgroundColor: 'rgba(10,15,29,0.08)' }} />
+                </div>
+                <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(1.6rem, 3vw, 2.1rem)', fontWeight: 800, color: 'var(--color-navy)', marginBottom: '1.75rem', letterSpacing: '-0.03em', lineHeight: 1.15 }}>
+                  4-Stage Execution Protocol
+                </h2>
                 <div style={{
-                  position: 'absolute', left: '2.75rem', top: '2rem', bottom: '2rem',
-                  width: '1px',
-                  background: 'linear-gradient(180deg, var(--color-gold), rgba(223,186,115,0.1))',
-                }} />
-
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                  {deliverables.map((item, i) => (
-                    <motion.div
-                      key={i}
-                      initial={{ opacity: 0, x: -12 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: i * 0.07 }}
-                      style={{ display: 'flex', alignItems: 'center', gap: '1.25rem', position: 'relative', zIndex: 1 }}
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(auto-fit, minmax(270px, 1fr))',
+                  gap: '1.5rem'
+                }}>
+                  {[
+                    { step: 'STAGE 01', title: 'Statutory Verification & Audit', desc: 'Detailed pre-filing audit of founder credentials and constitutional entity structure to eliminate rejection risks and ensure instant processing.' },
+                    { step: 'STAGE 02', title: 'Direct Authority Submission', desc: 'Precision electronic drafting and filing before central and state regulatory registries directly managed by senior practice specialists.' },
+                    { step: 'STAGE 03', title: 'Liaison & Query Defense', desc: 'Dedicated professional representation during departmental scrutiny and prompt legal defense of examination reports.' },
+                    { step: 'STAGE 04', title: 'Certificate Handover & Roadmap', desc: 'Formal delivery of registered statutory certificates along with a customized post-compliance annual statutory calendar mapping.' }
+                  ].map((item, idx) => (
+                    <div key={idx} style={{
+                      background: '#ffffff',
+                      border: '1px solid rgba(10,15,29,0.08)',
+                      borderRadius: 'var(--radius-xl)',
+                      padding: '1.75rem',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      justifyContent: 'space-between',
+                      boxShadow: '0 4px 20px -4px rgba(10,15,29,0.05)',
+                      transition: 'transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease'
+                    }}
+                    onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-3px)'; e.currentTarget.style.boxShadow = '0 12px 32px -6px rgba(10,15,29,0.12)'; e.currentTarget.style.borderColor = 'var(--color-gold-dark)'; }}
+                    onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 20px -4px rgba(10,15,29,0.05)'; e.currentTarget.style.borderColor = 'rgba(10,15,29,0.08)'; }}
                     >
-                      <div style={{
-                        width: '44px', height: '44px', flexShrink: 0,
-                        background: 'var(--color-navy)',
-                        border: '1px solid rgba(223,186,115,0.3)',
-                        display: 'flex', alignItems: 'center', justifyContent: 'center',
-                        fontFamily: 'var(--font-mono)', fontSize: '0.7rem', color: 'var(--color-gold)',
-                        fontWeight: 600,
-                      }}>
-                        0{i + 1}
-                      </div>
-                      <div style={{
-                        flex: 1, padding: '1rem 1.25rem',
-                        background: 'var(--color-secondary)',
-                        border: '1px solid var(--color-border-main)',
-                        fontSize: '0.9375rem', fontWeight: 500, color: 'var(--color-navy)',
-                        transition: 'all 200ms ease',
-                      }}>
-                        {item}
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Required Documents */}
-            {serviceData.documents && serviceData.documents.length > 0 && (
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                style={{ marginBottom: '3.5rem' }}
-              >
-                <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.5rem', fontWeight: 600, color: 'var(--color-navy)', marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '12px' }}>
-                  <FileText size={22} style={{ color: 'var(--color-gold)' }} />
-                  Required Documents
-                </h2>
-                <div style={{ background: 'var(--color-secondary)', border: '1px solid var(--color-border-main)', padding: '2rem' }}>
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '0.75rem' }}>
-                    {serviceData.documents.map((doc, i) => (
-                      <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
-                        <div style={{ width: '6px', height: '6px', background: 'var(--color-gold)', borderRadius: '50%', marginTop: '7px', flexShrink: 0 }} />
-                        <span style={{ fontSize: '0.875rem', color: 'var(--color-text-muted)', lineHeight: '1.6' }}>{doc}</span>
-                      </div>
-                    ))}
-                  </div>
-                  {serviceData.documents.some(doc => doc.includes('*')) && (
-                    <p style={{ marginTop: '1.5rem', fontSize: '0.8125rem', color: 'var(--color-text-muted)', display: 'flex', gap: '6px', paddingTop: '1.25rem', borderTop: '1px solid var(--color-border-main)', fontStyle: 'italic' }}>
-                      <span style={{ color: 'var(--color-gold)', fontStyle: 'normal', fontWeight: 700 }}>*</span>
-                      These documents will be drafted and prepared by our experts as part of the engagement.
-                    </p>
-                  )}
-                </div>
-              </motion.div>
-            )}
-
-            {/* Related Services */}
-            {related.length > 0 && (
-              <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-                <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.5rem', fontWeight: 600, color: 'var(--color-navy)', marginBottom: '1.25rem' }}>
-                  Related Services
-                </h2>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: '0.875rem' }}>
-                  {related.map((s) => (
-                    <Link
-                      key={s.id}
-                      to={`/services/${s.slug}`}
-                      style={{
-                        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-                        padding: '1rem 1.25rem',
-                        background: 'var(--color-secondary)', border: '1px solid var(--color-border-main)',
-                        transition: 'all 200ms ease', gap: '0.75rem',
-                      }}
-                      onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--color-gold)'; e.currentTarget.style.background = 'rgba(223,186,115,0.08)'; }}
-                      onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--color-border-main)'; e.currentTarget.style.background = 'var(--color-secondary)'; }}
-                    >
-                      <span style={{ fontSize: '0.875rem', fontWeight: 500, color: 'var(--color-navy)' }}>{s.title}</span>
-                      <ArrowRight size={14} style={{ color: 'var(--color-gold)', flexShrink: 0 }} />
-                    </Link>
-                  ))}
-                </div>
-              </motion.div>
-            )}
-          </div>
-
-          {/* ── RIGHT: Sticky Sidebar ── */}
-          <div>
-            <motion.div
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.6 }}
-              style={{ position: 'sticky', top: '6rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}
-            >
-              {/* Primary CTA Card */}
-              <div style={{ background: 'var(--color-navy)', padding: '2rem', border: '1px solid rgba(223,186,115,0.25)' }}>
-                <div style={{ marginBottom: '1.5rem' }}>
-                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.6rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--color-gold)', marginBottom: '0.5rem' }}>
-                    Start Today
-                  </div>
-                  <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.25rem', color: '#ffffff', marginBottom: '0.625rem' }}>
-                    Get {serviceData.title}
-                  </h3>
-                  <p style={{ fontSize: '0.875rem', color: 'rgba(255,255,255,0.45)', lineHeight: '1.65' }}>
-                    Our experts will handle everything from start to finish. Book a free consultation to begin.
-                  </p>
-                </div>
-
-                <Link to="/contact" className="btn-gold" style={{ width: '100%', justifyContent: 'center', marginBottom: '0.75rem' }}>
-                  Book Free Consultation <ArrowRight size={15} style={{ marginLeft: '8px' }} />
-                </Link>
-
-                <a
-                  href={`https://wa.me/918448803143?text=Hi%2C%20I'm%20interested%20in%20getting%20help%20with%20${encodeURIComponent(serviceData.title)}`}
-                  style={{
-                    display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px',
-                    width: '100%', padding: '0.75rem',
-                    background: 'rgba(37,211,102,0.1)', border: '1px solid rgba(37,211,102,0.3)',
-                    fontSize: '0.8125rem', fontWeight: 600, color: '#25D366',
-                    transition: 'all 200ms ease',
-                  }}
-                  onMouseEnter={e => { e.currentTarget.style.background = 'rgba(37,211,102,0.18)'; }}
-                  onMouseLeave={e => { e.currentTarget.style.background = 'rgba(37,211,102,0.1)'; }}
-                >
-                  <MessageCircle size={16} /> Chat on WhatsApp
-                </a>
-              </div>
-
-              {/* Timeline */}
-              {serviceData.timeline && (
-                <div style={{ background: 'var(--color-secondary)', border: '1px solid var(--color-border-main)', padding: '1.5rem' }}>
-                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.6rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--color-text-light)', marginBottom: '0.625rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                    <Clock size={13} style={{ color: 'var(--color-gold)' }} /> Estimated Timeline
-                  </div>
-                  <p style={{ fontFamily: 'var(--font-heading)', fontSize: '1.125rem', color: 'var(--color-navy)', fontWeight: 600 }}>{serviceData.timeline}</p>
-                </div>
-              )}
-
-              {/* Fees */}
-              {serviceData.fees && (
-                <div style={{ background: 'var(--color-secondary)', border: '1px solid var(--color-border-main)', padding: '1.5rem' }}>
-                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.6rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--color-text-light)', marginBottom: '0.625rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                    <CreditCard size={13} style={{ color: 'var(--color-gold)' }} /> Government Fees
-                  </div>
-                  <p style={{ fontSize: '0.9rem', color: 'var(--color-text-muted)', lineHeight: '1.6', marginBottom: '0.875rem' }}>{serviceData.fees}</p>
-                  <div style={{ display: 'flex', gap: '8px', alignItems: 'flex-start', padding: '0.75rem', background: 'rgba(223,186,115,0.06)', border: '1px solid rgba(223,186,115,0.18)' }}>
-                    <ShieldAlert size={14} style={{ color: 'var(--color-gold)', flexShrink: 0, marginTop: '2px' }} />
-                    <span style={{ fontSize: '0.8rem', color: 'var(--color-text-muted)', lineHeight: '1.5' }}>Our professional fee is quoted separately based on your case complexity.</span>
-                  </div>
-                </div>
-              )}
-
-              {/* Trust indicators */}
-              <div style={{ background: 'var(--color-secondary)', border: '1px solid var(--color-border-main)', padding: '1.5rem' }}>
-                {[
-                  { icon: CheckCircle, label: '100% Online Process', desc: 'No office visit needed' },
-                  { icon: Award, label: 'Qualified Professionals', desc: 'CAs, CSs & Legal experts' },
-                  { icon: ShieldCheck, label: 'Data Confidential', desc: 'Your documents are safe' },
-                ].map((item, i) => {
-                  const Icon = item.icon;
-                  return (
-                    <div key={i} style={{ display: 'flex', gap: '12px', padding: '0.75rem 0', borderBottom: i < 2 ? '1px solid var(--color-border-main)' : 'none' }}>
-                      <Icon size={16} style={{ color: 'var(--color-gold)', flexShrink: 0, marginTop: '2px' }} />
                       <div>
-                        <div style={{ fontSize: '0.8125rem', fontWeight: 600, color: 'var(--color-navy)' }}>{item.label}</div>
-                        <div style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)' }}>{item.desc}</div>
+                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.25rem' }}>
+                          <span style={{
+                            fontFamily: 'var(--font-mono)', fontSize: '0.72rem', fontWeight: 700,
+                            letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--color-gold-dark)',
+                            backgroundColor: 'rgba(223,186,115,0.12)', padding: '4px 10px', borderRadius: 'var(--radius-sm)'
+                          }}>
+                            {item.step}
+                          </span>
+                          <span style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--color-text-muted)' }}>
+                            Verified Protocol
+                          </span>
+                        </div>
+                        <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.15rem', fontWeight: 700, color: 'var(--color-navy)', marginBottom: '0.75rem', lineHeight: 1.3 }}>
+                          {item.title}
+                        </h3>
+                        <p style={{ fontSize: '0.88rem', color: 'var(--color-text-muted)', lineHeight: 1.6, margin: 0 }}>
+                          {item.desc}
+                        </p>
+                      </div>
+                      <div style={{ marginTop: '1.5rem', paddingTop: '1rem', borderTop: '1px solid rgba(10,15,29,0.06)', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                        <CheckCircle2 size={13} style={{ color: 'var(--color-gold-dark)' }} />
+                        <span style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--color-navy)' }}>100% Electronic Compliance</span>
                       </div>
                     </div>
-                  );
-                })}
-              </div>
+                  ))}
+                </div>
+              </motion.div>
 
-              {/* Call button */}
-              <Link
-                to="/contact"
-                style={{
-                  display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px',
-                  padding: '1rem',
-                  background: 'transparent', border: '1px solid var(--color-border-main)',
-                  fontSize: '0.8125rem', fontWeight: 600, color: 'var(--color-navy)',
-                  transition: 'all 200ms ease',
-                }}
-                onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--color-navy)'; e.currentTarget.style.background = 'var(--color-navy)'; e.currentTarget.style.color = '#fff'; }}
-                onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--color-border-main)'; e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'var(--color-navy)'; }}
-              >
-                <Phone size={15} /> Send Us a Message
-              </Link>
-            </motion.div>
+              {/* 2. Key Advantages (Institutional Feature Grid) */}
+              <motion.div variants={FADE_UP} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '0.75rem' }}>
+                  <span className="section-label" style={{ margin: 0 }}>Practice Standards</span>
+                  <div style={{ height: '1px', flex: 1, backgroundColor: 'rgba(10,15,29,0.08)' }} />
+                </div>
+                <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(1.6rem, 3vw, 2.1rem)', fontWeight: 800, color: 'var(--color-navy)', marginBottom: '1.75rem', letterSpacing: '-0.03em', lineHeight: 1.15 }}>
+                  Professional Service & Execution Assurance
+                </h2>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(270px, 1fr))', gap: '1.25rem' }}>
+                  {content.whyUs.map((point, idx) => (
+                    <div key={idx} style={{
+                      display: 'flex', alignItems: 'flex-start', gap: '14px',
+                      padding: '1.5rem',
+                      background: '#ffffff',
+                      border: '1px solid rgba(10,15,29,0.08)',
+                      borderRadius: 'var(--radius-xl)',
+                      boxShadow: '0 4px 16px -4px rgba(10,15,29,0.04)',
+                      transition: 'border-color 160ms ease'
+                    }}
+                    onMouseEnter={e => e.currentTarget.style.borderColor = 'rgba(223,186,115,0.4)'}
+                    onMouseLeave={e => e.currentTarget.style.borderColor = 'rgba(10,15,29,0.08)'}
+                    >
+                      <div style={{ width: '36px', height: '36px', borderRadius: 'var(--radius-md)', background: 'var(--color-navy)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                        <CheckCircle2 size={16} style={{ color: 'var(--color-gold)' }} />
+                      </div>
+                      <div>
+                        <span style={{ fontSize: '0.95rem', fontWeight: 700, color: 'var(--color-navy)', lineHeight: '1.4', display: 'block', marginBottom: '4px' }}>
+                          {point}
+                        </span>
+                        <span style={{ fontSize: '0.81rem', color: 'var(--color-text-muted)', lineHeight: '1.5', display: 'block' }}>
+                          Guaranteed by senior practice counsel across all filings.
+                        </span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+
+              {/* 3. Statutory Documentation Checklist (Audit Matrix Card) */}
+              {serviceData.documents && serviceData.documents.length > 0 && (
+                <motion.div variants={FADE_UP} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '0.75rem' }}>
+                    <span className="section-label" style={{ margin: 0 }}>Required Verification</span>
+                    <div style={{ height: '1px', flex: 1, backgroundColor: 'rgba(10,15,29,0.08)' }} />
+                  </div>
+                  <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(1.6rem, 3vw, 2.1rem)', fontWeight: 800, color: 'var(--color-navy)', marginBottom: '1.75rem', letterSpacing: '-0.03em', lineHeight: 1.15 }}>
+                    Pre-Submission Documentation Checklist
+                  </h2>
+                  
+                  <div style={{
+                    backgroundColor: '#ffffff',
+                    border: '1px solid rgba(10,15,29,0.08)',
+                    borderRadius: 'var(--radius-2xl)',
+                    overflow: 'hidden',
+                    boxShadow: '0 12px 32px -8px rgba(10,15,29,0.06)'
+                  }}>
+                    {/* Header Banner */}
+                    <div style={{
+                      backgroundColor: 'var(--color-navy)',
+                      padding: '1.5rem 2rem',
+                      borderBottom: '1px solid rgba(255,255,255,0.1)',
+                      display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem'
+                    }}>
+                      <div>
+                        <span style={{ fontSize: '0.72rem', fontFamily: 'var(--font-mono)', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--color-gold)', fontWeight: 700, display: 'block', marginBottom: '4px' }}>
+                          Statutory Audit Standard
+                        </span>
+                        <h3 style={{ fontSize: '1.15rem', color: '#ffffff', fontWeight: 700, margin: 0 }}>
+                          Required Documentation Matrix
+                        </h3>
+                      </div>
+                      <div style={{ backgroundColor: 'rgba(255,255,255,0.08)', padding: '0.5rem 1rem', borderRadius: 'var(--radius-md)', border: '1px solid rgba(255,255,255,0.12)' }}>
+                        <span style={{ fontSize: '0.78rem', color: '#ffffff', fontWeight: 600 }}>100% Digital Submission</span>
+                      </div>
+                    </div>
+
+                    {/* Document Items Grid */}
+                    <div style={{ padding: '2rem', display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '1.25rem' }}>
+                      {serviceData.documents.map((doc, idx) => (
+                        <div key={idx} style={{
+                          display: 'flex', alignItems: 'center', gap: '12px',
+                          padding: '1rem 1.25rem',
+                          backgroundColor: 'var(--color-secondary)',
+                          border: '1px solid rgba(10,15,29,0.06)',
+                          borderRadius: 'var(--radius-lg)',
+                          transition: 'background-color 160ms ease, border-color 160ms ease'
+                        }}
+                        onMouseEnter={e => { e.currentTarget.style.backgroundColor = '#ffffff'; e.currentTarget.style.borderColor = 'var(--color-gold-dark)'; }}
+                        onMouseLeave={e => { e.currentTarget.style.backgroundColor = 'var(--color-secondary)'; e.currentTarget.style.borderColor = 'rgba(10,15,29,0.06)'; }}
+                        >
+                          <div style={{ width: '24px', height: '24px', borderRadius: '50%', backgroundColor: 'rgba(223,186,115,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                            <CheckCircle size={13} style={{ color: 'var(--color-gold-dark)' }} />
+                          </div>
+                          <span style={{ fontSize: '0.88rem', color: 'var(--color-navy)', fontWeight: 600, lineHeight: '1.4' }}>{doc}</span>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Legal Note */}
+                    {serviceData.documents.some(doc => doc.includes('*')) && (
+                      <div style={{ backgroundColor: 'var(--color-secondary)', padding: '1.25rem 2rem', borderTop: '1px solid rgba(10,15,29,0.06)', display: 'flex', gap: '10px', alignItems: 'center' }}>
+                        <span style={{ color: 'var(--color-gold-dark)', fontWeight: 800, fontSize: '1.1rem' }}>*</span>
+                        <span style={{ fontSize: '0.82rem', color: 'var(--color-text-muted)', fontStyle: 'italic', fontWeight: 500 }}>
+                          Constitutional deeds, affidavits, and statutory declarations (* marked) are drafted and attested directly by our practice legal counsel.
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                </motion.div>
+              )}
+
+              {/* Related Disciplines */}
+              {related.length > 0 && (
+                <motion.div variants={FADE_UP} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '0.75rem' }}>
+                    <span className="section-label" style={{ margin: 0 }}>Related Disciplines</span>
+                    <div style={{ height: '1px', flex: 1, backgroundColor: 'rgba(10,15,29,0.08)' }} />
+                  </div>
+                  <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(1.5rem, 2.8vw, 1.85rem)', fontWeight: 800, color: 'var(--color-navy)', marginBottom: '1.5rem', letterSpacing: '-0.02em' }}>
+                    Complementary Corporate Services
+                  </h2>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '1rem' }}>
+                    {related.map((s) => (
+                      <Link
+                        key={s.id}
+                        to={`/services/${s.slug}`}
+                        style={{
+                          display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+                          padding: '1.25rem 1.5rem',
+                          background: '#ffffff', border: '1px solid rgba(10,15,29,0.08)',
+                          borderRadius: 'var(--radius-xl)',
+                          boxShadow: '0 4px 16px -4px rgba(10,15,29,0.04)',
+                          transition: 'border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease', gap: '1rem',
+                        }}
+                        onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--color-gold-dark)'; e.currentTarget.style.boxShadow = '0 10px 28px -6px rgba(10,15,29,0.1)'; e.currentTarget.style.transform = 'translateY(-2px)'; }}
+                        onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(10,15,29,0.08)'; e.currentTarget.style.boxShadow = '0 4px 16px -4px rgba(10,15,29,0.04)'; e.currentTarget.style.transform = 'translateY(0)'; }}
+                      >
+                        <span style={{ fontSize: '0.92rem', fontWeight: 700, color: 'var(--color-navy)' }}>{s.title}</span>
+                        <ArrowRight size={15} style={{ color: 'var(--color-gold-dark)', flexShrink: 0 }} />
+                      </Link>
+                    ))}
+                  </div>
+                </motion.div>
+              )}
+            </div>
+
+            {/* Right Column: Unified Executive Retainer & Governance Sidebar (No more scattered boxes!) */}
+            <div style={{ position: 'sticky', top: '6.5rem' }}>
+              <div style={{
+                backgroundColor: 'var(--color-navy)',
+                border: '1px solid rgba(255,255,255,0.12)',
+                borderRadius: 'var(--radius-2xl)',
+                overflow: 'hidden',
+                boxShadow: '0 24px 64px -12px rgba(10,15,29,0.22)'
+              }}>
+                
+                {/* Tier 1: Action Header */}
+                <div style={{ padding: '2.25rem' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '1rem' }}>
+                    <div style={{ width: '26px', height: '26px', borderRadius: '6px', backgroundColor: 'var(--color-gold)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                      <Award size={14} style={{ color: 'var(--color-navy)' }} />
+                    </div>
+                    <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.72rem', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--color-gold)', fontWeight: 700 }}>
+                      Expert Retainer Desk
+                    </span>
+                  </div>
+                  
+                  <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.5rem', fontWeight: 800, color: '#ffffff', marginBottom: '0.875rem', letterSpacing: '-0.02em' }}>
+                    Get Started with Us
+                  </h3>
+                  <p style={{ fontSize: '0.88rem', color: 'rgba(255,255,255,0.68)', lineHeight: '1.65', marginBottom: '2rem' }}>
+                    Our specialists manage your entire registration and statutory compliance from initial audit to final authority handover.
+                  </p>
+
+                  <Link to="/contact" className="btn-gold" style={{ width: '100%', marginBottom: '0.875rem', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '8px', padding: '1rem' }}>
+                    Talk to an Expert <ArrowRight size={16} />
+                  </Link>
+
+                  <a
+                    href={`https://wa.me/918448803143?text=Hi%2C%20I'm%20inquiring%20about%20${encodeURIComponent(serviceData.title)}`}
+                    target="_blank" rel="noopener noreferrer"
+                    style={{
+                      display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px',
+                      width: '100%', padding: '0.875rem', borderRadius: 'var(--radius-md)',
+                      background: 'rgba(37,211,102,0.14)', border: '1px solid rgba(37,211,102,0.35)',
+                      fontSize: '0.85rem', fontWeight: 700, color: '#25D366',
+                      transition: 'background-color 160ms ease, transform 160ms ease'
+                    }}
+                    onMouseEnter={e => { e.currentTarget.style.backgroundColor = 'rgba(37,211,102,0.22)'; e.currentTarget.style.transform = 'translateY(-1px)'; }}
+                    onMouseLeave={e => { e.currentTarget.style.backgroundColor = 'rgba(37,211,102,0.14)'; e.currentTarget.style.transform = 'translateY(0)'; }}
+                  >
+                    <MessageCircle size={16} /> Chat on WhatsApp
+                  </a>
+                </div>
+
+                {/* Tier 2: Statutory Turnaround & Fee Bar */}
+                <div style={{
+                  backgroundColor: '#ffffff',
+                  padding: '2rem 2.25rem',
+                  borderTop: '1px solid rgba(255,255,255,0.1)',
+                  borderBottom: '1px solid rgba(10,15,29,0.08)'
+                }}>
+                  {serviceData.timeline && (
+                    <div style={{ marginBottom: '1.5rem', paddingBottom: '1.5rem', borderBottom: '1px solid rgba(10,15,29,0.06)' }}>
+                      <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.6875rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--color-text-light)', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '6px', fontWeight: 700 }}>
+                        <Clock size={13} style={{ color: 'var(--color-gold-dark)' }} /> Estimated Turnaround
+                      </div>
+                      <p style={{ fontFamily: 'var(--font-heading)', fontSize: '1.25rem', color: 'var(--color-navy)', fontWeight: 800, margin: 0 }}>
+                        {serviceData.timeline}
+                      </p>
+                    </div>
+                  )}
+
+                  {serviceData.fees && (
+                    <div>
+                      <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.6875rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--color-text-light)', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '6px', fontWeight: 700 }}>
+                        <CreditCard size={13} style={{ color: 'var(--color-gold-dark)' }} /> Government & Package Fee
+                      </div>
+                      <p style={{ fontSize: '1rem', color: 'var(--color-navy)', fontWeight: 700, marginBottom: '1rem' }}>
+                        {serviceData.fees}
+                      </p>
+                      <div style={{ display: 'flex', gap: '10px', alignItems: 'flex-start', padding: '0.875rem 1rem', backgroundColor: 'var(--color-secondary)', borderRadius: 'var(--radius-md)', border: '1px solid rgba(10,15,29,0.08)' }}>
+                        <ShieldAlert size={15} style={{ color: 'var(--color-gold-dark)', flexShrink: 0, marginTop: '2px' }} />
+                        <span style={{ fontSize: '0.82rem', color: 'var(--color-navy)', lineHeight: '1.5', fontWeight: 600 }}>
+                          Fixed, upfront package fee. Zero surprise charges or hidden departmental costs.
+                        </span>
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                {/* Tier 3: Institutional Trust Assurances */}
+                <div style={{ backgroundColor: 'var(--color-secondary)', padding: '1.75rem 2.25rem' }}>
+                  <span style={{ fontSize: '0.7rem', fontFamily: 'var(--font-mono)', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--color-text-light)', fontWeight: 700, display: 'block', marginBottom: '1.25rem' }}>
+                    Practice Guarantees
+                  </span>
+                  {[
+                    { icon: CheckCircle, label: 'Secure Online Process', desc: 'Zero physical visits required across India' },
+                    { icon: Award, label: 'Experienced Specialists', desc: 'Dedicated Senior Advisors & Legal Counsel' },
+                    { icon: ShieldCheck, label: '100% Confidential', desc: 'Strict fiduciary client data protection' },
+                  ].map((item, i) => {
+                    const Icon = item.icon;
+                    return (
+                      <div key={i} style={{ display: 'flex', gap: '14px', padding: '0.875rem 0', borderBottom: i < 2 ? '1px solid rgba(10,15,29,0.06)' : 'none' }}>
+                        <div style={{ width: '28px', height: '28px', borderRadius: '50%', background: 'rgba(223,186,115,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                          <Icon size={14} style={{ color: 'var(--color-gold-dark)' }} />
+                        </div>
+                        <div>
+                          <div style={{ fontSize: '0.88rem', fontWeight: 700, color: 'var(--color-navy)', marginBottom: '2px' }}>{item.label}</div>
+                          <div style={{ fontSize: '0.78rem', color: 'var(--color-text-muted)' }}>{item.desc}</div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+
+              </div>
+            </div>
+
           </div>
         </div>
       </section>

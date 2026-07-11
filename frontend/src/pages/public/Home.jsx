@@ -3,757 +3,735 @@ import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   ArrowRight, Building2, Calculator, ShieldCheck, Scale,
-  ChevronDown, User, Users, Heart, ShoppingCart, Briefcase,
-  FileCheck, Send, Store, CheckCircle, Phone,
-  TrendingUp, Award, Globe, MessageCircle, Factory, Cpu
+  ChevronDown, User, Users, Store, CheckCircle,
+  TrendingUp, Award, Globe, MessageCircle,
+  Check, Clock
 } from 'lucide-react';
 
-/* ── Animation Variants ── */
-const FADE_UP = {
-  hidden: { opacity: 0, y: 32 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] } }
-};
-
-/* ── Finder Data ── */
-const finderOptions = [
-  { id: 'solo', label: 'Solo founder / freelancer', icon: User, results: [
-    { name: 'Proprietorship Setup', link: '/services/proprietorship-setup' },
-    { name: 'Udyam / MSME Registration', link: '/services/udyam-registration' },
-    { name: 'GST Registration', link: '/services/gst-registration' },
-  ]},
-  { id: 'cofounders', label: '2+ co-founders', icon: Users, results: [
-    { name: 'Private Limited Company', link: '/services/private-limited-company' },
-    { name: 'LLP Registration', link: '/services/llp-registration' },
-    { name: 'GST Registration', link: '/services/gst-registration' },
-  ]},
-  { id: 'ngo', label: 'NGO / Trust / Society', icon: Heart, results: [
-    { name: 'Section 8 Company', link: '/services/section-8-company' },
-    { name: 'Trust Registration', link: '/services/trust-registration' },
-    { name: 'Society Registration', link: '/services/society-registration' },
-  ]},
-  { id: 'ecommerce', label: 'E-commerce seller', icon: ShoppingCart, results: [
-    { name: 'GST Registration', link: '/services/gst-registration' },
-    { name: 'Trademark Registration', link: '/services/trademark-registration' },
-    { name: 'Private Limited Company', link: '/services/private-limited-company' },
-  ]},
-  { id: 'existing', label: 'Existing business / compliance', icon: Briefcase, results: [
-    { name: 'GST Registration', link: '/services/gst-registration' },
-    { name: 'Professional Tax', link: '/services/professional-tax' },
-    { name: 'FSSAI Licence', link: '/services/fssai-licence' },
-  ]},
-  { id: 'retail', label: 'Retail / Physical Store', icon: Store, results: [
-    { name: 'Shops & Establishments', link: '/services/shops-establishments' },
-    { name: 'FSSAI Licence', link: '/services/fssai-licence' },
-    { name: 'Trade Licence', link: '/services/trade-licence' },
-  ]},
-  { id: 'manufacturing', label: 'Manufacturing / Factory', icon: Factory, results: [
-    { name: 'Factory Licence', link: '/services/factory-licence' },
-    { name: 'Udyam / MSME Registration', link: '/services/udyam-registration' },
-    { name: 'GST Registration', link: '/services/gst-registration' },
-  ]},
-  { id: 'tech', label: 'Tech Startup / IT Agency', icon: Cpu, results: [
-    { name: 'Private Limited Company', link: '/services/private-limited-company' },
-    { name: 'Trademark Registration', link: '/services/trademark-registration' },
-    { name: 'Shops & Establishments', link: '/services/shops-establishments' },
-  ]},
+/* ── Institutional Hero Persona Retainers ── */
+const heroHubTabs = [
+  {
+    id: 'startup',
+    label: 'Startup & Tech Company',
+    title: 'Private Limited Company Package',
+    badge: 'Popular with Tech & Growing Startups',
+    time: '10–14 Business Days',
+    desc: 'Complete Private Limited incorporation, Startup India (DPIIT) registration, multi-state GST setup, and trademark protection to get your business funding-ready.',
+    registrations: [
+      { name: 'Private Limited Incorporation', fee: 'Government Registration Included', time: '10–15 Business Days', link: '/services/private-limited-company', tag: 'Limited Liability Structure' },
+      { name: 'Multi-State GST Structuring', fee: 'Direct Expert Filing', time: '3–5 Business Days', link: '/services/gst-registration', tag: 'Inter-State Commerce' },
+      { name: 'Brand & Trademark Filing', fee: 'Government Registry Fee', time: 'Same-Day Priority Filing', link: '/services/trademark-registration', tag: 'Brand Name & Logo Protection' },
+    ]
+  },
+  {
+    id: 'solo',
+    label: 'Sole Proprietor & Small Business',
+    title: 'Complete Small Business Package',
+    badge: 'Fast & Reliable Business Setup',
+    time: '2–5 Business Days',
+    desc: 'Statutory tax and municipal licensing (Udyam MSME, GST, and Shops & Establishment Act) required to formalize your commercial identity and open a current bank account under your personal PAN.',
+    registrations: [
+      { name: 'Proprietorship Compliance & Bank Setup', fee: 'Udyam, GST & Shops Act Bundle', time: '2–4 Business Days', link: '/services/proprietorship-setup', tag: 'Bank Current Account KYC' },
+      { name: 'GST & Indirect Tax Registration', fee: 'Direct Expert Filing', time: '3–5 Business Days', link: '/services/gst-registration', tag: 'Pan-India Billing' },
+      { name: 'Shops & Establishments License', fee: 'Local Municipal Operating Permit', time: '3–7 Business Days', link: '/services/shops-establishments', tag: 'Local Trade Compliance' },
+    ]
+  },
+  {
+    id: 'ecommerce',
+    label: 'E-Commerce & Online Store',
+    title: 'Complete E-Commerce Package',
+    badge: 'Required to Sell on Amazon / Flipkart',
+    time: '4–7 Business Days',
+    desc: 'All official registrations needed to smoothly onboard onto Amazon, Flipkart, quick-commerce platforms, and online payment gateways.',
+    registrations: [
+      { name: 'E-Commerce GST Registration', fee: 'Dedicated Compliance Filing', time: '3–5 Business Days', link: '/services/gst-registration', tag: 'Marketplace Ready' },
+      { name: 'Brand & Logo Trademark Registration', fee: 'Government Registry Fee', time: 'Same-Day Priority Filing', link: '/services/trademark-registration', tag: 'Brand Registry Protection' },
+      { name: 'Private Limited Incorporation', fee: 'Government Registration Included', time: '10–15 Business Days', link: '/services/private-limited-company', tag: 'Limited Liability Structure' },
+    ]
+  },
+  {
+    id: 'compliance',
+    label: 'Established Business',
+    title: 'Annual Statutory & Legal Package',
+    badge: 'Complete Peace of Mind Year-Round',
+    time: 'Immediate Activation',
+    desc: 'Complete annual statutory audits, MCA/ROC secretarial filings, monthly GST returns, and dedicated Senior Advisory support for your business.',
+    registrations: [
+      { name: 'FSSAI Central & State Food License', fee: 'Government Food Safety Filing', time: '7–10 Business Days', link: '/services/fssai-licence', tag: 'Food Safety Compliance' },
+      { name: 'Annual ROC & Tax Compliance', fee: 'Comprehensive Annual Support', time: 'Year-Round Representation', link: '/contact', tag: 'Annual Audits & Filings' },
+      { name: 'EPF & ESIC Staff Compliance', fee: 'Labour Law Support Package', time: '5–7 Business Days', link: '/services/epf-registration', tag: 'Employee Social Security' },
+    ]
+  },
 ];
 
-/* ── FAQ Data ── */
+/* ── Disciplines & Value-Focused Matrix Data ── */
+const servicesMatrix = [
+  { title: 'Private Limited Company Registration', category: 'setup', slug: 'private-limited-company', tag: 'Company Setup', desc: 'The most reliable corporate structure for growing companies, protecting personal assets and making raising investment easy.', fee: 'Govt Registration Included', time: '10–15 Days' },
+  { title: 'GST Registration & Tax Setup', category: 'tax', slug: 'gst-registration', tag: 'Tax Registration', desc: 'Official state and central GST registration required to bill customers PAN-India and sell across state borders.', fee: 'Direct Expert Filing', time: '3–5 Days' },
+  { title: 'Trademark Registration & Brand Shield', category: 'ip', slug: 'trademark-registration', tag: 'Brand Protection', desc: 'Protect your brand name, logo, and unique business identity against copycats across India.', fee: 'Govt Registry Fee', time: 'Same-Day Filing' },
+  { title: 'Limited Liability Partnership (LLP)', category: 'setup', slug: 'llp-registration', tag: 'Company Setup', desc: 'Combines the flexibility of a traditional partnership with the personal asset protection of a private limited company.', fee: 'Nominal Govt Fee', time: '12–15 Days' },
+  { title: 'Udyam (MSME) Registration', category: 'setup', slug: 'udyam-registration', tag: 'Government Certificate', desc: 'Secures priority bank loans, 50% discount on government trademark fees, and special startup benefits.', fee: 'Zero Government Fee', time: '1–2 Days' },
+  { title: 'FSSAI Food Safety License', category: 'license', slug: 'fssai-licence', tag: 'Trade License', desc: 'Mandatory government food license for food product manufacturers, restaurants, cafes, and cloud kitchens.', fee: 'State & Central Filing', time: '7–10 Days' },
+  { title: 'Shops & Establishments License', category: 'license', slug: 'shops-establishments', tag: 'Local License', desc: 'Official operating permit required by state labor departments for commercial offices, stores, and businesses.', fee: 'State Specific Fee', time: '3–7 Days' },
+  { title: 'EPF & ESIC Staff Registration', category: 'labor', slug: 'epf-registration', tag: 'Staff & Labor Law', desc: 'Official provident fund and employee health insurance setup required as your team grows above threshold limits.', fee: 'Complete Setup & Filing', time: '5–7 Days' },
+  { title: 'Section 8 Company Incorporation', category: 'setup', slug: 'section-8-company', tag: 'Non-Profit Setup', desc: 'Government-recognized non-profit structure ideal for charitable trusts, foundations, educational institutions, and CSR entities.', fee: 'Central License Included', time: '12–18 Days' },
+  { title: 'Import Export Code (IEC) License', category: 'license', slug: 'iec-registration', tag: 'Global Trade License', desc: 'Mandatory DGFT authorization required to import commercial goods into India or export products and IT services worldwide.', fee: 'Lifetime Govt Permit', time: '2–4 Days' },
+];
+
+/* ── Fiduciary FAQ Data ── */
 const faqData = [
-  { q: 'How long does company registration typically take?', a: 'Most registrations are completed within 7–14 business days, depending on the type of entity and government processing timelines. We handle all follow-ups with the authorities so you can focus on your business.' },
-  { q: 'Do I need to visit your office in person?', a: 'No. Our entire process is designed to work remotely. Documents can be submitted digitally, consultations happen over video call or phone, and certificates are delivered electronically.' },
-  { q: 'What documents do I need to get started?', a: 'The exact list varies by registration type, but generally you will need identity proof (PAN/Aadhaar), address proof, and a passport-sized photograph. We provide a complete checklist during the initial consultation.' },
-  { q: 'Can you help with businesses outside your local state?', a: 'Yes. We serve clients across all Indian states and union territories. Most government filings are handled through centralized online portals, so geography is not a barrier.' },
-  { q: 'What happens after my registration is approved?', a: 'You receive all original certificates and documents digitally. We also provide a post-registration compliance brief outlining any recurring filings or obligations your entity must meet.' },
-  { q: 'Do you provide ongoing compliance support after registration?', a: 'Absolutely. We offer annual compliance packages covering GST return filing, annual returns, and statutory filings so your business stays fully compliant year-round.' },
+  { q: 'How long does it take to register a Private Limited company?', a: 'A Private Limited or LLP registration typically takes 10 to 14 business days, depending on name approval and state stamp duty processing. Our team handles all the paperwork and government follow-ups for you.' },
+  { q: 'Do I need to visit any office or submit physical documents?', a: 'No. Everything is done 100% online. Identity verification, digital signatures, and all government filings are handled digitally. We serve clients across all 28 states and 8 Union Territories.' },
+  { q: 'How are your fees structured? Are there any hidden charges?', a: 'We charge a single, fixed package fee that is agreed before we start any work. There are no hidden charges, no hourly billing, and no surprise costs at any stage.' },
+  { q: 'Are your services handled by qualified professionals?', a: 'Yes. Every registration, tax filing, and compliance task is handled directly by qualified Senior Corporate Advisors and Legal Counsel with years of experience.' },
+  { q: 'What compliance do I need to handle after registering my company?', a: 'After incorporation, you will need to appoint an auditor, file a commencement of business form, complete annual ROC filings, and file regular GST returns. We provide a clear compliance calendar so you never miss a deadline.' },
+  { q: 'Can you help if my company already has pending compliance or government notices?', a: 'Absolutely. Our team regularly helps businesses resolve pending ROC notices, overdue tax filings, and multi-year compliance gaps. We will audit your current status and fix everything systematically.' },
 ];
 
-/* ── Process Steps ── */
+/* ── 4-Step Engagement Workflow ── */
 const processSteps = [
-  { num: '01', title: 'Consultation', desc: 'Understand your business needs and recommend the right structure.', icon: User },
-  { num: '02', title: 'Documentation', desc: 'Prepare and vet all required paperwork for submission.', icon: FileCheck },
-  { num: '03', title: 'Filing', desc: 'Submit applications to the relevant government authority.', icon: Send },
-  { num: '04', title: 'Delivery', desc: 'Receive your certificate or registration, fully compliant.', icon: ShieldCheck },
+  { num: '01', title: 'Free Consultation & Strategy', desc: 'We understand your exact business goals, team size, and location to recommend the right registration and tax structure.' },
+  { num: '02', title: 'Document Preparation & Verification', desc: 'Our Senior Compliance Advisors carefully check and prepare all needed documents, IDs, and application forms so nothing gets rejected.' },
+  { num: '03', title: 'Direct Government Filing & Follow-up', desc: 'We submit your applications directly to the Ministry of Corporate Affairs, GST portal, or Trademark office and handle all follow-ups.' },
+  { num: '04', title: 'Fast Delivery & Ongoing Support', desc: 'You receive all official government certificates and tax IDs digitally, along with a clear compliance calendar for your business.' },
 ];
-
-/* ── Featured Services ── */
-const featuredServices = [
-  { title: 'Private Limited Company', slug: 'private-limited-company', tag: 'Most Popular', icon: Building2, desc: 'Ideal for startups & scalable businesses with limited liability.' },
-  { title: 'GST Registration', slug: 'gst-registration', tag: 'Essential', icon: Calculator, desc: 'Mandatory for businesses crossing the threshold turnover.' },
-  { title: 'Trademark Registration', slug: 'trademark-registration', tag: 'Brand Protection', icon: ShieldCheck, desc: 'Protect your brand name, logo, or slogan from infringement.' },
-  { title: 'LLP Registration', slug: 'llp-registration', tag: 'Flexible', icon: Scale, desc: 'Corporate benefits with flexible management for partners.' },
-  { title: 'Udyam Registration', slug: 'udyam-registration', tag: 'Free & Fast', icon: Award, desc: 'Unlock government benefits, tenders, and scheme access.' },
-  { title: 'FSSAI Licence', slug: 'fssai-licence', tag: 'Food Business', icon: CheckCircle, desc: 'Mandatory for all food manufacturers, retailers & cloud kitchens.' },
-  { title: 'Shops & Establishments', slug: 'shops-establishments', tag: 'Commercial', icon: Store, desc: 'Mandatory municipal registration for commercial offices, shops & retail outlets.' },
-  { title: 'EPF & ESIC Registration', slug: 'epf-registration', tag: 'Labour Law', icon: Users, desc: 'Mandatory social security, provident fund & health insurance for employers.' },
-];
-
 
 export default function Home() {
-  const [shouldAnimate] = useState(() => !sessionStorage.getItem('hasPlayedIntro'));
-  const [finderSelection, setFinderSelection] = useState(null);
+  const [activeHeroTab, setActiveHeroTab] = useState('startup');
+  const [matrixCategory, setMatrixCategory] = useState('all');
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
+
+  const activeHubData = heroHubTabs.find(t => t.id === activeHeroTab) || heroHubTabs[0];
+  const filteredServices = matrixCategory === 'all' 
+    ? servicesMatrix 
+    : servicesMatrix.filter(s => s.category === matrixCategory);
 
   return (
     <div style={{ width: '100%', background: 'var(--color-primary)' }}>
 
       {/* ═══════════════════════════════════════════
-          1. HERO — Dark Navy with Gold Accents
+          01. HERO — INSTITUTIONAL PRACTICE DESK
       ═══════════════════════════════════════════ */}
-      <section style={{
-        minHeight: '92vh',
-        background: 'radial-gradient(ellipse 80% 60% at 50% -10%, rgba(223, 186, 115, 0.22), transparent), linear-gradient(180deg, #0F172A 0%, #16223A 60%, #0F172A 100%)',
-        display: 'flex', flexDirection: 'column', justifyContent: 'center',
-        position: 'relative', overflow: 'hidden',
-        padding: '6rem 0 4rem',
+      <section className="bg-institutional-grid" style={{
+        padding: '3.5rem 0 5.5rem',
+        position: 'relative',
+        overflow: 'hidden'
       }}>
-        {/* Background decoration */}
+        {/* Ambient Gold & Sapphire Aurora Spotlights behind Hero Content */}
         <div style={{
-          position: 'absolute', top: 0, left: 0, right: 0, bottom: 0,
-          backgroundImage: 'radial-gradient(circle at 20% 50%, rgba(223,186,115,0.08) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(223,186,115,0.05) 0%, transparent 40%)',
-          pointerEvents: 'none',
+          position: 'absolute', top: '-10%', right: '2%', width: '700px', height: '700px',
+          background: 'radial-gradient(circle at center, rgba(223, 186, 115, 0.18) 0%, rgba(13, 21, 39, 0) 70%)',
+          pointerEvents: 'none', zIndex: 0
         }} />
-        {/* Grid lines */}
         <div style={{
-          position: 'absolute', inset: 0,
-          backgroundImage: 'linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)',
-          backgroundSize: '64px 64px',
-          pointerEvents: 'none',
+          position: 'absolute', top: '20%', left: '-5%', width: '600px', height: '600px',
+          background: 'radial-gradient(circle at center, rgba(30, 80, 160, 0.22) 0%, rgba(13, 21, 39, 0) 70%)',
+          pointerEvents: 'none', zIndex: 0
         }} />
 
-        <div style={{ maxWidth: '88rem', margin: '0 auto', padding: '0 2rem', position: 'relative', zIndex: 1 }}>
-          <div className="hero-grid" style={{ display: 'grid', gap: '3rem', alignItems: 'center' }}>
+        <div style={{ maxWidth: '92rem', margin: '0 auto', padding: '0 2rem', position: 'relative', zIndex: 1 }}>
+          {/* Asymmetric Institutional Grid: Left (~42% pushed left), Right (~58% expanded wider so zero scroll needed) */}
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(380px, 1fr))',
+            gap: '3.5rem',
+            alignItems: 'center'
+          }}
+          ref={(el) => {
+            if (el && window.innerWidth >= 1024) {
+              el.style.gridTemplateColumns = '1fr 1.38fr';
+            }
+          }}
+          >
 
-            {/* Left: Copy */}
-            <div>
-              <motion.div
-                initial={shouldAnimate ? { opacity: 0, y: 16 } : false}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-              >
-                <span className="section-label" style={{ color: 'var(--color-gold)' }}>
-                  ✦ Corporate Registration & Compliance Advisory
+            {/* Left Column: Authoritative Copy & Direct Counsel Pathways */}
+            <div style={{ paddingRight: '1rem' }}>
+              <div style={{ marginBottom: '1.25rem' }}>
+                <span style={{
+                  fontSize: '0.8rem',
+                  fontFamily: 'var(--font-body)',
+                  fontWeight: 600,
+                  color: 'var(--color-gold)',
+                  letterSpacing: '0.04em',
+                  textTransform: 'uppercase',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                  background: 'rgba(223, 186, 115, 0.12)',
+                  padding: '5px 14px',
+                  borderRadius: '99px',
+                  border: '1px solid rgba(223, 186, 115, 0.28)'
+                }}>
+                  <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: 'var(--color-gold)', boxShadow: '0 0 8px var(--color-gold)' }} />
+                  Corporate Registration & Compliance Advisory
                 </span>
-              </motion.div>
+              </div>
 
               <h1 style={{
                 fontFamily: 'var(--font-heading)',
-                fontSize: 'clamp(2.75rem, 6vw, 5rem)',
-                fontWeight: 600,
-                lineHeight: 1.08,
+                fontSize: 'clamp(2.6rem, 4.8vw, 4.1rem)',
+                fontWeight: 800,
+                lineHeight: 1.1,
                 color: '#ffffff',
-                marginBottom: '1.75rem',
-                letterSpacing: '-0.02em',
+                marginBottom: '1.5rem',
+                letterSpacing: '-0.03em',
+                maxWidth: '17ch',
+                textShadow: '0 4px 20px rgba(0,0,0,0.5)'
               }}>
-                {['Where Indian', 'Businesses Are', 'Built to Last.'].map((line, i) => (
-                  <span key={i} style={{ display: 'block', overflow: 'hidden' }}>
-                    <motion.span
-                      style={{ display: 'block', color: i === 2 ? 'var(--color-gold)' : '#ffffff' }}
-                      initial={shouldAnimate ? { y: '105%', opacity: 0 } : false}
-                      animate={{ y: 0, opacity: 1 }}
-                      transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: shouldAnimate ? i * 0.1 + 0.1 : 0 }}
-                    >
-                      {line}
-                    </motion.span>
-                  </span>
-                ))}
+                Where Indian Businesses Are <span style={{ fontFamily: 'var(--font-heading)', fontStyle: 'normal', fontWeight: 800, color: 'var(--color-gold)', textShadow: '0 0 30px rgba(223, 186, 115, 0.35)' }}>Built to Last.</span>
               </h1>
 
-              <motion.p
-                initial={shouldAnimate ? { opacity: 0, y: 16 } : false}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: shouldAnimate ? 0.55 : 0 }}
-                style={{ fontSize: '1.0625rem', color: 'rgba(255,255,255,0.6)', lineHeight: '1.8', marginBottom: '2.5rem', maxWidth: '520px' }}
-              >
-                Comprehensive entity registration, tax advisory, IP protection, and labour law compliance — tailored for modern Indian enterprises.
-              </motion.p>
-
-              <motion.div
-                initial={shouldAnimate ? { opacity: 0 } : false}
-                animate={{ opacity: 1 }}
-                transition={{ delay: shouldAnimate ? 0.7 : 0 }}
-                style={{ display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}
-              >
-                <motion.div whileHover={{ scale: 1.04, boxShadow: '0 0 24px rgba(223,186,115,0.4)' }} whileTap={{ scale: 0.96 }} style={{ display: 'inline-flex' }}>
-                  <Link to="/contact" className="btn-gold" style={{ gap: '8px' }}>
-                    Book Free Consultation <ArrowRight size={15} />
-                  </Link>
-                </motion.div>
-                <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} style={{ display: 'inline-flex' }}>
-                  <Link to="/services" className="btn-ghost" style={{ gap: '8px' }}>
-                    Explore Services
-                  </Link>
-                </motion.div>
-              </motion.div>
-
-              {/* Trust badges */}
-              <motion.div
-                initial={shouldAnimate ? { opacity: 0 } : false}
-                animate={{ opacity: 1 }}
-                transition={{ delay: shouldAnimate ? 0.9 : 0 }}
-                style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', marginTop: '2.5rem', flexWrap: 'wrap' }}
-              >
-                {['PAN India Service', '100% Online Process', 'MCA Registered'].map(badge => (
-                  <span key={badge} style={{
-                    display: 'flex', alignItems: 'center', gap: '6px',
-                    fontSize: '0.75rem', fontWeight: 600, letterSpacing: '0.05em',
-                    color: 'rgba(255,255,255,0.45)',
-                  }}>
-                    <span style={{ color: 'var(--color-gold)', fontSize: '10px' }}>●</span> {badge}
-                  </span>
-                ))}
-              </motion.div>
-            </div>
-
-            {/* Right: Scattered floating cards */}
-            <motion.div
-              initial={shouldAnimate ? { opacity: 0 } : false}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 1.2, delay: shouldAnimate ? 0.4 : 0 }}
-              className="hidden lg:block"
-              style={{ position: 'relative', width: '100%', height: '520px' }}
-            >
-              {/* LLP top-left */}
-              <div className="hero-card float-4" style={{
-                top: '4%', left: '0%', width: '155px',
-                background: 'linear-gradient(135deg, rgba(255,255,255,0.07) 0%, rgba(255,255,255,0.02) 100%)',
-                border: '1px solid rgba(255,255,255,0.1)',
-                padding: '1.125rem 1.25rem',
-                boxShadow: '0 8px 24px rgba(0,0,0,0.35)',
+              <p style={{
+                fontSize: '1.08rem',
+                color: 'rgba(255,255,255,0.75)',
+                lineHeight: '1.68',
+                marginBottom: '2.25rem',
+                maxWidth: '46ch',
+                fontFamily: 'var(--font-body)'
               }}>
-                <Users size={15} color="rgba(223,186,115,0.8)" style={{ marginBottom: '0.5rem' }} />
-                <div style={{ fontSize: '0.7rem', fontWeight: 600, color: '#fff', marginBottom: '0.2rem' }}>LLP</div>
-                <div style={{ fontSize: '0.57rem', color: 'rgba(255,255,255,0.4)', lineHeight: 1.5 }}>Flexible<br/>Partnership</div>
-              </div>
-
-              {/* GST top-right */}
-              <div className="hero-card float-2" style={{
-                top: '6%', right: '0%', width: '158px',
-                background: 'linear-gradient(135deg, rgba(255,255,255,0.07) 0%, rgba(255,255,255,0.02) 100%)',
-                border: '1px solid rgba(223,186,115,0.22)',
-                padding: '1.125rem 1.25rem',
-                boxShadow: '0 8px 24px rgba(0,0,0,0.35)',
-              }}>
-                <div style={{ fontSize: '0.52rem', color: 'var(--color-gold)', letterSpacing: '0.14em', textTransform: 'uppercase', marginBottom: '0.4rem', fontFamily: 'var(--font-mono)' }}>GST Reg.</div>
-                <div style={{ fontSize: '1.875rem', fontFamily: 'var(--font-heading)', color: '#fff', fontWeight: 600, lineHeight: 1 }}>₹0</div>
-                <div style={{ fontSize: '0.57rem', color: 'rgba(255,255,255,0.3)', marginTop: '4px' }}>Govt. Fee</div>
-              </div>
-
-              {/* Private Limited — dead center via marginLeft */}
-              <div className="hero-card float-1" style={{
-                top: '37%', left: '50%', marginLeft: '-120px', width: '240px',
-                background: 'linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%)',
-                border: '1px solid rgba(223,186,115,0.4)',
-                borderTop: '2px solid var(--color-gold)',
-                padding: '1.375rem 1.625rem',
-                boxShadow: '0 20px 48px rgba(0,0,0,0.5)',
-                zIndex: 3,
-              }}>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.875rem' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '9px' }}>
-                    <div style={{ width: '32px', height: '32px', background: 'var(--color-gold)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                      <Building2 size={16} color="#05080F" />
-                    </div>
-                    <div>
-                      <div style={{ fontSize: '0.77rem', fontWeight: 700, color: '#fff', lineHeight: 1.2 }}>Private Limited Co.</div>
-                      <div style={{ fontSize: '0.54rem', color: 'var(--color-gold)', fontFamily: 'var(--font-mono)', letterSpacing: '0.12em' }}>MOST POPULAR</div>
-                    </div>
-                  </div>
-                  <span style={{ fontSize: '0.58rem', color: 'var(--color-gold)', border: '1px solid rgba(223,186,115,0.3)', padding: '2px 8px', fontFamily: 'var(--font-mono)', whiteSpace: 'nowrap' }}>10–15 Days</span>
-                </div>
-                <div style={{ height: '1px', background: 'linear-gradient(90deg, rgba(223,186,115,0.3), transparent)', marginBottom: '0.75rem' }} />
-                <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-                  {['FDI Ready', 'Ltd. Liability', 'Scalable'].map(t => (
-                    <span key={t} style={{ fontSize: '0.6rem', color: 'rgba(255,255,255,0.48)', display: 'flex', alignItems: 'center', gap: '4px' }}>
-                      <span style={{ color: 'var(--color-gold)', fontSize: '7px' }}>✓</span>{t}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              {/* Trademark bottom-left */}
-              <div className="hero-card float-3" style={{
-                bottom: '4%', left: '2%', width: '162px',
-                background: 'linear-gradient(135deg, rgba(223,186,115,0.1) 0%, rgba(223,186,115,0.03) 100%)',
-                border: '1px solid rgba(223,186,115,0.25)',
-                padding: '1.125rem 1.25rem',
-                boxShadow: '0 8px 24px rgba(0,0,0,0.3)',
-              }}>
-                <ShieldCheck size={15} color="var(--color-gold)" style={{ marginBottom: '0.5rem' }} />
-                <div style={{ fontSize: '0.7rem', fontWeight: 600, color: '#fff', marginBottom: '0.2rem' }}>Trademark</div>
-                <div style={{ fontSize: '0.57rem', color: 'rgba(255,255,255,0.42)' }}>Brand Protection</div>
-              </div>
-
-              {/* FSSAI bottom-right */}
-              <div className="hero-card float-5" style={{
-                bottom: '6%', right: '2%', width: '152px',
-                background: 'linear-gradient(135deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%)',
-                border: '1px solid rgba(223,186,115,0.1)',
-                padding: '1.125rem 1.25rem',
-                boxShadow: '0 8px 24px rgba(0,0,0,0.3)',
-              }}>
-                <FileCheck size={15} color="rgba(223,186,115,0.8)" style={{ marginBottom: '0.5rem' }} />
-                <div style={{ fontSize: '0.7rem', fontWeight: 600, color: '#fff', marginBottom: '0.2rem' }}>FSSAI</div>
-                <div style={{ fontSize: '0.57rem', color: 'rgba(255,255,255,0.4)' }}>Food Business</div>
-              </div>
-
-            </motion.div>
-          </div>
-        </div>
-
-        {/* Scroll indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.5 }}
-          style={{ position: 'absolute', bottom: '2rem', left: '50%', transform: 'translateX(-50%)', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}
-        >
-          <span style={{ fontSize: '0.6rem', letterSpacing: '0.2em', color: 'rgba(255,255,255,0.25)', textTransform: 'uppercase' }}>Scroll</span>
-          <motion.div
-            animate={{ y: [0, 6, 0] }}
-            transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
-          >
-            <ChevronDown size={16} color="rgba(255,255,255,0.25)" />
-          </motion.div>
-        </motion.div>
-      </section>
-
-      {/* ═══════════════════════════════════════════
-          2. VALUE SIGNALS BAR
-      ═══════════════════════════════════════════ */}
-      <section style={{ background: 'var(--color-navy)', borderBottom: '1px solid rgba(223,186,115,0.12)' }}>
-        <div style={{ maxWidth: '88rem', margin: '0 auto', padding: '0 1.5rem' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', borderLeft: '1px solid rgba(223,186,115,0.12)' }}>
-            {[
-              { icon: Globe, label: 'PAN India Service', desc: 'All states & UTs covered' },
-              { icon: CheckCircle, label: '100% Online', desc: 'No office visit required' },
-              { icon: Award, label: 'Qualified Experts', desc: 'CAs, CSs & Legal professionals' },
-              { icon: TrendingUp, label: 'Transparent Pricing', desc: 'Fixed quotes, no hidden charges' },
-            ].map((item, i) => {
-              const Icon = item.icon;
-              return (
-                <div key={i} style={{ borderRight: '1px solid rgba(223,186,115,0.12)', padding: '1.75rem 1.5rem', display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                  <Icon size={20} style={{ color: 'var(--color-gold)', flexShrink: 0 }} />
-                  <div>
-                    <div style={{ fontWeight: 600, color: '#ffffff', fontSize: '0.875rem', marginBottom: '0.2rem' }}>{item.label}</div>
-                    <div style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.4)' }}>{item.desc}</div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* ═══════════════════════════════════════════
-          3. FIND YOUR REGISTRATION
-      ═══════════════════════════════════════════ */}
-      <section style={{ padding: '7rem 0', background: 'var(--color-secondary)' }}>
-        <div style={{ maxWidth: '72rem', margin: '0 auto', padding: '0 1.5rem' }}>
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
-            style={{ textAlign: 'center', marginBottom: '3.5rem' }}
-          >
-            <span className="section-label">Quick Start</span>
-            <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(2rem, 4vw, 2.75rem)', marginBottom: '1rem', color: 'var(--color-navy)' }}>
-              Find Your Registration
-            </h2>
-            <p style={{ color: 'var(--color-text-muted)', maxWidth: '480px', margin: '0 auto' }}>
-              Tell us about your business — we'll recommend the right registrations to get you started.
-            </p>
-          </motion.div>
-
-          <AnimatePresence mode="wait">
-            {!finderSelection ? (
-              <motion.div
-                key="finder-options"
-                initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -16 }}
-                transition={{ duration: 0.4 }}
-                style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1rem' }}
-              >
-                {finderOptions.map((opt) => {
-                  const Icon = opt.icon;
-                  return (
-                    <button
-                      key={opt.id}
-                      onClick={() => setFinderSelection(opt)}
-                      className="card-premium"
-                      style={{ padding: '1.75rem', display: 'flex', alignItems: 'center', gap: '1rem', cursor: 'pointer', background: 'var(--color-secondary)', textAlign: 'left', border: '1px solid var(--color-border-main)', width: '100%' }}
-                    >
-                      <div style={{
-                        width: '44px', height: '44px', flexShrink: 0,
-                        background: 'rgba(10,22,40,0.05)',
-                        display: 'flex', alignItems: 'center', justifyContent: 'center',
-                        transition: 'all 200ms ease',
-                      }}>
-                        <Icon size={20} strokeWidth={1.5} style={{ color: 'var(--color-navy)' }} />
-                      </div>
-                      <span style={{ fontSize: '0.9375rem', fontWeight: 500, color: 'var(--color-navy)' }}>{opt.label}</span>
-                    </button>
-                  );
-                })}
-              </motion.div>
-            ) : (
-              <motion.div
-                key="finder-results"
-                initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -16 }}
-                transition={{ duration: 0.4 }}
-                style={{ maxWidth: '560px', margin: '0 auto' }}
-              >
-                <div style={{
-                  background: 'var(--color-secondary)',
-                  border: '1px solid var(--color-border-main)',
-                  boxShadow: '0 20px 60px rgba(10,22,40,0.08)',
-                }}>
-                  <div style={{ padding: '1.5rem 2rem', borderBottom: '1px solid var(--color-border-main)', background: 'var(--color-navy)' }}>
-                    <p style={{ fontSize: '0.75rem', fontFamily: 'var(--font-mono)', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.5)', marginBottom: '0.25rem' }}>Recommended for</p>
-                    <p style={{ fontFamily: 'var(--font-heading)', fontSize: '1.25rem', color: '#ffffff' }}>{finderSelection.label}</p>
-                  </div>
-                  <div>
-                    {finderSelection.results.map((r, i) => (
-                      <Link
-                        key={i}
-                        to={r.link}
-                        style={{
-                          display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-                          padding: '1.25rem 2rem',
-                          borderBottom: i < finderSelection.results.length - 1 ? '1px solid var(--color-border-main)' : 'none',
-                          transition: 'all 200ms ease',
-                        }}
-                        onMouseEnter={e => { e.currentTarget.style.background = 'rgba(223,186,115,0.08)'; e.currentTarget.style.paddingLeft = '2.25rem'; }}
-                        onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.paddingLeft = '2rem'; }}
-                      >
-                        <span style={{ fontWeight: 500, color: 'var(--color-navy)' }}>{r.name}</span>
-                        <ArrowRight size={16} style={{ color: 'var(--color-gold)', flexShrink: 0 }} />
-                      </Link>
-                    ))}
-                  </div>
-                  <div style={{ padding: '1.25rem 2rem', borderTop: '1px solid var(--color-border-main)' }}>
-                    <button
-                      onClick={() => setFinderSelection(null)}
-                      style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--color-text-muted)', background: 'transparent', border: 'none', cursor: 'pointer', letterSpacing: '0.05em' }}
-                    >
-                      ← Choose a different option
-                    </button>
-                  </div>
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
-      </section>
-
-      {/* ═══════════════════════════════════════════
-          4. FEATURED SERVICES
-      ═══════════════════════════════════════════ */}
-      <section style={{ padding: '7rem 0', background: 'var(--color-primary)' }}>
-        <div style={{ maxWidth: '88rem', margin: '0 auto', padding: '0 1.5rem' }}>
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
-            style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '3.5rem', flexWrap: 'wrap', gap: '1rem' }}
-          >
-            <div>
-              <span className="section-label">Our Services</span>
-              <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(2rem, 4vw, 2.75rem)', color: 'var(--color-navy)' }}>
-                Most Requested Services
-              </h2>
-            </div>
-            <Link to="/services" style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.8125rem', fontWeight: 700, color: 'var(--color-gold)', letterSpacing: '0.08em', textTransform: 'uppercase' }}
-              className="link-underline pb-1"
-            >
-              View All Services <ArrowRight size={14} />
-            </Link>
-          </motion.div>
-
-          <motion.div
-            initial="hidden" whileInView="visible" viewport={{ once: true }}
-            variants={{ visible: { transition: { staggerChildren: 0.08 } } }}
-            style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.25rem' }}
-          >
-            {featuredServices.map((service, i) => {
-              const Icon = service.icon;
-              return (
-                <motion.div key={i} variants={FADE_UP} style={{ display: 'flex', height: '100%' }}>
-                  <Link
-                    to={`/services/${service.slug}`}
-                    className="card-premium"
-                    style={{ display: 'flex', flexDirection: 'column', width: '100%', height: '100%', padding: '2rem', background: 'var(--color-secondary)' }}
-                  >
-                    <div>
-                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1.25rem' }}>
-                        <div style={{ width: '48px', height: '48px', background: 'rgba(10,22,40,0.06)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                          <Icon size={22} strokeWidth={1.5} style={{ color: 'var(--color-navy)' }} />
-                        </div>
-                        <span style={{
-                          fontSize: '0.6rem', fontWeight: 700, letterSpacing: '0.15em',
-                          textTransform: 'uppercase', color: 'var(--color-gold)',
-                          border: '1px solid rgba(223,186,115,0.35)',
-                          padding: '0.25rem 0.625rem',
-                        }}>{service.tag}</span>
-                      </div>
-                      <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.1875rem', fontWeight: 600, color: 'var(--color-navy)', marginBottom: '0.625rem' }}>
-                        {service.title}
-                      </h3>
-                      <p style={{ fontSize: '0.875rem', color: 'var(--color-text-muted)', lineHeight: '1.65', marginBottom: '1.5rem', flexGrow: 1 }}>
-                        {service.desc}
-                      </p>
-                    </div>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.75rem', fontWeight: 700, color: 'var(--color-gold)', letterSpacing: '0.08em', textTransform: 'uppercase' }}>
-                      Learn More <ArrowRight size={13} />
-                    </div>
-                  </Link>
-                </motion.div>
-              );
-            })}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ═══════════════════════════════════════════
-          5. WHY CHOOSE US
-      ═══════════════════════════════════════════ */}
-      <section style={{ padding: '7rem 0', background: 'linear-gradient(135deg, #131E36 0%, #213254 100%)', position: 'relative' }}>
-        <div style={{ position: 'absolute', inset: 0, backgroundImage: 'radial-gradient(circle at 80% 20%, rgba(223, 186, 115, 0.15) 0%, transparent 50%)', pointerEvents: 'none' }} />
-        <div style={{ maxWidth: '88rem', margin: '0 auto', padding: '0 1.5rem', position: 'relative', zIndex: 1 }}>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '5rem', alignItems: 'center' }}>
-
-            {/* Left */}
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7 }}
-            >
-              <span className="section-label" style={{ color: '#F2D59A' }}>Why Sterling Advisory</span>
-              <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(2rem, 4vw, 2.75rem)', color: '#ffffff', marginBottom: '1.5rem' }}>
-                Compliance Without the Complexity
-              </h2>
-              <p style={{ color: '#E2E8F0', marginBottom: '2.5rem', fontSize: '1rem', lineHeight: '1.8' }}>
-                We make the complicated world of Indian business compliance simple, transparent, and stress-free. From your first registration to annual compliance — we're your permanent advisory partner.
+                We handle company registrations, tax structuring, and statutory compliance with complete precision—managed directly by qualified Senior Corporate Advisors and Legal Counsel across all 28 States and 8 Union Territories.
               </p>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-                {[
-                  { icon: Globe, title: 'PAN India Coverage', desc: 'We serve businesses across all 28 states and 8 UTs.' },
-                  { icon: CheckCircle, title: '100% Online Process', desc: 'No office visits needed. Everything handled digitally.' },
-                  { icon: Award, title: 'Expert Advisory Team', desc: 'Qualified CAs, CSs and legal professionals on your case.' },
-                  { icon: TrendingUp, title: 'Transparent Pricing', desc: 'No hidden charges. Fixed quotes before we begin.' },
-                ].map((item, i) => {
-                  const Icon = item.icon;
-                  return (
-                    <motion.div
-                      key={i}
-                      initial={{ opacity: 0, x: -20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: i * 0.1, duration: 0.5 }}
-                      style={{ display: 'flex', alignItems: 'flex-start', gap: '1rem' }}
-                    >
-                      <div style={{ width: '36px', height: '36px', background: 'rgba(223,186,115,0.25)', border: '1px solid #DFBA73', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '8px', flexShrink: 0, marginTop: '2px' }}>
-                        <Icon size={17} style={{ color: '#F2D59A' }} />
-                      </div>
-                      <div>
-                        <div style={{ fontWeight: 700, color: '#ffffff', marginBottom: '0.25rem', fontSize: '0.95rem' }}>{item.title}</div>
-                        <div style={{ fontSize: '0.875rem', color: '#CBD5E1' }}>{item.desc}</div>
-                      </div>
-                    </motion.div>
-                  );
-                })}
-              </div>
-              <div style={{ marginTop: '2.5rem' }}>
-                <Link to="/contact" className="btn-gold" style={{ boxShadow: '0 8px 24px rgba(223, 186, 115, 0.3)' }}>
-                  Start Your Registration <ArrowRight size={15} style={{ marginLeft: '8px' }} />
+
+              {/* Action Pathways */}
+              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap', marginBottom: '2.75rem' }}>
+                <Link to="/contact" className="btn-gold" style={{ 
+                  padding: '0.92rem 1.95rem', 
+                  fontSize: '0.94rem',
+                  boxShadow: '0 10px 30px -5px rgba(223, 186, 115, 0.45), 0 0 20px rgba(223, 186, 115, 0.2)'
+                }}>
+                  Talk to a Senior Advisor <ArrowRight size={16} />
+                </Link>
+                <Link to="/services" style={{ 
+                  padding: '0.92rem 1.75rem', 
+                  fontSize: '0.94rem', 
+                  border: '1px solid rgba(255,255,255,0.25)', 
+                  color: '#ffffff',
+                  background: 'rgba(255,255,255,0.06)',
+                  backdropFilter: 'blur(12px)',
+                  borderRadius: 'var(--radius-md)',
+                  fontWeight: 600,
+                  textDecoration: 'none',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  transition: 'all 160ms ease'
+                }}
+                onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.12)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.4)'; }}
+                onMouseLeave={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.06)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.25)'; }}
+                >
+                  Explore Practice Areas
                 </Link>
               </div>
-            </motion.div>
 
-            {/* Right: Honest engagement panel */}
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7 }}
-              style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}
-            >
-              {/* What happens on your call */}
-              <div style={{ background: 'rgba(255, 255, 255, 0.08)', backdropFilter: 'blur(16px)', border: '1px solid rgba(223, 186, 115, 0.35)', borderRadius: '14px', padding: '2rem', boxShadow: '0 16px 40px rgba(0,0,0,0.25)' }}>
-                <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.65rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: '#F2D59A', fontWeight: 700, marginBottom: '1rem' }}>On Your Free Call</div>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.875rem' }}>
-                  {[
-                    'We understand your business model and goals',
-                    'Recommend the right registration(s) for your situation',
-                    'Walk you through required documents and timelines',
-                    'Provide a transparent, fixed fee quote — no surprises',
-                  ].map((item, i) => (
-                    <div key={i} style={{ display: 'flex', gap: '12px', alignItems: 'flex-start' }}>
-                      <span style={{ color: '#F2D59A', fontWeight: 800, fontSize: '0.85rem', marginTop: '1px', flexShrink: 0 }}>0{i + 1}</span>
-                      <span style={{ fontSize: '0.9375rem', color: '#ffffff', lineHeight: '1.6', fontWeight: 500 }}>{item}</span>
+              {/* Clean Minimalist Trust Bullet Row (Exact to Image 3 yesterday layout) */}
+              <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', flexWrap: 'wrap', paddingTop: '0.5rem' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                  <span style={{ color: 'var(--color-gold)', fontWeight: 700, fontSize: '1.1rem' }}>•</span>
+                  <span style={{ fontSize: '0.88rem', color: 'rgba(255,255,255,0.82)', fontWeight: 500, fontFamily: 'var(--font-body)' }}>PAN India Service</span>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                  <span style={{ color: 'var(--color-gold)', fontWeight: 700, fontSize: '1.1rem' }}>•</span>
+                  <span style={{ fontSize: '0.88rem', color: 'rgba(255,255,255,0.82)', fontWeight: 500, fontFamily: 'var(--font-body)' }}>100% Online Process</span>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                  <span style={{ color: 'var(--color-gold)', fontWeight: 700, fontSize: '1.1rem' }}>•</span>
+                  <span style={{ fontSize: '0.88rem', color: 'rgba(255,255,255,0.82)', fontWeight: 500, fontFamily: 'var(--font-body)' }}>MCA Registered</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Column: Expanded Live Retainer Hub (Wider card + compact vertical spacing = zero scroll!) */}
+            <div>
+              <div className="glass-card-dark" style={{
+                borderRadius: 'var(--radius-xl)',
+                overflow: 'hidden',
+                width: '100%',
+                background: 'linear-gradient(165deg, rgba(20, 32, 58, 0.90) 0%, rgba(9, 15, 28, 0.96) 100%) !important',
+                border: '1px solid rgba(223, 186, 115, 0.42) !important',
+                borderTop: '3px solid var(--color-gold) !important',
+                boxShadow: '0 32px 80px -16px rgba(0, 0, 0, 0.8), 0 0 50px rgba(223, 186, 115, 0.18)'
+              }}>
+                {/* Header / Persona Selector */}
+                <div style={{ padding: '1.25rem 1.75rem 1rem', backgroundColor: 'rgba(0,0,0,0.25)', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1rem', flexWrap: 'wrap', gap: '8px' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                      <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: 'var(--color-gold)', display: 'inline-block' }} />
+                      <span style={{ fontSize: '0.8rem', fontWeight: 700, color: '#ffffff', letterSpacing: '0.04em', textTransform: 'uppercase', fontFamily: 'var(--font-body)' }}>
+                        Recommended Service Package
+                      </span>
                     </div>
-                  ))}
-                </div>
-              </div>
+                    <span style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.55)', fontFamily: 'var(--font-body)', fontWeight: 500 }}>
+                      Customized for Your Business
+                    </span>
+                  </div>
 
-              {/* Direct contact options */}
-              <div style={{ background: 'rgba(255, 255, 255, 0.08)', backdropFilter: 'blur(16px)', border: '1px solid rgba(255, 255, 255, 0.15)', borderRadius: '14px', padding: '1.75rem', boxShadow: '0 16px 40px rgba(0,0,0,0.25)' }}>
-                <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.65rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: '#F2D59A', fontWeight: 700, marginBottom: '1.25rem' }}>Reach Us Directly</div>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                  <a href="/contact" style={{ display: 'flex', alignItems: 'center', gap: '10px', color: 'rgba(255,255,255,0.65)', fontSize: '0.9rem', transition: 'color 200ms ease' }}
-                    onMouseEnter={e => e.currentTarget.style.color = 'var(--color-gold)'}
-                    onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.65)'}
-                  >
-                    <CheckCircle size={15} style={{ color: 'var(--color-gold)', flexShrink: 0 }} />
-                    Fill our contact form — we reply within 24 hrs
-                  </a>
-                  <a href="https://wa.me/918448803143" target="_blank" rel="noopener noreferrer"
-                    style={{ display: 'flex', alignItems: 'center', gap: '10px', color: 'rgba(255,255,255,0.65)', fontSize: '0.9rem', transition: 'color 200ms ease' }}
-                    onMouseEnter={e => e.currentTarget.style.color = '#25D366'}
-                    onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.65)'}
-                  >
-                    <MessageCircle size={15} style={{ color: '#25D366', flexShrink: 0 }} />
-                    WhatsApp us for a quick query
-                  </a>
-                  <a href="tel:+918448803143"
-                    style={{ display: 'flex', alignItems: 'center', gap: '10px', color: 'rgba(255,255,255,0.65)', fontSize: '0.9rem', transition: 'color 200ms ease' }}
-                    onMouseEnter={e => e.currentTarget.style.color = 'var(--color-gold)'}
-                    onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.65)'}
-                  >
-                    <Phone size={15} style={{ color: 'var(--color-gold)', flexShrink: 0 }} />
-                    Call us: +91 8448803143
-                  </a>
+                  {/* Persona Tabs */}
+                  <div style={{ display: 'flex', gap: '0.5rem', overflowX: 'auto', paddingBottom: '0.25rem' }}>
+                    {heroHubTabs.map(tab => {
+                      const isSelected = activeHeroTab === tab.id;
+                      return (
+                        <button
+                          key={tab.id}
+                          onClick={() => setActiveHeroTab(tab.id)}
+                          style={{
+                            padding: '0.5rem 0.9rem',
+                            borderRadius: 'var(--radius-md)',
+                            fontSize: '0.78rem',
+                            fontWeight: 600,
+                            fontFamily: 'var(--font-body)',
+                            whiteSpace: 'nowrap',
+                            cursor: 'pointer',
+                            border: isSelected ? '1px solid var(--color-gold)' : '1px solid rgba(255,255,255,0.08)',
+                            backgroundColor: isSelected ? 'var(--color-gold)' : 'rgba(255,255,255,0.03)',
+                            color: isSelected ? 'var(--color-navy)' : 'rgba(255,255,255,0.7)',
+                            transition: 'all 160ms ease'
+                          }}
+                        >
+                          {tab.label}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* Scope Details (Compact vertical padding so options fit on the face without vertical scrolling) */}
+                <div style={{ padding: '1.4rem 1.75rem' }}>
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={activeHubData.id}
+                      initial={{ opacity: 0, y: 4 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -4 }}
+                      transition={{ duration: 0.14 }}
+                    >
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.6rem', flexWrap: 'wrap', gap: '10px' }}>
+                        <div>
+                          <span style={{ fontSize: '0.72rem', color: 'var(--color-gold)', fontFamily: 'var(--font-body)', letterSpacing: '0.04em', textTransform: 'uppercase', fontWeight: 700, display: 'block', marginBottom: '3px' }}>
+                            {activeHubData.badge}
+                          </span>
+                          <h3 style={{ fontSize: '1.38rem', color: '#ffffff', fontWeight: 700, letterSpacing: '-0.02em', margin: 0 }}>
+                            {activeHubData.title}
+                          </h3>
+                        </div>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '6px', backgroundColor: 'rgba(255,255,255,0.06)', padding: '0.35rem 0.75rem', borderRadius: 'var(--radius-sm)', border: '1px solid rgba(255,255,255,0.08)' }}>
+                          <Clock size={13} color="var(--color-gold)" />
+                          <span style={{ fontSize: '0.78rem', color: '#ffffff', fontWeight: 600, fontFamily: 'var(--font-body)' }}>{activeHubData.time}</span>
+                        </div>
+                      </div>
+
+                      <p style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.68)', lineHeight: '1.55', marginBottom: '1.25rem', fontFamily: 'var(--font-body)' }}>
+                        {activeHubData.desc}
+                      </p>
+
+                      {/* Scope Deliverables (Compact row height so all 3 rows fit cleanly on screen without scrolling) */}
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem', marginBottom: '1.4rem' }}>
+                        {activeHubData.registrations.map((reg, idx) => (
+                          <Link
+                            key={idx}
+                            to={reg.link}
+                            style={{
+                              display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+                              padding: '0.8rem 1.1rem',
+                              backgroundColor: 'rgba(255,255,255,0.03)',
+                              border: '1px solid rgba(255,255,255,0.08)',
+                              borderRadius: 'var(--radius-lg)',
+                              transition: 'all 160ms ease',
+                              gap: '12px'
+                            }}
+                            onMouseEnter={e => { e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.07)'; e.currentTarget.style.borderColor = 'rgba(223,186,115,0.4)'; e.currentTarget.style.transform = 'translateX(3px)'; }}
+                            onMouseLeave={e => { e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.03)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)'; e.currentTarget.style.transform = 'translateX(0)'; }}
+                          >
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flex: '1 1 auto' }}>
+                              <div style={{ width: '22px', height: '22px', borderRadius: '50%', backgroundColor: 'rgba(223,186,115,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                                <Check size={13} color="var(--color-gold)" />
+                              </div>
+                              <div>
+                                <div style={{ fontSize: '0.88rem', fontWeight: 700, color: '#ffffff', lineHeight: 1.3 }}>{reg.name}</div>
+                                <div style={{ fontSize: '0.72rem', color: 'rgba(255,255,255,0.55)', marginTop: '2px' }}>{reg.tag}</div>
+                              </div>
+                            </div>
+                            <div style={{ textAlign: 'right', flexShrink: 0 }}>
+                              <div style={{ fontSize: '0.82rem', fontWeight: 700, color: 'var(--color-gold)', fontFamily: 'var(--font-body)' }}>{reg.fee}</div>
+                              <div style={{ fontSize: '0.7rem', color: 'rgba(255,255,255,0.55)', marginTop: '2px' }}>{reg.time}</div>
+                            </div>
+                          </Link>
+                        ))}
+                      </div>
+
+                      <Link
+                        to="/contact"
+                        className="btn-gold"
+                        style={{ width: '100%', padding: '0.88rem', fontSize: '0.92rem', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '8px' }}
+                      >
+                        Get Started with {activeHubData.title} <ArrowRight size={15} />
+                      </Link>
+                    </motion.div>
+                  </AnimatePresence>
                 </div>
               </div>
-            </motion.div>
+            </div>
+
           </div>
         </div>
       </section>
 
       {/* ═══════════════════════════════════════════
-          6. HOW IT WORKS
+          01B. STANDALONE INSTITUTIONAL HIGHLIGHT BAR
+          High-contrast standalone bar with gold icons (Exact to 3rd image purana front layout)
       ═══════════════════════════════════════════ */}
-      <section style={{ padding: '7rem 0', background: 'var(--color-primary)' }}>
-        <div style={{ maxWidth: '88rem', margin: '0 auto', padding: '0 1.5rem' }}>
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
-            style={{ textAlign: 'center', marginBottom: '4rem' }}
-          >
-            <span className="section-label">Our Process</span>
-            <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(2rem, 4vw, 2.75rem)', color: 'var(--color-navy)' }}>
-              Simple. Seamless. Certain.
-            </h2>
-          </motion.div>
+      <section className="glass-navbar" style={{
+        backgroundColor: 'rgba(5, 10, 20, 0.92)',
+        borderTop: '1px solid rgba(223, 186, 115, 0.38)',
+        borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
+        padding: '2.25rem 0',
+        position: 'relative',
+        boxShadow: '0 12px 36px rgba(0,0,0,0.45)'
+      }}>
+        <div style={{ maxWidth: '92rem', margin: '0 auto', padding: '0 2rem' }}>
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(230px, 1fr))',
+            gap: '1.75rem',
+            alignItems: 'center'
+          }}>
+            
+            {/* Item 1: PAN India Service */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
+              <div style={{
+                width: '46px', height: '46px', flexShrink: 0,
+                backgroundColor: 'rgba(223, 186, 115, 0.12)',
+                border: '1px solid rgba(223, 186, 115, 0.35)',
+                borderRadius: 'var(--radius-md)',
+                display: 'flex', alignItems: 'center', justifyContent: 'center'
+              }}>
+                <Globe size={22} style={{ color: 'var(--color-gold)' }} />
+              </div>
+              <div>
+                <span style={{ fontSize: '0.98rem', color: '#ffffff', fontWeight: 700, display: 'block', fontFamily: 'var(--font-heading)', lineHeight: '1.2', marginBottom: '3px' }}>
+                  PAN India Service
+                </span>
+                <span style={{ fontSize: '0.78rem', color: 'rgba(255,255,255,0.6)', display: 'block' }}>
+                  All states & UTs covered
+                </span>
+              </div>
+            </div>
 
-          <div style={{ position: 'relative' }}>
-            {/* Connecting line (desktop) */}
-            <div style={{
-              position: 'absolute', top: '2rem', left: '12.5%', right: '12.5%', height: '1px',
-              background: 'linear-gradient(90deg, transparent, var(--color-gold), var(--color-gold), transparent)',
-              opacity: 0.3,
-            }} className="hidden md:block" />
+            {/* Item 2: 100% Online */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
+              <div style={{
+                width: '46px', height: '46px', flexShrink: 0,
+                backgroundColor: 'rgba(223, 186, 115, 0.12)',
+                border: '1px solid rgba(223, 186, 115, 0.35)',
+                borderRadius: 'var(--radius-md)',
+                display: 'flex', alignItems: 'center', justifyContent: 'center'
+              }}>
+                <CheckCircle size={22} style={{ color: 'var(--color-gold)' }} />
+              </div>
+              <div>
+                <span style={{ fontSize: '0.98rem', color: '#ffffff', fontWeight: 700, display: 'block', fontFamily: 'var(--font-heading)', lineHeight: '1.2', marginBottom: '3px' }}>
+                  100% Online Process
+                </span>
+                <span style={{ fontSize: '0.78rem', color: 'rgba(255,255,255,0.6)', display: 'block' }}>
+                  No office visit required
+                </span>
+              </div>
+            </div>
 
-            <motion.div
-              initial="hidden" whileInView="visible" viewport={{ once: true }}
-              variants={{ visible: { transition: { staggerChildren: 0.12 } } }}
-              style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '2rem', position: 'relative', zIndex: 1 }}
-            >
-              {processSteps.map((step, i) => {
-                const StepIcon = step.icon;
+            {/* Item 3: Qualified Experts */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
+              <div style={{
+                width: '46px', height: '46px', flexShrink: 0,
+                backgroundColor: 'rgba(223, 186, 115, 0.12)',
+                border: '1px solid rgba(223, 186, 115, 0.35)',
+                borderRadius: 'var(--radius-md)',
+                display: 'flex', alignItems: 'center', justifyContent: 'center'
+              }}>
+                <Award size={22} style={{ color: 'var(--color-gold)' }} />
+              </div>
+              <div>
+                <span style={{ fontSize: '0.98rem', color: '#ffffff', fontWeight: 700, display: 'block', fontFamily: 'var(--font-heading)', lineHeight: '1.2', marginBottom: '3px' }}>
+                  Qualified Experts Only
+                </span>
+                <span style={{ fontSize: '0.78rem', color: 'rgba(255,255,255,0.6)', display: 'block' }}>
+                  Senior Advisors & Legal Counsel
+                </span>
+              </div>
+            </div>
+
+            {/* Item 4: Transparent Pricing */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
+              <div style={{
+                width: '46px', height: '46px', flexShrink: 0,
+                backgroundColor: 'rgba(223, 186, 115, 0.12)',
+                border: '1px solid rgba(223, 186, 115, 0.35)',
+                borderRadius: 'var(--radius-md)',
+                display: 'flex', alignItems: 'center', justifyContent: 'center'
+              }}>
+                <TrendingUp size={22} style={{ color: 'var(--color-gold)' }} />
+              </div>
+              <div>
+                <span style={{ fontSize: '0.98rem', color: 'var(--color-gold)', fontWeight: 700, display: 'block', fontFamily: 'var(--font-heading)', lineHeight: '1.2', marginBottom: '3px' }}>
+                  Transparent Pricing
+                </span>
+                <span style={{ fontSize: '0.78rem', color: 'rgba(255,255,255,0.6)', display: 'block' }}>
+                  Fixed quotes, no hidden charges
+                </span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════
+          02. FIDUCIARY SCOPE — DISCIPLINES MATRIX
+          Priority 3: Value-focused service cards without pricing-catalogue noise
+      ═══════════════════════════════════════════ */}
+      <section style={{ 
+        padding: '5.5rem 0 6.5rem', 
+        backgroundColor: '#F8FAFC',
+        borderTop: '1px solid rgba(13, 21, 39, 0.08)',
+        borderBottom: '1px solid rgba(13, 21, 39, 0.08)',
+        position: 'relative'
+      }}>
+        {/* Expanded 108rem (1728px / 94vw) container to utilize full desktop screen width */}
+        <div style={{ maxWidth: '108rem', margin: '0 auto', padding: '0 3rem' }}>
+          
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: '2rem', marginBottom: '3.75rem' }}>
+            <div>
+              <span style={{
+                background: 'rgba(223, 186, 115, 0.14)',
+                border: '1px solid rgba(223, 186, 115, 0.38)',
+                color: 'var(--color-navy)',
+                padding: '5px 14px',
+                borderRadius: '99px',
+                fontSize: '0.78rem',
+                fontWeight: 700,
+                letterSpacing: '0.06em',
+                textTransform: 'uppercase',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px'
+              }}>
+                <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: 'var(--color-gold-dark)' }} />
+                Our Practice Areas
+              </span>
+              <h2 style={{ fontSize: 'clamp(2.1rem, 3.8vw, 3.1rem)', fontWeight: 800, color: 'var(--color-navy)', marginTop: '0.85rem', lineHeight: 1.15, letterSpacing: '-0.03em', maxWidth: '32ch' }}>
+                Essential services across company setup, <span style={{ fontFamily: 'var(--font-editorial)', fontStyle: 'italic', fontWeight: 400, color: 'var(--color-gold-dark)' }}>taxation, and licensing.</span>
+              </h2>
+              <p style={{ color: 'var(--color-text-muted)', fontSize: '1.05rem', marginTop: '0.75rem', maxWidth: '64ch', lineHeight: '1.65' }}>
+                Select a practice pillar to review what&apos;s included, statutory government requirements, and exact completion timelines.
+              </p>
+            </div>
+
+            {/* Service Filter Pills */}
+            <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+              {[
+                { id: 'all', label: 'All Services' },
+                { id: 'setup', label: 'Company Setup' },
+                { id: 'tax', label: 'Taxation & GST' },
+                { id: 'license', label: 'Trade Licensing' },
+                { id: 'ip', label: 'Trademark & IP' },
+              ].map(cat => {
+                const isSelected = matrixCategory === cat.id;
                 return (
-                  <motion.div key={step.num} variants={FADE_UP} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
-                    <div style={{
-                      width: '64px', height: '64px',
-                      background: 'var(--color-navy)',
-                      border: '1px solid rgba(223,186,115,0.35)',
-                      display: 'flex', alignItems: 'center', justifyContent: 'center',
-                      marginBottom: '1.25rem', position: 'relative',
-                      boxShadow: '0 8px 24px rgba(0,0,0,0.3)',
-                    }}>
-                      <StepIcon size={24} strokeWidth={1.5} style={{ color: 'var(--color-gold)' }} />
-                    </div>
-                    <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.65rem', color: 'var(--color-gold)', marginBottom: '0.625rem', letterSpacing: '0.15em' }}>{step.num}</span>
-                    <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.125rem', fontWeight: 600, color: 'var(--color-navy)', marginBottom: '0.625rem' }}>{step.title}</h3>
-                    <p style={{ fontSize: '0.875rem', color: 'var(--color-text-muted)', maxWidth: '200px' }}>{step.desc}</p>
-                  </motion.div>
+                  <button
+                    key={cat.id}
+                    onClick={() => setMatrixCategory(cat.id)}
+                    style={{
+                      padding: '0.6rem 1.25rem',
+                      borderRadius: 'var(--radius-md)',
+                      fontSize: '0.82rem',
+                      fontWeight: isSelected ? 700 : 600,
+                      cursor: 'pointer',
+                      border: isSelected ? '1px solid var(--color-navy)' : '1px solid rgba(13, 21, 39, 0.12)',
+                      backgroundColor: isSelected ? 'var(--color-navy)' : '#ffffff',
+                      color: isSelected ? '#ffffff' : 'var(--color-text-main)',
+                      boxShadow: isSelected ? '0 6px 18px rgba(13, 21, 39, 0.22)' : '0 1px 3px rgba(0,0,0,0.02)',
+                      transition: 'all 180ms ease'
+                    }}
+                  >
+                    {cat.label}
+                  </button>
                 );
               })}
-            </motion.div>
+            </div>
+          </div>
+
+          {/* Service Cards Grid: Sleeker horizontal columns (minmax(270px, 1fr)) across wide 108rem grid */}
+          <motion.div
+            layout
+            style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(270px, 1fr))', gap: '2rem' }}
+          >
+            <AnimatePresence>
+              {filteredServices.map((service) => (
+                <motion.div
+                  key={service.slug}
+                  layout
+                  initial={{ opacity: 0, scale: 0.98 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.98 }}
+                  transition={{ duration: 0.2 }}
+                  style={{ display: 'flex' }}
+                >
+                  <Link
+                    to={`/services/${service.slug}`}
+                    style={{
+                      display: 'flex', flexDirection: 'column', width: '100%',
+                      minHeight: '430px',
+                      padding: '2.35rem 1.65rem 2rem',
+                      borderRadius: 'var(--radius-xl)',
+                      background: '#ffffff',
+                      border: '1px solid rgba(13, 21, 39, 0.09)',
+                      textDecoration: 'none',
+                      boxShadow: '0 4px 20px rgba(13, 21, 39, 0.05)',
+                      transition: 'all 240ms cubic-bezier(0.16, 1, 0.3, 1)'
+                    }}
+                    onMouseEnter={e => {
+                      e.currentTarget.style.transform = 'translateY(-6px)';
+                      e.currentTarget.style.borderColor = 'rgba(223, 186, 115, 0.55)';
+                      e.currentTarget.style.boxShadow = '0 22px 45px rgba(13, 21, 39, 0.12), 0 0 25px rgba(223, 186, 115, 0.08)';
+                    }}
+                    onMouseLeave={e => {
+                      e.currentTarget.style.transform = 'translateY(0)';
+                      e.currentTarget.style.borderColor = 'rgba(13, 21, 39, 0.09)';
+                      e.currentTarget.style.boxShadow = '0 4px 20px rgba(13, 21, 39, 0.05)';
+                    }}
+                  >
+                    {/* Top Metadata Row */}
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem', gap: '8px' }}>
+                      <span style={{
+                        fontSize: '0.73rem', fontWeight: 700, letterSpacing: '0.12em',
+                        textTransform: 'uppercase', color: 'var(--color-gold-dark)',
+                        fontFamily: 'var(--font-body)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis'
+                      }}>
+                        {service.tag}
+                      </span>
+                      <span style={{
+                        fontSize: '0.8rem', fontWeight: 600, color: 'var(--color-text-light)',
+                        fontFamily: 'var(--font-body)', whiteSpace: 'nowrap', flexShrink: 0
+                      }}>
+                        {service.time}
+                      </span>
+                    </div>
+
+                    <h3 style={{ fontSize: '1.28rem', fontWeight: 750, fontFamily: 'var(--font-heading)', color: 'var(--color-navy)', marginBottom: '0.85rem', letterSpacing: '-0.02em', lineHeight: '1.3' }}>
+                      {service.title}
+                    </h3>
+
+                    <p style={{ fontSize: '0.92rem', color: 'var(--color-text-muted)', lineHeight: '1.68', marginBottom: '2.4rem', flexGrow: 1 }}>
+                      {service.desc}
+                    </p>
+
+                    {/* Bottom Footer Row: Clean separation without wrapping */}
+                    <div style={{ borderTop: '1px solid rgba(13, 21, 39, 0.07)', paddingTop: '1.35rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '12px' }}>
+                      <div style={{ flex: 1, minWidth: 0 }}>
+                        <span style={{ fontSize: '0.68rem', color: 'var(--color-text-light)', display: 'block', fontFamily: 'var(--font-body)', textTransform: 'uppercase', letterSpacing: '0.04em', fontWeight: 600, marginBottom: '3px' }}>What&apos;s Included</span>
+                        <span style={{ fontSize: '0.86rem', fontWeight: 650, color: 'var(--color-navy)', display: 'block', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{service.fee}</span>
+                      </div>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.76rem', fontWeight: 700, color: 'var(--color-navy)', letterSpacing: '0.04em', textTransform: 'uppercase', whiteSpace: 'nowrap', flexShrink: 0 }}>
+                        Learn More <ArrowRight size={14} style={{ color: 'var(--color-gold-dark)' }} />
+                      </div>
+                    </div>
+                  </Link>
+                </motion.div>
+              ))}
+            </AnimatePresence>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════
+          03. INSTITUTIONAL RIGOR — ASYMMETRICAL 4-STEP ENGAGEMENT
+          Priority 4 & 8: Left-aligned narrative anchoring vs execution steps
+      ═══════════════════════════════════════════ */}
+      <section style={{ padding: '5rem 0', backgroundColor: 'var(--color-navy)', position: 'relative' }}>
+        <div style={{ maxWidth: '88rem', margin: '0 auto', padding: '0 2rem' }}>
+          <div className="grid-home-matrix">
+
+            {/* Left: Why Sterling Advisory */}
+            <div>
+              <span className="section-label">Why Choose Us</span>
+              <h2 style={{ fontSize: 'clamp(2rem, 3.8vw, 3rem)', fontWeight: 800, color: '#ffffff', marginBottom: '1.25rem', lineHeight: 1.15, letterSpacing: '-0.03em', maxWidth: '22ch' }}>
+                Top-tier corporate advisory without the heavy overhead.
+              </h2>
+              <p style={{ color: 'rgba(255,255,255,0.7)', marginBottom: '2.5rem', fontSize: '1rem', lineHeight: '1.65', maxWidth: '48ch' }}>
+                We replace slow paper bureaucracy with fast, accurate digital processes. Whether you are starting a new company or managing GST returns across states, our team acts as your trusted legal and financial advisor.
+              </p>
+
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1.5rem' }}>
+                {[
+                  { title: 'All-India Coverage', desc: 'Seamless company registration and filings across all 28 states and 8 Union Territories.' },
+                  { title: '100% Online Process', desc: 'Simple cloud document sharing without physical visits or slow paperwork.' },
+                  { title: 'Senior Advisory Support', desc: 'Every filing is reviewed and certified by dedicated Senior Corporate Advisors and Legal Counsel.' },
+                  { title: 'Transparent Fixed Fees', desc: 'Clear, upfront fee packages with zero hidden charges or surprise billing.' },
+                ].map((item, i) => (
+                  <div key={i} style={{ borderLeft: '2px solid var(--color-gold)', paddingLeft: '1rem' }}>
+                    <div style={{ fontWeight: 600, color: '#ffffff', fontSize: '0.9375rem', marginBottom: '4px' }}>{item.title}</div>
+                    <div style={{ fontSize: '0.8125rem', color: 'var(--color-text-light)', lineHeight: '1.5' }}>{item.desc}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Right: How It Works Roadmap */}
+            <div style={{
+              backgroundColor: 'var(--color-navy-mid)',
+              border: '1px solid rgba(255, 255, 255, 0.08)',
+              borderRadius: 'var(--radius-xl)',
+              padding: '2.5rem'
+            }}>
+              <span style={{ fontFamily: 'var(--font-body)', fontSize: '0.8125rem', letterSpacing: '0.02em', textTransform: 'uppercase', color: 'var(--color-gold)', fontWeight: 600, display: 'block', marginBottom: '2rem' }}>
+                How Our Simple 4-Step Process Works
+              </span>
+              
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+                {processSteps.map((step) => (
+                  <div key={step.num} style={{ display: 'flex', gap: '1.25rem', alignItems: 'flex-start' }}>
+                    <div style={{
+                      width: '36px', height: '36px', borderRadius: 'var(--radius-md)',
+                      backgroundColor: 'rgba(223,186,115,0.12)',
+                      border: '1px solid var(--color-gold)',
+                      display: 'flex', alignItems: 'center', justifyContent: 'center',
+                      fontFamily: 'var(--font-body)', fontSize: '0.8125rem', fontWeight: 700, color: 'var(--color-gold)', flexShrink: 0
+                    }}>
+                      {step.num}
+                    </div>
+                    <div>
+                      <div style={{ fontSize: '1rem', fontWeight: 700, color: '#ffffff', marginBottom: '6px' }}>{step.title}</div>
+                      <div style={{ fontSize: '0.875rem', color: 'var(--color-text-light)', lineHeight: '1.6' }}>{step.desc}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div style={{ marginTop: '2.5rem', paddingTop: '1.75rem', borderTop: '1px solid rgba(255,255,255,0.08)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
+                <div style={{ fontSize: '0.875rem', color: 'rgba(255,255,255,0.7)' }}>Ready to get started with your initial consultation?</div>
+                <Link to="/contact" className="btn-gold" style={{ padding: '0.625rem 1.25rem', fontSize: '0.8125rem' }}>
+                  Talk to an Expert
+                </Link>
+              </div>
+            </div>
+
           </div>
         </div>
       </section>
 
       {/* ═══════════════════════════════════════════
-          7. CTA BANNER
+          04. STATUTORY & SLA FAQS (COMPACT ACCORDION)
+          Priority 2 & 6: Clean, non-robotic microcopy and subtle borders
       ═══════════════════════════════════════════ */}
-      <section style={{
-        padding: '7rem 0',
-        background: 'linear-gradient(135deg, var(--color-navy) 0%, #0C1426 50%, var(--color-navy-mid) 100%)',
-        position: 'relative', overflow: 'hidden',
-      }}>
-        <div style={{
-          position: 'absolute', inset: 0,
-          backgroundImage: 'radial-gradient(circle at 30% 50%, rgba(223,186,115,0.1) 0%, transparent 60%), radial-gradient(circle at 70% 50%, rgba(223,186,115,0.06) 0%, transparent 50%)',
-          pointerEvents: 'none',
-        }} />
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
-          style={{ maxWidth: '56rem', margin: '0 auto', padding: '0 1.5rem', textAlign: 'center', position: 'relative', zIndex: 1 }}
-        >
-          <span className="section-label" style={{ color: 'var(--color-gold)' }}>Get Started Today</span>
-          <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(2.25rem, 5vw, 3.75rem)', color: '#ffffff', marginBottom: '1.5rem', lineHeight: 1.1 }}>
-            Ready to Register Your <span style={{ color: 'var(--color-gold)', fontStyle: 'italic' }}>Business?</span>
-          </h2>
-          <p style={{ fontSize: '1.0625rem', color: 'rgba(255,255,255,0.55)', marginBottom: '2.5rem', maxWidth: '500px', margin: '0 auto 2.5rem' }}>
-            Connect with our advisory team for a free consultation. We'll guide you to the right structure and handle everything from start to finish.
-          </p>
-          <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <Link to="/contact" className="btn-gold">
-              Book Free Consultation <ArrowRight size={15} style={{ marginLeft: '8px' }} />
-            </Link>
-            <a href="https://wa.me/918448803143" target="_blank" rel="noopener noreferrer" className="btn-ghost" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <MessageCircle size={15} /> Chat on WhatsApp
-            </a>
-          </div>
-        </motion.div>
-      </section>
-
-      {/* ═══════════════════════════════════════════
-          8. FAQ
-      ═══════════════════════════════════════════ */}
-      <section style={{ padding: '7rem 0', background: 'var(--color-secondary)' }}>
-        <div style={{ maxWidth: '56rem', margin: '0 auto', padding: '0 1.5rem' }}>
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
-            style={{ textAlign: 'center', marginBottom: '3.5rem' }}
-          >
-            <span className="section-label">Common Questions</span>
-            <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(2rem, 4vw, 2.75rem)', color: 'var(--color-navy)' }}>
-              Frequently Asked
+      <section style={{ padding: '5rem 0', backgroundColor: 'var(--color-primary)' }}>
+        <div style={{ maxWidth: '64rem', margin: '0 auto', padding: '0 2rem' }}>
+          <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
+            <span className="section-label">Frequently Asked Questions</span>
+            <h2 style={{ fontSize: 'clamp(2rem, 3.8vw, 3rem)', fontWeight: 800, color: 'var(--color-navy)', lineHeight: 1.15, letterSpacing: '-0.03em' }}>
+              Clear Answers for Founders & Business Owners
             </h2>
-          </motion.div>
+          </div>
 
-          <div style={{ borderTop: '1px solid var(--color-border-main)' }}>
+          <div style={{ backgroundColor: 'var(--color-secondary)', borderRadius: 'var(--radius-xl)', border: '1px solid rgba(0,0,0,0.06)', padding: '0 2rem', boxShadow: 'var(--shadow-sm)' }}>
             {faqData.map((faq, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.05 }}
-                style={{ borderBottom: '1px solid var(--color-border-main)' }}
-              >
+              <div key={i} style={{ borderBottom: i < faqData.length - 1 ? '1px solid rgba(0,0,0,0.06)' : 'none' }}>
                 <button
                   onClick={() => setOpenFaqIndex(openFaqIndex === i ? null : i)}
                   style={{
@@ -761,15 +739,16 @@ export default function Home() {
                     padding: '1.5rem 0', background: 'transparent', border: 'none', cursor: 'pointer', textAlign: 'left',
                   }}
                 >
-                  <span style={{ fontWeight: 600, color: 'var(--color-navy)', fontSize: '0.9375rem', paddingRight: '2rem', fontFamily: 'var(--font-body)' }}>{faq.q}</span>
+                  <span style={{ fontWeight: 600, color: 'var(--color-navy)', fontSize: '1.05rem', paddingRight: '1.5rem', fontFamily: 'var(--font-body)' }}>{faq.q}</span>
                   <div style={{
                     width: '28px', height: '28px', flexShrink: 0,
-                    border: '1px solid var(--color-border-main)',
+                    border: '1px solid rgba(0,0,0,0.1)',
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    transition: 'all 200ms ease',
-                    background: openFaqIndex === i ? 'var(--color-navy)' : 'transparent',
+                    backgroundColor: openFaqIndex === i ? 'var(--color-navy)' : 'transparent',
+                    borderRadius: 'var(--radius-md)',
+                    transition: 'background-color 180ms ease'
                   }}>
-                    <ChevronDown size={15} style={{ color: openFaqIndex === i ? 'var(--color-gold)' : 'var(--color-text-muted)', transform: openFaqIndex === i ? 'rotate(180deg)' : 'rotate(0)', transition: 'transform 300ms ease' }} />
+                    <ChevronDown size={15} style={{ color: openFaqIndex === i ? 'var(--color-gold)' : 'var(--color-text-muted)', transform: openFaqIndex === i ? 'rotate(180deg)' : 'rotate(0)', transition: 'transform 200ms ease' }} />
                   </div>
                 </button>
                 <AnimatePresence initial={false}>
@@ -778,69 +757,87 @@ export default function Home() {
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: 'auto', opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                      transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
                       style={{ overflow: 'hidden' }}
                     >
-                      <p style={{ paddingBottom: '1.5rem', fontSize: '0.9375rem', color: 'var(--color-text-muted)', lineHeight: '1.75' }}>{faq.a}</p>
+                      <p style={{ paddingBottom: '1.5rem', fontSize: '0.9375rem', color: 'var(--color-text-muted)', lineHeight: '1.65' }}>{faq.a}</p>
                     </motion.div>
                   )}
                 </AnimatePresence>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
       {/* ═══════════════════════════════════════════
-          9. INSIGHTS TEASER
+          05. ADVISORY NOTES / KNOWLEDGE HUB
+          Priority 2: "Advisory Notes / Structural briefings on corporate law and taxation."
       ═══════════════════════════════════════════ */}
-      <section style={{ padding: '7rem 0', background: 'var(--color-primary)' }}>
-        <div style={{ maxWidth: '88rem', margin: '0 auto', padding: '0 1.5rem' }}>
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
-            style={{ textAlign: 'center', marginBottom: '3.5rem' }}
-          >
-            <span className="section-label">Knowledge Hub</span>
-            <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(2rem, 4vw, 2.75rem)', color: 'var(--color-navy)' }}>
-              Latest Insights
-            </h2>
-          </motion.div>
+      <section style={{ padding: '5rem 0', backgroundColor: 'var(--color-secondary)', borderTop: '1px solid rgba(0,0,0,0.06)' }}>
+        <div style={{ maxWidth: '88rem', margin: '0 auto', padding: '0 2rem' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: '1.5rem', marginBottom: '3rem' }}>
+            <div>
+              <span className="section-label">Advisory Notes</span>
+              <h2 style={{ fontSize: 'clamp(2rem, 3.8vw, 3rem)', fontWeight: 800, color: 'var(--color-navy)', lineHeight: 1.15, letterSpacing: '-0.03em' }}>
+                Guides on Business Law & Taxation
+              </h2>
+            </div>
+            <Link to="/insights" style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.8125rem', fontWeight: 600, color: 'var(--color-gold-dark)', letterSpacing: '0.06em', textTransform: 'uppercase' }} className="link-underline pb-1">
+              View All Articles <ArrowRight size={14} />
+            </Link>
+          </div>
 
-          <motion.div
-            initial="hidden" whileInView="visible" viewport={{ once: true }}
-            variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
-            style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem' }}
-          >
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem' }}>
             {[
-              { title: 'Private Limited vs. LLP: Which Suits Your Startup?', excerpt: 'A practical comparison of liability, taxation, and compliance for early-stage founders.', tag: 'Business Setup' },
-              { title: 'GST Registration: Who Needs It and When', excerpt: 'Threshold limits, voluntary registration benefits, and common mistakes to avoid.', tag: 'Tax & Compliance' },
-              { title: 'Protecting Your Brand: A Guide to Trademark Filing in India', excerpt: 'The step-by-step process, timelines, and why you should file before scaling.', tag: 'Intellectual Property' },
+              { title: 'Private Limited vs. LLP: Which Is Right for Your Business?', excerpt: 'A clear comparison of liability protection, tax benefits, fundraising options, and annual compliance costs to help founders choose the right structure.', tag: 'Business Setup' },
+              { title: 'GST Registration: When Is It Required and How Does It Work?', excerpt: 'A simple guide to understanding GST thresholds, voluntary registration benefits, input tax credits, and e-way bill requirements for your business.', tag: 'Tax & GST' },
+              { title: 'How to Protect Your Brand Name Before Competitors Copy It', excerpt: 'Practical steps to register your trademark, select the right classes, and secure your brand identity before raising funding or scaling operations.', tag: 'Trademark & IP' },
             ].map((post, i) => (
-              <motion.div key={i} variants={FADE_UP} style={{ display: 'flex', height: '100%' }}>
-                <Link to="/insights" className="card-premium" style={{ display: 'flex', flexDirection: 'column', width: '100%', height: '100%', padding: '2rem', background: 'var(--color-secondary)' }}>
-                  <div>
-                    <span style={{ fontSize: '0.65rem', fontFamily: 'var(--font-mono)', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--color-gold)', marginBottom: '1rem', display: 'block' }}>{post.tag}</span>
-                    <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.125rem', fontWeight: 600, color: 'var(--color-navy)', marginBottom: '0.75rem', lineHeight: 1.3 }}>{post.title}</h3>
-                    <p style={{ fontSize: '0.875rem', color: 'var(--color-text-muted)', marginBottom: '1.5rem', lineHeight: '1.65', flexGrow: 1 }}>{post.excerpt}</p>
-                  </div>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.75rem', fontWeight: 700, color: 'var(--color-gold)', letterSpacing: '0.08em', textTransform: 'uppercase' }}>
-                    Read More <ArrowRight size={13} />
+              <div key={i} style={{ display: 'flex' }}>
+                <Link to="/insights" className="card-premium" style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
+                  <span style={{ fontSize: '0.75rem', fontFamily: 'var(--font-body)', letterSpacing: '0.02em', textTransform: 'uppercase', color: 'var(--color-gold-dark)', marginBottom: '0.875rem', display: 'block', fontWeight: 600 }}>{post.tag}</span>
+                  <h3 style={{ fontSize: '1.3rem', fontWeight: 700, fontFamily: 'var(--font-heading)', color: 'var(--color-navy)', marginBottom: '0.625rem', lineHeight: 1.35, letterSpacing: '-0.02em' }}>{post.title}</h3>
+                  <p style={{ fontSize: '0.875rem', color: 'var(--color-text-muted)', marginBottom: '1.5rem', lineHeight: '1.6', flexGrow: 1 }}>{post.excerpt}</p>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.75rem', fontWeight: 600, color: 'var(--color-navy)', letterSpacing: '0.04em', textTransform: 'uppercase', borderTop: '1px solid rgba(0,0,0,0.06)', paddingTop: '1rem' }}>
+                    Read Article <ArrowRight size={13} style={{ color: 'var(--color-gold-dark)' }} />
                   </div>
                 </Link>
-              </motion.div>
+              </div>
             ))}
-          </motion.div>
-
-          <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} style={{ textAlign: 'center', marginTop: '3rem' }}>
-            <Link to="/insights" style={{ fontSize: '0.8125rem', fontWeight: 700, color: 'var(--color-navy)', letterSpacing: '0.1em', textTransform: 'uppercase', display: 'inline-flex', alignItems: 'center', gap: '6px' }} className="link-underline pb-1">
-              View All Insights <ArrowRight size={14} />
-            </Link>
-          </motion.div>
+          </div>
         </div>
       </section>
+
+      {/* ═══════════════════════════════════════════
+          06. CTA BANNER
+          Priority 2 & 7: Confident, authoritative closing command
+      ═══════════════════════════════════════════ */}
+      <section style={{
+        padding: '5.5rem 0',
+        backgroundColor: 'var(--color-navy)',
+        borderTop: '1px solid rgba(255,255,255,0.08)'
+      }}>
+        <div style={{ maxWidth: '56rem', margin: '0 auto', padding: '0 2rem', textAlign: 'center' }}>
+          <span className="section-label">Get Started</span>
+          <h2 style={{ fontSize: 'clamp(2.35rem, 4.8vw, 3.5rem)', fontWeight: 800, color: '#ffffff', marginBottom: '1.25rem', lineHeight: 1.15, letterSpacing: '-0.03em' }}>
+            Set up your business <br />
+            with <span style={{ fontFamily: 'var(--font-editorial)', fontStyle: 'italic', fontWeight: 400, color: 'var(--color-gold)' }}>complete confidence.</span>
+          </h2>
+          <p style={{ fontSize: '1.05rem', color: 'rgba(255,255,255,0.7)', marginBottom: '2.5rem', maxWidth: '48ch', margin: '0 auto 2.5rem', lineHeight: '1.65' }}>
+            Talk to our Senior Corporate Advisors and Legal Counsel. We handle company registrations and statutory filings across all 28 states and 8 Union Territories.
+          </p>
+          <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+            <Link to="/contact" className="btn-gold" style={{ padding: '0.875rem 2rem', fontSize: '0.9375rem' }}>
+              Get a Free Consultation <ArrowRight size={15} />
+            </Link>
+            <a href="https://wa.me/918448803143" target="_blank" rel="noopener noreferrer" className="btn-ghost" style={{ padding: '0.875rem 1.75rem', fontSize: '0.9375rem' }}>
+              Chat on WhatsApp
+            </a>
+          </div>
+        </div>
+      </section>
+
     </div>
   );
 }

@@ -7,29 +7,29 @@ import {
 import { getApiUrl } from '../../utils/api';
 
 const BUSINESS_STAGES = [
-  "Solo Founder / Freelancer",
-  "2+ Co-founders / Startup",
-  "Private Limited / Existing Company",
-  "Retail / E-commerce Seller",
-  "NGO / Trust / Society"
+  "Startup / New Business",
+  "Sole Proprietor / Freelancer",
+  "Established Private Limited / LLP",
+  "E-commerce / Online Business",
+  "NGO / Society / Trust"
 ];
 
 const SERVICE_OPTIONS = [
-  "Company Setup (Pvt Ltd / LLP)",
-  "GST & Tax Registrations",
-  "Trademark & IP Protection",
-  "FSSAI & Municipal Licenses",
-  "Annual Compliance & Accounting"
+  "Company Registration (Private Limited / LLP)",
+  "GST Registration & Monthly Return Filing",
+  "Trademark & Copyright Registration",
+  "Trade License, FSSAI & Labor Registrations",
+  "Annual ROC Compliance & Accounting Package"
 ];
 
 const TIMELINE_OPTIONS = [
-  "Immediate / Urgent (1-3 days)",
-  "Standard (1-2 weeks)",
-  "Just Exploring / Planning"
+  "Immediate / Urgent (Within 3 Days)",
+  "Standard (Within 1–2 Weeks)",
+  "Just exploring / Need consultation first"
 ];
 
 export default function Contact() {
-  const [stage, setStage] = useState(BUSINESS_STAGES[1]);
+  const [stage, setStage] = useState(BUSINESS_STAGES[0]);
   const [selectedServices, setSelectedServices] = useState([SERVICE_OPTIONS[0]]);
   const [timeline, setTimeline] = useState(TIMELINE_OPTIONS[1]);
 
@@ -56,7 +56,7 @@ export default function Contact() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!name || !email) {
-      setError('Please provide your name and email address.');
+      setError('Please enter your name and email address.');
       return;
     }
 
@@ -84,7 +84,7 @@ export default function Contact() {
       if (res.ok && json.success) {
         setSuccessData(json.data);
       } else {
-        setError(json.error || 'Failed to submit consultation. Please verify your connection.');
+        setError(json.error || 'Failed to submit your inquiry. Please check your details and try again.');
       }
     } catch (err) {
       const fakeTicket = `ST-ADV-${Math.floor(1000 + Math.random() * 9000)}`;
@@ -101,551 +101,532 @@ export default function Contact() {
   };
 
   const getWhatsAppUrl = () => {
-    const ticket = successData ? successData.id : 'ST-ADV-LEAD';
+    const ticket = successData ? successData.id : 'ST-ADV-SCOPE';
     const srvText = selectedServices.join(', ');
-    const text = `Hello Sterling Advisory team, I just submitted consultation intake (${ticket}) for ${srvText}. Would like to connect regarding my ${stage} right away!`;
+    const text = `Hello Sterling Advisory team, I just submitted an inquiry (${ticket}) regarding ${srvText}. Would like to discuss my requirements immediately.`;
     return `https://wa.me/918448803143?text=${encodeURIComponent(text)}`;
-  };
-
-  return (
+  };  return (
     <div style={{
-      background: '#F8F6F0',
+      background: '#F8FAFC',
       minHeight: '100vh',
-      paddingTop: '6rem',
-      paddingBottom: '8rem',
-      paddingLeft: '1.5rem',
-      paddingRight: '1.5rem',
-      position: 'relative',
-      color: '#0A0F1D'
+      color: 'var(--color-navy)',
+      position: 'relative'
     }}>
-      {/* Subtle Luxury Ambient Background Pattern */}
-      <div style={{
-        position: 'absolute', inset: 0,
-        backgroundImage: 'radial-gradient(circle at 50% 0%, rgba(223, 186, 115, 0.16) 0%, transparent 60%)',
-        pointerEvents: 'none'
-      }} />
+      {/* ═══════════════════════════════════════════
+          01. LUXURY OBSIDIAN & GOLD HEADER BANNER
+      ═══════════════════════════════════════════ */}
+      <section className="bg-institutional-grid" style={{
+        background: 'linear-gradient(180deg, #040811 0%, #060C18 100%)',
+        paddingTop: '8.5rem',
+        paddingBottom: '5.5rem',
+        borderBottom: '1px solid rgba(223, 186, 115, 0.28)',
+        position: 'relative',
+        overflow: 'hidden'
+      }}>
+        <div style={{
+          position: 'absolute', top: '15%', left: '50%', transform: 'translateX(-50%)', width: '900px', height: '400px',
+          background: 'radial-gradient(ellipse at center, rgba(223, 186, 115, 0.16) 0%, transparent 70%)',
+          pointerEvents: 'none'
+        }} />
 
-      <div style={{ maxWidth: '80rem', margin: '0 auto', position: 'relative', zIndex: 1 }}>
-        
-        {/* Top Header Section */}
-        <div style={{ textAlign: 'center', marginBottom: '4.5rem' }}>
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            style={{
-              display: 'inline-flex', alignItems: 'center', gap: '8px',
-              padding: '0.45rem 1.125rem', background: '#FFFFFF',
-              border: '1px solid #DFBA73', borderRadius: '30px',
-              marginBottom: '1.25rem', boxShadow: '0 4px 16px rgba(223, 186, 115, 0.18)'
-            }}
-          >
-            <Sparkles size={15} style={{ color: '#A6823B' }} />
-            <span style={{ fontSize: '0.75rem', fontWeight: 800, color: '#A6823B', letterSpacing: '0.12em', textTransform: 'uppercase', fontFamily: 'var(--font-mono)' }}>
-              Strategic Consultation Desk
-            </span>
-          </motion.div>
-          
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            style={{
-              fontFamily: 'var(--font-heading)',
-              fontSize: 'clamp(2.5rem, 5.5vw, 4rem)',
-              fontWeight: 800,
-              color: '#0A0F1D',
-              letterSpacing: '-0.03em',
-              lineHeight: '1.15',
-              marginBottom: '1.25rem'
-            }}
-          >
-            Schedule Your Advisory Intake
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            style={{
-              color: '#475569',
-              fontSize: '1.125rem',
-              maxWidth: '660px',
-              margin: '0 auto',
-              lineHeight: '1.75',
-              fontFamily: 'var(--font-body)',
-              fontWeight: 500
-            }}
-          >
-            Connect directly with our senior Company Secretaries & Chartered Accountants. We analyze your corporate structure and provide transparent fee quotes within 2 hours.
-          </motion.p>
+        <div style={{ maxWidth: '108rem', margin: '0 auto', padding: '0 3.5rem', position: 'relative', zIndex: 1 }}>
+          <div style={{ textAlign: 'center', maxWidth: '820px', margin: '0 auto' }}>
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              style={{
+                display: 'inline-flex', alignItems: 'center', gap: '8px',
+                padding: '0.45rem 1rem', background: 'rgba(223, 186, 115, 0.12)',
+                border: '1px solid rgba(223, 186, 115, 0.38)', borderRadius: '99px',
+                marginBottom: '1.5rem', boxShadow: '0 0 20px rgba(223, 186, 115, 0.15)'
+              }}
+            >
+              <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: 'var(--color-gold)', boxShadow: '0 0 8px var(--color-gold)' }} />
+              <span style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--color-gold)', letterSpacing: '0.1em', textTransform: 'uppercase', fontFamily: 'var(--font-mono)' }}>
+                Direct Partner Access Desk
+              </span>
+            </motion.div>
+            
+            <motion.h1
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.08 }}
+              style={{
+                fontFamily: 'var(--font-heading)',
+                fontSize: 'clamp(2.8rem, 5.2vw, 4.2rem)',
+                fontWeight: 800,
+                color: '#ffffff',
+                letterSpacing: '-0.03em',
+                lineHeight: 1.1,
+                marginBottom: '1.25rem'
+              }}
+            >
+              Speak With Our <span style={{ fontFamily: 'var(--font-editorial)', fontStyle: 'italic', fontWeight: 400, color: 'var(--color-gold)' }}>Senior Expert Team</span>
+            </motion.h1>
+            <motion.p
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.15 }}
+              style={{
+                color: 'rgba(255, 255, 255, 0.78)',
+                fontSize: '1.15rem',
+                lineHeight: '1.68',
+                fontWeight: 450
+              }}
+            >
+              Connect directly with Senior Expert Advisors and Corporate Legal Counsel. We analyze your corporate scope and provide an exact upfront fee structure within 2 business hours.
+            </motion.p>
+          </div>
         </div>
+      </section>
 
-        {/* ── Main Two Column Layout Grid ── */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(360px, 1fr))', gap: '3.5rem', alignItems: 'flex-start' }}>
+      {/* ═══════════════════════════════════════════
+          02. FULL-WIDTH 108REM CONSULTATION GRID
+      ═══════════════════════════════════════════ */}
+      <div style={{ maxWidth: '108rem', margin: '0 auto', padding: '5rem 3.5rem 8rem' }}>
+        
+        <div style={{ display: 'grid', gridTemplateColumns: 'minmax(360px, 4.5fr) minmax(580px, 7.5fr)', gap: '4.5rem', alignItems: 'start' }} className="grid-contact-responsive">
           
-          {/* Left Column: Direct Reach & Pillars */}
+          {/* ── Left Column: Direct Access Cards & Live Fiduciary Status ── */}
           <motion.div
-            initial={{ opacity: 0, x: -24 }}
+            initial={{ opacity: 0, x: -16 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.2 }}
             style={{ display: 'flex', flexDirection: 'column', gap: '2.5rem' }}
           >
             <div>
               <span style={{
-                fontFamily: 'var(--font-mono)', fontSize: '0.725rem', fontWeight: 800,
-                color: '#A6823B', letterSpacing: '0.18em', textTransform: 'uppercase',
-                display: 'block', marginBottom: '0.625rem'
-              }}>Direct Communications</span>
-              <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: '2rem', fontWeight: 800, color: '#0A0F1D', marginBottom: '1rem', letterSpacing: '-0.02em', lineHeight: '1.25' }}>
-                Talk Directly to India's Corporate Registry Specialists
+                fontFamily: 'var(--font-mono)', fontSize: '0.75rem', fontWeight: 700,
+                color: 'var(--color-gold-dark)', letterSpacing: '0.12em', textTransform: 'uppercase',
+                display: 'block', marginBottom: '0.6rem'
+              }}>Direct Access Channels</span>
+              <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: '2.2rem', fontWeight: 800, color: 'var(--color-navy)', marginBottom: '1rem', letterSpacing: '-0.02em', lineHeight: '1.2' }}>
+                Senior Expert Advisors & Retainer Desk
               </h2>
-              <p style={{ color: '#475569', fontSize: '0.985rem', lineHeight: '1.7', fontFamily: 'var(--font-body)' }}>
-                Whether incorporating a high-growth startup or streamlining multi-state compliance for an existing enterprise, our advisory desk guarantees accurate counsel without delays.
+              <p style={{ color: 'var(--color-text-muted)', fontSize: '1.02rem', lineHeight: '1.68' }}>
+                Skip generic customer service. All client inquiries are reviewed directly by Senior Corporate Advisors and Professional Counsel to ensure complete statutory accuracy from Day 1.
               </p>
             </div>
 
-            {/* Direct Contact Cards */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+            {/* Direct Contact Cards (Elevated Luxury Alabaster with Hover Illumination) */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.35rem' }}>
               <a
                 href="https://wa.me/918448803143"
                 target="_blank"
                 rel="noreferrer"
                 style={{
-                  display: 'flex', alignItems: 'center', gap: '1.25rem',
-                  padding: '1.5rem', background: '#FFFFFF',
-                  border: '1px solid #E2E8F0', borderRadius: '14px',
-                  textDecoration: 'none', transition: 'all 250ms ease',
-                  boxShadow: '0 8px 24px rgba(10, 15, 29, 0.05)'
+                  display: 'flex', alignItems: 'center', gap: '1.35rem',
+                  padding: '1.65rem', background: '#ffffff',
+                  border: '1px solid rgba(13, 21, 39, 0.1)', borderRadius: 'var(--radius-xl)',
+                  textDecoration: 'none', transition: 'all 220ms cubic-bezier(0.16, 1, 0.3, 1)',
+                  boxShadow: '0 8px 24px -6px rgba(13, 21, 39, 0.06)'
                 }}
-                onMouseEnter={e => { e.currentTarget.style.borderColor = '#DFBA73'; e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 12px 32px rgba(223, 186, 115, 0.18)'; }}
-                onMouseLeave={e => { e.currentTarget.style.borderColor = '#E2E8F0'; e.currentTarget.style.transform = 'translateY(0px)'; e.currentTarget.style.boxShadow = '0 8px 24px rgba(10, 15, 29, 0.05)'; }}
+                onMouseEnter={e => { e.currentTarget.style.borderColor = '#16a34a'; e.currentTarget.style.boxShadow = '0 18px 40px -10px rgba(22, 163, 74, 0.18)'; e.currentTarget.style.transform = 'translateY(-4px)'; }}
+                onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(13, 21, 39, 0.1)'; e.currentTarget.style.boxShadow = '0 8px 24px -6px rgba(13, 21, 39, 0.06)'; e.currentTarget.style.transform = 'translateY(0)'; }}
               >
-                <div style={{ width: '54px', height: '54px', background: 'rgba(34, 197, 94, 0.12)', border: '1px solid #22c55e', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '12px', flexShrink: 0 }}>
+                <div style={{ width: '54px', height: '54px', background: 'rgba(37,211,102,0.14)', border: '1px solid #25D366', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: 'var(--radius-lg)', flexShrink: 0 }}>
                   <MessageSquare size={26} style={{ color: '#16a34a' }} />
                 </div>
                 <div>
-                  <div style={{ fontSize: '0.725rem', fontFamily: 'var(--font-mono)', color: '#A6823B', textTransform: 'uppercase', letterSpacing: '0.1em', fontWeight: 800, marginBottom: '4px' }}>Instant WhatsApp Desk</div>
-                  <div style={{ fontSize: '1.18rem', fontWeight: 800, color: '#0A0F1D', fontFamily: 'var(--font-heading)' }}>+91 84488 03143</div>
-                  <div style={{ fontSize: '0.8rem', color: '#16a34a', fontWeight: 600 }}>Priority response Mon - Sat (9am - 8pm)</div>
+                  <div style={{ fontSize: '0.72rem', fontFamily: 'var(--font-mono)', color: '#16a34a', textTransform: 'uppercase', letterSpacing: '0.1em', fontWeight: 700, marginBottom: '4px' }}>Priority WhatsApp Retainer</div>
+                  <div style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--color-navy)', fontFamily: 'var(--font-heading)' }}>+91 84488 03143</div>
+                  <div style={{ fontSize: '0.82rem', color: 'var(--color-text-muted)', fontWeight: 600, marginTop: '2px' }}>🟢 Online • Senior Partner Response within 15 mins</div>
                 </div>
               </a>
 
               <a
-                href="mailto:consult@thesterlingadvisory.com"
+                href="mailto:thesterlingadvisory@gmail.com"
                 style={{
-                  display: 'flex', alignItems: 'center', gap: '1.25rem',
-                  padding: '1.5rem', background: '#FFFFFF',
-                  border: '1px solid #E2E8F0', borderRadius: '14px',
-                  textDecoration: 'none', transition: 'all 250ms ease',
-                  boxShadow: '0 8px 24px rgba(10, 15, 29, 0.05)'
+                  display: 'flex', alignItems: 'center', gap: '1.35rem',
+                  padding: '1.65rem', background: '#ffffff',
+                  border: '1px solid rgba(13, 21, 39, 0.1)', borderRadius: 'var(--radius-xl)',
+                  textDecoration: 'none', transition: 'all 220ms cubic-bezier(0.16, 1, 0.3, 1)',
+                  boxShadow: '0 8px 24px -6px rgba(13, 21, 39, 0.06)'
                 }}
-                onMouseEnter={e => { e.currentTarget.style.borderColor = '#DFBA73'; e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 12px 32px rgba(223, 186, 115, 0.18)'; }}
-                onMouseLeave={e => { e.currentTarget.style.borderColor = '#E2E8F0'; e.currentTarget.style.transform = 'translateY(0px)'; e.currentTarget.style.boxShadow = '0 8px 24px rgba(10, 15, 29, 0.05)'; }}
+                onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--color-gold-dark)'; e.currentTarget.style.boxShadow = '0 18px 40px -10px rgba(223, 186, 115, 0.22)'; e.currentTarget.style.transform = 'translateY(-4px)'; }}
+                onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(13, 21, 39, 0.1)'; e.currentTarget.style.boxShadow = '0 8px 24px -6px rgba(13, 21, 39, 0.06)'; e.currentTarget.style.transform = 'translateY(0)'; }}
               >
-                <div style={{ width: '54px', height: '54px', background: '#F8FAFC', border: '1px solid #CBD5E1', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '12px', flexShrink: 0 }}>
-                  <Mail size={26} style={{ color: '#A6823B' }} />
+                <div style={{ width: '54px', height: '54px', background: 'rgba(223, 186, 115, 0.15)', border: '1px solid var(--color-gold-dark)', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: 'var(--radius-lg)', flexShrink: 0 }}>
+                  <Mail size={26} style={{ color: 'var(--color-gold-dark)' }} />
                 </div>
                 <div>
-                  <div style={{ fontSize: '0.725rem', fontFamily: 'var(--font-mono)', color: '#64748B', textTransform: 'uppercase', letterSpacing: '0.1em', fontWeight: 800, marginBottom: '4px' }}>Official Email Desk</div>
-                  <div style={{ fontSize: '1.18rem', fontWeight: 800, color: '#0A0F1D', fontFamily: 'var(--font-heading)' }}>consult@thesterlingadvisory.com</div>
-                  <div style={{ fontSize: '0.8rem', color: '#64748B', fontWeight: 500 }}>Formal proposals & document review</div>
+                  <div style={{ fontSize: '0.72rem', fontFamily: 'var(--font-mono)', color: 'var(--color-gold-dark)', textTransform: 'uppercase', letterSpacing: '0.1em', fontWeight: 700, marginBottom: '4px' }}>Institutional Email Desk</div>
+                  <div style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--color-navy)', fontFamily: 'var(--font-heading)' }}>thesterlingadvisory@gmail.com</div>
+                  <div style={{ fontSize: '0.82rem', color: 'var(--color-text-muted)', fontWeight: 600, marginTop: '2px' }}>Document Review & Term Sheets</div>
                 </div>
               </a>
 
               <div style={{
-                display: 'flex', alignItems: 'center', gap: '1.25rem',
-                padding: '1.5rem', background: '#FFFFFF',
-                border: '1px solid #E2E8F0', borderRadius: '14px',
-                boxShadow: '0 8px 24px rgba(10, 15, 29, 0.05)'
+                display: 'flex', alignItems: 'center', gap: '1.35rem',
+                padding: '1.65rem', background: '#ffffff',
+                border: '1px solid rgba(13, 21, 39, 0.1)', borderRadius: 'var(--radius-xl)',
+                boxShadow: '0 8px 24px -6px rgba(13, 21, 39, 0.06)'
               }}>
-                <div style={{ width: '54px', height: '54px', background: '#F8FAFC', border: '1px solid #CBD5E1', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '12px', flexShrink: 0 }}>
-                  <MapPin size={26} style={{ color: '#A6823B' }} />
+                <div style={{ width: '54px', height: '54px', background: 'rgba(13, 21, 39, 0.06)', border: '1px solid rgba(13, 21, 39, 0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: 'var(--radius-lg)', flexShrink: 0 }}>
+                  <MapPin size={26} style={{ color: 'var(--color-navy)' }} />
                 </div>
                 <div>
-                  <div style={{ fontSize: '0.725rem', fontFamily: 'var(--font-mono)', color: '#64748B', textTransform: 'uppercase', letterSpacing: '0.1em', fontWeight: 800, marginBottom: '4px' }}>Central Headquarters</div>
-                  <div style={{ fontSize: '1.15rem', fontWeight: 800, color: '#0A0F1D', fontFamily: 'var(--font-heading)' }}>Connaught Place, New Delhi</div>
-                  <div style={{ fontSize: '0.8rem', color: '#64748B', fontWeight: 500 }}>PAN-India filings across all 28 States & 8 UTs</div>
+                  <div style={{ fontSize: '0.72rem', fontFamily: 'var(--font-mono)', color: 'var(--color-navy)', textTransform: 'uppercase', letterSpacing: '0.1em', fontWeight: 700, marginBottom: '4px' }}>Pan-India Jurisdiction Coverage</div>
+                  <div style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--color-navy)', fontFamily: 'var(--font-heading)' }}>All 28 States & 8 Union Territories</div>
+                  <div style={{ fontSize: '0.82rem', color: 'var(--color-text-muted)', fontWeight: 600, marginTop: '2px' }}>100% Online Paperless Regulatory Filings</div>
                 </div>
               </div>
             </div>
 
-            {/* The Sterling Assurance Box */}
-            <div style={{ padding: '2rem', background: '#FFFDF9', border: '1px solid #DFBA73', borderRadius: '14px', boxShadow: '0 12px 32px rgba(223, 186, 115, 0.12)' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '1.5rem', borderBottom: '1px solid #F2D59A', paddingBottom: '1rem' }}>
-                <ShieldCheck size={22} style={{ color: '#A6823B' }} />
-                <span style={{ fontSize: '0.925rem', fontWeight: 800, color: '#A6823B', fontFamily: 'var(--font-mono)', textTransform: 'uppercase', letterSpacing: '0.12em' }}>
-                  The Sterling Assurance
-                </span>
+            {/* Fiduciary Scope Box */}
+            <div style={{
+              padding: '2rem',
+              background: 'linear-gradient(155deg, #050A14 0%, #0D1527 100%)',
+              border: '1px solid rgba(223, 186, 115, 0.35)',
+              borderRadius: 'var(--radius-xl)',
+              color: '#ffffff',
+              boxShadow: '0 20px 50px -12px rgba(5, 10, 20, 0.4)'
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--color-gold)', fontFamily: 'var(--font-mono)', fontSize: '0.74rem', textTransform: 'uppercase', letterSpacing: '0.1em', fontWeight: 700, marginBottom: '1rem' }}>
+                <ShieldCheck size={18} /> Our Statutory Guarantee
               </div>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.125rem' }}>
-                <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.875rem' }}>
-                  <CheckCircle2 size={18} style={{ color: '#A6823B', flexShrink: 0, marginTop: '3px' }} />
-                  <span style={{ fontSize: '0.925rem', color: '#334155', lineHeight: '1.65' }}><strong style={{ color: '#0A0F1D' }}>No Hidden Fees:</strong> Every quote provided is all-inclusive covering government challan, DSC, name approval, and professional fees.</span>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', fontSize: '0.92rem', color: 'rgba(255, 255, 255, 0.85)' }}>
+                <div style={{ display: 'flex', gap: '12px' }}>
+                  <span style={{ color: 'var(--color-gold)', fontWeight: 800 }}>✓</span>
+                  <span><strong>Fixed Upfront Pricing:</strong> Complete package fee quoted before initiation. Zero hidden costs or surprise government charges.</span>
                 </div>
-                <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.875rem' }}>
-                  <CheckCircle2 size={18} style={{ color: '#A6823B', flexShrink: 0, marginTop: '3px' }} />
-                  <span style={{ fontSize: '0.925rem', color: '#334155', lineHeight: '1.65' }}><strong style={{ color: '#0A0F1D' }}>Senior Specialists:</strong> Handled entirely by practicing CSs, CAs & Corporate Advocates. Zero junior intern handoffs.</span>
+                <div style={{ display: 'flex', gap: '12px' }}>
+                  <span style={{ color: 'var(--color-gold)', fontWeight: 800 }}>✓</span>
+                  <span><strong>Senior Practice Director Ownership:</strong> Every statutory filing is signed off and managed directly by senior institutional advisors.</span>
                 </div>
-                <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.875rem' }}>
-                  <CheckCircle2 size={18} style={{ color: '#A6823B', flexShrink: 0, marginTop: '3px' }} />
-                  <span style={{ fontSize: '0.925rem', color: '#334155', lineHeight: '1.65' }}><strong style={{ color: '#0A0F1D' }}>Strict Confidentiality:</strong> Your business plans, financial numbers, and documents remain 100% encrypted under NDA protocols.</span>
+                <div style={{ display: 'flex', gap: '12px' }}>
+                  <span style={{ color: 'var(--color-gold)', fontWeight: 800 }}>✓</span>
+                  <span><strong>100% Confidentiality:</strong> Strict data encryption and professional privilege on all financial and board documentation.</span>
                 </div>
               </div>
             </div>
           </motion.div>
 
-          {/* Right Column: Interactive Intake Form Card (`card-premium`) */}
+          {/* ── Right Column: Executive Upfront Quote & Roadmap Intake Terminal ── */}
           <motion.div
-            initial={{ opacity: 0, x: 24 }}
+            initial={{ opacity: 0, x: 16 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.3 }}
+            transition={{ delay: 0.25 }}
             style={{
-              background: '#FFFFFF',
-              border: '1px solid #E2E8F0',
-              borderRadius: '16px',
-              padding: '3rem',
-              boxShadow: '0 24px 64px rgba(10, 15, 29, 0.08)',
+              background: '#ffffff',
+              padding: '3.5rem',
+              borderRadius: 'var(--radius-2xl)',
+              border: '1px solid rgba(13, 21, 39, 0.12)',
+              boxShadow: '0 30px 80px -15px rgba(13, 21, 39, 0.12), 0 0 40px rgba(223, 186, 115, 0.08)',
               position: 'relative'
             }}
           >
-            <AnimatePresence mode="wait">
-              {!successData ? (
-                <motion.form
-                  key="intake-form"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  onSubmit={handleSubmit}
-                  style={{ display: 'flex', flexDirection: 'column', gap: '2.25rem' }}
-                >
-                  <div style={{ borderBottom: '1px solid #F1F5F9', paddingBottom: '1.5rem' }}>
-                    <div style={{ display: 'inline-block', fontSize: '0.725rem', fontFamily: 'var(--font-mono)', color: '#A6823B', letterSpacing: '0.15em', textTransform: 'uppercase', fontWeight: 800, marginBottom: '0.5rem' }}>
-                      4-Step Interactive Intake
-                    </div>
-                    <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.75rem', fontWeight: 800, color: '#0A0F1D', marginBottom: '0.5rem', letterSpacing: '-0.02em' }}>
-                      Consultation & Fee Assessment
-                    </h3>
-                    <p style={{ fontSize: '0.925rem', color: '#64748B', lineHeight: '1.6' }}>
-                      Select your profile below so our team prepares the exact regulatory roadmaps before reaching out.
-                    </p>
-                  </div>
+            {/* Top Golden Crown Highlight Strip */}
+            <div style={{
+              position: 'absolute', top: 0, left: '3rem', right: '3rem', height: '4px',
+              background: 'linear-gradient(90deg, var(--color-gold) 0%, #C28E2B 100%)',
+              borderRadius: '0 0 4px 4px'
+            }} />
 
-                  {/* Step 1: Business Profile Stage */}
-                  <div>
-                    <label style={{ display: 'block', fontSize: '0.785rem', fontFamily: 'var(--font-mono)', color: '#A6823B', textTransform: 'uppercase', letterSpacing: '0.12em', fontWeight: 800, marginBottom: '0.875rem' }}>
-                      Step 1: What is Your Current Business Stage?
-                    </label>
-                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem' }}>
-                      {BUSINESS_STAGES.map((st, i) => {
-                        const isSel = stage === st;
-                        return (
-                          <button
-                            type="button"
-                            key={i}
-                            onClick={() => setStage(st)}
-                            style={{
-                              padding: '0.75rem 1.125rem', borderRadius: '8px', fontSize: '0.875rem',
-                              fontWeight: isSel ? 700 : 600,
-                              fontFamily: 'var(--font-body)',
-                              background: isSel ? 'linear-gradient(135deg, #DFBA73 0%, #A6823B 100%)' : '#F8FAFC',
-                              border: isSel ? '1px solid #A6823B' : '1px solid #CBD5E1',
-                              color: isSel ? '#000000' : '#334155',
-                              cursor: 'pointer', transition: 'all 200ms ease',
-                              boxShadow: isSel ? '0 4px 16px rgba(223, 186, 115, 0.35)' : 'none'
-                            }}
-                          >
-                            {st}
-                          </button>
-                        );
-                      })}
-                    </div>
-                  </div>
+            <div style={{ marginBottom: '2.5rem' }}>
+              <span style={{
+                fontFamily: 'var(--font-mono)', fontSize: '0.74rem', fontWeight: 700,
+                color: 'var(--color-gold-dark)', letterSpacing: '0.12em', textTransform: 'uppercase',
+                display: 'block', marginBottom: '0.5rem'
+              }}>Consultation Intake Terminal</span>
+              <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: '2.2rem', fontWeight: 800, color: 'var(--color-navy)', letterSpacing: '-0.02em', margin: 0, marginBottom: '0.5rem' }}>
+                Get Your Upfront Quote & Strategy Plan
+              </h2>
+              <p style={{ color: 'var(--color-text-muted)', fontSize: '1rem', margin: 0 }}>
+                Select your corporate scope below. Our senior advisory desk will prepare an exact proposal and roadmap for you within 2 business hours.
+              </p>
+            </div>
 
-                  {/* Step 2: Services Needed */}
-                  <div>
-                    <label style={{ display: 'block', fontSize: '0.785rem', fontFamily: 'var(--font-mono)', color: '#A6823B', textTransform: 'uppercase', letterSpacing: '0.12em', fontWeight: 800, marginBottom: '0.875rem' }}>
-                      Step 2: Select Services You Require (Select all that apply)
-                    </label>
-                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem' }}>
-                      {SERVICE_OPTIONS.map((srv, i) => {
-                        const isSel = selectedServices.includes(srv);
-                        return (
-                          <button
-                            type="button"
-                            key={i}
-                            onClick={() => toggleService(srv)}
-                            style={{
-                              padding: '0.75rem 1.125rem', borderRadius: '8px', fontSize: '0.875rem',
-                              fontWeight: isSel ? 700 : 600,
-                              fontFamily: 'var(--font-body)',
-                              background: isSel ? '#FFFDF9' : '#F8FAFC',
-                              border: isSel ? '2px solid #DFBA73' : '1px solid #CBD5E1',
-                              color: isSel ? '#0A0F1D' : '#475569',
-                              display: 'flex', alignItems: 'center', gap: '8px',
-                              cursor: 'pointer', transition: 'all 200ms ease'
-                            }}
-                          >
-                            <span style={{
-                              width: '18px', height: '18px', borderRadius: '4px',
-                              border: isSel ? '2px solid #A6823B' : '1px solid #94A3B8',
-                              background: isSel ? '#DFBA73' : 'transparent',
-                              display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
-                              transition: 'all 150ms ease'
-                            }}>
-                              {isSel && <span style={{ color: '#000000', fontSize: '12px', fontWeight: 900 }}>✓</span>}
-                            </span>
-                            <span>{srv}</span>
-                          </button>
-                        );
-                      })}
-                    </div>
-                  </div>
+            {error && (
+              <div style={{
+                padding: '1.2rem', background: '#FEF2F2', border: '1px solid #F87171',
+                borderRadius: 'var(--radius-md)', color: '#991B1B', fontSize: '0.9rem',
+                marginBottom: '2rem', display: 'flex', alignItems: 'center', gap: '10px'
+              }}>
+                <strong>⚠️ Notice:</strong> {error}
+              </div>
+            )}
 
-                  {/* Step 3: Target Timeline */}
-                  <div>
-                    <label style={{ display: 'block', fontSize: '0.785rem', fontFamily: 'var(--font-mono)', color: '#A6823B', textTransform: 'uppercase', letterSpacing: '0.12em', fontWeight: 800, marginBottom: '0.875rem' }}>
-                      Step 3: What is Your Priority Timeline?
-                    </label>
-                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem' }}>
-                      {TIMELINE_OPTIONS.map((tm, i) => {
-                        const isSel = timeline === tm;
-                        return (
-                          <button
-                            type="button"
-                            key={i}
-                            onClick={() => setTimeline(tm)}
-                            style={{
-                              padding: '0.75rem 1.125rem', borderRadius: '8px', fontSize: '0.875rem',
-                              fontWeight: isSel ? 700 : 600,
-                              fontFamily: 'var(--font-body)',
-                              background: isSel ? 'linear-gradient(135deg, #DFBA73 0%, #A6823B 100%)' : '#F8FAFC',
-                              border: isSel ? '1px solid #A6823B' : '1px solid #CBD5E1',
-                              color: isSel ? '#000000' : '#334155',
-                              cursor: 'pointer', transition: 'all 200ms ease',
-                              boxShadow: isSel ? '0 4px 16px rgba(223, 186, 115, 0.35)' : 'none'
-                            }}
-                          >
-                            {tm}
-                          </button>
-                        );
-                      })}
-                    </div>
-                  </div>
-
-                  {/* Step 4: Contact Info Fields */}
-                  <div style={{ borderTop: '1px solid #F1F5F9', paddingTop: '1.75rem' }}>
-                    <label style={{ display: 'block', fontSize: '0.785rem', fontFamily: 'var(--font-mono)', color: '#A6823B', textTransform: 'uppercase', letterSpacing: '0.12em', fontWeight: 800, marginBottom: '1.25rem' }}>
-                      Step 4: Contact & Company Details
-                    </label>
-
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1.25rem', marginBottom: '1.25rem' }}>
-                      <div>
-                        <label style={{ display: 'block', fontSize: '0.8rem', color: '#0A0F1D', fontWeight: 700, marginBottom: '0.5rem' }}>Your Full Name *</label>
-                        <input
-                          type="text"
-                          required
-                          value={name}
-                          onChange={e => setName(e.target.value)}
-                          placeholder="e.g. Deep Kalra"
+            {successData ? (
+              <motion.div
+                initial={{ opacity: 0, scale: 0.96 }}
+                animate={{ opacity: 1, scale: 1 }}
+                style={{
+                  textAlign: 'center', padding: '3.5rem 2rem',
+                  background: '#F8FAFC', borderRadius: 'var(--radius-xl)',
+                  border: '1px solid rgba(13, 21, 39, 0.1)'
+                }}
+              >
+                <div style={{ width: '70px', height: '70px', background: 'var(--color-gold)', color: 'var(--color-navy)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1.5rem', boxShadow: '0 10px 25px rgba(223, 186, 115, 0.4)' }}>
+                  <CheckCircle2 size={38} />
+                </div>
+                <h3 style={{ fontSize: '1.8rem', fontWeight: 800, color: 'var(--color-navy)', fontFamily: 'var(--font-heading)', marginBottom: '0.5rem' }}>
+                  Inquiry Received (`#{successData.id}`)
+                </h3>
+                <p style={{ fontSize: '1.05rem', color: 'var(--color-text-muted)', maxWidth: '500px', margin: '0 auto 2.2rem', lineHeight: '1.6' }}>
+                  Thank you, <strong>{successData.name}</strong>. Our senior practice directors are reviewing your requirements for <strong>{selectedServices[0]}</strong> right now.
+                </p>
+                <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap' }}>
+                  <a
+                    href={getWhatsAppUrl()}
+                    target="_blank"
+                    rel="noreferrer"
+                    style={{
+                      display: 'inline-flex', alignItems: 'center', gap: '8px',
+                      padding: '1rem 2rem', background: '#25D366', color: '#ffffff',
+                      borderRadius: '99px', fontWeight: 700, textDecoration: 'none',
+                      boxShadow: '0 8px 20px rgba(37, 211, 102, 0.35)',
+                      transition: 'all 160ms ease'
+                    }}
+                  >
+                    <MessageSquare size={18} /> Instant WhatsApp Chat With Senior Advisor
+                  </a>
+                  <button
+                    onClick={() => { setSuccessData(null); setMessage(''); }}
+                    style={{
+                      padding: '1rem 1.75rem', background: 'transparent',
+                      border: '1px solid rgba(13, 21, 39, 0.2)', color: 'var(--color-navy)',
+                      borderRadius: '99px', fontWeight: 700, cursor: 'pointer'
+                    }}
+                  >
+                    Submit Another Inquiry
+                  </button>
+                </div>
+              </motion.div>
+            ) : (
+              <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '2.5rem' }}>
+                
+                {/* Step 1: Business Stage */}
+                <div>
+                  <label style={{ display: 'block', fontSize: '0.82rem', fontFamily: 'var(--font-mono)', fontWeight: 700, color: 'var(--color-gold-dark)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '1rem' }}>
+                    01. Select Your Current Business Stage
+                  </label>
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem' }}>
+                    {BUSINESS_STAGES.map(stg => {
+                      const active = stage === stg;
+                      return (
+                        <button
+                          key={stg}
+                          type="button"
+                          onClick={() => setStage(stg)}
                           style={{
-                            width: '100%', padding: '0.875rem 1.125rem', background: '#F8FAFC',
-                            border: '1px solid #CBD5E1', borderRadius: '8px',
-                            color: '#0F172A', fontSize: '0.925rem', fontFamily: 'var(--font-body)', outline: 'none',
-                            fontWeight: 500
+                            padding: '0.75rem 1.4rem',
+                            borderRadius: '99px',
+                            fontSize: '0.86rem',
+                            fontWeight: active ? 700 : 600,
+                            cursor: 'pointer',
+                            border: active ? '1.5px solid var(--color-navy)' : '1px solid #CBD5E1',
+                            background: active ? 'var(--color-navy)' : '#F8FAFC',
+                            color: active ? '#ffffff' : '#334155',
+                            boxShadow: active ? '0 8px 20px rgba(13, 21, 39, 0.25)' : 'none',
+                            transition: 'all 180ms ease'
                           }}
-                          onFocus={e => { e.target.style.borderColor = '#DFBA73'; e.target.style.background = '#FFFFFF'; e.target.style.boxShadow = '0 0 0 3px rgba(223, 186, 115, 0.2)'; }}
-                          onBlur={e => { e.target.style.borderColor = '#CBD5E1'; e.target.style.background = '#F8FAFC'; e.target.style.boxShadow = 'none'; }}
-                        />
-                      </div>
+                        >
+                          {stg}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
 
-                      <div>
-                        <label style={{ display: 'block', fontSize: '0.8rem', color: '#0A0F1D', fontWeight: 700, marginBottom: '0.5rem' }}>Work Email Address *</label>
-                        <input
-                          type="email"
-                          required
-                          value={email}
-                          onChange={e => setEmail(e.target.value)}
-                          placeholder="name@company.com"
+                {/* Step 2: Required Services */}
+                <div>
+                  <label style={{ display: 'block', fontSize: '0.82rem', fontFamily: 'var(--font-mono)', fontWeight: 700, color: 'var(--color-gold-dark)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '1rem' }}>
+                    02. Select Services Needed (Select All That Apply)
+                  </label>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '0.9rem' }}>
+                    {SERVICE_OPTIONS.map(srv => {
+                      const isChecked = selectedServices.includes(srv);
+                      return (
+                        <div
+                          key={srv}
+                          onClick={() => toggleService(srv)}
                           style={{
-                            width: '100%', padding: '0.875rem 1.125rem', background: '#F8FAFC',
-                            border: '1px solid #CBD5E1', borderRadius: '8px',
-                            color: '#0F172A', fontSize: '0.925rem', fontFamily: 'var(--font-body)', outline: 'none',
-                            fontWeight: 500
+                            display: 'flex', alignItems: 'center', gap: '14px',
+                            padding: '1.1rem 1.35rem',
+                            borderRadius: 'var(--radius-lg)',
+                            border: isChecked ? '1.5px solid var(--color-gold-dark)' : '1px solid #E2E8F0',
+                            background: isChecked ? 'rgba(223, 186, 115, 0.12)' : '#ffffff',
+                            cursor: 'pointer',
+                            transition: 'all 160ms ease',
+                            boxShadow: isChecked ? '0 4px 15px rgba(223, 186, 115, 0.2)' : '0 1px 3px rgba(0,0,0,0.02)'
                           }}
-                          onFocus={e => { e.target.style.borderColor = '#DFBA73'; e.target.style.background = '#FFFFFF'; e.target.style.boxShadow = '0 0 0 3px rgba(223, 186, 115, 0.2)'; }}
-                          onBlur={e => { e.target.style.borderColor = '#CBD5E1'; e.target.style.background = '#F8FAFC'; e.target.style.boxShadow = 'none'; }}
-                        />
-                      </div>
-                    </div>
+                        >
+                          <div style={{
+                            width: '22px', height: '22px', borderRadius: '6px',
+                            border: isChecked ? 'none' : '2px solid #CBD5E1',
+                            background: isChecked ? 'var(--color-gold-dark)' : 'transparent',
+                            display: 'flex', alignItems: 'center', justifyContent: 'center',
+                            color: '#ffffff', fontSize: '0.85rem', fontWeight: 800, flexShrink: 0
+                          }}>
+                            {isChecked ? '✓' : ''}
+                          </div>
+                          <span style={{ fontSize: '0.92rem', fontWeight: isChecked ? 700 : 550, color: isChecked ? 'var(--color-navy)' : '#334155', lineHeight: '1.4' }}>
+                            {srv}
+                          </span>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
 
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1.25rem', marginBottom: '1.25rem' }}>
-                      <div>
-                        <label style={{ display: 'block', fontSize: '0.8rem', color: '#0A0F1D', fontWeight: 700, marginBottom: '0.5rem' }}>Phone / WhatsApp Number *</label>
-                        <input
-                          type="tel"
-                          required
-                          value={phone}
-                          onChange={e => setPhone(e.target.value)}
-                          placeholder="+91 98765 43210"
+                {/* Step 3: Timeline */}
+                <div>
+                  <label style={{ display: 'block', fontSize: '0.82rem', fontFamily: 'var(--font-mono)', fontWeight: 700, color: 'var(--color-gold-dark)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '1rem' }}>
+                    03. When Do You Need Initiation?
+                  </label>
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem' }}>
+                    {TIMELINE_OPTIONS.map(tOption => {
+                      const active = timeline === tOption;
+                      return (
+                        <button
+                          key={tOption}
+                          type="button"
+                          onClick={() => setTimeline(tOption)}
                           style={{
-                            width: '100%', padding: '0.875rem 1.125rem', background: '#F8FAFC',
-                            border: '1px solid #CBD5E1', borderRadius: '8px',
-                            color: '#0F172A', fontSize: '0.925rem', fontFamily: 'var(--font-body)', outline: 'none',
-                            fontWeight: 500
+                            padding: '0.75rem 1.4rem',
+                            borderRadius: '99px',
+                            fontSize: '0.86rem',
+                            fontWeight: active ? 700 : 600,
+                            cursor: 'pointer',
+                            border: active ? '1.5px solid var(--color-navy)' : '1px solid #CBD5E1',
+                            background: active ? 'var(--color-navy)' : '#F8FAFC',
+                            color: active ? '#ffffff' : '#334155',
+                            boxShadow: active ? '0 8px 20px rgba(13, 21, 39, 0.25)' : 'none',
+                            transition: 'all 180ms ease'
                           }}
-                          onFocus={e => { e.target.style.borderColor = '#DFBA73'; e.target.style.background = '#FFFFFF'; e.target.style.boxShadow = '0 0 0 3px rgba(223, 186, 115, 0.2)'; }}
-                          onBlur={e => { e.target.style.borderColor = '#CBD5E1'; e.target.style.background = '#F8FAFC'; e.target.style.boxShadow = 'none'; }}
-                        />
-                      </div>
+                        >
+                          {tOption}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
 
-                      <div>
-                        <label style={{ display: 'block', fontSize: '0.8rem', color: '#0A0F1D', fontWeight: 700, marginBottom: '0.5rem' }}>Company / Entity Name (Optional)</label>
-                        <input
-                          type="text"
-                          value={company}
-                          onChange={e => setCompany(e.target.value)}
-                          placeholder="e.g. Sterling Tech Ventures Pvt Ltd"
-                          style={{
-                            width: '100%', padding: '0.875rem 1.125rem', background: '#F8FAFC',
-                            border: '1px solid #CBD5E1', borderRadius: '8px',
-                            color: '#0F172A', fontSize: '0.925rem', fontFamily: 'var(--font-body)', outline: 'none',
-                            fontWeight: 500
-                          }}
-                          onFocus={e => { e.target.style.borderColor = '#DFBA73'; e.target.style.background = '#FFFFFF'; e.target.style.boxShadow = '0 0 0 3px rgba(223, 186, 115, 0.2)'; }}
-                          onBlur={e => { e.target.style.borderColor = '#CBD5E1'; e.target.style.background = '#F8FAFC'; e.target.style.boxShadow = 'none'; }}
-                        />
-                      </div>
-                    </div>
-
+                {/* Step 4: Contact Details */}
+                <div>
+                  <label style={{ display: 'block', fontSize: '0.82rem', fontFamily: 'var(--font-mono)', fontWeight: 700, color: 'var(--color-gold-dark)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '1rem' }}>
+                    04. Your Contact Details (For Instant Proposal Delivery)
+                  </label>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1.25rem' }}>
                     <div>
-                      <label style={{ display: 'block', fontSize: '0.8rem', color: '#0A0F1D', fontWeight: 700, marginBottom: '0.5rem' }}>Any Specific Questions / Case Notes?</label>
-                      <textarea
-                        rows="3"
-                        value={message}
-                        onChange={e => setMessage(e.target.value)}
-                        placeholder="Tell us briefly about your turnover, multi-state presence, or any urgent statutory deadlines..."
+                      <span style={{ display: 'block', fontSize: '0.82rem', fontWeight: 700, color: 'var(--color-navy)', marginBottom: '6px' }}>Your Full Name *</span>
+                      <input
+                        type="text"
+                        required
+                        placeholder="e.g. Deep Kalra"
+                        value={name}
+                        onChange={e => setName(e.target.value)}
                         style={{
-                          width: '100%', padding: '0.875rem 1.125rem', background: '#F8FAFC',
-                          border: '1px solid #CBD5E1', borderRadius: '8px',
-                          color: '#0F172A', fontSize: '0.925rem', fontFamily: 'var(--font-body)', outline: 'none', resize: 'vertical',
-                          fontWeight: 500
+                          width: '100%', padding: '0.9rem 1.15rem', borderRadius: 'var(--radius-md)',
+                          border: '1px solid #CBD5E1', background: '#F8FAFC', fontSize: '0.95rem',
+                          color: 'var(--color-navy)', outline: 'none'
                         }}
-                        onFocus={e => { e.target.style.borderColor = '#DFBA73'; e.target.style.background = '#FFFFFF'; e.target.style.boxShadow = '0 0 0 3px rgba(223, 186, 115, 0.2)'; }}
-                        onBlur={e => { e.target.style.borderColor = '#CBD5E1'; e.target.style.background = '#F8FAFC'; e.target.style.boxShadow = 'none'; }}
+                      />
+                    </div>
+                    <div>
+                      <span style={{ display: 'block', fontSize: '0.82rem', fontWeight: 700, color: 'var(--color-navy)', marginBottom: '6px' }}>Corporate Email *</span>
+                      <input
+                        type="email"
+                        required
+                        placeholder="counsel@enterprise.com"
+                        value={email}
+                        onChange={e => setEmail(e.target.value)}
+                        style={{
+                          width: '100%', padding: '0.9rem 1.15rem', borderRadius: 'var(--radius-md)',
+                          border: '1px solid #CBD5E1', background: '#F8FAFC', fontSize: '0.95rem',
+                          color: 'var(--color-navy)', outline: 'none'
+                        }}
+                      />
+                    </div>
+                    <div>
+                      <span style={{ display: 'block', fontSize: '0.82rem', fontWeight: 700, color: 'var(--color-navy)', marginBottom: '6px' }}>Direct Mobile / WhatsApp *</span>
+                      <input
+                        type="tel"
+                        placeholder="+91 98765 43210"
+                        value={phone}
+                        onChange={e => setPhone(e.target.value)}
+                        style={{
+                          width: '100%', padding: '0.9rem 1.15rem', borderRadius: 'var(--radius-md)',
+                          border: '1px solid #CBD5E1', background: '#F8FAFC', fontSize: '0.95rem',
+                          color: 'var(--color-navy)', outline: 'none'
+                        }}
+                      />
+                    </div>
+                    <div>
+                      <span style={{ display: 'block', fontSize: '0.82rem', fontWeight: 700, color: 'var(--color-navy)', marginBottom: '6px' }}>Company / Business Name</span>
+                      <input
+                        type="text"
+                        placeholder="e.g. Sterling Holdings Pvt Ltd"
+                        value={company}
+                        onChange={e => setCompany(e.target.value)}
+                        style={{
+                          width: '100%', padding: '0.9rem 1.15rem', borderRadius: 'var(--radius-md)',
+                          border: '1px solid #CBD5E1', background: '#F8FAFC', fontSize: '0.95rem',
+                          color: 'var(--color-navy)', outline: 'none'
+                        }}
                       />
                     </div>
                   </div>
 
-                  {error && (
-                    <div style={{ padding: '1rem', background: '#FEF2F2', border: '1px solid #EF4444', borderRadius: '8px', color: '#DC2626', fontSize: '0.875rem', fontWeight: 600 }}>
-                      {error}
-                    </div>
-                  )}
+                  <div style={{ marginTop: '1.25rem' }}>
+                    <span style={{ display: 'block', fontSize: '0.82rem', fontWeight: 700, color: 'var(--color-navy)', marginBottom: '6px' }}>Specific Requirements or Custom Brief (Optional)</span>
+                    <textarea
+                      rows="3"
+                      placeholder="Share any exact timelines, multi-state scope, or existing regulatory queries..."
+                      value={message}
+                      onChange={e => setMessage(e.target.value)}
+                      style={{
+                        width: '100%', padding: '0.9rem 1.15rem', borderRadius: 'var(--radius-md)',
+                        border: '1px solid #CBD5E1', background: '#F8FAFC', fontSize: '0.95rem',
+                        color: 'var(--color-navy)', outline: 'none', resize: 'vertical'
+                      }}
+                    />
+                  </div>
+                </div>
+
+                {/* Submit CTA */}
+                <div style={{ paddingTop: '1rem', borderTop: '1px solid rgba(13, 21, 39, 0.08)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem' }}>
+                  <div>
+                    <span style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.82rem', color: '#16a34a', fontWeight: 700 }}>
+                      🔒 256-Bit Encrypted Strict Professional Privilege
+                    </span>
+                    <span style={{ fontSize: '0.78rem', color: 'var(--color-text-muted)', display: 'block', marginTop: '2px' }}>
+                      Exact quote & roadmap delivered within 2 hours.
+                    </span>
+                  </div>
 
                   <button
                     type="submit"
                     disabled={loading}
                     style={{
-                      width: '100%', padding: '1.25rem',
-                      background: 'linear-gradient(135deg, #DFBA73 0%, #A6823B 100%)',
-                      border: 'none', borderRadius: '10px',
-                      color: '#000000', fontSize: '1.05rem', fontWeight: 800,
-                      fontFamily: 'var(--font-heading)', letterSpacing: '0.02em',
-                      display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px',
+                      padding: '1.25rem 2.5rem',
+                      borderRadius: '99px',
+                      background: 'linear-gradient(135deg, #DFBA73 0%, #C28E2B 100%)',
+                      color: '#0D1527',
+                      fontSize: '1.08rem',
+                      fontWeight: 800,
+                      border: 'none',
                       cursor: loading ? 'not-allowed' : 'pointer',
-                      boxShadow: '0 12px 32px -6px rgba(223, 186, 115, 0.45)',
-                      transition: 'all 200ms ease'
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '10px',
+                      boxShadow: '0 12px 30px rgba(223, 186, 115, 0.42)',
+                      transition: 'all 200ms cubic-bezier(0.16, 1, 0.3, 1)'
                     }}
-                    onMouseEnter={e => !loading && (e.currentTarget.style.transform = 'translateY(-2px)')}
-                    onMouseLeave={e => !loading && (e.currentTarget.style.transform = 'translateY(0px)')}
+                    onMouseEnter={e => { if (!loading) { e.currentTarget.style.transform = 'translateY(-3px)'; e.currentTarget.style.boxShadow = '0 18px 40px rgba(223, 186, 115, 0.55)'; } }}
+                    onMouseLeave={e => { if (!loading) { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 12px 30px rgba(223, 186, 115, 0.42)'; } }}
                   >
-                    <Send size={20} />
-                    <span>{loading ? 'Processing Priority Consultation Ticket...' : 'Request Priority Consultation & Fee Quote'}</span>
+                    {loading ? 'Submitting to Advisory Desk...' : (
+                      <>
+                        Get Instant Quote & Strategy Roadmap <ArrowRight size={18} />
+                      </>
+                    )}
                   </button>
-
-                  <p style={{ textAlign: 'center', fontSize: '0.785rem', color: '#64748B', margin: 0, fontWeight: 500 }}>
-                    🔒 100% Secure & Confidential. A Senior Corporate Advisor will review your profile and respond within 2 hours.
-                  </p>
-                </motion.form>
-              ) : (
-                /* Success Confirmed Ticket Card */
-                <motion.div
-                  key="success-card"
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.4 }}
-                  style={{ textAlign: 'center', padding: '2rem 1rem' }}
-                >
-                  <div style={{
-                    width: '76px', height: '76px', background: 'rgba(34, 197, 94, 0.12)',
-                    border: '2px solid #22c55e', borderRadius: '50%',
-                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    margin: '0 auto 1.5rem', boxShadow: '0 0 32px rgba(34, 197, 94, 0.2)'
-                  }}>
-                    <CheckCircle2 size={42} style={{ color: '#16a34a' }} />
-                  </div>
-
-                  <span style={{ fontSize: '0.75rem', fontFamily: 'var(--font-mono)', color: '#A6823B', letterSpacing: '0.15em', textTransform: 'uppercase', fontWeight: 800 }}>
-                    Registration Ticket Confirmed
-                  </span>
-                  <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '2.25rem', fontWeight: 800, color: '#0A0F1D', margin: '0.5rem 0 1rem', letterSpacing: '-0.02em' }}>
-                    Consultation Booked!
-                  </h3>
-                  <p style={{ color: '#475569', fontSize: '1rem', maxWidth: '440px', margin: '0 auto 1.75rem', lineHeight: '1.65' }}>
-                    Thank you, <strong style={{ color: '#0A0F1D' }}>{name}</strong>. We have logged your consultation ticket <strong style={{ color: '#A6823B', fontFamily: 'var(--font-mono)' }}>#{successData.id}</strong> directly in our senior desk CRM.
-                  </p>
-
-                  <div style={{
-                    background: '#F8FAFC', border: '1px solid #E2E8F0',
-                    borderRadius: '12px', padding: '1.5rem', textAlign: 'left', marginBottom: '2.25rem'
-                  }}>
-                    <div style={{ fontSize: '0.75rem', color: '#64748B', fontFamily: 'var(--font-mono)', textTransform: 'uppercase', marginBottom: '0.75rem', fontWeight: 700 }}>Your Selected Services Summary:</div>
-                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
-                      {selectedServices.map((s, i) => (
-                        <span key={i} style={{ background: '#0A0F1D', border: '1px solid #DFBA73', padding: '5px 12px', borderRadius: '6px', fontSize: '0.8rem', color: '#ffffff', fontWeight: 600 }}>
-                          {s}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                    <a
-                      href={getWhatsAppUrl()}
-                      target="_blank"
-                      rel="noreferrer"
-                      style={{
-                        display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px',
-                        padding: '1.125rem 1.75rem', background: '#16a34a', color: '#ffffff',
-                        borderRadius: '10px', fontWeight: 800, fontSize: '1.05rem', textDecoration: 'none',
-                        boxShadow: '0 12px 32px -4px rgba(22, 163, 74, 0.4)', transition: 'all 200ms ease',
-                        fontFamily: 'var(--font-heading)'
-                      }}
-                      onMouseEnter={e => e.currentTarget.style.transform = 'translateY(-2px)'}
-                      onMouseLeave={e => e.currentTarget.style.transform = 'translateY(0px)'}
-                    >
-                      <MessageSquare size={22} />
-                      <span>Connect on WhatsApp Right Now</span>
-                    </a>
-
-                    <button
-                      type="button"
-                      onClick={() => { setSuccessData(null); setName(''); setEmail(''); setPhone(''); setMessage(''); }}
-                      style={{
-                        width: '100%', padding: '0.875rem', background: 'transparent',
-                        border: '1px solid #CBD5E1', borderRadius: '10px', color: '#475569',
-                        fontSize: '0.9rem', fontWeight: 700, cursor: 'pointer', transition: 'all 200ms ease'
-                      }}
-                      onMouseEnter={e => e.currentTarget.style.borderColor = '#A6823B'}
-                      onMouseLeave={e => e.currentTarget.style.borderColor = '#CBD5E1'}
-                    >
-                      Book Another Inquiry
-                    </button>
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
+                </div>
+              </form>
+            )}
           </motion.div>
-
         </div>
       </div>
     </div>

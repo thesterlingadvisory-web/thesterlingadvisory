@@ -1,0 +1,16 @@
+{
+  "name": "thesterlingadvisory-root",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Root package runner for The Sterling Advisory frontend and backend",
+  "scripts": {
+    "dev": "npm --prefix frontend run dev",
+    "dev:frontend": "npm --prefix frontend run dev",
+    "dev:backend": "npm --prefix backend run dev",
+    "dev:all": "npx concurrently \"npm --prefix backend run dev\" \"npm --prefix frontend run dev\"",
+    "build": "npm --prefix frontend run build"
+  },
+  "devDependencies": {
+    "concurrently": "^9.0.0"
+  }
+}
