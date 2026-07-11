@@ -20,10 +20,12 @@ import AdminDashboard from './pages/admin/AdminDashboard';
 import HomepageBuilder from './pages/admin/HomepageBuilder';
 
 import SmoothScroll from './components/layout/SmoothScroll';
+import ScrollToTop from './components/layout/ScrollToTop';
 
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <SmoothScroll>
         <Routes>
           {/* Public Routes */}
