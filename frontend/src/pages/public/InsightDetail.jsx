@@ -129,20 +129,21 @@ export default function InsightDetail() {
         
         {/* Executive Summary Box */}
         <div style={{
-          backgroundColor: 'var(--color-secondary)',
-          border: '1px solid var(--color-gold)',
+          backgroundColor: '#ffffff',
+          border: '1px solid rgba(223, 186, 115, 0.4)',
           borderRadius: 'var(--radius-lg)',
           padding: '2.25rem',
-          marginBottom: '3rem'
+          marginBottom: '3rem',
+          boxShadow: '0 4px 20px rgba(13, 21, 39, 0.03)'
         }}>
           <span style={{
             fontFamily: 'var(--font-mono)', fontSize: '0.725rem', fontWeight: 700,
-            color: 'var(--color-gold)', textTransform: 'uppercase', letterSpacing: '0.12em',
+            color: 'var(--color-gold-dark)', textTransform: 'uppercase', letterSpacing: '0.12em',
             display: 'block', marginBottom: '0.75rem'
           }}>
             Executive Summary
           </span>
-          <p style={{ fontSize: '1.125rem', color: '#ffffff', lineHeight: '1.65', fontWeight: 500, margin: 0 }}>
+          <p style={{ fontSize: '1.125rem', color: 'var(--color-navy)', lineHeight: '1.65', fontWeight: 600, margin: 0 }}>
             {article.summary}
           </p>
         </div>
@@ -154,8 +155,8 @@ export default function InsightDetail() {
               <h2 style={{
                 fontFamily: 'var(--font-heading)',
                 fontSize: '1.65rem',
-                fontWeight: 700,
-                color: '#ffffff',
+                fontWeight: 750,
+                color: 'var(--color-navy)',
                 marginBottom: '1rem',
                 letterSpacing: '-0.01em'
               }}>
@@ -163,7 +164,7 @@ export default function InsightDetail() {
               </h2>
               <p style={{
                 fontSize: '1.0625rem',
-                color: 'rgba(255,255,255,0.8)',
+                color: 'var(--color-text-muted)',
                 lineHeight: '1.75',
                 margin: 0
               }}>
@@ -175,19 +176,20 @@ export default function InsightDetail() {
 
         {/* Action Checkpoints */}
         <div style={{
-          backgroundColor: 'var(--color-secondary)',
-          border: '1px solid rgba(255,255,255,0.08)',
+          backgroundColor: '#ffffff',
+          border: '1px solid rgba(13, 21, 39, 0.08)',
           borderRadius: 'var(--radius-lg)',
           padding: '2.5rem',
-          marginBottom: '4rem'
+          marginBottom: '4rem',
+          boxShadow: '0 4px 20px rgba(13, 21, 39, 0.03)'
         }}>
-          <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.35rem', fontWeight: 700, color: 'var(--color-gold)', marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <ShieldCheck size={20} /> Key Action Steps
+          <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.35rem', fontWeight: 750, color: 'var(--color-navy)', marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <ShieldCheck size={20} style={{ color: 'var(--color-gold-dark)' }} /> Key Action Steps
           </h3>
           <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             {article.takeaways.map((point, idx) => (
-              <li key={idx} style={{ display: 'flex', alignItems: 'flex-start', gap: '12px', fontSize: '1rem', color: '#ffffff', lineHeight: '1.5' }}>
-                <CheckCircle2 size={18} style={{ color: '#25D366', flexShrink: 0, marginTop: '2px' }} />
+              <li key={idx} style={{ display: 'flex', alignItems: 'flex-start', gap: '12px', fontSize: '1.05rem', color: 'var(--color-text-muted)', lineHeight: '1.5', fontWeight: 500 }}>
+                <CheckCircle2 size={18} style={{ color: 'var(--color-gold-dark)', flexShrink: 0, marginTop: '2px' }} />
                 <span>{point}</span>
               </li>
             ))}
