@@ -371,11 +371,31 @@ export default function PublicLayout() {
 
           {/* CTA + Mobile Toggle */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-            <div className="hidden md:inline-flex">
+            <div className="hidden md:flex items-center" style={{ gap: '0.85rem' }}>
+              <button
+                onClick={() => window.dispatchEvent(new Event('open-ai-chat'))}
+                style={{
+                  display: 'flex', alignItems: 'center', gap: '6px',
+                  padding: '0.55rem 0.875rem',
+                  fontSize: '0.8125rem', fontWeight: 650,
+                  color: 'var(--color-gold)',
+                  background: 'rgba(223, 186, 115, 0.08)',
+                  border: '1px solid rgba(223, 186, 115, 0.25)',
+                  borderRadius: 'var(--radius-md)',
+                  cursor: 'pointer',
+                  transition: 'all 200ms ease',
+                  boxShadow: '0 0 12px rgba(223, 186, 115, 0.05)'
+                }}
+                onMouseEnter={e => { e.currentTarget.style.background = 'rgba(223, 186, 115, 0.15)'; e.currentTarget.style.boxShadow = '0 0 20px rgba(223, 186, 115, 0.2)'; }}
+                onMouseLeave={e => { e.currentTarget.style.background = 'rgba(223, 186, 115, 0.08)'; e.currentTarget.style.boxShadow = '0 0 12px rgba(223, 186, 115, 0.05)'; }}
+              >
+                <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: '#25D366' }} /> Ask AI
+              </button>
+              
               <Link
                 to="/contact"
                 className="btn-gold"
-                style={{ padding: '0.625rem 1.25rem', fontSize: '0.8125rem' }}
+                style={{ padding: '0.55rem 1.25rem', fontSize: '0.8125rem' }}
               >
                 Talk to an Expert
               </Link>
@@ -598,7 +618,7 @@ export default function PublicLayout() {
         rel="noopener noreferrer"
         aria-label="Direct Counsel via WhatsApp"
         style={{
-          position: 'fixed', bottom: '2rem', right: '2rem', zIndex: 900,
+          position: 'fixed', bottom: '2rem', left: '2rem', zIndex: 900,
           padding: '0.625rem 1rem',
           borderRadius: 'var(--radius-md)',
           background: '#128C7E',

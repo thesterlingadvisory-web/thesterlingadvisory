@@ -22,6 +22,12 @@ export default function ChatWidget() {
     }
   }, [messages, isLoading, isOpen]);
 
+  useEffect(() => {
+    const handleOpen = () => setIsOpen(true);
+    window.addEventListener('open-ai-chat', handleOpen);
+    return () => window.removeEventListener('open-ai-chat', handleOpen);
+  }, []);
+
   const handleSend = async (e) => {
     e.preventDefault();
     if (!input.trim()) return;
