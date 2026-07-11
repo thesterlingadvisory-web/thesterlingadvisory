@@ -637,6 +637,29 @@ export default function Home() {
               ))}
             </AnimatePresence>
           </motion.div>
+
+          {/* Right-Aligned Explore All Services Tab/Button */}
+          <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '3.75rem' }}>
+            <Link
+              to="/services"
+              className="btn-gold"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '10px',
+                padding: '0.95rem 2.35rem',
+                fontSize: '0.96rem',
+                fontWeight: 700,
+                borderRadius: '99px',
+                boxShadow: '0 10px 28px -6px rgba(223, 186, 115, 0.45)',
+                transition: 'all 220ms cubic-bezier(0.16, 1, 0.3, 1)'
+              }}
+              onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-3px)'; e.currentTarget.style.boxShadow = '0 16px 36px -8px rgba(223, 186, 115, 0.6)'; }}
+              onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 10px 28px -6px rgba(223, 186, 115, 0.45)'; }}
+            >
+              Explore All Services <ArrowRight size={16} />
+            </Link>
+          </div>
         </div>
       </section>
 
