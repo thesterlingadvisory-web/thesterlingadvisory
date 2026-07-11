@@ -585,10 +585,10 @@ export default function Home() {
             layout
             style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(270px, 1fr))', gap: '2rem' }}
           >
-            <AnimatePresence>
+            <AnimatePresence mode="popLayout">
               {filteredServices.map((service) => (
                 <motion.div
-                  key={service.slug}
+                  key={service.title}
                   layout
                   initial={{ opacity: 0, scale: 0.98 }}
                   animate={{ opacity: 1, scale: 1 }}
