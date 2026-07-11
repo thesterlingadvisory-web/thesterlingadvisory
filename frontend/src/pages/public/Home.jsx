@@ -65,17 +65,40 @@ const heroHubTabs = [
 ];
 
 /* ── Disciplines & Value-Focused Matrix Data ── */
+/* ── Disciplines & Value-Focused Matrix Data ── */
 const servicesMatrix = [
-  { title: 'Private Limited Company Registration', category: 'setup', slug: 'private-limited-company', tag: 'Company Setup', desc: 'The most reliable corporate structure for growing companies, protecting personal assets and making raising investment easy.', fee: 'Govt Registration Included', time: '10–15 Days' },
-  { title: 'GST Registration & Tax Setup', category: 'tax', slug: 'gst-registration', tag: 'Tax Registration', desc: 'Official state and central GST registration required to bill customers PAN-India and sell across state borders.', fee: 'Direct Expert Filing', time: '3–5 Days' },
-  { title: 'Trademark Registration & Brand Shield', category: 'ip', slug: 'trademark-registration', tag: 'Brand Protection', desc: 'Protect your brand name, logo, and unique business identity against copycats across India.', fee: 'Govt Registry Fee', time: 'Same-Day Filing' },
-  { title: 'Limited Liability Partnership (LLP)', category: 'setup', slug: 'llp-registration', tag: 'Company Setup', desc: 'Combines the flexibility of a traditional partnership with the personal asset protection of a private limited company.', fee: 'Nominal Govt Fee', time: '12–15 Days' },
-  { title: 'Udyam (MSME) Registration', category: 'setup', slug: 'udyam-registration', tag: 'Government Certificate', desc: 'Secures priority bank loans, 50% discount on government trademark fees, and special startup benefits.', fee: 'Zero Government Fee', time: '1–2 Days' },
-  { title: 'FSSAI Food Safety License', category: 'license', slug: 'fssai-licence', tag: 'Trade License', desc: 'Mandatory government food license for food product manufacturers, restaurants, cafes, and cloud kitchens.', fee: 'State & Central Filing', time: '7–10 Days' },
-  { title: 'Shops & Establishments License', category: 'license', slug: 'shops-establishments', tag: 'Local License', desc: 'Official operating permit required by state labor departments for commercial offices, stores, and businesses.', fee: 'State Specific Fee', time: '3–7 Days' },
-  { title: 'EPF & ESIC Staff Registration', category: 'labor', slug: 'epf-registration', tag: 'Staff & Labor Law', desc: 'Official provident fund and employee health insurance setup required as your team grows above threshold limits.', fee: 'Complete Setup & Filing', time: '5–7 Days' },
-  { title: 'Section 8 Company Incorporation', category: 'setup', slug: 'section-8-company', tag: 'Non-Profit Setup', desc: 'Government-recognized non-profit structure ideal for charitable trusts, foundations, educational institutions, and CSR entities.', fee: 'Central License Included', time: '12–18 Days' },
-  { title: 'Import Export Code (IEC) License', category: 'license', slug: 'iec-registration', tag: 'Global Trade License', desc: 'Mandatory DGFT authorization required to import commercial goods into India or export products and IT services worldwide.', fee: 'Lifetime Govt Permit', time: '2–4 Days' },
+  /* 10 Featured Flagship Cards (Shown in 'All Services') */
+  { title: 'Private Limited Company Registration', category: 'setup', slug: 'private-limited-company', tag: 'Company Setup', desc: 'The most reliable corporate structure for growing companies, protecting personal assets and making raising investment easy.', fee: 'Govt Registration Included', time: '10–15 Days', featured: true },
+  { title: 'GST Registration & Tax Setup', category: 'tax', slug: 'gst-registration', tag: 'Tax Registration', desc: 'Official state and central GST registration required to bill customers PAN-India and sell across state borders.', fee: 'Direct Expert Filing', time: '3–5 Days', featured: true },
+  { title: 'Trademark Registration & Brand Shield', category: 'ip', slug: 'trademark-registration', tag: 'Brand Protection', desc: 'Protect your brand name, logo, and unique business identity against copycats across India.', fee: 'Govt Registry Fee', time: 'Same-Day Filing', featured: true },
+  { title: 'Limited Liability Partnership (LLP)', category: 'setup', slug: 'llp-registration', tag: 'Company Setup', desc: 'Combines the flexibility of a traditional partnership with the personal asset protection of a private limited company.', fee: 'Nominal Govt Fee', time: '12–15 Days', featured: true },
+  { title: 'Udyam (MSME) Registration', category: 'setup', slug: 'udyam-registration', tag: 'Government Certificate', desc: 'Secures priority bank loans, 50% discount on government trademark fees, and special startup benefits.', fee: 'Zero Government Fee', time: '1–2 Days', featured: true },
+  { title: 'FSSAI Food Safety License', category: 'license', slug: 'fssai-licence', tag: 'Trade License', desc: 'Mandatory government food license for food product manufacturers, restaurants, cafes, and cloud kitchens.', fee: 'State & Central Filing', time: '7–10 Days', featured: true },
+  { title: 'Shops & Establishments License', category: 'license', slug: 'shops-establishments', tag: 'Local License', desc: 'Official operating permit required by state labor departments for commercial offices, stores, and businesses.', fee: 'State Specific Fee', time: '3–7 Days', featured: true },
+  { title: 'EPF & ESIC Staff Registration', category: 'license', slug: 'epf-registration', tag: 'Staff & Labor Law', desc: 'Official provident fund and employee health insurance setup required as your team grows above threshold limits.', fee: 'Complete Setup & Filing', time: '5–7 Days', featured: true },
+  { title: 'Section 8 Company Incorporation', category: 'setup', slug: 'section-8-company', tag: 'Non-Profit Setup', desc: 'Government-recognized non-profit structure ideal for charitable trusts, foundations, educational institutions, and CSR entities.', fee: 'Central License Included', time: '12–18 Days', featured: true },
+  { title: 'Import Export Code (IEC) License', category: 'license', slug: 'iec-registration', tag: 'Global Trade License', desc: 'Mandatory DGFT authorization required to import commercial goods into India or export products and IT services worldwide.', fee: 'Lifetime Govt Permit', time: '2–4 Days', featured: true },
+
+  /* Additional Specialized Company Setup Cards */
+  { title: 'One Person Company (OPC) Registration', category: 'setup', slug: 'private-limited-company', tag: 'Solo Entrepreneur Setup', desc: 'Full corporate limited liability protection tailored for solo founders and independent consultants without requiring a second director.', fee: 'Govt Registration Included', time: '10–12 Days', featured: false },
+  { title: 'Public Limited Company Incorporation', category: 'setup', slug: 'private-limited-company', tag: 'Corporate Expansion', desc: 'Comprehensive multi-shareholder corporate entity structuring required for raising public equity or pre-IPO venture financing.', fee: 'Complete Statutory Package', time: '15–20 Days', featured: false },
+  { title: 'Foreign Subsidiary Incorporation in India', category: 'setup', slug: 'private-limited-company', tag: 'FDI & Cross-Border', desc: 'End-to-end statutory setup for international corporations establishing wholly owned Indian subsidiaries under FEMA and RBI guidelines.', fee: 'FDI Compliance Included', time: '14–21 Days', featured: false },
+
+  /* Additional Specialized Taxation & GST Cards */
+  { title: 'Corporate Income Tax & TDS Advisory', category: 'tax', slug: 'gst-registration', tag: 'Corporate Taxation', desc: 'Strategic direct tax planning, quarterly TDS return filings, and statutory tax calculations managed by Senior Corporate Advisors.', fee: 'Fixed Scope Retainer', time: 'Ongoing Support', featured: false },
+  { title: 'GST Monthly Filings & Reconciliation', category: 'tax', slug: 'gst-registration', tag: 'Indirect Tax Retainer', desc: 'Comprehensive GSTR-1 and GSTR-3B monthly return preparation with detailed Input Tax Credit (ITC) reconciliation.', fee: 'Monthly Retainer Fee', time: 'Monthly Compliance', featured: false },
+  { title: 'Tax Audit & Statutory Representation', category: 'tax', slug: 'gst-registration', tag: 'Statutory Defense', desc: 'Expert practice representation and defense before state and central tax authorities for audit queries and assessment notices.', fee: 'Specialist Practice Fee', time: 'Milestone Based', featured: false },
+  { title: 'International Taxation & Transfer Pricing', category: 'tax', slug: 'gst-registration', tag: 'Cross-Border Tax', desc: 'Transfer pricing documentation, Form 3CEB filing, and DTAA structuring for businesses engaged in international transactions.', fee: 'Senior Advisory Quote', time: 'Fixed Scope SLA', featured: false },
+
+  /* Additional Specialized Trade Licensing Cards */
+  { title: 'ISO Certification & Quality Standards', category: 'license', slug: 'shops-establishments', tag: 'Global Accreditation', desc: 'Complete statutory audit and documentation support for ISO 9001:2015, ISO 27001, and CE quality standard certifications.', fee: 'Complete Accreditation', time: '7–12 Days', featured: false },
+  { title: 'RERA & State Regulatory Permitting', category: 'license', slug: 'shops-establishments', tag: 'Real Estate & Projects', desc: 'End-to-end RERA project registration, agent certification, and municipal land zoning clearance across major Indian jurisdictions.', fee: 'Jurisdiction Specific', time: '14–20 Days', featured: false },
+  { title: 'Pollution Control Board Consent (CTE/CTO)', category: 'license', slug: 'shops-establishments', tag: 'Environmental Compliance', desc: 'State Pollution Control Board Consent to Establish (CTE) and Consent to Operate (CTO) permits for industrial units.', fee: 'State Board Filing', time: '10–15 Days', featured: false },
+
+  /* Additional Specialized Trademark & IP Cards */
+  { title: 'Trademark Objection & Hearing Defense', category: 'ip', slug: 'trademark-registration', tag: 'IP Legal Defense', desc: 'Expert legal response and hearing representation by Senior Corporate Counsel to overcome Trademark Registry examination objections.', fee: 'Fixed Legal Retainer', time: '48 Hour Response', featured: false },
+  { title: 'Copyright & Digital Design Protection', category: 'ip', slug: 'trademark-registration', tag: 'IP Asset Shield', desc: 'Official government copyright filing to legally secure your proprietary software code, creative content, architectural plans, and brand assets.', fee: 'Govt Registry Included', time: '14–18 Days', featured: false },
+  { title: 'Patent Prior-Art Search & Filing', category: 'ip', slug: 'trademark-registration', tag: 'Innovation Protection', desc: 'Comprehensive patent novelty search, provisional specification drafting, and complete Indian Patent Office representation.', fee: 'Technical Drafting Fee', time: '7–14 Days', featured: false },
 ];
 
 /* ── Fiduciary FAQ Data ── */
@@ -103,7 +126,7 @@ export default function Home() {
 
   const activeHubData = heroHubTabs.find(t => t.id === activeHeroTab) || heroHubTabs[0];
   const filteredServices = matrixCategory === 'all' 
-    ? servicesMatrix 
+    ? servicesMatrix.filter(s => s.featured) 
     : servicesMatrix.filter(s => s.category === matrixCategory);
 
   return (
