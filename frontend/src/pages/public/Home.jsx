@@ -288,7 +288,7 @@ export default function Home() {
                   </div>
 
                   {/* Persona Tabs */}
-                  <div style={{ display: 'flex', gap: '0.5rem', overflowX: 'auto', paddingBottom: '0.5rem', WebkitOverflowScrolling: 'touch', scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+                  <div style={{ display: 'flex', flexWrap: 'nowrap', gap: '0.5rem', overflowX: 'auto', paddingBottom: '0.5rem', WebkitOverflowScrolling: 'touch', scrollbarWidth: 'none', msOverflowStyle: 'none' }}
                   className="hide-scroll">
                     {heroHubTabs.map(tab => {
                       const isSelected = activeHeroTab === tab.id;

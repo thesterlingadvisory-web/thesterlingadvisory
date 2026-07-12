@@ -447,7 +447,7 @@ export default function PublicLayout() {
       {/* Mobile Menu Sidebar */}
       <AnimatePresence>
         {isMobileMenuOpen && (
-          <>
+          <div key="mobile-menu-wrapper" style={{ position: 'fixed', zIndex: 900 }}>
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -521,7 +521,7 @@ export default function PublicLayout() {
                 </Link>
               </div>
             </motion.div>
-          </>
+          </div>
         )}
       </AnimatePresence>
 
