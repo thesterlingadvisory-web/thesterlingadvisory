@@ -1,4 +1,43 @@
-import React, { useState, useEffect } from 'react';
+const fs = require('fs');
+const path = require('path');
+
+// 1. Fix AdminLayout.jsx sidebar theme
+const layoutFile = path.join(__dirname, 'frontend', 'src', 'components', 'layout', 'AdminLayout.jsx');
+let layoutContent = fs.readFileSync(layoutFile, 'utf8');
+
+// Replace the authenticated layout section to enforce hardcoded dark theme for the sidebar
+// Find the sidebar aside element
+layoutContent = layoutContent.replace(
+  /background: 'var\(--color-secondary\)',\s*borderRight: '1px solid rgba\(255,255,255,0\.08\)'/,
+  "background: '#0A0F1D',\n        borderRight: '1px solid rgba(255,255,255,0.05)'"
+);
+layoutContent = layoutContent.replace(
+  /<div style={{ minHeight: '100vh', background: 'var\(--color-primary\)', display: 'flex', color: '#ffffff' }}>/,
+  "<div style={{ minHeight: '100vh', background: '#F9FAFB', display: 'flex', color: '#111827' }}>"
+);
+
+// Top header bar (make it white)
+layoutContent = layoutContent.replace(
+  /height: '70px', background: 'var\(--color-secondary\)',\s*borderBottom: '1px solid rgba\(255,255,255,0\.08\)'/,
+  "height: '70px', background: '#FFFFFF',\n          borderBottom: '1px solid #E5E7EB'"
+);
+// Top header text color
+layoutContent = layoutContent.replace(
+  /Practitioner Desk: <strong style={{ color: '#ffffff', fontWeight: 600 }}>/,
+  "Practitioner Desk: <strong style={{ color: '#111827', fontWeight: 600 }}>"
+);
+layoutContent = layoutContent.replace(
+  /color: 'rgba\(255,255,255,0\.7\)'/,
+  "color: '#6B7280'"
+);
+
+fs.writeFileSync(layoutFile, layoutContent, 'utf8');
+
+
+// 2. Complete rewrite of AdminDashboard.jsx
+const dashFile = path.join(__dirname, 'frontend', 'src', 'pages', 'admin', 'AdminDashboard.jsx');
+
+const premiumDashboard = `import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Users, Search, Filter, Phone, Mail, MessageSquare, 
@@ -21,7 +60,7 @@ export default function AdminDashboard() {
     try {
       const token = localStorage.getItem('supabase_admin_token') || 'executive-passcode-auth';
       const res = await fetch(getApiUrl('/api/leads'), {
-        headers: { 'Authorization': `Bearer ${token}` }
+        headers: { 'Authorization': \`Bearer \${token}\` }
       });
       const json = await res.json();
       if (json && json.success) {
@@ -49,11 +88,11 @@ export default function AdminDashboard() {
 
     try {
       const token = localStorage.getItem('supabase_admin_token') || 'executive-passcode-auth';
-      await fetch(getApiUrl(`/api/leads/${leadId}`), {
+      await fetch(getApiUrl(\`/api/leads/\${leadId}\`), {
         method: 'PATCH',
         headers: { 
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
+          'Authorization': \`Bearer \${token}\`
         },
         body: JSON.stringify({ status: newStatus })
       });
@@ -71,11 +110,11 @@ export default function AdminDashboard() {
 
     try {
       const token = localStorage.getItem('supabase_admin_token') || 'executive-passcode-auth';
-      await fetch(getApiUrl(`/api/leads/${selectedLead.id}`), {
+      await fetch(getApiUrl(\`/api/leads/\${selectedLead.id}\`), {
         method: 'PATCH',
         headers: { 
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
+          'Authorization': \`Bearer \${token}\`
         },
         body: JSON.stringify({ notes: editingNotes })
       });
@@ -338,7 +377,7 @@ export default function AdminDashboard() {
                           <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end' }}>
                             {l.phone && l.phone !== 'Not Provided' && (
                               <a
-                                href={`https://wa.me/${l.phone.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(`Hello ${l.name}, senior statutory counsel following up regarding your retainer scope assessment (${l.id}) at Sterling Advisory.`)}`}
+                                href={\`https://wa.me/\${l.phone.replace(/[^0-9]/g, '')}?text=\${encodeURIComponent(\`Hello \${l.name}, senior statutory counsel following up regarding your retainer scope assessment (\${l.id}) at Sterling Advisory.\`)}\`}
                                 target="_blank"
                                 rel="noreferrer"
                                 style={{
@@ -354,7 +393,7 @@ export default function AdminDashboard() {
                               </a>
                             )}
                             <a
-                              href={`mailto:${l.email}?subject=Statutory Retainer Proposal - Sterling Advisory (${l.id})`}
+                              href={\`mailto:\${l.email}?subject=Statutory Retainer Proposal - Sterling Advisory (\${l.id})\`}
                               style={{
                                 padding: '8px', background: '#F1F5F9',
                                 borderRadius: '8px', color: '#475569',
@@ -484,3 +523,7 @@ export default function AdminDashboard() {
     </div>
   );
 }
+`;
+
+fs.writeFileSync(dashFile, premiumDashboard, 'utf8');
+console.log('Premium Admin UI redesign complete!');

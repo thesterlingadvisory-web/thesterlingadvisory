@@ -230,12 +230,12 @@ export default function AdminLayout() {
 
   // ── AUTHENTICATED INSTITUTIONAL DARK THEME ADMIN DESK ──
   return (
-    <div style={{ minHeight: '100vh', background: 'var(--color-primary)', display: 'flex', color: '#ffffff' }}>
+    <div style={{ minHeight: '100vh', background: '#F9FAFB', display: 'flex', color: '#111827' }}>
       {/* ── Left Sidebar (Dark Authority Theme) ── */}
       <aside style={{
         width: '270px', flexShrink: 0,
-        background: 'var(--color-secondary)',
-        borderRight: '1px solid rgba(255,255,255,0.08)',
+        background: '#0A0F1D',
+        borderRight: '1px solid rgba(255,255,255,0.05)',
         display: 'flex', flexDirection: 'column',
         position: 'sticky', top: 0, height: '100vh', zIndex: 40,
       }}>
@@ -321,7 +321,7 @@ export default function AdminLayout() {
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0.5rem 0.25rem' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
               <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#25D366', boxShadow: '0 0 8px #25D366' }} />
-              <span style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.7)', fontWeight: 600 }}>Registry Active</span>
+              <span style={{ fontSize: '0.75rem', color: '#6B7280', fontWeight: 600 }}>Registry Active</span>
             </div>
             <button 
               onClick={() => fetchLeadsCount()}
@@ -338,14 +338,14 @@ export default function AdminLayout() {
       <main style={{ flexGrow: 1, minWidth: 0, display: 'flex', flexDirection: 'column' }}>
         {/* Top Header Bar */}
         <header style={{
-          height: '70px', background: 'var(--color-secondary)',
-          borderBottom: '1px solid rgba(255,255,255,0.08)',
+          height: '70px', background: '#FFFFFF',
+          borderBottom: '1px solid #E5E7EB',
           padding: '0 2.5rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between',
           position: 'sticky', top: 0, zIndex: 30,
         }}>
           <div>
             <span style={{ fontSize: '0.875rem', color: 'rgba(255,255,255,0.7)' }}>
-              Practitioner Desk: <strong style={{ color: '#ffffff', fontWeight: 600 }}>Deep Kalra (Senior Partner)</strong>
+              Practitioner Desk: <strong style={{ color: '#111827', fontWeight: 600 }}>Deep Kalra (Senior Partner)</strong>
             </span>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
