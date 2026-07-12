@@ -586,15 +586,16 @@ export default function Home() {
             style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(270px, 1fr))', gap: '2rem' }}
           >
             <AnimatePresence mode="popLayout">
-              {filteredServices.map((service) => (
+              {filteredServices.map((service, index) => (
                 <motion.div
                   key={service.title}
                   layout
+                  className={index >= 4 ? 'hidden md:flex' : 'flex'}
                   initial={{ opacity: 0, scale: 0.98 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.98 }}
                   transition={{ duration: 0.2 }}
-                  style={{ display: 'flex' }}
+                  style={{ width: '100%' }}
                 >
                   <Link
                     to={`/services/${service.slug}`}

@@ -69,6 +69,7 @@ export default function PublicLayout() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isServicesOpen, setIsServicesOpen] = useState(false);
   const [activeMegaTab, setActiveMegaTab] = useState(0);
+  const [openFooterAccordion, setOpenFooterAccordion] = useState(null);
   const location = useLocation();
 
   useEffect(() => {
@@ -538,10 +539,16 @@ export default function PublicLayout() {
 
             {/* Services */}
             <div>
-              <h4 style={{ fontFamily: 'var(--font-body)', fontSize: '0.8125rem', letterSpacing: '0.02em', textTransform: 'uppercase', color: 'var(--color-gold)', marginBottom: '1.25rem', fontWeight: 600 }}>
+              <div className="md:hidden flex justify-between items-center cursor-pointer mb-3" onClick={() => setOpenFooterAccordion(openFooterAccordion === 'services' ? null : 'services')}>
+                <h4 style={{ fontFamily: 'var(--font-body)', fontSize: '0.8125rem', letterSpacing: '0.02em', textTransform: 'uppercase', color: 'var(--color-gold)', fontWeight: 600, margin: 0 }}>
+                  Our Services
+                </h4>
+                <ChevronDown size={16} style={{ color: 'var(--color-gold)', transform: openFooterAccordion === 'services' ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 200ms ease' }} />
+              </div>
+              <h4 className="hidden md:block" style={{ fontFamily: 'var(--font-body)', fontSize: '0.8125rem', letterSpacing: '0.02em', textTransform: 'uppercase', color: 'var(--color-gold)', marginBottom: '1.25rem', fontWeight: 600 }}>
                 Our Services
               </h4>
-              <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.625rem' }}>
+              <ul className={`md:flex ${openFooterAccordion === 'services' ? 'flex' : 'hidden'}`} style={{ listStyle: 'none', padding: 0, margin: 0, flexDirection: 'column', gap: '0.625rem' }}>
                 {[
                   { label: 'Company & Business Setup', href: '/services?category=business-registrations' },
                   { label: 'GST & Tax Compliance', href: '/services?category=tax-registrations' },
@@ -562,10 +569,16 @@ export default function PublicLayout() {
 
             {/* Popular Services */}
             <div>
-              <h4 style={{ fontFamily: 'var(--font-body)', fontSize: '0.8125rem', letterSpacing: '0.02em', textTransform: 'uppercase', color: 'var(--color-gold)', marginBottom: '1.25rem', fontWeight: 600 }}>
+              <div className="md:hidden flex justify-between items-center cursor-pointer mb-3 mt-2" onClick={() => setOpenFooterAccordion(openFooterAccordion === 'popular' ? null : 'popular')}>
+                <h4 style={{ fontFamily: 'var(--font-body)', fontSize: '0.8125rem', letterSpacing: '0.02em', textTransform: 'uppercase', color: 'var(--color-gold)', fontWeight: 600, margin: 0 }}>
+                  Popular Services
+                </h4>
+                <ChevronDown size={16} style={{ color: 'var(--color-gold)', transform: openFooterAccordion === 'popular' ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 200ms ease' }} />
+              </div>
+              <h4 className="hidden md:block" style={{ fontFamily: 'var(--font-body)', fontSize: '0.8125rem', letterSpacing: '0.02em', textTransform: 'uppercase', color: 'var(--color-gold)', marginBottom: '1.25rem', fontWeight: 600 }}>
                 Popular Services
               </h4>
-              <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.625rem' }}>
+              <ul className={`md:flex ${openFooterAccordion === 'popular' ? 'flex' : 'hidden'}`} style={{ listStyle: 'none', padding: 0, margin: 0, flexDirection: 'column', gap: '0.625rem' }}>
                 {[
                   { label: 'Private Limited Incorporation', href: '/services/private-limited-company' },
                   { label: 'Multi-State GST Filings', href: '/services/gst-registration' },
@@ -586,10 +599,16 @@ export default function PublicLayout() {
 
             {/* Company */}
             <div>
-              <h4 style={{ fontFamily: 'var(--font-body)', fontSize: '0.8125rem', letterSpacing: '0.02em', textTransform: 'uppercase', color: 'var(--color-gold)', marginBottom: '1.25rem', fontWeight: 600 }}>
+              <div className="md:hidden flex justify-between items-center cursor-pointer mb-3 mt-2" onClick={() => setOpenFooterAccordion(openFooterAccordion === 'company' ? null : 'company')}>
+                <h4 style={{ fontFamily: 'var(--font-body)', fontSize: '0.8125rem', letterSpacing: '0.02em', textTransform: 'uppercase', color: 'var(--color-gold)', fontWeight: 600, margin: 0 }}>
+                  Company
+                </h4>
+                <ChevronDown size={16} style={{ color: 'var(--color-gold)', transform: openFooterAccordion === 'company' ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 200ms ease' }} />
+              </div>
+              <h4 className="hidden md:block" style={{ fontFamily: 'var(--font-body)', fontSize: '0.8125rem', letterSpacing: '0.02em', textTransform: 'uppercase', color: 'var(--color-gold)', marginBottom: '1.25rem', fontWeight: 600 }}>
                 Company
               </h4>
-              <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.625rem' }}>
+              <ul className={`md:flex ${openFooterAccordion === 'company' ? 'flex' : 'hidden'}`} style={{ listStyle: 'none', padding: 0, margin: 0, flexDirection: 'column', gap: '0.625rem' }}>
                 {[
                   { label: 'About Our Firm', href: '/about' },
                   { label: 'Insights & Guides', href: '/insights' },
