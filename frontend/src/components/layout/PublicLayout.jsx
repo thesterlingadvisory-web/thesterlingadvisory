@@ -146,7 +146,7 @@ export default function PublicLayout() {
           </Link>
 
           {/* Desktop Nav */}
-          <nav style={{ display: 'flex', alignItems: 'center', gap: '2rem' }} className="hidden md:flex">
+          <nav style={{ gap: '2rem' }} className="hidden md:flex items-center">
             {/* Services Dropdown (Deloitte / Big 4 Grade Full-Width Mega-Menu) */}
             <div
               style={{ position: 'relative' }}
