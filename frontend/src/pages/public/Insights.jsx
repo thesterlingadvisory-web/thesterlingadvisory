@@ -66,7 +66,7 @@ export default function Insights() {
         paddingTop: '6.5rem', paddingBottom: '5rem',
         borderBottom: '1px solid rgba(255,255,255,0.06)'
       }}>
-        <div style={{ maxWidth: '88rem', margin: '0 auto', padding: '0 2rem' }}>
+        <div style={{ maxWidth: '88rem', margin: '0 auto', padding: '0 clamp(1rem, 5vw, 2rem)' }}>
           <div style={{ maxWidth: '52rem' }}>
             <span style={{
               fontFamily: 'var(--font-mono)', fontSize: '0.75rem', letterSpacing: '0.12em',
@@ -95,7 +95,7 @@ export default function Insights() {
 
       {/* ── Featured Quarterly Report Card ── */}
       <section style={{ padding: '5rem 0 3rem', maxWidth: '88rem', margin: '0 auto' }}>
-        <div style={{ padding: '0 2rem' }}>
+        <div style={{ padding: '0 clamp(1rem, 5vw, 2rem)' }}>
           <Link to={`/insights/${featuredInsight.slug}`} style={{ display: 'block', textDecoration: 'none' }}>
             <div
               className="card-premium"
@@ -151,7 +151,7 @@ export default function Insights() {
 
       {/* ── Publications Matrix Grid ── */}
       <section style={{ padding: '3rem 0 6rem', maxWidth: '88rem', margin: '0 auto' }}>
-        <div style={{ padding: '0 2rem' }}>
+        <div style={{ padding: '0 clamp(1rem, 5vw, 2rem)' }}>
           <div style={{ marginBottom: '2.5rem', borderBottom: '1px solid rgba(0,0,0,0.08)', paddingBottom: '1rem' }}>
             <span className="section-label" style={{ marginBottom: '0.25rem' }}>All Guides & Articles</span>
             <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.75rem', fontWeight: 700, color: 'var(--color-navy)', letterSpacing: '-0.02em' }}>
@@ -165,7 +165,7 @@ export default function Insights() {
                 key={article.id}
                 to={`/insights/${article.slug}`}
                 className="card-premium"
-                style={{ display: 'flex', flexDirection: 'column', height: '100%', padding: '2rem' }}
+                style={{ display: 'flex', flexDirection: 'column', height: '100%', padding: 'clamp(1rem, 5vw, 2rem)' }}
               >
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' }}>
                   <span style={{ fontSize: '0.7rem', fontFamily: 'var(--font-mono)', fontWeight: 600, color: 'var(--color-gold-dark)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
@@ -191,7 +191,7 @@ export default function Insights() {
 
       {/* ── Executive Briefing Subscription Card ── */}
       <section style={{ padding: '6rem 0', backgroundColor: 'var(--color-navy)', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
-        <div style={{ maxWidth: '46rem', margin: '0 auto', padding: '0 2rem', textAlign: 'center' }}>
+        <div style={{ maxWidth: '46rem', margin: '0 auto', padding: '0 clamp(1rem, 5vw, 2rem)', textAlign: 'center' }}>
           <span className="section-label">Stay Updated</span>
           <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(1.85rem, 3.5vw, 2.75rem)', fontWeight: 700, color: '#ffffff', marginBottom: '1.25rem', letterSpacing: '-0.02em', lineHeight: 1.1 }}>
             Subscribe to Business & Tax Updates

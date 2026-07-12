@@ -67,7 +67,7 @@ export default function IndustryDetail() {
       
       {/* Top Header */}
       <div style={{ backgroundColor: 'var(--color-navy)', borderBottom: '1px solid rgba(255,255,255,0.08)', paddingTop: '6.5rem', paddingBottom: '4.5rem' }}>
-        <div style={{ maxWidth: '64rem', margin: '0 auto', padding: '0 2rem' }}>
+        <div style={{ maxWidth: '64rem', margin: '0 auto', padding: '0 clamp(1rem, 5vw, 2rem)' }}>
           <Link
             to="/industries"
             style={{
@@ -112,7 +112,7 @@ export default function IndustryDetail() {
       </div>
 
       {/* Main Dossier Content */}
-      <div style={{ maxWidth: '64rem', margin: '4rem auto 0', padding: '0 2rem' }}>
+      <div style={{ maxWidth: '64rem', margin: '4rem auto 0', padding: '0 clamp(1rem, 5vw, 2rem)' }}>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '2.5rem', marginBottom: '4rem' }}>
           
           {/* Statutory Retainer Scope */}

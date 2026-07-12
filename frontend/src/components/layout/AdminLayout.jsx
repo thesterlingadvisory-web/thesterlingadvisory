@@ -106,7 +106,7 @@ export default function AdminLayout() {
         minHeight: '100vh',
         background: 'var(--color-primary)',
         display: 'flex', alignItems: 'center', justifyContent: 'center',
-        padding: '2rem', color: '#ffffff'
+        padding: 'clamp(1rem, 5vw, 2rem)', color: '#ffffff'
       }}>
         <div style={{
           width: '100%', maxWidth: '440px',

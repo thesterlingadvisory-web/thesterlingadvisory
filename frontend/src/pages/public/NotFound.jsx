@@ -4,7 +4,7 @@ import { ArrowLeft, ShieldAlert, Home, PhoneCall } from 'lucide-react';
 
 export default function NotFound() {
   return (
-    <div style={{ width: '100%', minHeight: '100vh', background: 'var(--color-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '4rem 2rem' }}>
+    <div style={{ width: '100%', minHeight: '100vh', background: 'var(--color-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '4rem clamp(1rem, 5vw, 2rem)' }}>
       <div style={{ maxWidth: '44rem', width: '100%', textAlign: 'center' }}>
         
         <div style={{

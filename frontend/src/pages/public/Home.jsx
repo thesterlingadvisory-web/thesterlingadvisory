@@ -152,7 +152,7 @@ export default function Home() {
           pointerEvents: 'none', zIndex: 0
         }} />
 
-        <div style={{ maxWidth: '92rem', margin: '0 auto', padding: '0 2rem', position: 'relative', zIndex: 1 }}>
+        <div style={{ maxWidth: '92rem', margin: '0 auto', padding: '0 clamp(1rem, 5vw, 2rem)', position: 'relative', zIndex: 1 }}>
           {/* Asymmetric Institutional Grid: Left (~42% pushed left), Right (~58% expanded wider so zero scroll needed) */}
           <div style={{
             display: 'grid',
@@ -192,7 +192,7 @@ export default function Home() {
 
               <h1 style={{
                 fontFamily: 'var(--font-heading)',
-                fontSize: 'clamp(2.6rem, 4.8vw, 4.1rem)',
+                fontSize: 'clamp(2.2rem, 4.8vw, 4.1rem)',
                 fontWeight: 800,
                 lineHeight: 1.1,
                 color: '#ffffff',
@@ -409,7 +409,7 @@ export default function Home() {
         position: 'relative',
         boxShadow: '0 12px 36px rgba(0,0,0,0.45)'
       }}>
-        <div style={{ maxWidth: '92rem', margin: '0 auto', padding: '0 2rem' }}>
+        <div style={{ maxWidth: '92rem', margin: '0 auto', padding: '0 clamp(1rem, 5vw, 2rem)' }}>
           <div style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
@@ -517,7 +517,7 @@ export default function Home() {
         position: 'relative'
       }}>
         {/* Expanded 108rem (1728px / 94vw) container to utilize full desktop screen width */}
-        <div style={{ maxWidth: '108rem', margin: '0 auto', padding: '0 3rem' }}>
+        <div style={{ maxWidth: '108rem', margin: '0 auto', padding: '0 clamp(1rem, 5vw, 3rem)' }}>
           
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: '2rem', marginBottom: '3.75rem' }}>
             <div>
@@ -538,7 +538,7 @@ export default function Home() {
                 <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: 'var(--color-gold-dark)' }} />
                 Our Practice Areas
               </span>
-              <h2 style={{ fontSize: 'clamp(2.1rem, 3.8vw, 3.1rem)', fontWeight: 800, color: 'var(--color-navy)', marginTop: '0.85rem', lineHeight: 1.15, letterSpacing: '-0.03em', maxWidth: '32ch' }}>
+              <h2 style={{ fontSize: 'clamp(1.9rem, 3.8vw, 3.1rem)', fontWeight: 800, color: 'var(--color-navy)', marginTop: '0.85rem', lineHeight: 1.15, letterSpacing: '-0.03em', maxWidth: '32ch' }}>
                 Essential services across company setup, <span style={{ fontFamily: 'var(--font-editorial)', fontStyle: 'italic', fontWeight: 400, color: 'var(--color-gold-dark)' }}>taxation, and licensing.</span>
               </h2>
               <p style={{ color: 'var(--color-text-muted)', fontSize: '1.05rem', marginTop: '0.75rem', maxWidth: '64ch', lineHeight: '1.65' }}>
@@ -691,7 +691,7 @@ export default function Home() {
           Priority 4 & 8: Left-aligned narrative anchoring vs execution steps
       ═══════════════════════════════════════════ */}
       <section style={{ padding: '5rem 0', backgroundColor: 'var(--color-navy)', position: 'relative' }}>
-        <div style={{ maxWidth: '88rem', margin: '0 auto', padding: '0 2rem' }}>
+        <div style={{ maxWidth: '88rem', margin: '0 auto', padding: '0 clamp(1rem, 5vw, 2rem)' }}>
           <div className="grid-home-matrix">
 
             {/* Left: Why Sterling Advisory */}
@@ -767,7 +767,7 @@ export default function Home() {
           Priority 2 & 6: Clean, non-robotic microcopy and subtle borders
       ═══════════════════════════════════════════ */}
       <section style={{ padding: '5rem 0', backgroundColor: 'var(--color-primary)' }}>
-        <div style={{ maxWidth: '64rem', margin: '0 auto', padding: '0 2rem' }}>
+        <div style={{ maxWidth: '64rem', margin: '0 auto', padding: '0 clamp(1rem, 5vw, 2rem)' }}>
           <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
             <span className="section-label">Frequently Asked Questions</span>
             <h2 style={{ fontSize: 'clamp(2rem, 3.8vw, 3rem)', fontWeight: 800, color: 'var(--color-navy)', lineHeight: 1.15, letterSpacing: '-0.03em' }}>
@@ -775,7 +775,7 @@ export default function Home() {
             </h2>
           </div>
 
-          <div style={{ backgroundColor: 'var(--color-secondary)', borderRadius: 'var(--radius-xl)', border: '1px solid rgba(0,0,0,0.06)', padding: '0 2rem', boxShadow: 'var(--shadow-sm)' }}>
+          <div style={{ backgroundColor: 'var(--color-secondary)', borderRadius: 'var(--radius-xl)', border: '1px solid rgba(0,0,0,0.06)', padding: '0 clamp(1rem, 5vw, 2rem)', boxShadow: 'var(--shadow-sm)' }}>
             {faqData.map((faq, i) => (
               <div key={i} style={{ borderBottom: i < faqData.length - 1 ? '1px solid rgba(0,0,0,0.06)' : 'none' }}>
                 <button
@@ -821,7 +821,7 @@ export default function Home() {
           Priority 2: "Advisory Notes / Structural briefings on corporate law and taxation."
       ═══════════════════════════════════════════ */}
       <section style={{ padding: '5rem 0', backgroundColor: 'var(--color-secondary)', borderTop: '1px solid rgba(0,0,0,0.06)' }}>
-        <div style={{ maxWidth: '88rem', margin: '0 auto', padding: '0 2rem' }}>
+        <div style={{ maxWidth: '88rem', margin: '0 auto', padding: '0 clamp(1rem, 5vw, 2rem)' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: '1.5rem', marginBottom: '3rem' }}>
             <div>
               <span className="section-label">Advisory Notes</span>
@@ -864,7 +864,7 @@ export default function Home() {
         backgroundColor: 'var(--color-navy)',
         borderTop: '1px solid rgba(255,255,255,0.08)'
       }}>
-        <div style={{ maxWidth: '56rem', margin: '0 auto', padding: '0 2rem', textAlign: 'center' }}>
+        <div style={{ maxWidth: '56rem', margin: '0 auto', padding: '0 clamp(1rem, 5vw, 2rem)', textAlign: 'center' }}>
           <span className="section-label">Get Started</span>
           <h2 style={{ fontSize: 'clamp(2.35rem, 4.8vw, 3.5rem)', fontWeight: 800, color: '#ffffff', marginBottom: '1.25rem', lineHeight: 1.15, letterSpacing: '-0.03em' }}>
             Set up your business <br />

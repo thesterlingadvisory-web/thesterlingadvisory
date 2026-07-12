@@ -50,7 +50,7 @@ export default function Industries() {
         paddingTop: '6.5rem', paddingBottom: '5rem',
         borderBottom: '1px solid rgba(255,255,255,0.06)'
       }}>
-        <div style={{ maxWidth: '88rem', margin: '0 auto', padding: '0 2rem' }}>
+        <div style={{ maxWidth: '88rem', margin: '0 auto', padding: '0 clamp(1rem, 5vw, 2rem)' }}>
           <div style={{ maxWidth: '48rem' }}>
             <span style={{
               fontFamily: 'var(--font-mono)', fontSize: '0.75rem', letterSpacing: '0.12em',
@@ -79,7 +79,7 @@ export default function Industries() {
 
       {/* ── Sector Matrix List ── */}
       <section style={{ padding: '6rem 0', maxWidth: '88rem', margin: '0 auto' }}>
-        <div style={{ padding: '0 2rem' }}>
+        <div style={{ padding: '0 clamp(1rem, 5vw, 2rem)' }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
             {industries.map((industry) => {
               const IconComponent = industry.icon;
@@ -145,7 +145,7 @@ export default function Industries() {
 
       {/* ── Call to Specialization Banner ── */}
       <section style={{ padding: '6rem 0', backgroundColor: 'var(--color-navy)', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
-        <div style={{ maxWidth: '52rem', margin: '0 auto', padding: '0 2rem', textAlign: 'center' }}>
+        <div style={{ maxWidth: '52rem', margin: '0 auto', padding: '0 clamp(1rem, 5vw, 2rem)', textAlign: 'center' }}>
           <span className="section-label">Sector Advisory Briefing</span>
           <h2 style={{ fontSize: 'clamp(1.85rem, 3.5vw, 2.75rem)', fontWeight: 700, color: '#ffffff', marginBottom: '1.25rem', letterSpacing: '-0.02em', lineHeight: 1.1 }}>
             Require specialized sector representation?

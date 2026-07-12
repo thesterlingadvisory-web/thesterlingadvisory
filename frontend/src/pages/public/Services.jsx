@@ -35,7 +35,7 @@ export default function Services() {
         paddingTop: '6rem', paddingBottom: '4.5rem',
         borderBottom: '1px solid rgba(255,255,255,0.06)'
       }}>
-        <div style={{ maxWidth: '88rem', margin: '0 auto', padding: '0 2rem' }}>
+        <div style={{ maxWidth: '88rem', margin: '0 auto', padding: '0 clamp(1rem, 5vw, 2rem)' }}>
           <div style={{ maxWidth: '44rem' }}>
             <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.35 }}>
               <span style={{
@@ -94,7 +94,7 @@ export default function Services() {
       {/* ── Category Navigation Bar ── */}
       {!categoryFilter && (
         <section style={{ background: 'var(--color-secondary)', borderBottom: '1px solid rgba(0,0,0,0.06)', padding: '1.25rem 0' }}>
-          <div style={{ maxWidth: '88rem', margin: '0 auto', padding: '0 2rem', display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+          <div style={{ maxWidth: '88rem', margin: '0 auto', padding: '0 clamp(1rem, 5vw, 2rem)', display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
             {serviceCategories.map(cat => (
               <Link
                 key={cat.id}
@@ -121,7 +121,7 @@ export default function Services() {
 
       {/* ── Services Catalog & Matrix ── */}
       <section style={{ padding: '5rem 0 6rem', maxWidth: '88rem', margin: '0 auto' }}>
-        <div style={{ padding: '0 2rem' }}>
+        <div style={{ padding: '0 clamp(1rem, 5vw, 2rem)' }}>
 
           {/* Filtered Category View */}
           {categoryFilter && displayedCategories.length > 0 ? (
@@ -241,7 +241,7 @@ export default function Services() {
         padding: '5rem 0',
         borderTop: '1px solid rgba(255,255,255,0.08)'
       }}>
-        <div style={{ maxWidth: '48rem', margin: '0 auto', padding: '0 2rem', textAlign: 'center' }}>
+        <div style={{ maxWidth: '48rem', margin: '0 auto', padding: '0 clamp(1rem, 5vw, 2rem)', textAlign: 'center' }}>
           <span className="section-label">Expert Consultation</span>
           <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(2rem, 3.8vw, 3rem)', fontWeight: 800, color: '#ffffff', marginBottom: '1.25rem', letterSpacing: '-0.03em', lineHeight: 1.15 }}>
             Need Help Choosing the Right Service?

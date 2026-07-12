@@ -251,7 +251,7 @@ export default function ServiceDetail() {
         paddingTop: '3.25rem', paddingBottom: '2.25rem',
         borderBottom: '1px solid rgba(255,255,255,0.08)'
       }}>
-        <div style={{ maxWidth: '88rem', margin: '0 auto', padding: '0 2rem' }}>
+        <div style={{ maxWidth: '88rem', margin: '0 auto', padding: '0 clamp(1rem, 5vw, 2rem)' }}>
           
           {/* Breadcrumbs */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.8125rem', color: 'var(--color-text-light)', marginBottom: '1.25rem', flexWrap: 'wrap' }}>
@@ -366,7 +366,7 @@ export default function ServiceDetail() {
 
       {/* ── Main Engagement Content & Retainer Dashboard ── */}
       <section style={{ padding: '4.5rem 0 6.5rem', maxWidth: '88rem', margin: '0 auto' }}>
-        <div style={{ padding: '0 2rem' }}>
+        <div style={{ padding: '0 clamp(1rem, 5vw, 2rem)' }}>
           <div className="grid-service-tier" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(360px, 1fr))', gap: '4rem', alignItems: 'flex-start' }}>
 
             {/* Left Column: Architectural Practice Dossier */}
@@ -495,7 +495,7 @@ export default function ServiceDetail() {
                     {/* Header Banner */}
                     <div style={{
                       backgroundColor: 'var(--color-navy)',
-                      padding: '1.5rem 2rem',
+                      padding: '1.5rem clamp(1rem, 5vw, 2rem)',
                       borderBottom: '1px solid rgba(255,255,255,0.1)',
                       display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem'
                     }}>
@@ -513,7 +513,7 @@ export default function ServiceDetail() {
                     </div>
 
                     {/* Document Items Grid */}
-                    <div style={{ padding: '2rem', display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '1.25rem' }}>
+                    <div style={{ padding: 'clamp(1rem, 5vw, 2rem)', display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '1.25rem' }}>
                       {serviceData.documents.map((doc, idx) => (
                         <div key={idx} style={{
                           display: 'flex', alignItems: 'center', gap: '12px',
@@ -536,7 +536,7 @@ export default function ServiceDetail() {
 
                     {/* Legal Note */}
                     {serviceData.documents.some(doc => doc.includes('*')) && (
-                      <div style={{ backgroundColor: 'var(--color-secondary)', padding: '1.25rem 2rem', borderTop: '1px solid rgba(10,15,29,0.06)', display: 'flex', gap: '10px', alignItems: 'center' }}>
+                      <div style={{ backgroundColor: 'var(--color-secondary)', padding: '1.25rem clamp(1rem, 5vw, 2rem)', borderTop: '1px solid rgba(10,15,29,0.06)', display: 'flex', gap: '10px', alignItems: 'center' }}>
                         <span style={{ color: 'var(--color-gold-dark)', fontWeight: 800, fontSize: '1.1rem' }}>*</span>
                         <span style={{ fontSize: '0.82rem', color: 'var(--color-text-muted)', fontStyle: 'italic', fontWeight: 500 }}>
                           Constitutional deeds, affidavits, and statutory declarations (* marked) are drafted and attested directly by our practice legal counsel.
@@ -634,7 +634,7 @@ export default function ServiceDetail() {
                 {/* Tier 2: Statutory Turnaround & Fee Bar */}
                 <div style={{
                   backgroundColor: '#ffffff',
-                  padding: '2rem 2.25rem',
+                  padding: 'clamp(1rem, 5vw, 2rem) clamp(1rem, 5vw, 2.25rem)',
                   borderTop: '1px solid rgba(255,255,255,0.1)',
                   borderBottom: '1px solid rgba(10,15,29,0.08)'
                 }}>

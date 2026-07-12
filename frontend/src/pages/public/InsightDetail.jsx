@@ -63,7 +63,7 @@ export default function InsightDetail() {
       
       {/* Top Breadcrumb Header */}
       <div style={{ backgroundColor: 'var(--color-navy)', borderBottom: '1px solid rgba(255,255,255,0.08)', paddingTop: '6.5rem', paddingBottom: '3.5rem' }}>
-        <div style={{ maxWidth: '64rem', margin: '0 auto', padding: '0 2rem' }}>
+        <div style={{ maxWidth: '64rem', margin: '0 auto', padding: '0 clamp(1rem, 5vw, 2rem)' }}>
           <Link
             to="/insights"
             style={{
@@ -125,7 +125,7 @@ export default function InsightDetail() {
       </div>
 
       {/* Main Memorandum Body */}
-      <div style={{ maxWidth: '64rem', margin: '4rem auto 0', padding: '0 2rem' }}>
+      <div style={{ maxWidth: '64rem', margin: '4rem auto 0', padding: '0 clamp(1rem, 5vw, 2rem)' }}>
         
         {/* Executive Summary Box */}
         <div style={{
@@ -201,7 +201,7 @@ export default function InsightDetail() {
           backgroundColor: 'var(--color-navy)',
           border: '1px solid var(--color-gold)',
           borderRadius: 'var(--radius-xl)',
-          padding: '3rem',
+          padding: 'clamp(1rem, 5vw, 3rem)',
           textAlign: 'center'
         }}>
           <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.85rem', fontWeight: 700, color: '#ffffff', marginBottom: '1rem' }}>

@@ -12,7 +12,7 @@ export default function About() {
         paddingTop: '6.5rem', paddingBottom: '5rem',
         borderBottom: '1px solid rgba(255,255,255,0.06)'
       }}>
-        <div style={{ maxWidth: '88rem', margin: '0 auto', padding: '0 2rem' }}>
+        <div style={{ maxWidth: '88rem', margin: '0 auto', padding: '0 clamp(1rem, 5vw, 2rem)' }}>
           <div style={{ maxWidth: '52rem' }}>
             <span style={{
               fontFamily: 'var(--font-mono)', fontSize: '0.75rem', letterSpacing: '0.12em',
@@ -68,7 +68,7 @@ export default function About() {
 
       {/* ── Fiduciary Philosophy ── */}
       <section style={{ padding: '6rem 0', backgroundColor: 'var(--color-primary)' }}>
-        <div style={{ maxWidth: '88rem', margin: '0 auto', padding: '0 2rem' }}>
+        <div style={{ maxWidth: '88rem', margin: '0 auto', padding: '0 clamp(1rem, 5vw, 2rem)' }}>
           <div className="grid-about-hero">
             <div style={{ borderTop: '2px solid var(--color-gold)', paddingTop: '1.25rem' }}>
               <span className="section-label" style={{ marginBottom: 0 }}>Our Mission</span>
@@ -92,7 +92,7 @@ export default function About() {
 
       {/* ── Core Principles ── */}
       <section style={{ padding: '6rem 0', backgroundColor: 'var(--color-secondary)', borderTop: '1px solid rgba(0,0,0,0.06)', borderBottom: '1px solid rgba(0,0,0,0.06)' }}>
-        <div style={{ maxWidth: '88rem', margin: '0 auto', padding: '0 2rem' }}>
+        <div style={{ maxWidth: '88rem', margin: '0 auto', padding: '0 clamp(1rem, 5vw, 2rem)' }}>
           <div style={{ marginBottom: '4rem' }}>
             <span className="section-label">How We Work</span>
             <h2 style={{ fontSize: 'clamp(1.85rem, 3.2vw, 2.5rem)', fontWeight: 700, color: 'var(--color-navy)', letterSpacing: '-0.02em' }}>
@@ -130,7 +130,7 @@ export default function About() {
 
       {/* ── Closing Call to Representation ── */}
       <section style={{ padding: '6rem 0', backgroundColor: 'var(--color-navy)' }}>
-        <div style={{ maxWidth: '52rem', margin: '0 auto', padding: '0 2rem', textAlign: 'center' }}>
+        <div style={{ maxWidth: '52rem', margin: '0 auto', padding: '0 clamp(1rem, 5vw, 2rem)', textAlign: 'center' }}>
           <span className="section-label">Get Started</span>
           <h2 style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', fontWeight: 700, color: '#ffffff', marginBottom: '1.25rem', letterSpacing: '-0.03em', lineHeight: 1.1 }}>
             Partner with trusted <br />

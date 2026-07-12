@@ -275,7 +275,7 @@ export default function Contact() {
 
             {/* Fiduciary Scope Box */}
             <div style={{
-              padding: '2rem',
+              padding: 'clamp(1rem, 5vw, 2rem)',
               background: 'linear-gradient(155deg, #050A14 0%, #0D1527 100%)',
               border: '1px solid rgba(223, 186, 115, 0.35)',
               borderRadius: 'var(--radius-xl)',
@@ -352,7 +352,7 @@ export default function Contact() {
                 initial={{ opacity: 0, scale: 0.96 }}
                 animate={{ opacity: 1, scale: 1 }}
                 style={{
-                  textAlign: 'center', padding: '3.5rem 2rem',
+                  textAlign: 'center', padding: '3.5rem clamp(1rem, 5vw, 2rem)',
                   background: '#F8FAFC', borderRadius: 'var(--radius-xl)',
                   border: '1px solid rgba(13, 21, 39, 0.1)'
                 }}

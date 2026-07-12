@@ -115,7 +115,7 @@ export default function PublicLayout() {
       >
         <div
           style={{
-            maxWidth: '88rem', margin: '0 auto', padding: '0 2rem',
+            maxWidth: '88rem', margin: '0 auto', padding: '0 clamp(1rem, 5vw, 2rem)',
             display: 'flex', alignItems: 'center', justifyContent: 'space-between',
             height: isScrolled ? '64px' : '76px',
             transition: 'height 200ms ease',
@@ -188,7 +188,7 @@ export default function PublicLayout() {
                       padding: '2.5rem 0',
                     }}
                   >
-                    <div style={{ maxWidth: '88rem', margin: '0 auto', padding: '0 2rem' }}>
+                    <div style={{ maxWidth: '88rem', margin: '0 auto', padding: '0 clamp(1rem, 5vw, 2rem)' }}>
                       <div style={{ display: 'grid', gridTemplateColumns: '260px 1fr 300px', gap: '3rem', alignItems: 'start' }}>
                         
                         {/* Column 1: Mega Sidebar Categories (Exact to Deloitte tabs) */}
@@ -456,7 +456,7 @@ export default function PublicLayout() {
               position: 'fixed', inset: 0, zIndex: 40,
               background: 'var(--color-navy)',
               display: 'flex', flexDirection: 'column',
-              padding: '6rem 2rem 2rem',
+              padding: 'clamp(4rem, 10vw, 6rem) clamp(1rem, 5vw, 2rem) 2rem',
             }}
             className="md:hidden"
           >
@@ -500,7 +500,7 @@ export default function PublicLayout() {
 
       {/* ── FOOTER (Priority 2 & 4: Human-crafted copywriting & 8pt spatial grid) ── */}
       <footer style={{ background: 'var(--color-navy)', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
-        <div style={{ maxWidth: '88rem', margin: '0 auto', padding: '5rem 2rem 3rem' }}>
+        <div style={{ maxWidth: '88rem', margin: '0 auto', padding: 'clamp(3rem, 10vw, 5rem) clamp(1rem, 5vw, 2rem) 3rem' }}>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '3.5rem', marginBottom: '4.5rem' }}>
 
             {/* Brand */}
