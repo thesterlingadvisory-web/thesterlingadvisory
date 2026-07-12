@@ -58,6 +58,12 @@
     scroll-behavior: smooth;
   }
 
+  @media (min-width: 768px) {
+    html {
+      zoom: 0.75;
+    }
+  }
+
   body {
     background-color: var(--color-primary);
     color: var(--color-text-main);
