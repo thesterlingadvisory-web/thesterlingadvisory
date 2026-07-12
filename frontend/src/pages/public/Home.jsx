@@ -599,9 +599,8 @@ export default function Home() {
                   <Link
                     to={`/services/${service.slug}`}
                     style={{
-                      display: 'flex', flexDirection: 'column', width: '100%',
-                      minHeight: '430px',
-                      padding: '2.35rem 1.65rem 2rem',
+                      display: 'flex', flexDirection: 'column', width: '100%', height: '100%',
+                      padding: '1.75rem 1.5rem 1.5rem',
                       borderRadius: 'var(--radius-xl)',
                       background: '#ffffff',
                       border: '1px solid rgba(13, 21, 39, 0.09)',
@@ -621,7 +620,7 @@ export default function Home() {
                     }}
                   >
                     {/* Top Metadata Row */}
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem', gap: '8px' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem', gap: '8px' }}>
                       <span style={{
                         fontSize: '0.73rem', fontWeight: 700, letterSpacing: '0.12em',
                         textTransform: 'uppercase', color: 'var(--color-gold-dark)',
@@ -637,16 +636,16 @@ export default function Home() {
                       </span>
                     </div>
 
-                    <h3 style={{ fontSize: '1.28rem', fontWeight: 750, fontFamily: 'var(--font-heading)', color: 'var(--color-navy)', marginBottom: '0.85rem', letterSpacing: '-0.02em', lineHeight: '1.3' }}>
+                    <h3 style={{ fontSize: '1.15rem', fontWeight: 750, fontFamily: 'var(--font-heading)', color: 'var(--color-navy)', marginBottom: '0.75rem', letterSpacing: '-0.02em', lineHeight: '1.3' }}>
                       {service.title}
                     </h3>
 
-                    <p style={{ fontSize: '0.92rem', color: 'var(--color-text-muted)', lineHeight: '1.68', marginBottom: '2.4rem', flexGrow: 1 }}>
+                    <p style={{ fontSize: '0.9rem', color: 'var(--color-text-muted)', lineHeight: '1.6', marginBottom: '1.5rem', flexGrow: 1 }}>
                       {service.desc}
                     </p>
 
                     {/* Bottom Footer Row: Clean separation without wrapping */}
-                    <div style={{ borderTop: '1px solid rgba(13, 21, 39, 0.07)', paddingTop: '1.35rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '12px' }}>
+                    <div style={{ borderTop: '1px solid rgba(13, 21, 39, 0.07)', paddingTop: '1.1rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '12px' }}>
                       <div style={{ flex: 1, minWidth: 0 }}>
                         <span style={{ fontSize: '0.68rem', color: 'var(--color-text-light)', display: 'block', fontFamily: 'var(--font-body)', textTransform: 'uppercase', letterSpacing: '0.04em', fontWeight: 600, marginBottom: '3px' }}>What&apos;s Included</span>
                         <span style={{ fontSize: '0.86rem', fontWeight: 650, color: 'var(--color-navy)', display: 'block', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{service.fee}</span>

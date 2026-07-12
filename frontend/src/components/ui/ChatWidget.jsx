@@ -11,6 +11,7 @@ export default function ChatWidget() {
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef(null);
+  const containerRef = useRef(null);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -28,20 +29,47 @@ export default function ChatWidget() {
     return () => window.removeEventListener('open-ai-chat', handleOpen);
   }, []);
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (containerRef.current && !containerRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    };
+    if (isOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [isOpen]);
+
   const handleSend = async (e) => {
     e.preventDefault();
     if (!input.trim()) return;
 
     const userMessage = input.trim();
     setInput('');
-    setMessages(prev => [...prev, { role: 'user', text: userMessage }]);
+    setMessages(prev => [
+      ...prev, 
+      { role: 'user', text: userMessage },
+      { role: 'model', text: '', isTyping: true }
+    ]);
     setIsLoading(true);
 
     try {
-      const history = messages.map(msg => ({
-        role: msg.role === 'model' ? 'model' : 'user',
-        parts: [{ text: msg.text }]
-      }));
+      // The Gemini API requires history to strictly alternate (user, model) and end with model.
+      const historyToSent = messages[0]?.role === 'model' ? messages.slice(1) : messages;
+      
+      const validHistory = [];
+      for (const msg of historyToSent) {
+        const role = msg.role === 'model' ? 'model' : 'user';
+        if (validHistory.length === 0 && role === 'model') continue;
+        if (validHistory.length > 0 && validHistory[validHistory.length - 1].role === role) continue;
+        validHistory.push({ role, parts: [{ text: msg.text }] });
+      }
+      if (validHistory.length > 0 && validHistory[validHistory.length - 1].role === 'user') {
+        validHistory.pop();
+      }
+
+      const history = validHistory;
 
       const res = await fetch(getApiUrl('/api/chat'), {
         method: 'POST',
@@ -52,22 +80,63 @@ export default function ChatWidget() {
         })
       });
 
-      const data = await res.json();
-      
-      if (res.ok) {
-        setMessages(prev => [...prev, { role: 'model', text: data.response }]);
-      } else {
-        setMessages(prev => [...prev, { role: 'model', text: 'Our advisory network is currently experiencing high volume. Please contact us directly via the Contact page.' }]);
+      if (!res.ok) {
+        setMessages(prev => {
+          const newMsgs = [...prev];
+          newMsgs[newMsgs.length - 1] = { role: 'model', text: 'Our advisory network is currently experiencing high volume. Please contact us directly via the Contact page.', isTyping: false };
+          return newMsgs;
+        });
+        return;
+      }
+
+      const reader = res.body.getReader();
+      const decoder = new TextDecoder();
+      let done = false;
+      let fullText = '';
+      let buffer = '';
+
+      while (!done) {
+        const { value, done: readerDone } = await reader.read();
+        done = readerDone;
+        if (value) {
+          buffer += decoder.decode(value, { stream: true });
+          const lines = buffer.split('\n');
+          buffer = lines.pop(); // keep incomplete line in buffer
+          
+          for (const line of lines) {
+            if (line.startsWith('data: ') && line !== 'data: [DONE]') {
+              try {
+                const parsed = JSON.parse(line.slice(6));
+                fullText += parsed.text;
+                setMessages(prev => {
+                  const newMsgs = [...prev];
+                  newMsgs[newMsgs.length - 1] = {
+                    ...newMsgs[newMsgs.length - 1],
+                    text: fullText,
+                    isTyping: false
+                  };
+                  return newMsgs;
+                });
+              } catch (e) {
+                console.error('Error parsing stream chunk:', e);
+              }
+            }
+          }
+        }
       }
     } catch (error) {
-      setMessages(prev => [...prev, { role: 'model', text: 'Our systems are temporarily offline. Please book a formal consultation.' }]);
+      setMessages(prev => {
+        const newMsgs = [...prev];
+        newMsgs[newMsgs.length - 1] = { role: 'model', text: 'Our systems are temporarily offline. Please book a formal consultation.', isTyping: false };
+        return newMsgs;
+      });
     } finally {
       setIsLoading(false);
     }
   };
 
   return (
-    <div style={{ position: 'fixed', bottom: '2rem', right: '2rem', zIndex: 9999 }}>
+    <div ref={containerRef} style={{ position: 'fixed', bottom: '2rem', right: '2rem', zIndex: 9999 }}>
       <AnimatePresence>
         {!isOpen && (
           <motion.button
@@ -112,9 +181,9 @@ export default function ChatWidget() {
               position: 'absolute',
               bottom: '0',
               right: '0',
-              width: '380px',
-              height: '600px',
-              maxHeight: '80vh',
+              width: '450px',
+              height: '700px',
+              maxHeight: '85vh',
               backgroundColor: '#ffffff',
               borderRadius: 'var(--radius-xl)',
               boxShadow: '0 20px 40px rgba(13, 21, 39, 0.15)',
@@ -162,15 +231,22 @@ export default function ChatWidget() {
             </div>
 
             {/* Chat Area */}
-            <div style={{
-              flex: 1,
-              overflowY: 'auto',
-              padding: '1.5rem',
-              backgroundColor: '#f8f9fa',
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '1rem'
-            }}>
+            <div 
+              data-lenis-prevent="true"
+              onWheel={(e) => e.stopPropagation()}
+              onTouchMove={(e) => e.stopPropagation()}
+              style={{
+                flex: 1,
+                minHeight: 0,
+                overflowY: 'auto',
+                padding: '1.5rem',
+                backgroundColor: '#f8f9fa',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '1rem',
+                overscrollBehavior: 'contain'
+              }}
+            >
               {messages.map((msg, idx) => (
                 <div key={idx} style={{
                   display: 'flex',
@@ -189,24 +265,23 @@ export default function ChatWidget() {
                     fontSize: '0.925rem',
                     lineHeight: '1.5'
                   }}>
-                    {msg.text}
+                    {msg.isTyping ? (
+                      <div style={{ display: 'flex', gap: '4px', alignItems: 'center', height: '22px' }}>
+                        {[0, 1, 2].map(i => (
+                          <motion.div
+                            key={i}
+                            animate={{ y: [0, -5, 0] }}
+                            transition={{ duration: 0.6, repeat: Infinity, delay: i * 0.15, ease: 'easeInOut' }}
+                            style={{ width: '6px', height: '6px', backgroundColor: 'var(--color-navy)', borderRadius: '50%', opacity: 0.6 }}
+                          />
+                        ))}
+                      </div>
+                    ) : (
+                      msg.text
+                    )}
                   </div>
                 </div>
               ))}
-              {isLoading && (
-                <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
-                  <div style={{
-                    padding: '0.85rem 1.15rem',
-                    borderRadius: '1rem',
-                    borderBottomLeftRadius: '4px',
-                    backgroundColor: '#ffffff',
-                    boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
-                    border: '1px solid rgba(13, 21, 39, 0.05)',
-                  }}>
-                    <Loader2 size={18} className="spin" style={{ color: 'var(--color-gold-dark)' }} />
-                  </div>
-                </div>
-              )}
               <div ref={messagesEndRef} />
             </div>
 

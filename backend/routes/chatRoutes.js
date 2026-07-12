@@ -24,6 +24,22 @@ router.post('/', async (req, res) => {
       return res.status(400).json({ error: 'Message is required' });
     }
 
+    // Fast-path for simple greetings to provide a literally 0ms response
+    const lowerMsg = message.trim().toLowerCase();
+    const greetings = ['hi', 'hey', 'hello', 'hi there', 'hello there', 'good morning', 'good afternoon', 'good evening'];
+    
+    if (greetings.includes(lowerMsg)) {
+      res.setHeader('Content-Type', 'text/event-stream');
+      res.setHeader('Cache-Control', 'no-cache');
+      res.setHeader('Connection', 'keep-alive');
+      res.flushHeaders();
+      
+      const cannedResponse = "Hello! I am your Senior Virtual Advisor at The Sterling Advisory. How may I assist you with your corporate or tax requirements today?";
+      res.write(`data: ${JSON.stringify({ text: cannedResponse })}\n\n`);
+      res.write('data: [DONE]\n\n');
+      return res.end();
+    }
+
     const model = genAI.getGenerativeModel({
       model: 'gemini-flash-latest',
       systemInstruction: SYSTEM_INSTRUCTION,
@@ -33,13 +49,30 @@ router.post('/', async (req, res) => {
       history: history || [],
     });
 
-    const result = await chat.sendMessage(message);
-    const responseText = result.response.text();
+    res.setHeader('Content-Type', 'text/event-stream');
+    res.setHeader('Cache-Control', 'no-cache');
+    res.setHeader('Connection', 'keep-alive');
+    res.flushHeaders();
 
-    res.json({ response: responseText });
+    const result = await chat.sendMessageStream(message);
+    
+    for await (const chunk of result.stream) {
+      const chunkText = chunk.text();
+      if (chunkText) {
+        res.write(`data: ${JSON.stringify({ text: chunkText })}\n\n`);
+      }
+    }
+    
+    res.write('data: [DONE]\n\n');
+    res.end();
+
   } catch (error) {
     console.error('Gemini API Error:', error);
-    res.status(500).json({ error: 'Failed to process your request. Please try again later.' });
+    if (!res.headersSent) {
+      res.status(500).json({ error: 'Failed to process your request. Please try again later.' });
+    } else {
+      res.end();
+    }
   }
 });
 

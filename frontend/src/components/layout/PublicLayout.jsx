@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Outlet, Link, useLocation } from 'react-router-dom';
-import { Menu, X, ChevronDown } from 'lucide-react';
+import { Menu, X, ChevronDown, Sparkles } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import ChatWidget from '../ui/ChatWidget';
 
@@ -78,9 +78,16 @@ export default function PublicLayout() {
   }, []);
 
   useEffect(() => {
+    // Temporarily disable smooth scrolling for instant route transition
+    document.documentElement.style.scrollBehavior = 'auto';
+    window.scrollTo(0, 0);
+    setTimeout(() => {
+      document.documentElement.style.scrollBehavior = '';
+    }, 10);
+    
     setIsMobileMenuOpen(false);
     setIsServicesOpen(false);
-  }, [location]);
+  }, [location.pathname]);
 
   useEffect(() => {
     document.body.style.overflow = isMobileMenuOpen ? 'hidden' : 'unset';
@@ -97,12 +104,12 @@ export default function PublicLayout() {
         className="glass-navbar"
         style={{
           position: 'sticky', top: 0, zIndex: 50,
-          background: isScrolled ? 'rgba(2, 4, 8, 0.98) !important' : 'rgba(3, 6, 12, 0.94) !important',
-          backdropFilter: 'blur(28px) saturate(180%)',
-          WebkitBackdropFilter: 'blur(28px) saturate(180%)',
-          borderBottom: isScrolled ? '1px solid rgba(223, 186, 115, 0.35) !important' : '1px solid rgba(255,255,255,0.08) !important',
-          boxShadow: isScrolled ? '0 16px 40px rgba(0,0,0,0.8)' : 'none',
-          transition: 'all 200ms ease',
+          background: isScrolled ? 'rgba(3, 6, 12, 0.85)' : 'transparent',
+          backdropFilter: isScrolled ? 'blur(16px) saturate(180%)' : 'none',
+          WebkitBackdropFilter: isScrolled ? 'blur(16px) saturate(180%)' : 'none',
+          borderBottom: isScrolled ? '1px solid rgba(255, 255, 255, 0.06)' : '1px solid transparent',
+          boxShadow: 'none',
+          transition: 'all 300ms ease',
         }}
       >
         <div
@@ -137,7 +144,7 @@ export default function PublicLayout() {
           </Link>
 
           {/* Desktop Nav */}
-          <nav style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }} className="hidden md:flex">
+          <nav style={{ display: 'flex', alignItems: 'center', gap: '2rem' }} className="hidden md:flex">
             {/* Services Dropdown (Deloitte / Big 4 Grade Full-Width Mega-Menu) */}
             <div
               style={{ position: 'relative' }}
@@ -146,16 +153,15 @@ export default function PublicLayout() {
             >
               <button style={{
                 display: 'flex', alignItems: 'center', gap: '6px',
-                padding: '0.5rem 0.875rem',
-                fontSize: '0.8125rem', fontWeight: 500, letterSpacing: '-0.01em',
-                color: (isActive('/services') || isServicesOpen) ? '#ffffff' : 'rgba(255,255,255,0.7)',
-                background: (isActive('/services') || isServicesOpen) ? 'rgba(255,255,255,0.06)' : 'transparent',
-                borderRadius: 'var(--radius-md)',
+                padding: '0.5rem 0',
+                fontSize: '0.875rem', fontWeight: 500, letterSpacing: '0',
+                color: (isActive('/services') || isServicesOpen) ? '#ffffff' : 'rgba(255,255,255,0.65)',
+                background: 'transparent',
                 border: 'none', cursor: 'pointer',
-                transition: 'color 150ms ease, background-color 150ms ease',
+                transition: 'color 200ms ease',
               }}
               >
-                Services <ChevronDown size={14} style={{ transform: isServicesOpen ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 180ms ease', color: 'var(--color-gold)' }} />
+                Services <ChevronDown size={14} style={{ transform: isServicesOpen ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 200ms ease', color: 'rgba(255,255,255,0.4)' }} />
               </button>
 
               <AnimatePresence>
@@ -354,15 +360,15 @@ export default function PublicLayout() {
                 to={item.href}
                 style={{
                   display: 'block',
-                  padding: '0.5rem 0.875rem',
-                  fontSize: '0.8125rem', fontWeight: 500, letterSpacing: '-0.01em',
-                  color: isActive(item.href) ? '#ffffff' : 'rgba(255,255,255,0.7)',
-                  background: isActive(item.href) ? 'rgba(255,255,255,0.06)' : 'transparent',
-                  borderRadius: 'var(--radius-md)',
-                  transition: 'color 150ms ease, background-color 150ms ease',
+                  padding: '0.5rem 0',
+                  fontSize: '0.875rem', fontWeight: 500, letterSpacing: '0',
+                  color: isActive(item.href) ? '#ffffff' : 'rgba(255,255,255,0.65)',
+                  background: 'transparent',
+                  textDecoration: 'none',
+                  transition: 'color 200ms ease',
                 }}
-                onMouseEnter={e => { e.currentTarget.style.color = '#ffffff'; e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.06)'; }}
-                onMouseLeave={e => { e.currentTarget.style.color = isActive(item.href) ? '#ffffff' : 'rgba(255,255,255,0.7)'; e.currentTarget.style.backgroundColor = isActive(item.href) ? 'rgba(255,255,255,0.06)' : 'transparent'; }}
+                onMouseEnter={e => { e.currentTarget.style.color = '#ffffff'; }}
+                onMouseLeave={e => { e.currentTarget.style.color = isActive(item.href) ? '#ffffff' : 'rgba(255,255,255,0.65)'; }}
               >
                 {item.label}
               </Link>
@@ -376,26 +382,46 @@ export default function PublicLayout() {
                 onClick={() => window.dispatchEvent(new Event('open-ai-chat'))}
                 style={{
                   display: 'flex', alignItems: 'center', gap: '6px',
-                  padding: '0.55rem 0.875rem',
-                  fontSize: '0.8125rem', fontWeight: 650,
-                  color: 'var(--color-gold)',
-                  background: 'rgba(223, 186, 115, 0.08)',
-                  border: '1px solid rgba(223, 186, 115, 0.25)',
-                  borderRadius: 'var(--radius-md)',
+                  padding: '0.55rem 1rem',
+                  fontSize: '0.8125rem', fontWeight: 600,
+                  color: '#ffffff',
+                  background: 'linear-gradient(135deg, rgba(223, 186, 115, 0.15) 0%, rgba(223, 186, 115, 0.03) 100%)',
+                  border: '1px solid rgba(223, 186, 115, 0.3)',
+                  borderRadius: '99px',
                   cursor: 'pointer',
-                  transition: 'all 200ms ease',
-                  boxShadow: '0 0 12px rgba(223, 186, 115, 0.05)'
+                  transition: 'all 250ms ease',
+                  boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.05)'
                 }}
-                onMouseEnter={e => { e.currentTarget.style.background = 'rgba(223, 186, 115, 0.15)'; e.currentTarget.style.boxShadow = '0 0 20px rgba(223, 186, 115, 0.2)'; }}
-                onMouseLeave={e => { e.currentTarget.style.background = 'rgba(223, 186, 115, 0.08)'; e.currentTarget.style.boxShadow = '0 0 12px rgba(223, 186, 115, 0.05)'; }}
+                onMouseEnter={e => { 
+                  e.currentTarget.style.background = 'linear-gradient(135deg, rgba(223, 186, 115, 0.25) 0%, rgba(223, 186, 115, 0.08) 100%)'; 
+                  e.currentTarget.style.transform = 'translateY(-1px)';
+                  e.currentTarget.style.boxShadow = '0 6px 16px rgba(223, 186, 115, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.1)'; 
+                }}
+                onMouseLeave={e => { 
+                  e.currentTarget.style.background = 'linear-gradient(135deg, rgba(223, 186, 115, 0.15) 0%, rgba(223, 186, 115, 0.03) 100%)'; 
+                  e.currentTarget.style.transform = 'translateY(0)';
+                  e.currentTarget.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.05)'; 
+                }}
               >
-                <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: '#25D366' }} /> Ask AI
+                <Sparkles size={14} style={{ color: 'var(--color-gold)' }} />
+                <span>Ask AI</span>
               </button>
               
               <Link
                 to="/contact"
-                className="btn-gold"
-                style={{ padding: '0.55rem 1.25rem', fontSize: '0.8125rem' }}
+                style={{
+                  padding: '0.55rem 1.1rem',
+                  fontSize: '0.875rem',
+                  fontWeight: 600,
+                  color: 'var(--color-navy)',
+                  backgroundColor: '#ffffff',
+                  borderRadius: '99px',
+                  textDecoration: 'none',
+                  transition: 'all 200ms ease',
+                  boxShadow: '0 2px 8px rgba(255,255,255,0.1)'
+                }}
+                onMouseEnter={e => { e.currentTarget.style.backgroundColor = '#f1f3f5'; e.currentTarget.style.transform = 'translateY(-1px)'; }}
+                onMouseLeave={e => { e.currentTarget.style.backgroundColor = '#ffffff'; e.currentTarget.style.transform = 'translateY(0)'; }}
               >
                 Talk to an Expert
               </Link>
