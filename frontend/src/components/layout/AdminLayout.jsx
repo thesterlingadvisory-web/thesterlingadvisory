@@ -52,7 +52,7 @@ export default function AdminLayout() {
       localStorage.setItem('sterling_admin_auth', 'true');
       setIsLoggedIn(true);
     } else {
-      setLoginError('Invalid Senior Partner ID or Passcode. Hint: ID="admin", Passcode="Sterling@2026" or your official credentials.');
+      setLoginError('Invalid Senior Partner ID or Passcode. Please try again.');
     }
   };
 
@@ -174,7 +174,7 @@ export default function AdminLayout() {
                 <label style={{ fontSize: '0.75rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--color-gold)', fontFamily: 'var(--font-mono)' }}>
                   Encrypted Passcode
                 </label>
-                <span style={{ fontSize: '0.7rem', color: 'var(--color-text-light)' }}>Default: Sterling@2026</span>
+                <span style={{ fontSize: '0.7rem', color: 'var(--color-text-light)' }}>Encrypted</span>
               </div>
               <div style={{ position: 'relative' }}>
                 <input
