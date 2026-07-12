@@ -288,7 +288,8 @@ export default function Home() {
                   </div>
 
                   {/* Persona Tabs */}
-                  <div style={{ display: 'flex', gap: '0.5rem', overflowX: 'auto', paddingBottom: '0.25rem' }}>
+                  <div style={{ display: 'flex', gap: '0.5rem', overflowX: 'auto', paddingBottom: '0.5rem', WebkitOverflowScrolling: 'touch', scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+                  className="hide-scroll">
                     {heroHubTabs.map(tab => {
                       const isSelected = activeHeroTab === tab.id;
                       return (
@@ -317,7 +318,7 @@ export default function Home() {
                 </div>
 
                 {/* Scope Details (Compact vertical padding so options fit on the face without vertical scrolling) */}
-                <div style={{ padding: '1.4rem 1.75rem' }}>
+                <div style={{ padding: 'clamp(1rem, 4vw, 1.4rem) clamp(1rem, 4vw, 1.75rem)' }}>
                   <AnimatePresence mode="wait">
                     <motion.div
                       key={activeHubData.id}
@@ -331,7 +332,7 @@ export default function Home() {
                           <span style={{ fontSize: '0.72rem', color: 'var(--color-gold)', fontFamily: 'var(--font-body)', letterSpacing: '0.04em', textTransform: 'uppercase', fontWeight: 700, display: 'block', marginBottom: '3px' }}>
                             {activeHubData.badge}
                           </span>
-                          <h3 style={{ fontSize: '1.38rem', color: '#ffffff', fontWeight: 700, letterSpacing: '-0.02em', margin: 0 }}>
+                          <h3 style={{ fontSize: 'clamp(1.15rem, 4vw, 1.38rem)', color: '#ffffff', fontWeight: 700, letterSpacing: '-0.02em', margin: 0 }}>
                             {activeHubData.title}
                           </h3>
                         </div>
@@ -353,7 +354,7 @@ export default function Home() {
                             to={reg.link}
                             style={{
                               display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-                              padding: '0.8rem 1.1rem',
+                              padding: 'clamp(0.6rem, 3vw, 0.8rem) clamp(0.75rem, 3vw, 1.1rem)',
                               backgroundColor: 'rgba(255,255,255,0.03)',
                               border: '1px solid rgba(255,255,255,0.08)',
                               borderRadius: 'var(--radius-lg)',
