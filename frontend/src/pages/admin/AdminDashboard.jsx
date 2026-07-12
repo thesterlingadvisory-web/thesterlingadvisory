@@ -7,51 +7,6 @@ import {
 } from 'lucide-react';
 import { getApiUrl } from '../../utils/api';
 
-const SAMPLE_LEADS = [
-  {
-    id: "ST-ADV-9402",
-    name: "Rajesh Sharma",
-    email: "rajesh.sharma@techventure.in",
-    phone: "+91 98110 44210",
-    company_name: "TechVenture India Pvt Ltd",
-    business_type: "Venture / Tech Startup",
-    interested_in: ["Corporate Setup (Private Limited)", "Trademark & Proprietary IP Defense"],
-    timeline: "Priority Statutory SLA (1–3 Days)",
-    message: "We need to incorporate our venture-backed structure immediately to close institutional seed financing. Also require comprehensive trademark clearance across Class 9 and 42.",
-    status: "NEW",
-    created_at: new Date(Date.now() - 3600000 * 4).toISOString(),
-    notes: "Priority institutional mandate. Senior Corporate Advisor assigned for immediate jurisdiction review."
-  },
-  {
-    id: "ST-ADV-8311",
-    name: "Ananya Mehta",
-    email: "ananya.m@flavourcraft.com",
-    phone: "+91 99201 88314",
-    company_name: "FlavourCraft Foods LLP",
-    business_type: "Retail / Physical Store",
-    interested_in: ["FSSAI Statutory Licensing", "Shops & Establishments Enrolment"],
-    timeline: "Standard Retainer Scope (1–2 Weeks)",
-    message: "Launching commercial processing kitchen and retail pastry outlet in Gurgaon. Require municipal trade licensing and Central FSSAI permit.",
-    status: "CONTACTED",
-    created_at: new Date(Date.now() - 3600000 * 24).toISOString(),
-    notes: "Formal fee proposal (₹18,500 fixed scope) transmitted via encrypted client portal."
-  },
-  {
-    id: "ST-ADV-7194",
-    name: "Vikramaditya Verma",
-    email: "vikram@vermaexports.co.in",
-    phone: "+91 98712 33901",
-    company_name: "Verma Global Trading Co.",
-    business_type: "Established Corporate Entity",
-    interested_in: ["Multi-State GST & Tax Structuring", "Retainer Governance & Annual ROC Audit"],
-    timeline: "Scope Evaluation / Assessment",
-    message: "Evaluating transition of annual statutory representation and quarterly GST audit retainers to Sterling Advisory commencing upcoming fiscal quarter.",
-    status: "IN_PROGRESS",
-    created_at: new Date(Date.now() - 3600000 * 48).toISOString(),
-    notes: "Scheduled partner-level briefing to review multi-port IEC and drawback compliance."
-  }
-];
-
 export default function AdminDashboard() {
   const [leads, setLeads] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -69,14 +24,14 @@ export default function AdminDashboard() {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       const json = await res.json();
-      if (json && json.success && json.data.length > 0) {
-        setLeads(json.data);
+      if (json && json.success) {
+        setLeads(json.data || []);
       } else {
-        setLeads(SAMPLE_LEADS);
+        setLeads([]);
       }
     } catch (err) {
-      console.warn('Backend reach error, using local fallback leads:', err.message);
-      setLeads(SAMPLE_LEADS);
+      console.warn('Backend reach error:', err.message);
+      setLeads([]);
     } finally {
       setLoading(false);
     }
@@ -162,9 +117,9 @@ export default function AdminDashboard() {
   };
 
   return (
-    <div style={{ padding: '6.5rem 2rem 5rem', maxWidth: '88rem', margin: '0 auto', color: '#ffffff', minHeight: '100vh', background: 'var(--color-primary)' }}>
+    <div style={{ padding: '6.5rem 2rem 5rem', maxWidth: '88rem', margin: '0 auto', color: '#111827', minHeight: '100vh', background: '#f3f4f6' }}>
       {/* ── Top Title & Stats Bar ── */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '2.5rem', flexWrap: 'wrap', gap: '1rem', borderBottom: '1px solid rgba(255,255,255,0.08)', paddingBottom: '1.75rem' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '2.5rem', flexWrap: 'wrap', gap: '1rem', borderBottom: '1px solid #e5e7eb', paddingBottom: '1.75rem' }}>
         <div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '0.625rem' }}>
             <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: 'var(--color-gold)', letterSpacing: '0.12em', textTransform: 'uppercase', fontWeight: 600 }}>
@@ -174,10 +129,10 @@ export default function AdminDashboard() {
               ● Encrypted Registry Feed
             </span>
           </div>
-          <h1 style={{ fontFamily: 'var(--font-heading)', fontSize: '2.25rem', fontWeight: 700, color: '#ffffff', marginBottom: '0.5rem', letterSpacing: '-0.02em' }}>
+          <h1 style={{ fontFamily: 'var(--font-heading)', fontSize: '2.25rem', fontWeight: 700, color: '#111827', marginBottom: '0.5rem', letterSpacing: '-0.02em' }}>
             Retainer & Mandate Governance Desk
           </h1>
-          <p style={{ color: 'rgba(255,255,255,0.65)', fontSize: '0.9375rem', maxWidth: '640px', lineHeight: '1.6' }}>
+          <p style={{ color: '#4b5563', fontSize: '0.9375rem', maxWidth: '640px', lineHeight: '1.6' }}>
             Supervise statutory intakes, assign Senior Advisory leads, and formulate binding representation scope quotes directly from the central registry.
           </p>
         </div>
@@ -186,11 +141,11 @@ export default function AdminDashboard() {
           onClick={() => fetchLeads()}
           style={{
             display: 'flex', alignItems: 'center', gap: '8px', padding: '0.65rem 1.25rem',
-            background: 'var(--color-secondary)', border: '1px solid rgba(255,255,255,0.15)', borderRadius: 'var(--radius-md)',
-            color: '#ffffff', fontWeight: 600, fontSize: '0.8125rem', cursor: 'pointer', transition: 'border-color 160ms ease, background-color 160ms ease',
+            background: '#ffffff', border: '1px solid #d1d5db', borderRadius: 'var(--radius-md)',
+            color: '#111827', fontWeight: 600, fontSize: '0.8125rem', cursor: 'pointer', transition: 'border-color 160ms ease, background-color 160ms ease',
           }}
-          onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--color-gold)'; e.currentTarget.style.backgroundColor = 'var(--color-navy)'; }}
-          onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.15)'; e.currentTarget.style.backgroundColor = 'var(--color-secondary)'; }}
+          onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--color-gold)'; e.currentTarget.style.backgroundColor = '#f3f4f6'; }}
+          onMouseLeave={e => { e.currentTarget.style.borderColor = '#d1d5db'; e.currentTarget.style.backgroundColor = '#ffffff'; }}
         >
           <RefreshCw size={14} style={{ color: 'var(--color-gold)' }} />
           <span>Sync Statutory Feed</span>
@@ -199,70 +154,70 @@ export default function AdminDashboard() {
 
       {/* ── Stats Matrix ── */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1.25rem', marginBottom: '2.5rem' }}>
-        <div style={{ background: 'var(--color-secondary)', border: '1px solid rgba(255,255,255,0.08)', padding: '1.5rem', borderRadius: 'var(--radius-lg)' }}>
+        <div style={{ background: '#ffffff', border: '1px solid #e5e7eb', padding: '1.5rem', borderRadius: 'var(--radius-lg)' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
-            <span style={{ fontSize: '0.725rem', fontFamily: 'var(--font-mono)', color: 'var(--color-text-light)', textTransform: 'uppercase', fontWeight: 600 }}>Total Mandates Logged</span>
-            <Users size={16} style={{ color: 'var(--color-text-light)' }} />
+            <span style={{ fontSize: '0.725rem', fontFamily: 'var(--font-mono)', color: '#4b5563', textTransform: 'uppercase', fontWeight: 600 }}>Total Mandates Logged</span>
+            <Users size={16} style={{ color: '#4b5563' }} />
           </div>
-          <div style={{ fontFamily: 'var(--font-heading)', fontSize: '2.25rem', fontWeight: 700, color: '#ffffff', letterSpacing: '-0.02em' }}>{leads.length}</div>
+          <div style={{ fontFamily: 'var(--font-heading)', fontSize: '2.25rem', fontWeight: 700, color: '#111827', letterSpacing: '-0.02em' }}>{leads.length}</div>
           <div style={{ fontSize: '0.75rem', color: 'var(--color-gold)', marginTop: '0.25rem', fontWeight: 600 }}>Active corporate registry</div>
         </div>
 
-        <div style={{ background: 'var(--color-navy)', border: '1px solid var(--color-gold)', padding: '1.5rem', borderRadius: 'var(--radius-lg)' }}>
+        <div style={{ background: '#f9fafb', border: '1px solid var(--color-gold)', padding: '1.5rem', borderRadius: 'var(--radius-lg)' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
             <span style={{ fontSize: '0.725rem', fontFamily: 'var(--font-mono)', color: 'var(--color-gold)', textTransform: 'uppercase', fontWeight: 600 }}>Priority Intake Queue</span>
             <Sparkles size={16} style={{ color: 'var(--color-gold)' }} />
           </div>
-          <div style={{ fontFamily: 'var(--font-heading)', fontSize: '2.25rem', fontWeight: 700, color: '#ffffff', letterSpacing: '-0.02em' }}>
+          <div style={{ fontFamily: 'var(--font-heading)', fontSize: '2.25rem', fontWeight: 700, color: '#111827', letterSpacing: '-0.02em' }}>
             {leads.filter(l => l.status === 'NEW').length}
           </div>
-          <div style={{ fontSize: '0.75rem', color: '#34D399', marginTop: '0.25rem', fontWeight: 600 }}>Requires immediate practice assignment</div>
+          <div style={{ fontSize: '0.75rem', color: '#059669', marginTop: '0.25rem', fontWeight: 600 }}>Requires immediate practice assignment</div>
         </div>
 
-        <div style={{ background: 'var(--color-secondary)', border: '1px solid rgba(255,255,255,0.08)', padding: '1.5rem', borderRadius: 'var(--radius-lg)' }}>
+        <div style={{ background: '#ffffff', border: '1px solid #e5e7eb', padding: '1.5rem', borderRadius: 'var(--radius-lg)' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
-            <span style={{ fontSize: '0.725rem', fontFamily: 'var(--font-mono)', color: 'var(--color-text-light)', textTransform: 'uppercase', fontWeight: 600 }}>Under Counsel Assessment</span>
-            <Clock size={16} style={{ color: '#60A5FA' }} />
+            <span style={{ fontSize: '0.725rem', fontFamily: 'var(--font-mono)', color: '#4b5563', textTransform: 'uppercase', fontWeight: 600 }}>Under Counsel Assessment</span>
+            <Clock size={16} style={{ color: '#2563eb' }} />
           </div>
-          <div style={{ fontFamily: 'var(--font-heading)', fontSize: '2.25rem', fontWeight: 700, color: '#ffffff', letterSpacing: '-0.02em' }}>
+          <div style={{ fontFamily: 'var(--font-heading)', fontSize: '2.25rem', fontWeight: 700, color: '#111827', letterSpacing: '-0.02em' }}>
             {leads.filter(l => l.status === 'CONTACTED' || l.status === 'IN_PROGRESS').length}
           </div>
-          <div style={{ fontSize: '0.75rem', color: 'var(--color-text-light)', marginTop: '0.25rem', fontWeight: 500 }}>Active scope negotiations</div>
+          <div style={{ fontSize: '0.75rem', color: '#4b5563', marginTop: '0.25rem', fontWeight: 500 }}>Active scope negotiations</div>
         </div>
 
-        <div style={{ background: 'var(--color-secondary)', border: '1px solid rgba(255,255,255,0.08)', padding: '1.5rem', borderRadius: 'var(--radius-lg)' }}>
+        <div style={{ background: '#ffffff', border: '1px solid #e5e7eb', padding: '1.5rem', borderRadius: 'var(--radius-lg)' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
-            <span style={{ fontSize: '0.725rem', fontFamily: 'var(--font-mono)', color: 'var(--color-text-light)', textTransform: 'uppercase', fontWeight: 600 }}>Active Retainers Executed</span>
-            <CheckCircle size={16} style={{ color: '#34D399' }} />
+            <span style={{ fontSize: '0.725rem', fontFamily: 'var(--font-mono)', color: '#4b5563', textTransform: 'uppercase', fontWeight: 600 }}>Active Retainers Executed</span>
+            <CheckCircle size={16} style={{ color: '#059669' }} />
           </div>
-          <div style={{ fontFamily: 'var(--font-heading)', fontSize: '2.25rem', fontWeight: 700, color: '#ffffff', letterSpacing: '-0.02em' }}>
+          <div style={{ fontFamily: 'var(--font-heading)', fontSize: '2.25rem', fontWeight: 700, color: '#111827', letterSpacing: '-0.02em' }}>
             {leads.filter(l => l.status === 'CONVERTED').length}
           </div>
-          <div style={{ fontSize: '0.75rem', color: '#34D399', marginTop: '0.25rem', fontWeight: 600 }}>Formal retainers signed</div>
+          <div style={{ fontSize: '0.75rem', color: '#059669', marginTop: '0.25rem', fontWeight: 600 }}>Formal retainers signed</div>
         </div>
       </div>
 
       {/* ── Search & Filter Control Bar ── */}
       <div style={{ 
-        background: 'var(--color-secondary)', border: '1px solid rgba(255,255,255,0.08)',
+        background: '#ffffff', border: '1px solid #e5e7eb',
         padding: '1.25rem 1.5rem', borderRadius: 'var(--radius-lg)', marginBottom: '1.5rem',
         display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem',
       }}>
         {/* Search Input */}
         <div style={{ position: 'relative', width: '380px', maxWidth: '100%' }}>
-          <Search size={15} style={{ position: 'absolute', left: '1rem', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-text-light)' }} />
+          <Search size={15} style={{ position: 'absolute', left: '1rem', top: '50%', transform: 'translateY(-50%)', color: '#4b5563' }} />
           <input
             type="text"
             placeholder="Search by entity name, ticket ID, or contact number..."
             value={search}
             onChange={e => setSearch(e.target.value)}
             style={{
-              width: '100%', background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.12)',
-              padding: '0.625rem 1rem 0.625rem 2.75rem', borderRadius: 'var(--radius-md)', color: '#ffffff', fontSize: '0.8125rem',
+              width: '100%', background: '#f9fafb', border: '1px solid #d1d5db',
+              padding: '0.625rem 1rem 0.625rem 2.75rem', borderRadius: 'var(--radius-md)', color: '#111827', fontSize: '0.8125rem',
               outline: 'none', transition: 'border-color 160ms ease'
             }}
             onFocus={e => e.target.style.borderColor = 'var(--color-gold)'}
-            onBlur={e => e.target.style.borderColor = 'rgba(255,255,255,0.12)'}
+            onBlur={e => e.target.style.borderColor = '#d1d5db'}
           />
         </div>
 
@@ -293,25 +248,25 @@ export default function AdminDashboard() {
       <div style={{ display: 'grid', gridTemplateColumns: selectedLead ? '1fr 440px' : '1fr', gap: '1.5rem', transition: 'all 200ms ease' }}>
         
         {/* Left Side: Mandates Table Card */}
-        <div style={{ background: 'var(--color-secondary)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 'var(--radius-lg)', overflow: 'hidden' }}>
+        <div style={{ background: '#ffffff', border: '1px solid #e5e7eb', borderRadius: 'var(--radius-lg)', overflow: 'hidden' }}>
           {loading ? (
-            <div style={{ padding: '4rem', textAlign: 'center', color: 'var(--color-text-light)' }}>
+            <div style={{ padding: '4rem', textAlign: 'center', color: '#4b5563' }}>
               Loading corporate intake registry...
             </div>
           ) : filteredLeads.length === 0 ? (
-            <div style={{ padding: '4rem', textAlign: 'center', color: 'var(--color-text-light)' }}>
+            <div style={{ padding: '4rem', textAlign: 'center', color: '#4b5563' }}>
               No statutory intakes match your selected criteria.
             </div>
           ) : (
             <div style={{ overflowX: 'auto' }}>
               <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
                 <thead>
-                  <tr style={{ background: 'var(--color-navy)', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
-                    <th style={{ padding: '1rem 1.25rem', fontSize: '0.725rem', fontFamily: 'var(--font-mono)', color: 'var(--color-text-light)', textTransform: 'uppercase', fontWeight: 600 }}>Intake Ticket & Entity</th>
-                    <th style={{ padding: '1rem 1.25rem', fontSize: '0.725rem', fontFamily: 'var(--font-mono)', color: 'var(--color-text-light)', textTransform: 'uppercase', fontWeight: 600 }}>Constitutional Stage</th>
-                    <th style={{ padding: '1rem 1.25rem', fontSize: '0.725rem', fontFamily: 'var(--font-mono)', color: 'var(--color-text-light)', textTransform: 'uppercase', fontWeight: 600 }}>Requested Disciplines</th>
-                    <th style={{ padding: '1rem 1.25rem', fontSize: '0.725rem', fontFamily: 'var(--font-mono)', color: 'var(--color-text-light)', textTransform: 'uppercase', fontWeight: 600 }}>Intake Status</th>
-                    <th style={{ padding: '1rem 1.25rem', fontSize: '0.725rem', fontFamily: 'var(--font-mono)', color: 'var(--color-text-light)', textTransform: 'uppercase', fontWeight: 600 }}>Practitioner Actions</th>
+                  <tr style={{ background: '#f9fafb', borderBottom: '1px solid #e5e7eb' }}>
+                    <th style={{ padding: '1rem 1.25rem', fontSize: '0.725rem', fontFamily: 'var(--font-mono)', color: '#4b5563', textTransform: 'uppercase', fontWeight: 600 }}>Intake Ticket & Entity</th>
+                    <th style={{ padding: '1rem 1.25rem', fontSize: '0.725rem', fontFamily: 'var(--font-mono)', color: '#4b5563', textTransform: 'uppercase', fontWeight: 600 }}>Constitutional Stage</th>
+                    <th style={{ padding: '1rem 1.25rem', fontSize: '0.725rem', fontFamily: 'var(--font-mono)', color: '#4b5563', textTransform: 'uppercase', fontWeight: 600 }}>Requested Disciplines</th>
+                    <th style={{ padding: '1rem 1.25rem', fontSize: '0.725rem', fontFamily: 'var(--font-mono)', color: '#4b5563', textTransform: 'uppercase', fontWeight: 600 }}>Intake Status</th>
+                    <th style={{ padding: '1rem 1.25rem', fontSize: '0.725rem', fontFamily: 'var(--font-mono)', color: '#4b5563', textTransform: 'uppercase', fontWeight: 600 }}>Practitioner Actions</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -323,7 +278,7 @@ export default function AdminDashboard() {
                         key={l.id}
                         onClick={() => { setSelectedLead(l); setEditingNotes(l.notes || ''); }}
                         style={{
-                          borderBottom: '1px solid rgba(255,255,255,0.06)',
+                          borderBottom: '1px solid #e5e7eb',
                           background: isSelected ? 'rgba(223,186,115,0.1)' : 'transparent',
                           cursor: 'pointer', transition: 'background-color 160ms ease'
                         }}
@@ -333,21 +288,21 @@ export default function AdminDashboard() {
                           <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.725rem', color: 'var(--color-gold)', fontWeight: 600, marginBottom: '3px' }}>
                             {l.id}
                           </div>
-                          <div style={{ fontSize: '0.9375rem', fontWeight: 700, color: '#ffffff', marginBottom: '2px' }}>
+                          <div style={{ fontSize: '0.9375rem', fontWeight: 700, color: '#111827', marginBottom: '2px' }}>
                             {l.name}
                           </div>
-                          <div style={{ fontSize: '0.8125rem', color: 'var(--color-text-light)' }}>
+                          <div style={{ fontSize: '0.8125rem', color: '#4b5563' }}>
                             {l.company_name}
                           </div>
                         </td>
 
                         {/* Stage */}
                         <td style={{ padding: '1.125rem 1.25rem' }}>
-                          <span style={{ fontSize: '0.85rem', color: '#ffffff', fontWeight: 600, display: 'block', marginBottom: '4px' }}>
+                          <span style={{ fontSize: '0.85rem', color: '#111827', fontWeight: 600, display: 'block', marginBottom: '4px' }}>
                             {l.business_type}
                           </span>
-                          <span style={{ fontSize: '0.75rem', color: 'var(--color-text-light)' }}>
-                            SLA: <strong style={{ color: '#60A5FA' }}>{l.timeline}</strong>
+                          <span style={{ fontSize: '0.75rem', color: '#4b5563' }}>
+                            SLA: <strong style={{ color: '#2563eb' }}>{l.timeline}</strong>
                           </span>
                         </td>
 
@@ -356,8 +311,8 @@ export default function AdminDashboard() {
                           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px', maxWidth: '280px' }}>
                             {(Array.isArray(l.interested_in) ? l.interested_in : [l.interested_in]).map((srv, idx) => (
                               <span key={idx} style={{
-                                background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)',
-                                padding: '3px 8px', borderRadius: '4px', fontSize: '0.725rem', color: '#ffffff', fontWeight: 500
+                                background: '#f3f4f6', border: '1px solid #d1d5db',
+                                padding: '3px 8px', borderRadius: '4px', fontSize: '0.725rem', color: '#111827', fontWeight: 500
                               }}>
                                 {srv}
                               </span>
@@ -377,11 +332,11 @@ export default function AdminDashboard() {
                               cursor: 'pointer', outline: 'none'
                             }}
                           >
-                            <option value="NEW" style={{ background: 'var(--color-navy)', color: '#ffffff' }}>PRIORITY INTAKE</option>
-                            <option value="CONTACTED" style={{ background: 'var(--color-navy)', color: '#ffffff' }}>COUNSEL CONTACTED</option>
-                            <option value="IN_PROGRESS" style={{ background: 'var(--color-navy)', color: '#ffffff' }}>UNDER ASSESSMENT</option>
-                            <option value="CONVERTED" style={{ background: 'var(--color-navy)', color: '#ffffff' }}>RETAINER ACTIVE</option>
-                            <option value="CLOSED" style={{ background: 'var(--color-navy)', color: '#ffffff' }}>MANDATE CLOSED</option>
+                            <option value="NEW" style={{ background: '#f9fafb', color: '#111827' }}>PRIORITY INTAKE</option>
+                            <option value="CONTACTED" style={{ background: '#f9fafb', color: '#111827' }}>COUNSEL CONTACTED</option>
+                            <option value="IN_PROGRESS" style={{ background: '#f9fafb', color: '#111827' }}>UNDER ASSESSMENT</option>
+                            <option value="CONVERTED" style={{ background: '#f9fafb', color: '#111827' }}>RETAINER ACTIVE</option>
+                            <option value="CLOSED" style={{ background: '#f9fafb', color: '#111827' }}>MANDATE CLOSED</option>
                           </select>
                         </td>
 
@@ -408,8 +363,8 @@ export default function AdminDashboard() {
                               href={`mailto:${l.email}?subject=Statutory Retainer Proposal - Sterling Advisory (${l.id})`}
                               title="Transmit Formal Scope Email"
                               style={{
-                                padding: '6px 10px', background: 'rgba(255,255,255,0.06)',
-                                border: '1px solid rgba(255,255,255,0.15)', borderRadius: 'var(--radius-sm)', color: '#ffffff',
+                                padding: '6px 10px', background: '#f3f4f6',
+                                border: '1px solid #d1d5db', borderRadius: 'var(--radius-sm)', color: '#111827',
                                 display: 'flex', alignItems: 'center', gap: '4px', fontSize: '0.75rem', textDecoration: 'none',
                                 fontWeight: 500
                               }}
@@ -436,23 +391,23 @@ export default function AdminDashboard() {
               exit={{ opacity: 0, x: 16 }}
               transition={{ duration: 0.2 }}
               style={{
-                background: 'var(--color-secondary)', border: '1px solid var(--color-gold)',
+                background: '#ffffff', border: '1px solid var(--color-gold)',
                 borderRadius: 'var(--radius-lg)', padding: '1.75rem', display: 'flex', flexDirection: 'column',
                 position: 'sticky', top: '6.5rem', maxHeight: 'calc(100vh - 8rem)', overflowY: 'auto',
               }}
             >
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1.25rem', borderBottom: '1px solid rgba(255,255,255,0.08)', paddingBottom: '1rem' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1.25rem', borderBottom: '1px solid #e5e7eb', paddingBottom: '1rem' }}>
                 <div>
                   <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.725rem', color: 'var(--color-gold)', fontWeight: 600 }}>
                     {selectedLead.id}
                   </span>
-                  <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.35rem', fontWeight: 700, color: '#ffffff', marginTop: '2px' }}>
+                  <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.35rem', fontWeight: 700, color: '#111827', marginTop: '2px' }}>
                     {selectedLead.name}
                   </h3>
                 </div>
                 <button
                   onClick={() => setSelectedLead(null)}
-                  style={{ background: 'none', border: 'none', color: 'var(--color-text-light)', cursor: 'pointer', fontSize: '1.2rem' }}
+                  style={{ background: 'none', border: 'none', color: '#4b5563', cursor: 'pointer', fontSize: '1.2rem' }}
                 >
                   ✕
                 </button>
@@ -461,26 +416,26 @@ export default function AdminDashboard() {
               {/* Client Profile Details */}
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.875rem', marginBottom: '1.5rem' }}>
                 <div>
-                  <div style={{ fontSize: '0.75rem', color: 'var(--color-text-light)', fontWeight: 600 }}>Entity / Corporate Name</div>
-                  <div style={{ fontSize: '0.9375rem', color: '#ffffff', fontWeight: 600 }}>{selectedLead.company_name}</div>
+                  <div style={{ fontSize: '0.75rem', color: '#4b5563', fontWeight: 600 }}>Entity / Corporate Name</div>
+                  <div style={{ fontSize: '0.9375rem', color: '#111827', fontWeight: 600 }}>{selectedLead.company_name}</div>
                 </div>
                 <div>
-                  <div style={{ fontSize: '0.75rem', color: 'var(--color-text-light)', fontWeight: 600 }}>Contact Credentials</div>
-                  <div style={{ fontSize: '0.875rem', color: '#ffffff', fontWeight: 500 }}>{selectedLead.phone}</div>
+                  <div style={{ fontSize: '0.75rem', color: '#4b5563', fontWeight: 600 }}>Contact Credentials</div>
+                  <div style={{ fontSize: '0.875rem', color: '#111827', fontWeight: 500 }}>{selectedLead.phone}</div>
                   <div style={{ fontSize: '0.875rem', color: 'var(--color-gold)', fontWeight: 500 }}>{selectedLead.email}</div>
                 </div>
                 <div>
-                  <div style={{ fontSize: '0.75rem', color: 'var(--color-text-light)', fontWeight: 600 }}>Constitutional Stage & SLA</div>
-                  <div style={{ fontSize: '0.875rem', color: '#ffffff' }}>{selectedLead.business_type} • <span style={{ color: '#60A5FA', fontWeight: 600 }}>{selectedLead.timeline}</span></div>
+                  <div style={{ fontSize: '0.75rem', color: '#4b5563', fontWeight: 600 }}>Constitutional Stage & SLA</div>
+                  <div style={{ fontSize: '0.875rem', color: '#111827' }}>{selectedLead.business_type} • <span style={{ color: '#2563eb', fontWeight: 600 }}>{selectedLead.timeline}</span></div>
                 </div>
               </div>
 
               {/* Specific Requirements / Notes */}
               <div style={{ marginBottom: '1.5rem' }}>
-                <div style={{ fontSize: '0.75rem', color: 'var(--color-text-light)', fontWeight: 600, marginBottom: '0.375rem' }}>Client Scope Briefing</div>
+                <div style={{ fontSize: '0.75rem', color: '#4b5563', fontWeight: 600, marginBottom: '0.375rem' }}>Client Scope Briefing</div>
                 <div style={{
-                  padding: '1rem', background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)',
-                  borderRadius: 'var(--radius-md)', fontSize: '0.875rem', color: 'rgba(255,255,255,0.85)', lineHeight: '1.6'
+                  padding: '1rem', background: '#f9fafb', border: '1px solid #e5e7eb',
+                  borderRadius: 'var(--radius-md)', fontSize: '0.875rem', color: '#374151', lineHeight: '1.6'
                 }}>
                   {selectedLead.message || 'No specific statutory notes transmitted during initial registration.'}
                 </div>
@@ -492,19 +447,19 @@ export default function AdminDashboard() {
                   <span style={{ fontSize: '0.725rem', fontWeight: 600, color: 'var(--color-gold)', fontFamily: 'var(--font-mono)', textTransform: 'uppercase' }}>
                     Partner & Counsel Notes
                   </span>
-                  <span style={{ fontSize: '0.65rem', color: 'var(--color-text-light)' }}>Encrypted Fiduciary Record</span>
+                  <span style={{ fontSize: '0.65rem', color: '#4b5563' }}>Encrypted Fiduciary Record</span>
                 </div>
                 <textarea
                   value={editingNotes}
                   onChange={e => setEditingNotes(e.target.value)}
                   placeholder="Record case assessment, quote transmitted, or next statutory milestone here..."
                   style={{
-                    width: '100%', minHeight: '120px', background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.12)',
-                    borderRadius: 'var(--radius-md)', padding: '0.75rem', color: '#ffffff', fontSize: '0.875rem', outline: 'none',
+                    width: '100%', minHeight: '120px', background: '#f9fafb', border: '1px solid #d1d5db',
+                    borderRadius: 'var(--radius-md)', padding: '0.75rem', color: '#111827', fontSize: '0.875rem', outline: 'none',
                     resize: 'vertical', marginBottom: '0.75rem', transition: 'border-color 160ms ease'
                   }}
                   onFocus={e => e.target.style.borderColor = 'var(--color-gold)'}
-                  onBlur={e => e.target.style.borderColor = 'rgba(255,255,255,0.12)'}
+                  onBlur={e => e.target.style.borderColor = '#d1d5db'}
                 />
                 <button
                   onClick={handleSaveNotes}
