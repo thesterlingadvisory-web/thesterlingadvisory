@@ -104,35 +104,35 @@ export default function AdminLayout() {
     return (
       <div style={{
         minHeight: '100vh',
-        background: 'var(--color-primary)',
+        background: '#f3f4f6',
         display: 'flex', alignItems: 'center', justifyContent: 'center',
-        padding: 'clamp(1rem, 5vw, 2rem)', color: '#ffffff'
+        padding: 'clamp(1rem, 5vw, 2rem)', color: '#111827'
       }}>
         <div style={{
           width: '100%', maxWidth: '440px',
-          background: 'var(--color-secondary)',
+          background: '#ffffff',
           borderRadius: 'var(--radius-xl)',
           padding: '3rem 2.5rem',
           boxShadow: 'var(--shadow-modal)',
-          border: '1px solid rgba(223,186,115,0.3)'
+          border: '1px solid #e5e7eb'
         }}>
           {/* Header Brand */}
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', marginBottom: '2.25rem' }}>
             <div style={{
               width: '56px', height: '56px',
-              background: 'var(--color-navy)',
-              border: '1px solid var(--color-gold)',
+              background: '#fef3c7',
+              border: '1px solid #f59e0b',
               borderRadius: 'var(--radius-md)',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
-              boxShadow: '0 8px 20px rgba(223, 186, 115, 0.25)',
+              boxShadow: '0 4px 10px rgba(245, 158, 11, 0.15)',
               marginBottom: '1rem'
             }}>
               <Lock size={24} style={{ color: 'var(--color-gold)' }} />
             </div>
-            <h1 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.65rem', fontWeight: 700, color: '#ffffff', marginBottom: '0.35rem', letterSpacing: '-0.02em' }}>
+            <h1 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.65rem', fontWeight: 700, color: '#111827', marginBottom: '0.35rem', letterSpacing: '-0.02em' }}>
               Sterling Partner Portal
             </h1>
-            <p style={{ fontSize: '0.875rem', color: 'rgba(255,255,255,0.65)', lineHeight: '1.5' }}>
+            <p style={{ fontSize: '0.875rem', color: '#4b5563', lineHeight: '1.5' }}>
               Restricted Fiduciary Access. Please verify your practitioner identity to access statutory client intakes.
             </p>
           </div>
@@ -150,22 +150,22 @@ export default function AdminLayout() {
 
             <div>
               <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--color-gold)', fontFamily: 'var(--font-mono)', marginBottom: '0.5rem' }}>
-                Practitioner ID / Email
+                Login ID
               </label>
               <input
                 type="text"
-                placeholder="e.g. admin or counsel@thesterlingadvisory.com"
+                placeholder="Enter your Login ID"
                 value={loginId}
                 onChange={e => setLoginId(e.target.value)}
                 required
                 style={{
                   width: '100%', padding: '0.875rem 1rem',
-                  borderRadius: 'var(--radius-md)', border: '1px solid rgba(255,255,255,0.15)',
-                  background: 'rgba(255,255,255,0.04)', color: '#ffffff', fontSize: '0.9375rem',
+                  borderRadius: 'var(--radius-md)', border: '1px solid #d1d5db',
+                  background: '#f9fafb', color: '#111827', fontSize: '0.9375rem',
                   outline: 'none', transition: 'border-color 160ms ease'
                 }}
                 onFocus={e => e.target.style.borderColor = 'var(--color-gold)'}
-                onBlur={e => e.target.style.borderColor = 'rgba(255,255,255,0.15)'}
+                onBlur={e => e.target.style.borderColor = '#d1d5db'}
               />
             </div>
 
@@ -185,12 +185,12 @@ export default function AdminLayout() {
                   required
                   style={{
                     width: '100%', padding: '0.875rem 2.75rem 0.875rem 1rem',
-                    borderRadius: 'var(--radius-md)', border: '1px solid rgba(255,255,255,0.15)',
-                    background: 'rgba(255,255,255,0.04)', color: '#ffffff', fontSize: '0.9375rem',
+                    borderRadius: 'var(--radius-md)', border: '1px solid #d1d5db',
+                    background: '#f9fafb', color: '#111827', fontSize: '0.9375rem',
                     outline: 'none', transition: 'border-color 160ms ease'
                   }}
                   onFocus={e => e.target.style.borderColor = 'var(--color-gold)'}
-                  onBlur={e => e.target.style.borderColor = 'rgba(255,255,255,0.15)'}
+                  onBlur={e => e.target.style.borderColor = '#d1d5db'}
                 />
                 <button
                   type="button"
@@ -218,7 +218,7 @@ export default function AdminLayout() {
             </button>
           </form>
 
-          <div style={{ marginTop: '2rem', paddingTop: '1.25rem', borderTop: '1px solid rgba(255,255,255,0.1)', textAlign: 'center' }}>
+          <div style={{ marginTop: '2rem', paddingTop: '1.25rem', borderTop: '1px solid #e5e7eb', textAlign: 'center' }}>
             <Link to="/" style={{ fontSize: '0.8125rem', color: 'var(--color-text-light)', fontWeight: 600, textDecoration: 'none' }}>
               ← Return to Institutional Website
             </Link>
