@@ -1,4 +1,9 @@
-import React from 'react';
+const fs = require('fs');
+const path = require('path');
+
+const notFoundFile = path.join(__dirname, 'frontend', 'src', 'pages', 'public', 'NotFound.jsx');
+
+const premiumNotFound = `import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, ShieldAlert, Home, PhoneCall, Compass } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -137,3 +142,7 @@ export default function NotFound() {
     </div>
   );
 }
+`;
+
+fs.writeFileSync(notFoundFile, premiumNotFound, 'utf8');
+console.log('Premium 404 page implemented!');
