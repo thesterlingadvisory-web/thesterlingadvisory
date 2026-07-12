@@ -156,7 +156,7 @@ export default function Home() {
           {/* Asymmetric Institutional Grid: Left (~42% pushed left), Right (~58% expanded wider so zero scroll needed) */}
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(380px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
             gap: '3.5rem',
             alignItems: 'center'
           }}
@@ -412,7 +412,7 @@ export default function Home() {
         <div style={{ maxWidth: '92rem', margin: '0 auto', padding: '0 2rem' }}>
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(230px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
             gap: '1.75rem',
             alignItems: 'center'
           }}>

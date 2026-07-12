@@ -136,7 +136,7 @@ export default function ChatWidget() {
   };
 
   return (
-    <div ref={containerRef} style={{ position: 'fixed', bottom: '2rem', right: '2rem', zIndex: 9999 }}>
+    <div ref={containerRef} style={{ position: 'fixed', bottom: 'clamp(1rem, 4vw, 2rem)', right: 'clamp(1rem, 4vw, 2rem)', zIndex: 9999, display: 'flex', flexDirection: 'column', alignItems: 'flex-end' }}>
       <AnimatePresence>
         {!isOpen && (
           <motion.button
@@ -181,9 +181,10 @@ export default function ChatWidget() {
               position: 'absolute',
               bottom: '0',
               right: '0',
-              width: '450px',
-              height: '700px',
-              maxHeight: '85vh',
+              width: 'calc(100vw - 2rem)',
+              maxWidth: '450px',
+              height: 'calc(100dvh - 2rem)',
+              maxHeight: '700px',
               backgroundColor: '#ffffff',
               borderRadius: 'var(--radius-xl)',
               boxShadow: '0 20px 40px rgba(13, 21, 39, 0.15)',

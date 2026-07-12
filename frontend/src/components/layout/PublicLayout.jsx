@@ -122,25 +122,26 @@ export default function PublicLayout() {
         >
           {/* Logo */}
           <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: '12px', textDecoration: 'none' }}>
-            <div style={{
-              width: '32px', height: '32px',
-              backgroundColor: 'var(--color-gold)',
-              borderRadius: 'var(--radius-sm)',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              fontSize: '15px', fontWeight: 700, color: 'var(--color-navy)',
-              fontFamily: 'var(--font-body)',
-              letterSpacing: '-0.02em',
-              flexShrink: 0,
-            }}>S</div>
+            <img 
+              src="/logo.png" 
+              alt="Sterling Advisory Logo" 
+              style={{
+                width: '42px', 
+                height: '42px', 
+                objectFit: 'cover',
+                borderRadius: '8px',
+                flexShrink: 0,
+                boxShadow: '0 4px 12px rgba(0, 0, 0, 0.2)'
+              }}
+            />
             <span style={{
               fontFamily: 'var(--font-heading)',
               fontWeight: 700,
               fontSize: '1.18rem',
               color: '#ffffff',
               letterSpacing: '-0.02em',
-            }}>
-              Sterling <span style={{ color: 'var(--color-gold)' }}>Advisory</span>
-            </span>
+              lineHeight: 1
+            }}>Sterling Advisory</span>
           </Link>
 
           {/* Desktop Nav */}
