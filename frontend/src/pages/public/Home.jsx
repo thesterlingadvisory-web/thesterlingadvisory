@@ -718,11 +718,10 @@ export default function Home() {
                   key={service.title}
                   layout
                   className={index >= 4 ? 'hidden md:flex' : 'flex'}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-40px" }}
-                  exit={{ opacity: 0, scale: 0.98 }}
-                  transition={{ duration: 0.5, delay: (index % 10) * 0.08, ease: 'easeOut' }}
+                  initial={{ opacity: 0, scale: 0.96 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.96 }}
+                  transition={{ duration: 0.25, ease: 'easeOut' }}
                   style={{ width: '100%' }}
                 >
                   <Link
