@@ -87,7 +87,7 @@ export default function Insights() {
               Insights, Guides & Updates
             </h1>
             <p style={{ fontSize: '1.125rem', color: 'rgba(255,255,255,0.7)', lineHeight: '1.65' }}>
-              Clear, practical business guides, tax compliance updates, and legal advice written by our Senior Corporate Advisors and Legal Counsel.
+              Clear, practical business guides, registration updates, and legal advice written by our qualified professionals.
             </p>
           </div>
         </div>

@@ -66,7 +66,7 @@ export default function Services() {
             >
               {categoryFilter && displayedCategories.length > 0
                 ? displayedCategories[0].description
-                : 'Complete professional assistance for company registration, GST and tax compliance, labor law filings, and trademark protection.'}
+                : 'Complete professional assistance for company registration, GST & tax registrations, trademark protection, and all types of government licensing across India.'}
             </motion.p>
 
             {categoryFilter && (
@@ -159,7 +159,7 @@ export default function Services() {
                     <div style={{ borderTop: '1px solid rgba(0,0,0,0.06)', paddingTop: '1rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                       <div>
                         <span style={{ fontSize: '0.6875rem', color: 'var(--color-text-light)', display: 'block', fontFamily: 'var(--font-body)' }}>Package Fee</span>
-                        <span style={{ fontSize: '0.8125rem', fontWeight: 600, color: 'var(--color-navy)' }}>{service.fees || 'Fixed Package Fee'}</span>
+                        <span style={{ fontSize: '0.8125rem', fontWeight: 600, color: 'var(--color-navy)' }}>{service.fees || 'Transparent Pricing'}</span>
                       </div>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '0.75rem', fontWeight: 600, color: 'var(--color-navy)', letterSpacing: '0.04em', textTransform: 'uppercase' }}>
                         View Details <ArrowRight size={13} style={{ color: 'var(--color-gold-dark)' }} />
@@ -247,7 +247,7 @@ export default function Services() {
             Need Help Choosing the Right Service?
           </h2>
           <p style={{ color: 'rgba(255,255,255,0.7)', marginBottom: '2.5rem', fontSize: '1rem', lineHeight: '1.65' }}>
-            Our team of experienced Senior Corporate Advisors and Legal Counsel will help you figure out the exact registrations and tax setup needed for your business.
+            Our team of qualified professionals will help you figure out the exact registrations and government licences needed for your business — from company formation to trademarks, GST, and sector-specific permits.
           </p>
           <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
             <Link to="/contact" className="btn-gold">

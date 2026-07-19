@@ -35,7 +35,7 @@ export default function About() {
             </h1>
             
             <p style={{ fontSize: '1.125rem', color: 'rgba(255,255,255,0.7)', lineHeight: '1.65', maxWidth: '58ch' }}>
-              Sterling Advisory is a leading professional services firm of experienced Senior Corporate Advisors and Legal Counsel, helping businesses manage company registration, GST & tax compliance, labor law filings, and trademark protection across India.
+              Sterling Advisory is a leading professional services firm specializing in company registrations, GST & tax registrations, trademark filings, and all types of government licensing across India.
             </p>
           </div>
 
@@ -55,8 +55,8 @@ export default function About() {
               <div style={{ fontSize: '0.8125rem', color: 'var(--color-text-light)', marginTop: '4px' }}>Senior Advisors & Legal Counsel</div>
             </div>
             <div>
-              <div style={{ fontSize: '1.75rem', fontWeight: 700, color: '#ffffff', fontFamily: 'var(--font-heading)', letterSpacing: '-0.02em' }}>Fixed Upfront Pricing</div>
-              <div style={{ fontSize: '0.8125rem', color: 'var(--color-text-light)', marginTop: '4px' }}>Zero hidden charges or surprises</div>
+              <div style={{ fontSize: '1.75rem', fontWeight: 700, color: '#ffffff', fontFamily: 'var(--font-heading)', letterSpacing: '-0.02em' }}>Transparent Pricing</div>
+              <div style={{ fontSize: '0.8125rem', color: 'var(--color-text-light)', marginTop: '4px' }}>Clear and upfront fee structures</div>
             </div>
             <div>
               <div style={{ fontSize: '1.75rem', fontWeight: 700, color: 'var(--color-gold)', fontFamily: 'var(--font-heading)', letterSpacing: '-0.02em' }}>100% Online</div>
@@ -82,7 +82,7 @@ export default function About() {
                   Setting up and running a business in India comes with strict rules under the Ministry of Corporate Affairs, GST Council, and tax authorities. Using generic online templates can lead to serious legal and financial issues. At Sterling Advisory, we avoid automated shortcuts and ensure every filing is done right.
                 </p>
                 <p>
-                  Instead, we provide personalized support for company registration, tax filings, and trademark defense. Every document and application is carefully reviewed by experienced Senior Corporate Advisors and Professional Counsel to ensure zero rejections.
+                  Instead, we provide personalized support for all types of company registrations, trademark filings, and government licensing. Every document and application is carefully reviewed by qualified professionals to ensure zero rejections.
                 </p>
               </div>
             </div>
@@ -113,7 +113,7 @@ export default function About() {
               <span style={{ fontSize: '0.75rem', fontFamily: 'var(--font-mono)', fontWeight: 600, color: 'var(--color-gold-dark)', marginBottom: '1.25rem', display: 'block', letterSpacing: '0.08em', textTransform: 'uppercase' }}>Accuracy</span>
               <h3 style={{ fontSize: '1.35rem', fontWeight: 700, color: 'var(--color-navy)', marginBottom: '1rem', letterSpacing: '-0.01em' }}>Flawless Accuracy & Execution</h3>
               <p style={{ color: 'var(--color-text-muted)', fontSize: '0.9375rem', lineHeight: '1.65' }}>
-                From Private Limited company registrations to complex GST and trademark filings, we maintain strict quality standards. Every document and tax return undergoes thorough double-checking by our senior experts.
+                From Private Limited company registrations to GST, trademark, and specialized government licence filings, we maintain strict quality standards. Every registration application undergoes thorough double-checking by our senior experts before submission.
               </p>
             </div>
 
@@ -121,7 +121,7 @@ export default function About() {
               <span style={{ fontSize: '0.75rem', fontFamily: 'var(--font-mono)', fontWeight: 600, color: 'var(--color-gold-dark)', marginBottom: '1.25rem', display: 'block', letterSpacing: '0.08em', textTransform: 'uppercase' }}>Long-Term Partnership</span>
               <h3 style={{ fontSize: '1.35rem', fontWeight: 700, color: 'var(--color-navy)', marginBottom: '1rem', letterSpacing: '-0.01em' }}>Reliable Ongoing Support</h3>
               <p style={{ color: 'var(--color-text-muted)', fontSize: '0.9375rem', lineHeight: '1.65' }}>
-                We don't treat our clients like one-time transactions. Our team works as your trusted long-term partner, handling your compliance and legal paperwork at every stage of your business growth.
+                We don't treat our clients like one-time transactions. Our team works as your trusted long-term partner, handling all your registration and licensing requirements at every stage of your business growth.
               </p>
             </div>
           </div>
@@ -134,10 +134,10 @@ export default function About() {
           <span className="section-label">Get Started</span>
           <h2 style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', fontWeight: 700, color: '#ffffff', marginBottom: '1.25rem', letterSpacing: '-0.03em', lineHeight: 1.1 }}>
             Partner with trusted <br />
-            <span style={{ color: 'var(--color-gold)' }}>legal & tax advisors.</span>
+            <span style={{ color: 'var(--color-gold)' }}>registration specialists.</span>
           </h2>
           <p style={{ fontSize: '1.05rem', color: 'rgba(255,255,255,0.7)', marginBottom: '2.5rem', lineHeight: '1.65', maxWidth: '46ch', margin: '0 auto 2.5rem' }}>
-            Schedule a consultation with our experienced team to discuss your company registration, GST & tax compliance, or trademark protection needs.
+            Schedule a consultation with our experienced team to discuss your company registration, GST & trademark filing, or any other government licensing need.
           </p>
           <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
             <Link to="/contact" className="btn-gold">

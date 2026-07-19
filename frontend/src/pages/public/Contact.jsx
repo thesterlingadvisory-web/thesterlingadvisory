@@ -204,7 +204,7 @@ export default function Contact() {
                 Senior Expert Advisors & Retainer Desk
               </h2>
               <p style={{ color: 'var(--color-text-muted)', fontSize: '1.02rem', lineHeight: '1.68' }}>
-                Skip generic customer service. All client inquiries are reviewed directly by Senior Corporate Advisors and Professional Counsel to ensure complete statutory accuracy from Day 1.
+                Skip generic customer service. All client inquiries are reviewed directly by qualified professionals to ensure complete statutory accuracy from Day 1.
               </p>
             </div>
 
@@ -288,7 +288,7 @@ export default function Contact() {
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', fontSize: '0.92rem', color: 'rgba(255, 255, 255, 0.85)' }}>
                 <div style={{ display: 'flex', gap: '12px' }}>
                   <span style={{ color: 'var(--color-gold)', fontWeight: 800 }}>✓</span>
-                  <span><strong>Fixed Upfront Pricing:</strong> Complete package fee quoted before initiation. Zero hidden costs or surprise government charges.</span>
+                  <span><strong>Transparent Pricing:</strong> Complete pricing quoted before initiation. Straightforward models designed for predictability.</span>
                 </div>
                 <div style={{ display: 'flex', gap: '12px' }}>
                   <span style={{ color: 'var(--color-gold)', fontWeight: 800 }}>✓</span>

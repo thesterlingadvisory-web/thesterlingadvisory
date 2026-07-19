@@ -2,21 +2,21 @@
 @import "tailwindcss";
 
 @theme {
-  /* ── Institutional Midnight Blue & Gold Palette (Classic Front Combination) ── */
-  --color-primary: #F8F6F0;          /* Warm Precision Studio White */
+  /* ── McKinsey/Deloitte Premium Obsidian & Metallic Champagne Palette ── */
+  --color-primary: #FAFAFA;          /* Crisp Platinum White */
   --color-secondary: #FFFFFF;        /* Pure White */
-  --color-navy: #0D1527;             /* Deep Midnight Slate Blue (Rich Classic Front Palette) */
-  --color-navy-mid: #131F37;         /* Luminous Midnight Navy Surface */
-  --color-navy-light: #1A2A4A;       /* Frosted Slate Navy */
-  --color-gold: #DFBA73;             /* Luminous Champagne Titanium Gold */
-  --color-gold-light: #F2D59A;       /* Radiant Electric Champagne */
-  --color-gold-dark: #A6823B;        /* Deep Metallic Antique Gold */
-  --color-text-main: #0D1527;        /* Crisp Midnight Slate for text */
+  --color-navy: #050A15;             /* Deep Obsidian / Charcoal (High Contrast) */
+  --color-navy-mid: #0D1424;         /* Rich Obsidian Surface */
+  --color-navy-light: #162032;       /* Frosted Obsidian */
+  --color-gold: #C5A880;             /* Muted Metallic Champagne Gold */
+  --color-gold-light: #D6C0A1;       /* Soft Luminous Champagne */
+  --color-gold-dark: #A3845E;        /* Deep Antique Bronze/Gold */
+  --color-text-main: #050A15;        /* Crisp Obsidian for text */
   --color-text-muted: #475569;       /* High-contrast Slate Muted */
   --color-text-light: #64748B;       /* Precision Slate */
-  --color-accent: #DFBA73;           /* Champagne Gold Accent */
-  --color-accent-hover: #E6C480;     /* Champagne Gold Hover */
-  --color-highlight: #DFBA73;        /* Champagne Highlight */
+  --color-accent: #C5A880;           /* Champagne Gold Accent */
+  --color-accent-hover: #D6C0A1;     /* Champagne Gold Hover */
+  --color-highlight: #C5A880;        /* Champagne Highlight */
   --color-border-main: #E2E8F0;      /* Modern Tech Border */
   --color-border-dark: #1E293B;      /* Dark Carbon Border */
 
@@ -490,3 +490,96 @@
   }
 }
 
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+@keyframes floaty {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+@keyframes auroraShift {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(-3%, 2%, 0) scale(1.05);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@utility animate-fade-up {
+  animation: fadeUp 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+@utility animate-floaty {
+  animation: floaty 6s ease-in-out infinite;
+}
+@utility animate-aurora {
+  animation: auroraShift 18s ease-in-out infinite;
+}
+@utility animate-shimmer {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    color-mix(in oklab, var(--color-gold) 40%, transparent) 50%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 3s linear infinite;
+}
+
+@layer utilities {
+  .glass-panel {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(32px);
+    -webkit-backdrop-filter: blur(32px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1), 0 8px 32px 0 rgba(13, 21, 39, 0.08);
+  }
+
+  .glass-panel-dark {
+    background: rgba(13, 21, 39, 0.5);
+    backdrop-filter: blur(32px);
+    -webkit-backdrop-filter: blur(32px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05), 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+  }
+
+  .hover-lift {
+    transition: transform 400ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 400ms cubic-bezier(0.16, 1, 0.3, 1), border-color 400ms ease;
+  }
+  .hover-lift:hover {
+    transform: translateY(-8px) scale(1.01);
+    box-shadow: 0 24px 48px -12px rgba(5, 8, 15, 0.18), 0 0 24px rgba(197, 168, 128, 0.15);
+    border-color: rgba(197, 168, 128, 0.6);
+  }
+
+  .hover-glow {
+    transition: all 300ms ease;
+  }
+  .hover-glow:hover {
+    box-shadow: 0 0 25px rgba(223, 186, 115, 0.4);
+    border-color: var(--color-gold);
+  }
+}

@@ -208,10 +208,10 @@ export default function InsightDetail() {
             Need a Compliance Audit for Your Company?
           </h3>
           <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: '1.05rem', maxWidth: '50ch', margin: '0 auto 2rem', lineHeight: '1.6' }}>
-            Our Senior Corporate Advisors and legal counsel conduct confidential compliance reviews and help restructure your filings within 48 hours.
+            Our qualified professionals conduct confidential registration reviews and help resolve any government queries or application issues within 48 hours.
           </p>
           <Link to="/contact" className="btn-gold" style={{ display: 'inline-flex' }}>
-            Get a Free Consultation <ArrowRight size={16} />
+            Get a Consultation <ArrowRight size={16} />
           </Link>
         </div>
 

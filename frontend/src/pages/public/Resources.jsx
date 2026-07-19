@@ -64,7 +64,7 @@ export default function Resources() {
               Statutory Resources & Tools
             </h1>
             <p style={{ fontSize: '1.125rem', color: 'rgba(255,255,255,0.7)', lineHeight: '1.65' }}>
-              Curated compliance calendars, proprietary audit matrices, and technical whitepapers engineered by our Senior Corporate Advisors and Counsel to empower executive decision-making.
+              Curated registration guides, government licence checklists, and technical whitepapers engineered by our qualified professionals to empower your business setup decisions.
             </p>
           </div>
         </div>

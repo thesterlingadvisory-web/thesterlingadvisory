@@ -20,7 +20,27 @@ const categoryIconMap = {
 
 const serviceContent = {
   'proprietorship-setup': {
-    overview: 'In Indian corporate law, a Sole Proprietorship has no separate legal existence distinct from the individual proprietor and cannot be incorporated with the ROC. Formalizing a legitimate Sole Proprietorship requires obtaining specific statutory licenses—namely Udyam (MSME) Registration, GST Identification Number (GSTIN), and Shops & Establishment Act License (Gumasta)—which enable the proprietor to open a commercial bank current account under RBI KYC guidelines and legally execute business contracts under their personal PAN.',
+    type: 'bundle',
+    overview: 'A Sole Proprietorship is the simplest way to start a business as an individual. It does not create a separate legal company, which makes it fast and cheap to maintain, but it means you are personally responsible for all business risks.',
+    pros: [
+      { title: 'Easy & Fast Setup', desc: 'No complicated ROC incorporation required. Start billing clients in 3 days.' },
+      { title: 'Zero Annual Audit', desc: 'No mandatory CA audits or MCA annual filings if you stay below tax thresholds.' },
+      { title: 'Personal PAN Based', desc: 'Taxes are filed easily along with your personal Income Tax Return.' }
+    ],
+    cons: [
+      { title: 'Unlimited Personal Liability', desc: 'If the business takes a loan and fails, your personal assets are at risk.' },
+      { title: 'Cannot Raise Investors', desc: 'Venture Capitalists and Angel Investors cannot invest in this structure.' },
+      { title: 'Limited Credibility', desc: 'Some large corporate clients or foreign vendors prefer dealing with Private Limited companies.' }
+    ],
+    verdict: {
+      ideal: 'Solo freelancers, local retail shops, and individuals testing an unproven business idea with low risk.',
+      avoid: 'Tech startups, businesses seeking venture capital, or founders taking large business loans.'
+    },
+    childServices: [
+      { title: 'Udyam (MSME) Registration', link: '/services/udyam-registration' },
+      { title: 'GST Registration', link: '/services/gst-registration' },
+      { title: 'Shops & Establishment', link: '/services/shops-establishments' }
+    ],
     whyUs: [
       'Udyam (MSME) Registration & Central Priority Certificate Allocation',
       'GST Identification Number (GSTIN) Registration & Jurisdictional Setup',
@@ -37,7 +57,30 @@ const serviceContent = {
     whyUs: ['Class 3 DSC and Designated Partner DIN allocation', 'Precision MCA FiLLiP statutory filing', 'LLP Agreement constitutional drafting', 'Permanent annual ROC compliance tracking'],
   },
   'private-limited-company': {
-    overview: 'Private Limited incorporation establishes an independent corporate legal entity governed by the Companies Act 2013. It is the mandatory institutional structure for venture capital financing, equity dilution, and ESOP pools.',
+    type: 'bundle',
+    overview: 'A Private Limited Company is the safest and most popular way to build a serious business. It separates your personal savings from your business risks and makes it easy to bring in partners or investors.',
+    pros: [
+      { title: 'Your Personal Savings are Safe', desc: 'Banks cannot touch your personal assets (like your house) if the business fails.' },
+      { title: 'Easy to Get Investors', desc: 'The only structure Venture Capitalists will invest in because they can easily buy shares.' },
+      { title: 'High Trust Factor', desc: 'Big corporations, foreign clients, and banks take you much more seriously.' },
+      { title: 'Business Outlives You', desc: 'The business continues to exist legally even if founders leave or retire.' }
+    ],
+    cons: [
+      { title: 'Higher Running Costs', desc: 'You must hire a CA every year to audit your accounts and file annual returns, even on zero revenue.' },
+      { title: 'Strict Money Rules', desc: 'You cannot freely withdraw cash for personal use without formal salary or dividend declarations.' },
+      { title: 'More Paperwork', desc: 'Mandatory board meetings and official minute books must be maintained throughout the year.' }
+    ],
+    verdict: {
+      ideal: 'Tech startups, businesses raising external funds, and high-risk ventures signing large commercial contracts.',
+      avoid: 'Solo freelancers or small unproven lifestyle businesses with zero initial capital.'
+    },
+    childServices: [
+      { title: 'Class 3 DSC & DIN', link: '/services/dsc-registration' },
+      { title: 'Name Approval & SPICe+', link: '/services/private-limited-company' },
+      { title: 'Corporate PAN & TAN', link: '/services/pan-tan-application' },
+      { title: 'GST Registration', link: '/services/gst-registration' },
+      { title: 'Bank Account Setup', link: '/contact' }
+    ],
     whyUs: ['Complete SPICe+ constitutional incorporation', 'Memorandum & Articles (MoA & AoA) drafting', 'Director Identification Number (DIN) & DSC allocation', 'Statutory bank account opening authorization'],
   },
   'opc-registration': {
@@ -231,7 +274,7 @@ export default function ServiceDetail() {
     whyUs: [
       'Senior Corporate Advisory & Legal supervision',
       'Secure digital documentation without physical visits',
-      'Transparent fixed-scope professional fees',
+      'Transparent Pricing',
       'Ongoing post-filing statutory compliance support'
     ]
   };
@@ -372,68 +415,169 @@ export default function ServiceDetail() {
             {/* Left Column: Architectural Practice Dossier */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '4.5rem' }}>
 
-              {/* 1. 4-Stage Execution Protocol (Architectural Blueprint Grid) */}
-              <motion.div variants={FADE_UP} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '0.75rem' }}>
-                  <span className="section-label" style={{ margin: 0 }}>Practice Workflow</span>
-                  <div style={{ height: '1px', flex: 1, backgroundColor: 'rgba(10,15,29,0.08)' }} />
-                </div>
-                <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(1.6rem, 3vw, 2.1rem)', fontWeight: 800, color: 'var(--color-navy)', marginBottom: '1.75rem', letterSpacing: '-0.03em', lineHeight: 1.15 }}>
-                  4-Stage Execution Protocol
-                </h2>
-                <div style={{
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(auto-fit, minmax(270px, 1fr))',
-                  gap: '1.5rem'
-                }}>
-                  {[
-                    { step: 'STAGE 01', title: 'Statutory Verification & Audit', desc: 'Detailed pre-filing audit of founder credentials and constitutional entity structure to eliminate rejection risks and ensure instant processing.' },
-                    { step: 'STAGE 02', title: 'Direct Authority Submission', desc: 'Precision electronic drafting and filing before central and state regulatory registries directly managed by senior practice specialists.' },
-                    { step: 'STAGE 03', title: 'Liaison & Query Defense', desc: 'Dedicated professional representation during departmental scrutiny and prompt legal defense of examination reports.' },
-                    { step: 'STAGE 04', title: 'Certificate Handover & Roadmap', desc: 'Formal delivery of registered statutory certificates along with a customized post-compliance annual statutory calendar mapping.' }
-                  ].map((item, idx) => (
-                    <div key={idx} style={{
-                      background: '#ffffff',
-                      border: '1px solid rgba(10,15,29,0.08)',
-                      borderRadius: 'var(--radius-xl)',
-                      padding: '1.75rem',
-                      display: 'flex',
-                      flexDirection: 'column',
-                      justifyContent: 'space-between',
-                      boxShadow: '0 4px 20px -4px rgba(10,15,29,0.05)',
-                      transition: 'transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease'
-                    }}
-                    onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-3px)'; e.currentTarget.style.boxShadow = '0 12px 32px -6px rgba(10,15,29,0.12)'; e.currentTarget.style.borderColor = 'var(--color-gold-dark)'; }}
-                    onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 20px -4px rgba(10,15,29,0.05)'; e.currentTarget.style.borderColor = 'rgba(10,15,29,0.08)'; }}
-                    >
-                      <div>
-                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.25rem' }}>
-                          <span style={{
-                            fontFamily: 'var(--font-mono)', fontSize: '0.72rem', fontWeight: 700,
-                            letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--color-gold-dark)',
-                            backgroundColor: 'rgba(223,186,115,0.12)', padding: '4px 10px', borderRadius: 'var(--radius-sm)'
-                          }}>
-                            {item.step}
-                          </span>
-                          <span style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--color-text-muted)' }}>
-                            Verified Protocol
-                          </span>
+              {content.type === 'bundle' ? (
+                /* --- HUB BUNDLE LAYOUT --- */
+                <motion.div variants={FADE_UP} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '0.75rem' }}>
+                    <span className="section-label" style={{ margin: 0 }}>Strategic Advisory</span>
+                    <div style={{ height: '1px', flex: 1, backgroundColor: 'rgba(10,15,29,0.08)' }} />
+                  </div>
+                  <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(1.6rem, 3vw, 2.1rem)', fontWeight: 800, color: 'var(--color-navy)', marginBottom: '0.5rem', letterSpacing: '-0.03em', lineHeight: 1.15 }}>
+                    Pros & Cons (Unbiased Advisory)
+                  </h2>
+                  <p style={{ fontSize: '0.95rem', color: 'var(--color-text-muted)', marginBottom: '2rem', lineHeight: 1.6 }}>
+                    Honest advice to help you decide if this structure is right for you.
+                  </p>
+                  
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem', marginBottom: '2.5rem' }}>
+                    {/* Pros Card */}
+                    <div style={{ background: '#F8FAFC', border: '1px solid rgba(10,15,29,0.06)', borderRadius: 'var(--radius-xl)', padding: '1.75rem' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '1.25rem' }}>
+                        <div style={{ width: '28px', height: '28px', borderRadius: '50%', background: 'rgba(34, 197, 94, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                          <CheckCircle2 size={16} color="#16A34A" />
                         </div>
-                        <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.15rem', fontWeight: 700, color: 'var(--color-navy)', marginBottom: '0.75rem', lineHeight: 1.3 }}>
-                          {item.title}
-                        </h3>
-                        <p style={{ fontSize: '0.88rem', color: 'var(--color-text-muted)', lineHeight: 1.6, margin: 0 }}>
-                          {item.desc}
-                        </p>
+                        <h3 style={{ fontSize: '1.05rem', fontWeight: 700, color: 'var(--color-navy)' }}>The Good Stuff</h3>
                       </div>
-                      <div style={{ marginTop: '1.5rem', paddingTop: '1rem', borderTop: '1px solid rgba(10,15,29,0.06)', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                        <CheckCircle2 size={13} style={{ color: 'var(--color-gold-dark)' }} />
-                        <span style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--color-navy)' }}>100% Electronic Compliance</span>
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                        {content.pros.map((pro, i) => (
+                          <div key={i}>
+                            <div style={{ fontSize: '0.9rem', fontWeight: 600, color: 'var(--color-navy)', marginBottom: '4px' }}>{pro.title}</div>
+                            <div style={{ fontSize: '0.85rem', color: 'var(--color-text-muted)', lineHeight: 1.5 }}>{pro.desc}</div>
+                          </div>
+                        ))}
                       </div>
                     </div>
-                  ))}
-                </div>
-              </motion.div>
+
+                    {/* Cons Card */}
+                    <div style={{ background: '#FEF2F2', border: '1px solid rgba(220,38,38,0.1)', borderRadius: 'var(--radius-xl)', padding: '1.75rem' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '1.25rem' }}>
+                        <div style={{ width: '28px', height: '28px', borderRadius: '50%', background: 'rgba(220, 38, 38, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                          <ShieldAlert size={16} color="#DC2626" />
+                        </div>
+                        <h3 style={{ fontSize: '1.05rem', fontWeight: 700, color: 'var(--color-navy)' }}>Things to Keep in Mind</h3>
+                      </div>
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                        {content.cons.map((con, i) => (
+                          <div key={i}>
+                            <div style={{ fontSize: '0.9rem', fontWeight: 600, color: 'var(--color-navy)', marginBottom: '4px' }}>{con.title}</div>
+                            <div style={{ fontSize: '0.85rem', color: 'var(--color-text-muted)', lineHeight: 1.5 }}>{con.desc}</div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Verdict Card */}
+                  <div className="glass-panel hover-lift" style={{ borderRadius: 'var(--radius-xl)', padding: '1.75rem', border: '1px solid var(--color-gold)' }}>
+                    <h3 style={{ fontSize: '1.05rem', fontWeight: 700, color: 'var(--color-navy)', marginBottom: '1rem' }}>Our Honest Verdict</h3>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                      <div style={{ display: 'flex', gap: '8px', alignItems: 'flex-start' }}>
+                        <span style={{ fontSize: '1.2rem' }}>🎯</span>
+                        <div>
+                          <span style={{ fontSize: '0.88rem', fontWeight: 700, color: 'var(--color-navy)', display: 'block' }}>Perfect For:</span>
+                          <span style={{ fontSize: '0.88rem', color: 'var(--color-text-muted)', lineHeight: 1.5 }}>{content.verdict.ideal}</span>
+                        </div>
+                      </div>
+                      <div style={{ display: 'flex', gap: '8px', alignItems: 'flex-start' }}>
+                        <span style={{ fontSize: '1.2rem' }}>🛑</span>
+                        <div>
+                          <span style={{ fontSize: '0.88rem', fontWeight: 700, color: 'var(--color-navy)', display: 'block' }}>Skip This If:</span>
+                          <span style={{ fontSize: '0.88rem', color: 'var(--color-text-muted)', lineHeight: 1.5 }}>{content.verdict.avoid}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Child Services / Spokes */}
+                  <div style={{ marginTop: '3.5rem' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '1rem' }}>
+                      <span className="section-label" style={{ margin: 0 }}>What You Need</span>
+                      <div style={{ height: '1px', flex: 1, backgroundColor: 'rgba(10,15,29,0.08)' }} />
+                    </div>
+                    <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(1.4rem, 2.5vw, 1.8rem)', fontWeight: 800, color: 'var(--color-navy)', marginBottom: '1.5rem', letterSpacing: '-0.03em', lineHeight: 1.15 }}>
+                      Required Registrations
+                    </h2>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
+                      {content.childServices.map((child, i) => (
+                        <Link key={i} to={child.link} className="hover-lift" style={{
+                          display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+                          padding: '1.25rem', background: '#ffffff', borderRadius: 'var(--radius-lg)',
+                          border: '1px solid rgba(10,15,29,0.08)', textDecoration: 'none', color: 'var(--color-navy)'
+                        }}>
+                          <span style={{ fontSize: '0.9rem', fontWeight: 600 }}>{child.title}</span>
+                          <ChevronRight size={16} color="var(--color-gold)" />
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                </motion.div>
+              ) : (
+                /* --- STANDARD EXECUTION PROTOCOL LAYOUT --- */
+                <motion.div variants={FADE_UP} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '0.75rem' }}>
+                    <span className="section-label" style={{ margin: 0 }}>Practice Workflow</span>
+                    <div style={{ height: '1px', flex: 1, backgroundColor: 'rgba(10,15,29,0.08)' }} />
+                  </div>
+                  <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(1.6rem, 3vw, 2.1rem)', fontWeight: 800, color: 'var(--color-navy)', marginBottom: '0.5rem', letterSpacing: '-0.03em', lineHeight: 1.15 }}>
+                    How We Register Your Business
+                  </h2>
+                  <p style={{ fontSize: '0.95rem', color: 'var(--color-text-muted)', marginBottom: '1.75rem', lineHeight: 1.6 }}>
+                    A simple, transparent process handled by experienced professionals.
+                  </p>
+                  <div style={{
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(auto-fit, minmax(270px, 1fr))',
+                    gap: '1.5rem'
+                  }}>
+                    {[
+                      { step: 'STAGE 01', title: 'Understand Your Business', desc: 'We discuss your business idea and recommend the right company structure, registrations, and documents required to get started.', highlight: 'Expert Guidance' },
+                      { step: 'STAGE 02', title: 'Document Collection & Filing', desc: 'Our team prepares, verifies, and files all required applications with the relevant government authorities on your behalf.', highlight: 'Accurate & Hassle-Free Filing' },
+                      { step: 'STAGE 03', title: 'Application Tracking', desc: 'We continuously track your application, resolve any queries raised by the authorities, and keep you updated throughout the process.', highlight: 'Regular Status Updates' },
+                      { step: 'STAGE 04', title: 'Registration Completed', desc: 'Receive your registration certificates along with clear next steps for GST, compliance, banking, and future business requirements.', highlight: 'Post-Registration Support' }
+                    ].map((item, idx) => (
+                      <div key={idx} style={{
+                        background: '#ffffff',
+                        border: '1px solid rgba(10,15,29,0.08)',
+                        borderRadius: 'var(--radius-xl)',
+                        padding: '1.75rem',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'space-between',
+                        boxShadow: '0 4px 20px -4px rgba(10,15,29,0.05)',
+                        transition: 'transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease'
+                      }}
+                      onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-3px)'; e.currentTarget.style.boxShadow = '0 12px 32px -6px rgba(10,15,29,0.12)'; e.currentTarget.style.borderColor = 'var(--color-gold-dark)'; }}
+                      onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 20px -4px rgba(10,15,29,0.05)'; e.currentTarget.style.borderColor = 'rgba(10,15,29,0.08)'; }}
+                      >
+                        <div>
+                          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.25rem' }}>
+                            <span style={{
+                              fontFamily: 'var(--font-mono)', fontSize: '0.72rem', fontWeight: 700,
+                              letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--color-gold-dark)',
+                              backgroundColor: 'rgba(223,186,115,0.12)', padding: '4px 10px', borderRadius: 'var(--radius-sm)'
+                            }}>
+                              {item.step}
+                            </span>
+                            <span style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--color-text-muted)' }}>
+                              Verified Protocol
+                            </span>
+                          </div>
+                          <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.15rem', fontWeight: 700, color: 'var(--color-navy)', marginBottom: '0.75rem', lineHeight: 1.3 }}>
+                            {item.title}
+                          </h3>
+                          <p style={{ fontSize: '0.88rem', color: 'var(--color-text-muted)', lineHeight: 1.6, margin: 0 }}>
+                            {item.desc}
+                          </p>
+                        </div>
+                        <div style={{ marginTop: '1.5rem', paddingTop: '1rem', borderTop: '1px solid rgba(10,15,29,0.06)', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                          <CheckCircle2 size={13} style={{ color: 'var(--color-gold-dark)' }} />
+                          <span style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--color-navy)' }}>{item.highlight}</span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </motion.div>
+              )}
 
               {/* 2. Key Advantages (Institutional Feature Grid) */}
               <motion.div variants={FADE_UP} initial="hidden" whileInView="visible" viewport={{ once: true }}>
@@ -660,7 +804,7 @@ export default function ServiceDetail() {
                       <div style={{ display: 'flex', gap: '10px', alignItems: 'flex-start', padding: '0.875rem 1rem', backgroundColor: 'var(--color-secondary)', borderRadius: 'var(--radius-md)', border: '1px solid rgba(10,15,29,0.08)' }}>
                         <ShieldAlert size={15} style={{ color: 'var(--color-gold-dark)', flexShrink: 0, marginTop: '2px' }} />
                         <span style={{ fontSize: '0.82rem', color: 'var(--color-navy)', lineHeight: '1.5', fontWeight: 600 }}>
-                          Fixed, upfront package fee. Zero surprise charges or hidden departmental costs.
+                          Transparent Pricing. Comprehensive service packages with clear commercial terms.
                         </span>
                       </div>
                     </div>

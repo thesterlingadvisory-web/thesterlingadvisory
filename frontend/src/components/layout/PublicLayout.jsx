@@ -24,7 +24,7 @@ const megaMenuCategories = [
     id: 'tax-gst',
     title: 'Taxation, GST & Corporate Advisory',
     shortTitle: 'Taxation & GST Advisory',
-    desc: 'Direct & Indirect tax structuring, regulatory representation, and compliance assurance managed by Senior Corporate Advisors.',
+    desc: 'GST, professional tax, and all tax-related registrations handled by qualified professionals.',
     items: [
       { label: 'GST Registration & Structuring', href: '/services/gst-registration', badge: 'Pan-India' },
       { label: 'Corporate Income Tax & TDS Advisory', href: '/services?category=tax-registrations' },
@@ -102,23 +102,27 @@ export default function PublicLayout() {
 
       {/* ── HEADER (Priority 8: Agency-Grade Stripe / Mercury / Notion Navigation) ── */}
       <header
-        className="glass-navbar"
         style={{
-          position: 'sticky', top: 0, zIndex: 50,
-          background: isScrolled ? 'rgba(3, 6, 12, 0.85)' : 'transparent',
+          position: 'sticky', 
+          top: 0, 
+          zIndex: 50,
+          width: '100%',
+          background: isScrolled ? 'rgba(9, 15, 29, 0.95)' : '#0D1527',
           backdropFilter: isScrolled ? 'blur(16px) saturate(180%)' : 'none',
           WebkitBackdropFilter: isScrolled ? 'blur(16px) saturate(180%)' : 'none',
-          borderBottom: isScrolled ? '1px solid rgba(255, 255, 255, 0.06)' : '1px solid transparent',
-          boxShadow: 'none',
+          borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
+          boxShadow: isScrolled ? '0 10px 30px rgba(0,0,0,0.3)' : 'none',
           transition: 'all 300ms ease',
         }}
       >
         <div
           style={{
-            maxWidth: '88rem', margin: '0 auto', padding: '0 clamp(1rem, 5vw, 2rem)',
+            maxWidth: '88rem',
+            margin: '0 auto',
+            padding: '0 clamp(1rem, 5vw, 2rem)',
             display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-            height: isScrolled ? '64px' : '76px',
-            transition: 'height 200ms ease',
+            height: isScrolled ? '64px' : '84px',
+            transition: 'height 300ms ease',
           }}
         >
           {/* Logo */}
@@ -175,7 +179,7 @@ export default function PublicLayout() {
                     transition={{ duration: 0.16, ease: 'easeOut' }}
                     style={{
                       position: 'fixed',
-                      top: isScrolled ? '64px' : '76px',
+                      top: isScrolled ? '68px' : '84px',
                       left: 0,
                       right: 0,
                       width: '100vw',
@@ -186,6 +190,7 @@ export default function PublicLayout() {
                       boxShadow: '0 24px 64px rgba(0, 0, 0, 0.65)',
                       zIndex: 999,
                       padding: '2.5rem 0',
+                      transition: 'top 300ms ease',
                     }}
                   >
                     <div style={{ maxWidth: '88rem', margin: '0 auto', padding: '0 clamp(1rem, 5vw, 2rem)' }}>

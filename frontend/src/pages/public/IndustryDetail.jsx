@@ -152,7 +152,7 @@ export default function IndustryDetail() {
               </span>
             </div>
             <Link to="/contact" className="btn-gold">
-              Get a Free Consultation <ArrowRight size={15} />
+              Get a Consultation <ArrowRight size={15} />
             </Link>
           </div>
 

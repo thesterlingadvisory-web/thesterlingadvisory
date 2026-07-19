@@ -151,7 +151,7 @@ export default function Industries() {
             Require specialized sector representation?
           </h2>
           <p style={{ color: 'rgba(255,255,255,0.7)', marginBottom: '2.5rem', fontSize: '1.05rem', lineHeight: '1.65', maxWidth: '44ch', margin: '0 auto 2.5rem' }}>
-            Our Senior Corporate Advisors and Corporate Counsel execute sector-specific licensing audits and compliance charters within 48 hours.
+            Our qualified professionals execute sector-specific registration and licensing within 48 hours.
           </p>
           <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
             <Link to="/contact" className="btn-gold">

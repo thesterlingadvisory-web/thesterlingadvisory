@@ -18,7 +18,7 @@ export const serviceCategories = [
           'Premises Utility Bill (< 2 months old)',
           'NOC / Consent Letter from Premises Owner'
         ],
-        fees: '₹0 Government Fee (Statutory baseline licensing via Udyam, GST & Shops Act).',
+        fees: 'Government Fees: As per actuals (Statutory baseline licensing via Udyam, GST & Shops Act).',
         timeline: '2-4 Business Days',
       },
       {
@@ -27,7 +27,7 @@ export const serviceCategories = [
         slug: 'partnership-firm-registration',
         shortDesc: 'Multi-founder governance framework registered with the State Registrar of Firms.',
         documents: ['Executed Partnership Deed*', 'PAN & Aadhaar of all Partners', 'Premises Utility Bill', 'Premises Owner NOC'],
-        fees: '₹1,500 - ₹3,000 Government Fee (Varies by State jurisdiction).',
+        fees: 'Government Fees: As per actuals (Varies by State jurisdiction).',
         timeline: '7-12 Business Days',
       },
       {
@@ -44,7 +44,7 @@ export const serviceCategories = [
           'Registered Office Proof (Electricity/Water Bill < 2 months old)',
           'NOC from Property Owner'
         ],
-        fees: '₹500 - ₹5,000 Government Fee (Scaled to capital contribution & stamp duty).',
+        fees: 'Government Fees: As per actuals (Scaled to capital contribution & stamp duty).',
         timeline: '10-15 Business Days',
       },
       {
@@ -63,7 +63,7 @@ export const serviceCategories = [
           'Registered Office Proof (Electricity/Water Bill < 2 months old)',
           'NOC from Property Owner'
         ],
-        fees: '₹7,500 - ₹15,000+ (Zero SPICe+ Govt fee under ₹15L capital; State Stamp Duty & Name Reservation apply).',
+        fees: 'Government Fees: As per actuals (State Stamp Duty & Name Reservation apply).',
         timeline: '10-15 Business Days',
       },
       { id: 'opc', title: 'One Person Company (OPC)', slug: 'opc-registration', shortDesc: 'Corporate liability isolation tailored for sole proprietors.' },
@@ -74,9 +74,9 @@ export const serviceCategories = [
   },
   {
     id: 'tax-registrations',
-    title: 'Taxation & GST Retainers',
+    title: 'GST & Tax Registrations',
     icon: 'BarChart2',
-    description: 'Multi-jurisdictional tax registration, structuring, and statutory representation.',
+    description: 'Multi-jurisdictional GST and tax registrations across all Indian states and union territories.',
     services: [
       {
         id: 'gst',
@@ -84,21 +84,20 @@ export const serviceCategories = [
         slug: 'gst-registration',
         shortDesc: 'State and central tax registration required for inter-state commerce and threshold compliance.',
         documents: ['PAN Card of Business/Applicant', 'Aadhaar Card of Authorized Signatory', 'Proof of Business Formation', 'Premises Utility Bill / Lease Agreement', 'Bank Statement / Cancelled Cheque'],
-        fees: '₹0 Government Fee.',
+        fees: 'Government Fees: As per actuals.',
         timeline: '3-7 Business Days (Subject to Aadhaar & Physical Verification)',
       },
-      { id: 'gst-amendment', title: 'GST Amendment & Jurisdictional Transfer', slug: 'gst-amendment', shortDesc: 'Modification of core and non-core registration attributes.' },
-      { id: 'pan-tan', title: 'Corporate PAN & TAN Allocation', slug: 'pan-tan-application', shortDesc: 'Permanent Account & Tax Deduction Account assignment.' },
-      { id: 'pt', title: 'Professional Tax Enrolment', slug: 'professional-tax', shortDesc: 'State-mandated employer and employee tax registration.' },
-      { id: 'tds', title: 'TDS Registration & Return Retainer', slug: 'tds-registration', shortDesc: 'Tax deduction at source compliance and quarterly filing.' },
-      { id: 'annual-compliance', title: 'Annual ROC Compliance', slug: 'annual-compliance', shortDesc: 'Complete annual statutory audits and MCA/ROC secretarial filings.' }
+      { id: 'gst-amendment', title: 'GST Amendment & Jurisdictional Transfer', slug: 'gst-amendment', shortDesc: 'Modification of core and non-core GST registration attributes including address, business type, and authorized signatory.' },
+      { id: 'pan-tan', title: 'Corporate PAN & TAN Registration', slug: 'pan-tan-application', shortDesc: 'Permanent Account & Tax Deduction Account Number allocation for newly incorporated companies and LLPs.' },
+      { id: 'pt', title: 'Professional Tax Enrolment', slug: 'professional-tax', shortDesc: 'State-mandated employer and employee professional tax registration required in applicable states.' },
+      { id: 'tds', title: 'TDS Registration', slug: 'tds-registration', shortDesc: 'Tax Deduction at Source account registration required for businesses making payments to employees, vendors, and contractors.' },
     ]
   },
   {
     id: 'labour-law',
-    title: 'Statutory Labour Compliance',
+    title: 'Labour Law Registrations',
     icon: 'Users',
-    description: 'Workforce governance, social security registration, and municipal compliance.',
+    description: 'Workforce statutory registrations, social security enrolments, and municipal operating permits.',
     services: [
       {
         id: 'epf',
@@ -106,7 +105,7 @@ export const serviceCategories = [
         slug: 'epf-registration',
         shortDesc: 'Employee Provident Fund statutory registration for organizations with 20+ headcount.',
         documents: ['PAN of Business', 'Certificate of Incorporation', 'Crossed Cancelled Cheque', 'Premises Proof', 'Digital Signature (DSC) of Director/Partner'],
-        fees: '₹0 Government Fee (Shram Suvidha Portal).',
+        fees: 'Government Fees: As per actuals (Shram Suvidha Portal).',
         timeline: '3-5 Business Days',
       },
       {
@@ -115,11 +114,11 @@ export const serviceCategories = [
         slug: 'esic-registration',
         shortDesc: 'Employee State Insurance medical benefits registration (Mandatory at 10+ headcount).',
         documents: ['PAN Card of Entity', 'Registration Certificate', 'Employee Roster & Wage Data', 'Cancelled Cheque', 'Premises Proof'],
-        fees: '₹0 Government Fee (Shram Suvidha Portal).',
+        fees: 'Government Fees: As per actuals (Shram Suvidha Portal).',
         timeline: '3-5 Business Days',
       },
-      { id: 'lin', title: 'Labour Identification Number (LIN)', slug: 'lin-registration', shortDesc: 'Unified national labour identification assignment.' },
-      { id: 'clra', title: 'CLRA Contract Labour Licensing', slug: 'clra-registration', shortDesc: 'Contract Labour Regulation & Abolition Act statutory compliance.' },
+      { id: 'lin', title: 'Labour Identification Number (LIN)', slug: 'lin-registration', shortDesc: 'Unified national labour identification number registration for businesses covered under labour laws.' },
+      { id: 'clra', title: 'CLRA Contract Labour Registration', slug: 'clra-registration', shortDesc: 'Principal employer and contractor registration under the Contract Labour (Regulation & Abolition) Act.' },
       { id: 'shops-est', title: 'Shops & Establishments License', slug: 'shops-establishments', shortDesc: 'Mandatory municipal operating permit for commercial premises.' },
       { id: 'trade-license', title: 'Municipal Trade License', slug: 'trade-licence', shortDesc: 'Local civic authorization for commercial operations.' },
       { id: 'factory-license', title: 'Industrial Factory License', slug: 'factory-licence', shortDesc: 'Statutory manufacturing and safety permit under Factories Act.' },
@@ -137,7 +136,7 @@ export const serviceCategories = [
         slug: 'trademark-registration',
         shortDesc: 'Brand name, logo, and wordmark statutory protection against commercial infringement.',
         documents: ['Logo / Brand Mark Asset', 'Applicant PAN & Aadhaar', 'Udyam Certificate (to secure 50% statutory fee reduction)', 'Executed Form TM-48 (Power of Attorney)*', 'Prior Use Affidavit (if claiming retrospective rights)*'],
-        fees: '₹4,500 per class (MSME/Startups/Individuals) | ₹9,000 per class (Corporate entities).',
+        fees: 'Government Fees: As per actuals (Based on entity type and number of classes).',
         timeline: 'Filing: 1-3 Business Days | Examination & Registry Approval: 6-12 Months',
       },
       { id: 'copyright', title: 'Copyright Registration', slug: 'copyright-registration', shortDesc: 'Legal ownership establishment for software code, literary, and artistic assets.' },
@@ -157,7 +156,7 @@ export const serviceCategories = [
         slug: 'udyam-registration',
         shortDesc: 'Secures priority sector bank financing, trademark fee discounts, and govt tender advantages.',
         documents: ['Applicant Aadhaar Card (Mobile Linked)', 'Business PAN Card', 'Corporate Bank Account Details (IFSC & Account No)', 'NIC Activity Classification Code'],
-        fees: '₹0 Government Fee.',
+        fees: 'Government Fees: As per actuals.',
         timeline: '1-2 Business Days',
       },
       { id: 'gem', title: 'GeM Seller Accreditation', slug: 'gem-registration', shortDesc: 'Government e-Marketplace procurement portal registration.' },
@@ -179,7 +178,7 @@ export const serviceCategories = [
         slug: 'fssai-licence',
         shortDesc: 'Mandatory statutory food license for manufacturers, retail chains, and cloud kitchens.',
         documents: ['Identity Proof (Aadhaar/PAN)', 'Premises Occupancy Proof', 'Product Matrix', 'Equipment & Layout Blueprint (Manufacturing setups)', 'Water Quality Analysis Report'],
-        fees: 'Basic (Turnover < ₹1.5Cr): ₹100/yr | State (₹1.5Cr - ₹50Cr): ₹2,000-₹5,000/yr | Central (> ₹50Cr): ₹7,500/yr.',
+        fees: 'Government Fees: As per actuals (Varies by State, Central or Basic categories based on turnover).',
         timeline: '7-30 Business Days based on inspection criteria.',
       },
       { id: 'drug', title: 'Drug & Cosmetics Regulatory License', slug: 'drug-licence', shortDesc: 'Statutory authorization for pharmaceutical distribution and retail.' },
@@ -201,7 +200,7 @@ export const serviceCategories = [
         slug: 'iec-registration',
         shortDesc: 'Mandatory 10-digit DGFT identifier required for cross-border commercial transactions.',
         documents: ['Business PAN Card', 'Applicant Aadhaar', 'Cancelled Cheque', 'Premises Occupancy Proof'],
-        fees: '₹500 Government DGFT Fee.',
+        fees: 'Government Fees: As per actuals (DGFT processing).',
         timeline: '2-4 Business Days',
       },
       { id: 'dgft', title: 'DGFT Export Incentive Authorizations', slug: 'dgft-authorizations', shortDesc: 'Strategic structuring under RoDTEP and Advance Authorization schemes.' },
@@ -216,10 +215,9 @@ export const serviceCategories = [
     icon: 'CheckCircle2',
     description: 'Digital authentication, director compliance, and global legal identifiers.',
     services: [
-      { id: 'dsc', title: 'Class 3 Digital Signature Certificate (DSC)', slug: 'dsc-registration', shortDesc: 'Encrypted authentication token for MCA, GST, and Income Tax portals.' },
-      { id: 'din', title: 'Director Identification Number (DIN)', slug: 'din-registration', shortDesc: 'Statutory director registration and annual DIR-3 KYC compliance.' },
-      { id: 'mca-kyc', title: 'Annual Director Statutory KYC', slug: 'mca-kyc', shortDesc: 'Mandatory annual filing to prevent DIN deactivation.' },
-      { id: 'lei', title: 'Legal Entity Identifier (LEI) Issuance', slug: 'lei-registration', shortDesc: 'Global 20-character identifier for cross-border transactions > ₹50 Crore.' },
+      { id: 'dsc', title: 'Class 3 Digital Signature Certificate (DSC)', slug: 'dsc-registration', shortDesc: 'Encrypted authentication token for MCA, GST, Income Tax, and DGFT portals — mandatory for company directors and LLP partners.' },
+      { id: 'din', title: 'Director Identification Number (DIN)', slug: 'din-registration', shortDesc: 'Statutory government-issued unique identifier required for every director of a company registered with MCA.' },
+      { id: 'lei', title: 'Legal Entity Identifier (LEI) Issuance', slug: 'lei-registration', shortDesc: 'Global 20-character identifier for cross-border transactions exceeding ₹50 Crore.' },
     ]
   }
 ];
