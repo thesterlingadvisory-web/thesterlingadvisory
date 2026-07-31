@@ -286,562 +286,253 @@ export default function ServiceDetail() {
     ?.services.filter(s => s.slug !== slug).slice(0, 4) || [];
 
   return (
-    <div style={{ width: '100%', minHeight: '100vh', background: 'var(--color-primary)' }}>
+    <div style={{ width: '100%', minHeight: '100vh', background: '#0a0d14', color: '#ffffff' }}>
 
-      {/* ── Institutional Breadcrumb & Header ── */}
-      {/* ── Institutional Compact Header (Sleek Agency Banner) ── */}
-      <section className="bg-institutional-grid" style={{
-        paddingTop: '3.25rem', paddingBottom: '2.25rem',
-        borderBottom: '1px solid rgba(255,255,255,0.08)'
+      {/* ── Cinematic Dark Hero ── */}
+      <section style={{ 
+        position: 'relative',
+        paddingBottom: '2rem',
+        background: 'radial-gradient(circle at 70% 30%, rgba(20,27,45,1) 0%, rgba(10,13,20,1) 100%)',
+        overflow: 'hidden'
       }}>
-        <div style={{ maxWidth: '88rem', margin: '0 auto', padding: '0 clamp(1rem, 5vw, 2rem)' }}>
+        
+        {/* Subtle background texture/overlay (simulated) */}
+        <div style={{ position: 'absolute', inset: 0, opacity: 0.4, backgroundImage: 'radial-gradient(#ffffff 1px, transparent 1px)', backgroundSize: '40px 40px', pointerEvents: 'none' }} />
+
+        {/* Top Navbar Border Extension */}
+        <div style={{ height: '1px', width: '100%', backgroundColor: 'rgba(255,255,255,0.05)', position: 'relative', zIndex: 2 }} />
+
+        <div style={{ maxWidth: '110rem', margin: '0 auto', padding: '3.5rem clamp(1.25rem, 5vw, 3rem) 0', position: 'relative', zIndex: 2 }}>
           
-          {/* Breadcrumbs */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.8125rem', color: 'var(--color-text-light)', marginBottom: '1.25rem', flexWrap: 'wrap' }}>
-            <Link to="/" style={{ color: 'var(--color-text-light)', transition: 'color 160ms ease' }} onMouseEnter={e => e.currentTarget.style.color = '#ffffff'} onMouseLeave={e => e.currentTarget.style.color = 'var(--color-text-light)'}>Home</Link>
-            <ChevronRight size={13} style={{ color: 'rgba(255,255,255,0.3)' }} />
-            <Link to="/services" style={{ color: 'var(--color-text-light)', transition: 'color 160ms ease' }} onMouseEnter={e => e.currentTarget.style.color = '#ffffff'} onMouseLeave={e => e.currentTarget.style.color = 'var(--color-text-light)'}>Services</Link>
-            <ChevronRight size={13} style={{ color: 'rgba(255,255,255,0.3)' }} />
-            <span style={{ color: 'var(--color-gold)', fontWeight: 600 }}>{serviceData.title}</span>
+          {/* Breadcrumbs - Elegant */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.8rem', color: 'rgba(255,255,255,0.5)', marginBottom: '3.5rem', fontWeight: 500 }}>
+            <Link to="/" style={{ color: 'rgba(255,255,255,0.5)', textDecoration: 'none', transition: 'color 160ms' }} onMouseEnter={e => e.currentTarget.style.color = '#ffffff'} onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.5)'}>Home</Link>
+            <span>/</span>
+            <Link to="/services" style={{ color: 'rgba(255,255,255,0.5)', textDecoration: 'none', transition: 'color 160ms' }} onMouseEnter={e => e.currentTarget.style.color = '#ffffff'} onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.5)'}>Services</Link>
+            <span>/</span>
+            <span style={{ color: '#ffffff', fontWeight: 600 }}>{serviceData.title}</span>
           </div>
 
-          {/* Balanced Horizontal Layout (Left: Overview, Right: Practice Passport) */}
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'stretch', flexWrap: 'wrap', gap: '2.5rem' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '5rem' }}>
             
-            {/* Left Column: Title & Overview */}
-            <div style={{ flex: '1 1 480px', maxWidth: '62ch', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '0.75rem' }}>
-                <div style={{ width: '28px', height: '28px', backgroundColor: 'var(--color-gold)', borderRadius: 'var(--radius-sm)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                  <IconComponent size={15} style={{ color: 'var(--color-navy)' }} />
-                </div>
-                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--color-gold)' }}>
+            {/* Left Column */}
+            <div style={{ flex: '1 1 500px', maxWidth: '1100px' }}>
+              
+              {/* Gold Category Label */}
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '1.25rem' }}>
+                <IconComponent size={16} style={{ color: 'var(--color-gold)' }} />
+                <span style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--color-gold)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
                   {serviceData.category || 'Statutory Discipline'}
                 </span>
               </div>
 
-              <h1 style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(2.1rem, 4vw, 3.25rem)', fontWeight: 800, color: '#ffffff', marginBottom: '1rem', lineHeight: 1.12, letterSpacing: '-0.03em' }}>
+              {/* Massive Serif Title */}
+              <h1 style={{ fontFamily: '"Playfair Display", "Georgia", serif', fontSize: 'clamp(3rem, 5.5vw, 4.5rem)', fontWeight: 600, color: '#ffffff', marginBottom: '1.5rem', lineHeight: 1.1, letterSpacing: '-0.01em' }}>
                 {serviceData.title}
               </h1>
 
-              <p style={{ fontSize: '1.05rem', color: 'rgba(255,255,255,0.72)', lineHeight: '1.65', margin: 0, fontFamily: 'var(--font-body)' }}>
+              {/* Lead Paragraph */}
+              <p style={{ fontSize: '1.2rem', color: 'rgba(255,255,255,0.8)', lineHeight: '1.7', margin: '0 0 3.5rem 0', fontFamily: 'var(--font-body)', fontWeight: 300, maxWidth: '650px' }}>
                 {content.overview}
               </p>
-            </div>
 
-            {/* Right Column: Institutional Practice Credentials Card (Fills empty top space while anchoring pills below) */}
-            <div style={{
-              flex: '1 1 360px',
-              maxWidth: '450px',
-              backgroundColor: 'rgba(255,255,255,0.03)',
-              border: '1px solid rgba(255,255,255,0.1)',
-              borderRadius: 'var(--radius-xl)',
-              padding: '1.5rem',
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'space-between',
-              boxShadow: '0 12px 32px -8px rgba(0,0,0,0.4)'
-            }}>
-              {/* Top Authority & Practice Credentials */}
-              <div>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1rem', paddingBottom: '0.75rem', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                    <ShieldCheck size={15} style={{ color: 'var(--color-gold)' }} />
-                    <span style={{ fontSize: '0.72rem', fontFamily: 'var(--font-mono)', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--color-gold)', fontWeight: 700 }}>
-                      Practice Credentials
-                    </span>
-                  </div>
-                  <span style={{ fontSize: '0.68rem', fontWeight: 600, color: 'rgba(255,255,255,0.5)', backgroundColor: 'rgba(255,255,255,0.06)', padding: '2px 8px', borderRadius: '4px' }}>
-                    Government Liaison
-                  </span>
-                </div>
-
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', marginBottom: '1.25rem' }}>
-                  <div style={{ display: 'flex', gap: '10px', alignItems: 'flex-start' }}>
-                    <div style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: 'var(--color-gold)', marginTop: '6px', flexShrink: 0 }} />
-                    <div>
-                      <span style={{ fontSize: '0.82rem', fontWeight: 700, color: '#ffffff' }}>Direct Authority Submission: </span>
-                      <span style={{ fontSize: '0.82rem', color: 'rgba(255,255,255,0.65)' }}>Filed before central and state regulatory registries.</span>
-                    </div>
-                  </div>
-                  <div style={{ display: 'flex', gap: '10px', alignItems: 'flex-start' }}>
-                    <div style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: 'var(--color-gold)', marginTop: '6px', flexShrink: 0 }} />
-                    <div>
-                      <span style={{ fontSize: '0.82rem', fontWeight: 700, color: '#ffffff' }}>Senior Practice Counsel: </span>
-                      <span style={{ fontSize: '0.82rem', color: 'rgba(255,255,255,0.65)' }}>Dedicated Senior Advisory supervision across all milestones.</span>
-                    </div>
-                  </div>
-                  <div style={{ display: 'flex', gap: '10px', alignItems: 'flex-start' }}>
-                    <div style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: 'var(--color-gold)', marginTop: '6px', flexShrink: 0 }} />
-                    <div>
-                      <span style={{ fontSize: '0.82rem', fontWeight: 700, color: '#ffffff' }}>Pre-Filing Document Audit: </span>
-                      <span style={{ fontSize: '0.82rem', color: 'rgba(255,255,255,0.65)' }}>Zero-rejection verification before official processing.</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Bottom Governance Pills */}
-              <div style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(3, 1fr)',
-                gap: '0.75rem',
-                paddingTop: '1rem',
-                borderTop: '1px solid rgba(255,255,255,0.08)'
-              }}>
-                <div>
-                  <span style={{ fontSize: '0.65rem', color: 'rgba(255,255,255,0.45)', display: 'block', fontFamily: 'var(--font-mono)', textTransform: 'uppercase', letterSpacing: '0.06em', fontWeight: 600 }}>Supervision</span>
-                  <span style={{ fontSize: '0.82rem', fontWeight: 700, color: '#ffffff', marginTop: '2px', display: 'block' }}>Senior Advisory & Counsel</span>
-                </div>
-                <div style={{ borderLeft: '1px solid rgba(255,255,255,0.08)', paddingLeft: '0.75rem' }}>
-                  <span style={{ fontSize: '0.65rem', color: 'rgba(255,255,255,0.45)', display: 'block', fontFamily: 'var(--font-mono)', textTransform: 'uppercase', letterSpacing: '0.06em', fontWeight: 600 }}>Jurisdiction</span>
-                  <span style={{ fontSize: '0.82rem', fontWeight: 700, color: 'var(--color-gold)', marginTop: '2px', display: 'block' }}>All 28 States</span>
-                </div>
-                <div style={{ borderLeft: '1px solid rgba(255,255,255,0.08)', paddingLeft: '0.75rem' }}>
-                  <span style={{ fontSize: '0.65rem', color: 'rgba(255,255,255,0.45)', display: 'block', fontFamily: 'var(--font-mono)', textTransform: 'uppercase', letterSpacing: '0.06em', fontWeight: 600 }}>Execution</span>
-                  <span style={{ fontSize: '0.82rem', fontWeight: 700, color: '#ffffff', marginTop: '2px', display: 'block' }}>100% Digital</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </section>
-
-      {/* ── Main Engagement Content & Retainer Dashboard ── */}
-      <section style={{ padding: '4.5rem 0 6.5rem', maxWidth: '88rem', margin: '0 auto' }}>
-        <div style={{ padding: '0 clamp(1rem, 5vw, 2rem)' }}>
-          <div className="grid-service-tier" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(360px, 1fr))', gap: '4rem', alignItems: 'flex-start' }}>
-
-            {/* Left Column: Architectural Practice Dossier */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '4.5rem' }}>
-
-              {content.type === 'bundle' ? (
-                /* --- HUB BUNDLE LAYOUT --- */
-                <motion.div variants={FADE_UP} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '0.75rem' }}>
-                    <span className="section-label" style={{ margin: 0 }}>Strategic Advisory</span>
-                    <div style={{ height: '1px', flex: 1, backgroundColor: 'rgba(10,15,29,0.08)' }} />
-                  </div>
-                  <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(1.6rem, 3vw, 2.1rem)', fontWeight: 800, color: 'var(--color-navy)', marginBottom: '0.5rem', letterSpacing: '-0.03em', lineHeight: 1.15 }}>
-                    Pros & Cons (Unbiased Advisory)
-                  </h2>
-                  <p style={{ fontSize: '0.95rem', color: 'var(--color-text-muted)', marginBottom: '2rem', lineHeight: 1.6 }}>
-                    Honest advice to help you decide if this structure is right for you.
-                  </p>
-                  
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem', marginBottom: '2.5rem' }}>
-                    {/* Pros Card */}
-                    <div style={{ background: '#F8FAFC', border: '1px solid rgba(10,15,29,0.06)', borderRadius: 'var(--radius-xl)', padding: '1.75rem' }}>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '1.25rem' }}>
-                        <div style={{ width: '28px', height: '28px', borderRadius: '50%', background: 'rgba(34, 197, 94, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                          <CheckCircle2 size={16} color="#16A34A" />
-                        </div>
-                        <h3 style={{ fontSize: '1.05rem', fontWeight: 700, color: 'var(--color-navy)' }}>The Good Stuff</h3>
-                      </div>
-                      <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                        {content.pros.map((pro, i) => (
-                          <div key={i}>
-                            <div style={{ fontSize: '0.9rem', fontWeight: 600, color: 'var(--color-navy)', marginBottom: '4px' }}>{pro.title}</div>
-                            <div style={{ fontSize: '0.85rem', color: 'var(--color-text-muted)', lineHeight: 1.5 }}>{pro.desc}</div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* Cons Card */}
-                    <div style={{ background: '#FEF2F2', border: '1px solid rgba(220,38,38,0.1)', borderRadius: 'var(--radius-xl)', padding: '1.75rem' }}>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '1.25rem' }}>
-                        <div style={{ width: '28px', height: '28px', borderRadius: '50%', background: 'rgba(220, 38, 38, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                          <ShieldAlert size={16} color="#DC2626" />
-                        </div>
-                        <h3 style={{ fontSize: '1.05rem', fontWeight: 700, color: 'var(--color-navy)' }}>Things to Keep in Mind</h3>
-                      </div>
-                      <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                        {content.cons.map((con, i) => (
-                          <div key={i}>
-                            <div style={{ fontSize: '0.9rem', fontWeight: 600, color: 'var(--color-navy)', marginBottom: '4px' }}>{con.title}</div>
-                            <div style={{ fontSize: '0.85rem', color: 'var(--color-text-muted)', lineHeight: 1.5 }}>{con.desc}</div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Verdict Card */}
-                  <div className="glass-panel hover-lift" style={{ borderRadius: 'var(--radius-xl)', padding: '1.75rem', border: '1px solid var(--color-gold)' }}>
-                    <h3 style={{ fontSize: '1.05rem', fontWeight: 700, color: 'var(--color-navy)', marginBottom: '1rem' }}>Our Honest Verdict</h3>
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                      <div style={{ display: 'flex', gap: '8px', alignItems: 'flex-start' }}>
-                        <span style={{ fontSize: '1.2rem' }}>🎯</span>
-                        <div>
-                          <span style={{ fontSize: '0.88rem', fontWeight: 700, color: 'var(--color-navy)', display: 'block' }}>Perfect For:</span>
-                          <span style={{ fontSize: '0.88rem', color: 'var(--color-text-muted)', lineHeight: 1.5 }}>{content.verdict.ideal}</span>
-                        </div>
-                      </div>
-                      <div style={{ display: 'flex', gap: '8px', alignItems: 'flex-start' }}>
-                        <span style={{ fontSize: '1.2rem' }}>🛑</span>
-                        <div>
-                          <span style={{ fontSize: '0.88rem', fontWeight: 700, color: 'var(--color-navy)', display: 'block' }}>Skip This If:</span>
-                          <span style={{ fontSize: '0.88rem', color: 'var(--color-text-muted)', lineHeight: 1.5 }}>{content.verdict.avoid}</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Child Services / Spokes */}
-                  <div style={{ marginTop: '3.5rem' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '1rem' }}>
-                      <span className="section-label" style={{ margin: 0 }}>What You Need</span>
-                      <div style={{ height: '1px', flex: 1, backgroundColor: 'rgba(10,15,29,0.08)' }} />
-                    </div>
-                    <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(1.4rem, 2.5vw, 1.8rem)', fontWeight: 800, color: 'var(--color-navy)', marginBottom: '1.5rem', letterSpacing: '-0.03em', lineHeight: 1.15 }}>
-                      Required Registrations
-                    </h2>
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
-                      {content.childServices.map((child, i) => (
-                        <Link key={i} to={child.link} className="hover-lift" style={{
-                          display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-                          padding: '1.25rem', background: '#ffffff', borderRadius: 'var(--radius-lg)',
-                          border: '1px solid rgba(10,15,29,0.08)', textDecoration: 'none', color: 'var(--color-navy)'
-                        }}>
-                          <span style={{ fontSize: '0.9rem', fontWeight: 600 }}>{child.title}</span>
-                          <ChevronRight size={16} color="var(--color-gold)" />
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
-                </motion.div>
-              ) : (
-                /* --- STANDARD EXECUTION PROTOCOL LAYOUT --- */
-                <motion.div variants={FADE_UP} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '0.75rem' }}>
-                    <span className="section-label" style={{ margin: 0 }}>Practice Workflow</span>
-                    <div style={{ height: '1px', flex: 1, backgroundColor: 'rgba(10,15,29,0.08)' }} />
-                  </div>
-                  <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(1.6rem, 3vw, 2.1rem)', fontWeight: 800, color: 'var(--color-navy)', marginBottom: '0.5rem', letterSpacing: '-0.03em', lineHeight: 1.15 }}>
-                    How We Register Your Business
-                  </h2>
-                  <p style={{ fontSize: '0.95rem', color: 'var(--color-text-muted)', marginBottom: '1.75rem', lineHeight: 1.6 }}>
-                    A simple, transparent process handled by experienced professionals.
-                  </p>
-                  <div style={{
-                    display: 'grid',
-                    gridTemplateColumns: 'repeat(auto-fit, minmax(270px, 1fr))',
-                    gap: '1.5rem'
-                  }}>
-                    {[
-                      { step: 'STAGE 01', title: 'Understand Your Business', desc: 'We discuss your business idea and recommend the right company structure, registrations, and documents required to get started.', highlight: 'Expert Guidance' },
-                      { step: 'STAGE 02', title: 'Document Collection & Filing', desc: 'Our team prepares, verifies, and files all required applications with the relevant government authorities on your behalf.', highlight: 'Accurate & Hassle-Free Filing' },
-                      { step: 'STAGE 03', title: 'Application Tracking', desc: 'We continuously track your application, resolve any queries raised by the authorities, and keep you updated throughout the process.', highlight: 'Regular Status Updates' },
-                      { step: 'STAGE 04', title: 'Registration Completed', desc: 'Receive your registration certificates along with clear next steps for GST, compliance, banking, and future business requirements.', highlight: 'Post-Registration Support' }
-                    ].map((item, idx) => (
-                      <div key={idx} style={{
-                        background: '#ffffff',
-                        border: '1px solid rgba(10,15,29,0.08)',
-                        borderRadius: 'var(--radius-xl)',
-                        padding: '1.75rem',
-                        display: 'flex',
-                        flexDirection: 'column',
-                        justifyContent: 'space-between',
-                        boxShadow: '0 4px 20px -4px rgba(10,15,29,0.05)',
-                        transition: 'transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease'
-                      }}
-                      onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-3px)'; e.currentTarget.style.boxShadow = '0 12px 32px -6px rgba(10,15,29,0.12)'; e.currentTarget.style.borderColor = 'var(--color-gold-dark)'; }}
-                      onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 20px -4px rgba(10,15,29,0.05)'; e.currentTarget.style.borderColor = 'rgba(10,15,29,0.08)'; }}
-                      >
-                        <div>
-                          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.25rem' }}>
-                            <span style={{
-                              fontFamily: 'var(--font-mono)', fontSize: '0.72rem', fontWeight: 700,
-                              letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--color-gold-dark)',
-                              backgroundColor: 'rgba(223,186,115,0.12)', padding: '4px 10px', borderRadius: 'var(--radius-sm)'
-                            }}>
-                              {item.step}
-                            </span>
-                            <span style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--color-text-muted)' }}>
-                              Verified Protocol
-                            </span>
-                          </div>
-                          <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.15rem', fontWeight: 700, color: 'var(--color-navy)', marginBottom: '0.75rem', lineHeight: 1.3 }}>
-                            {item.title}
-                          </h3>
-                          <p style={{ fontSize: '0.88rem', color: 'var(--color-text-muted)', lineHeight: 1.6, margin: 0 }}>
-                            {item.desc}
-                          </p>
-                        </div>
-                        <div style={{ marginTop: '1.5rem', paddingTop: '1rem', borderTop: '1px solid rgba(10,15,29,0.06)', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                          <CheckCircle2 size={13} style={{ color: 'var(--color-gold-dark)' }} />
-                          <span style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--color-navy)' }}>{item.highlight}</span>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </motion.div>
-              )}
-
-              {/* 2. Key Advantages (Institutional Feature Grid) */}
-              <motion.div variants={FADE_UP} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '0.75rem' }}>
-                  <span className="section-label" style={{ margin: 0 }}>Practice Standards</span>
-                  <div style={{ height: '1px', flex: 1, backgroundColor: 'rgba(10,15,29,0.08)' }} />
-                </div>
-                <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(1.6rem, 3vw, 2.1rem)', fontWeight: 800, color: 'var(--color-navy)', marginBottom: '1.75rem', letterSpacing: '-0.03em', lineHeight: 1.15 }}>
-                  Professional Service & Execution Assurance
-                </h2>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(270px, 1fr))', gap: '1.25rem' }}>
-                  {content.whyUs.map((point, idx) => (
-                    <div key={idx} style={{
-                      display: 'flex', alignItems: 'flex-start', gap: '14px',
-                      padding: '1.5rem',
-                      background: '#ffffff',
-                      border: '1px solid rgba(10,15,29,0.08)',
-                      borderRadius: 'var(--radius-xl)',
-                      boxShadow: '0 4px 16px -4px rgba(10,15,29,0.04)',
-                      transition: 'border-color 160ms ease'
-                    }}
-                    onMouseEnter={e => e.currentTarget.style.borderColor = 'rgba(223,186,115,0.4)'}
-                    onMouseLeave={e => e.currentTarget.style.borderColor = 'rgba(10,15,29,0.08)'}
-                    >
-                      <div style={{ width: '36px', height: '36px', borderRadius: 'var(--radius-md)', background: 'var(--color-navy)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                        <CheckCircle2 size={16} style={{ color: 'var(--color-gold)' }} />
-                      </div>
-                      <div>
-                        <span style={{ fontSize: '0.95rem', fontWeight: 700, color: 'var(--color-navy)', lineHeight: '1.4', display: 'block', marginBottom: '4px' }}>
-                          {point}
-                        </span>
-                        <span style={{ fontSize: '0.81rem', color: 'var(--color-text-muted)', lineHeight: '1.5', display: 'block' }}>
-                          Guaranteed by senior practice counsel across all filings.
-                        </span>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </motion.div>
-
-              {/* 3. Statutory Documentation Checklist (Audit Matrix Card) */}
+              {/* Documents - Replaced Metrics */}
               {serviceData.documents && serviceData.documents.length > 0 && (
-                <motion.div variants={FADE_UP} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '0.75rem' }}>
-                    <span className="section-label" style={{ margin: 0 }}>Required Verification</span>
-                    <div style={{ height: '1px', flex: 1, backgroundColor: 'rgba(10,15,29,0.08)' }} />
-                  </div>
-                  <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(1.6rem, 3vw, 2.1rem)', fontWeight: 800, color: 'var(--color-navy)', marginBottom: '1.75rem', letterSpacing: '-0.03em', lineHeight: 1.15 }}>
-                    Pre-Submission Documentation Checklist
-                  </h2>
+                <div style={{ paddingTop: '1.5rem', marginTop: '1rem', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
+                  <h3 style={{ fontSize: '1.1rem', fontFamily: '"Playfair Display", "Georgia", serif', color: '#ffffff', fontWeight: 600, margin: '0 0 1.25rem 0' }}>
+                    What You Need to Provide
+                  </h3>
                   
-                  <div style={{
-                    backgroundColor: '#ffffff',
-                    border: '1px solid rgba(10,15,29,0.08)',
-                    borderRadius: 'var(--radius-2xl)',
-                    overflow: 'hidden',
-                    boxShadow: '0 12px 32px -8px rgba(10,15,29,0.06)'
-                  }}>
-                    {/* Header Banner */}
-                    <div style={{
-                      backgroundColor: 'var(--color-navy)',
-                      padding: '1.5rem clamp(1rem, 5vw, 2rem)',
-                      borderBottom: '1px solid rgba(255,255,255,0.1)',
-                      display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem'
-                    }}>
-                      <div>
-                        <span style={{ fontSize: '0.72rem', fontFamily: 'var(--font-mono)', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--color-gold)', fontWeight: 700, display: 'block', marginBottom: '4px' }}>
-                          Statutory Audit Standard
-                        </span>
-                        <h3 style={{ fontSize: '1.15rem', color: '#ffffff', fontWeight: 700, margin: 0 }}>
-                          Required Documentation Matrix
-                        </h3>
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem' }}>
+                    {serviceData.documents.map((doc, idx) => (
+                      <div key={idx} style={{ 
+                        display: 'flex', alignItems: 'center', gap: '10px', 
+                        padding: '0.75rem 1.25rem', 
+                        backgroundColor: 'rgba(20,26,41,0.6)', 
+                        border: '1px solid rgba(255,255,255,0.08)',
+                        borderRadius: '100px'
+                      }}>
+                        <FileText size={15} style={{ color: 'var(--color-gold)' }} />
+                        <span style={{ fontSize: '0.85rem', color: '#ffffff', fontWeight: 500 }}>{doc.replace('*', '')}</span>
                       </div>
-                      <div style={{ backgroundColor: 'rgba(255,255,255,0.08)', padding: '0.5rem 1rem', borderRadius: 'var(--radius-md)', border: '1px solid rgba(255,255,255,0.12)' }}>
-                        <span style={{ fontSize: '0.78rem', color: '#ffffff', fontWeight: 600 }}>100% Digital Submission</span>
-                      </div>
-                    </div>
-
-                    {/* Document Items Grid */}
-                    <div style={{ padding: 'clamp(1rem, 5vw, 2rem)', display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '1.25rem' }}>
-                      {serviceData.documents.map((doc, idx) => (
-                        <div key={idx} style={{
-                          display: 'flex', alignItems: 'center', gap: '12px',
-                          padding: '1rem 1.25rem',
-                          backgroundColor: 'var(--color-secondary)',
-                          border: '1px solid rgba(10,15,29,0.06)',
-                          borderRadius: 'var(--radius-lg)',
-                          transition: 'background-color 160ms ease, border-color 160ms ease'
-                        }}
-                        onMouseEnter={e => { e.currentTarget.style.backgroundColor = '#ffffff'; e.currentTarget.style.borderColor = 'var(--color-gold-dark)'; }}
-                        onMouseLeave={e => { e.currentTarget.style.backgroundColor = 'var(--color-secondary)'; e.currentTarget.style.borderColor = 'rgba(10,15,29,0.06)'; }}
-                        >
-                          <div style={{ width: '24px', height: '24px', borderRadius: '50%', backgroundColor: 'rgba(223,186,115,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                            <CheckCircle size={13} style={{ color: 'var(--color-gold-dark)' }} />
-                          </div>
-                          <span style={{ fontSize: '0.88rem', color: 'var(--color-navy)', fontWeight: 600, lineHeight: '1.4' }}>{doc}</span>
-                        </div>
-                      ))}
-                    </div>
-
-                    {/* Legal Note */}
-                    {serviceData.documents.some(doc => doc.includes('*')) && (
-                      <div style={{ backgroundColor: 'var(--color-secondary)', padding: '1.25rem clamp(1rem, 5vw, 2rem)', borderTop: '1px solid rgba(10,15,29,0.06)', display: 'flex', gap: '10px', alignItems: 'center' }}>
-                        <span style={{ color: 'var(--color-gold-dark)', fontWeight: 800, fontSize: '1.1rem' }}>*</span>
-                        <span style={{ fontSize: '0.82rem', color: 'var(--color-text-muted)', fontStyle: 'italic', fontWeight: 500 }}>
-                          Constitutional deeds, affidavits, and statutory declarations (* marked) are drafted and attested directly by our practice legal counsel.
-                        </span>
-                      </div>
-                    )}
-                  </div>
-                </motion.div>
-              )}
-
-              {/* Related Disciplines */}
-              {related.length > 0 && (
-                <motion.div variants={FADE_UP} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '0.75rem' }}>
-                    <span className="section-label" style={{ margin: 0 }}>Related Disciplines</span>
-                    <div style={{ height: '1px', flex: 1, backgroundColor: 'rgba(10,15,29,0.08)' }} />
-                  </div>
-                  <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(1.5rem, 2.8vw, 1.85rem)', fontWeight: 800, color: 'var(--color-navy)', marginBottom: '1.5rem', letterSpacing: '-0.02em' }}>
-                    Complementary Corporate Services
-                  </h2>
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '1rem' }}>
-                    {related.map((s) => (
-                      <Link
-                        key={s.id}
-                        to={`/services/${s.slug}`}
-                        style={{
-                          display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-                          padding: '1.25rem 1.5rem',
-                          background: '#ffffff', border: '1px solid rgba(10,15,29,0.08)',
-                          borderRadius: 'var(--radius-xl)',
-                          boxShadow: '0 4px 16px -4px rgba(10,15,29,0.04)',
-                          transition: 'border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease', gap: '1rem',
-                        }}
-                        onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--color-gold-dark)'; e.currentTarget.style.boxShadow = '0 10px 28px -6px rgba(10,15,29,0.1)'; e.currentTarget.style.transform = 'translateY(-2px)'; }}
-                        onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(10,15,29,0.08)'; e.currentTarget.style.boxShadow = '0 4px 16px -4px rgba(10,15,29,0.04)'; e.currentTarget.style.transform = 'translateY(0)'; }}
-                      >
-                        <span style={{ fontSize: '0.92rem', fontWeight: 700, color: 'var(--color-navy)' }}>{s.title}</span>
-                        <ArrowRight size={15} style={{ color: 'var(--color-gold-dark)', flexShrink: 0 }} />
-                      </Link>
                     ))}
                   </div>
-                </motion.div>
+
+                  {serviceData.documents.some(doc => doc.includes('*')) && (
+                    <div style={{ marginTop: '1.25rem', display: 'flex', gap: '8px', alignItems: 'flex-start' }}>
+                      <span style={{ color: 'var(--color-gold)', fontWeight: 700, fontSize: '1.1rem', marginTop: '-2px' }}>*</span>
+                      <span style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.5)', fontStyle: 'italic', lineHeight: 1.5 }}>
+                        Deeds and declarations marked with an asterisk are drafted exclusively by our practice counsel.
+                      </span>
+                    </div>
+                  )}
+                </div>
               )}
+
+
             </div>
 
-            {/* Right Column: Unified Executive Retainer & Governance Sidebar (No more scattered boxes!) */}
-            <div style={{ position: 'sticky', top: '6.5rem' }}>
+            {/* Right Column: Glassmorphism Snapshot Panel */}
+            <div style={{ flex: '1 1 340px', maxWidth: '380px' }}>
               <div style={{
-                backgroundColor: 'var(--color-navy)',
-                border: '1px solid rgba(255,255,255,0.12)',
-                borderRadius: 'var(--radius-2xl)',
-                overflow: 'hidden',
-                boxShadow: '0 24px 64px -12px rgba(10,15,29,0.22)'
+                backgroundColor: 'rgba(20,26,41,0.7)',
+                backdropFilter: 'blur(16px)',
+                WebkitBackdropFilter: 'blur(16px)',
+                border: '1px solid rgba(255,255,255,0.08)',
+                borderRadius: '16px',
+                boxShadow: '0 30px 60px rgba(0,0,0,0.4)',
+                display: 'flex',
+                flexDirection: 'column',
+                overflow: 'hidden'
               }}>
-                
-                {/* Tier 1: Action Header */}
-                <div style={{ padding: '2.25rem' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '1rem' }}>
-                    <div style={{ width: '26px', height: '26px', borderRadius: '6px', backgroundColor: 'var(--color-gold)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                      <Award size={14} style={{ color: 'var(--color-navy)' }} />
-                    </div>
-                    <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.72rem', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--color-gold)', fontWeight: 700 }}>
-                      Expert Retainer Desk
-                    </span>
-                  </div>
-                  
-                  <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.5rem', fontWeight: 800, color: '#ffffff', marginBottom: '0.875rem', letterSpacing: '-0.02em' }}>
-                    Get Started with Us
+                {/* Header */}
+                <div style={{ padding: '2rem 2rem 1.5rem', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
+                  <h3 style={{ fontFamily: '"Playfair Display", "Georgia", serif', fontSize: '1.4rem', fontWeight: 600, color: '#ffffff', margin: 0 }}>
+                    Service Snapshot
                   </h3>
-                  <p style={{ fontSize: '0.88rem', color: 'rgba(255,255,255,0.68)', lineHeight: '1.65', marginBottom: '2rem' }}>
-                    Our specialists manage your entire registration and statutory compliance from initial audit to final authority handover.
-                  </p>
+                </div>
 
-                  <Link to="/contact" className="btn-gold" style={{ width: '100%', marginBottom: '0.875rem', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '8px', padding: '1rem' }}>
-                    Talk to an Expert <ArrowRight size={16} />
+                {/* Timeline Row */}
+                {serviceData.timeline && (
+                  <div style={{ padding: '1.75rem 2rem', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '0.75rem' }}>
+                      <Clock size={15} style={{ color: 'var(--color-gold)' }} />
+                      <span style={{ fontSize: '0.9rem', color: '#ffffff', fontWeight: 700 }}>
+                        Estimated Turnaround
+                      </span>
+                    </div>
+                    <div style={{ fontSize: '0.95rem', color: 'rgba(255,255,255,0.7)', fontWeight: 400, lineHeight: 1.5, paddingLeft: '25px' }}>
+                      {serviceData.timeline}
+                    </div>
+                  </div>
+                )}
+
+                {/* Fees Row */}
+                {serviceData.fees && (
+                  <div style={{ padding: '1.75rem 2rem', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '0.75rem' }}>
+                      <CreditCard size={15} style={{ color: 'var(--color-gold)' }} />
+                      <span style={{ fontSize: '0.9rem', color: '#ffffff', fontWeight: 700 }}>
+                        Government & Filing Fees
+                      </span>
+                    </div>
+                    <div style={{ fontSize: '0.95rem', color: 'rgba(255,255,255,0.7)', fontWeight: 400, lineHeight: 1.5, paddingLeft: '25px' }}>
+                      {serviceData.fees}
+                    </div>
+                  </div>
+                )}
+
+                {/* Action Buttons Row */}
+                <div style={{ padding: '2rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                  <Link to="/contact" className="btn-gold" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '10px', padding: '1rem', width: '100%', textDecoration: 'none', fontSize: '1rem', fontWeight: 600, borderRadius: '8px' }}>
+                    Consult an Expert <ArrowRight size={18} />
                   </Link>
-
                   <a
                     href={`https://wa.me/918448803143?text=Hi%2C%20I'm%20inquiring%20about%20${encodeURIComponent(serviceData.title)}`}
                     target="_blank" rel="noopener noreferrer"
                     style={{
-                      display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px',
-                      width: '100%', padding: '0.875rem', borderRadius: 'var(--radius-md)',
-                      background: 'rgba(37,211,102,0.14)', border: '1px solid rgba(37,211,102,0.35)',
-                      fontSize: '0.85rem', fontWeight: 700, color: '#25D366',
-                      transition: 'background-color 160ms ease, transform 160ms ease'
+                      display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px',
+                      width: '100%', padding: '0.9rem', borderRadius: '8px',
+                      backgroundColor: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)',
+                      fontSize: '0.95rem', fontWeight: 600, color: '#ffffff', textDecoration: 'none',
+                      transition: 'all 160ms ease'
                     }}
-                    onMouseEnter={e => { e.currentTarget.style.backgroundColor = 'rgba(37,211,102,0.22)'; e.currentTarget.style.transform = 'translateY(-1px)'; }}
-                    onMouseLeave={e => { e.currentTarget.style.backgroundColor = 'rgba(37,211,102,0.14)'; e.currentTarget.style.transform = 'translateY(0)'; }}
+                    onMouseEnter={e => { e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.08)'; }}
+                    onMouseLeave={e => { e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.03)'; }}
                   >
-                    <MessageCircle size={16} /> Chat on WhatsApp
+                    <MessageCircle size={18} /> Chat on WhatsApp
                   </a>
                 </div>
-
-                {/* Tier 2: Statutory Turnaround & Fee Bar */}
-                <div style={{
-                  backgroundColor: '#ffffff',
-                  padding: 'clamp(1rem, 5vw, 2rem) clamp(1rem, 5vw, 2.25rem)',
-                  borderTop: '1px solid rgba(255,255,255,0.1)',
-                  borderBottom: '1px solid rgba(10,15,29,0.08)'
-                }}>
-                  {serviceData.timeline && (
-                    <div style={{ marginBottom: '1.5rem', paddingBottom: '1.5rem', borderBottom: '1px solid rgba(10,15,29,0.06)' }}>
-                      <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.6875rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--color-text-light)', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '6px', fontWeight: 700 }}>
-                        <Clock size={13} style={{ color: 'var(--color-gold-dark)' }} /> Estimated Turnaround
-                      </div>
-                      <p style={{ fontFamily: 'var(--font-heading)', fontSize: '1.25rem', color: 'var(--color-navy)', fontWeight: 800, margin: 0 }}>
-                        {serviceData.timeline}
-                      </p>
-                    </div>
-                  )}
-
-                  {serviceData.fees && (
-                    <div>
-                      <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.6875rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--color-text-light)', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '6px', fontWeight: 700 }}>
-                        <CreditCard size={13} style={{ color: 'var(--color-gold-dark)' }} /> Government & Package Fee
-                      </div>
-                      <p style={{ fontSize: '1rem', color: 'var(--color-navy)', fontWeight: 700, marginBottom: '1rem' }}>
-                        {serviceData.fees}
-                      </p>
-                      <div style={{ display: 'flex', gap: '10px', alignItems: 'flex-start', padding: '0.875rem 1rem', backgroundColor: 'var(--color-secondary)', borderRadius: 'var(--radius-md)', border: '1px solid rgba(10,15,29,0.08)' }}>
-                        <ShieldAlert size={15} style={{ color: 'var(--color-gold-dark)', flexShrink: 0, marginTop: '2px' }} />
-                        <span style={{ fontSize: '0.82rem', color: 'var(--color-navy)', lineHeight: '1.5', fontWeight: 600 }}>
-                          Transparent Pricing. Comprehensive service packages with clear commercial terms.
-                        </span>
-                      </div>
-                    </div>
-                  )}
-                </div>
-
-                {/* Tier 3: Institutional Trust Assurances */}
-                <div style={{ backgroundColor: 'var(--color-secondary)', padding: '1.75rem 2.25rem' }}>
-                  <span style={{ fontSize: '0.7rem', fontFamily: 'var(--font-mono)', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--color-text-light)', fontWeight: 700, display: 'block', marginBottom: '1.25rem' }}>
-                    Practice Guarantees
-                  </span>
-                  {[
-                    { icon: CheckCircle, label: 'Secure Online Process', desc: 'Zero physical visits required across India' },
-                    { icon: Award, label: 'Experienced Specialists', desc: 'Dedicated Senior Advisors & Legal Counsel' },
-                    { icon: ShieldCheck, label: '100% Confidential', desc: 'Strict fiduciary client data protection' },
-                  ].map((item, i) => {
-                    const Icon = item.icon;
-                    return (
-                      <div key={i} style={{ display: 'flex', gap: '14px', padding: '0.875rem 0', borderBottom: i < 2 ? '1px solid rgba(10,15,29,0.06)' : 'none' }}>
-                        <div style={{ width: '28px', height: '28px', borderRadius: '50%', background: 'rgba(223,186,115,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                          <Icon size={14} style={{ color: 'var(--color-gold-dark)' }} />
-                        </div>
-                        <div>
-                          <div style={{ fontSize: '0.88rem', fontWeight: 700, color: 'var(--color-navy)', marginBottom: '2px' }}>{item.label}</div>
-                          <div style={{ fontSize: '0.78rem', color: 'var(--color-text-muted)' }}>{item.desc}</div>
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-
               </div>
             </div>
 
           </div>
         </div>
       </section>
+
+
+
+
+
+      {/* ── 4-Step Process Grid (Bottom Half) ── */}
+      <section style={{ padding: '1rem 0 5rem' }}>
+        <div style={{ maxWidth: '110rem', margin: '0 auto', padding: '0 clamp(1.25rem, 5vw, 3rem)' }}>
+          <h3 style={{ fontSize: '1.25rem', fontFamily: '"Playfair Display", "Georgia", serif', color: '#ffffff', fontWeight: 600, margin: '0 0 2rem 0', textAlign: 'center' }}>
+            Our 4-Step Engagement Process
+          </h3>
+          <div style={{ maxWidth: '70rem', margin: '0 auto', display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '2rem' }}>
+            
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.75rem' }}>
+              <div style={{ width: '36px', height: '36px', borderRadius: '50%', backgroundColor: 'rgba(20,26,41,1)', border: '1px solid rgba(255,255,255,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-gold)', fontSize: '0.85rem', fontWeight: 700, fontFamily: 'var(--font-mono)' }}>
+                01
+              </div>
+              <h4 style={{ fontSize: '1rem', color: '#ffffff', fontWeight: 600, margin: 0, textAlign: 'center' }}>Consultation & Strategy</h4>
+            </div>
+
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.75rem' }}>
+              <div style={{ width: '36px', height: '36px', borderRadius: '50%', backgroundColor: 'rgba(20,26,41,1)', border: '1px solid rgba(255,255,255,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-gold)', fontSize: '0.85rem', fontWeight: 700, fontFamily: 'var(--font-mono)' }}>
+                02
+              </div>
+              <h4 style={{ fontSize: '1rem', color: '#ffffff', fontWeight: 600, margin: 0, textAlign: 'center' }}>Document Preparation</h4>
+            </div>
+
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.75rem' }}>
+              <div style={{ width: '36px', height: '36px', borderRadius: '50%', backgroundColor: 'rgba(20,26,41,1)', border: '1px solid rgba(255,255,255,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-gold)', fontSize: '0.85rem', fontWeight: 700, fontFamily: 'var(--font-mono)' }}>
+                03
+              </div>
+              <h4 style={{ fontSize: '1rem', color: '#ffffff', fontWeight: 600, margin: 0, textAlign: 'center' }}>Regulatory Filings</h4>
+            </div>
+
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.75rem' }}>
+              <div style={{ width: '36px', height: '36px', borderRadius: '50%', backgroundColor: 'rgba(20,26,41,1)', border: '1px solid rgba(255,255,255,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-gold)', fontSize: '0.85rem', fontWeight: 700, fontFamily: 'var(--font-mono)' }}>
+                04
+              </div>
+              <h4 style={{ fontSize: '1rem', color: '#ffffff', fontWeight: 600, margin: 0, textAlign: 'center' }}>Fast Delivery</h4>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* ── Optional: Pros & Cons Block (If available) ── */}
+      {content.type === 'bundle' && (
+        <section style={{ padding: '0 0 6rem', maxWidth: '80rem', margin: '0 auto' }}>
+          <div style={{ padding: '0 clamp(1.25rem, 5vw, 3rem)' }}>
+            <h2 style={{ fontFamily: '"Playfair Display", "Georgia", serif', fontSize: '2rem', color: '#ffffff', marginBottom: '2rem' }}>Pros & Cons (Unbiased Advisory)</h2>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
+              {/* Pros Card */}
+              <div style={{ background: 'rgba(22,163,74,0.05)', border: '1px solid rgba(22,163,74,0.2)', borderRadius: '16px', padding: '2rem' }}>
+                <h3 style={{ fontSize: '1.2rem', color: '#4ade80', marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  <CheckCircle2 size={18} /> The Good Stuff
+                </h3>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                  {content.pros.map((pro, i) => (
+                    <div key={i}>
+                      <div style={{ fontSize: '1rem', fontWeight: 600, color: '#ffffff', marginBottom: '4px' }}>{pro.title}</div>
+                      <div style={{ fontSize: '0.9rem', color: 'rgba(255,255,255,0.6)', lineHeight: 1.5 }}>{pro.desc}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Cons Card */}
+              <div style={{ background: 'rgba(220,38,38,0.05)', border: '1px solid rgba(220,38,38,0.2)', borderRadius: '16px', padding: '2rem' }}>
+                <h3 style={{ fontSize: '1.2rem', color: '#f87171', marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  <ShieldAlert size={18} /> Things to Keep in Mind
+                </h3>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                  {content.cons.map((con, i) => (
+                    <div key={i}>
+                      <div style={{ fontSize: '1rem', fontWeight: 600, color: '#ffffff', marginBottom: '4px' }}>{con.title}</div>
+                      <div style={{ fontSize: '0.9rem', color: 'rgba(255,255,255,0.6)', lineHeight: 1.5 }}>{con.desc}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
     </div>
   );
 }
