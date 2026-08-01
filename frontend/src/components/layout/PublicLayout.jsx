@@ -28,8 +28,7 @@ const megaMenuCategories = [
     items: [
       { label: 'GST Registration & Structuring', href: '/services/gst-registration', badge: 'Pan-India' },
       { label: 'GST Amendment & Transfer', href: '/services/gst-amendment' },
-      { label: 'TDS Registration', href: '/services/tds-registration' },
-      { label: 'Corporate PAN & TAN Registration', href: '/services/pan-tan-application' },
+      { label: 'PAN, TAN & TDS Services', href: '/services/pan-tan-tds-services' },
       { label: 'Professional Tax Enrolment', href: '/services/professional-tax' },
       { label: 'EPF Registration & Governance', href: '/services/epf-registration' },
     ]

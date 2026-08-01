@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import PublicLayout from './components/layout/PublicLayout';
 import AdminLayout from './components/layout/AdminLayout';
 
@@ -32,6 +32,9 @@ function App() {
         <Route element={<PublicLayout />}>
           <Route path="/" element={<Home />} />
           <Route path="/services" element={<Services />} />
+          <Route path="/services/dpiit-recognition" element={<Navigate to="/services/startup-india-recognition" replace />} />
+          <Route path="/services/pan-tan-application" element={<Navigate to="/services/pan-tan-tds-services" replace />} />
+          <Route path="/services/tds-registration" element={<Navigate to="/services/pan-tan-tds-services" replace />} />
           <Route path="/services/:slug" element={<ServiceDetail />} />
           <Route path="/industries" element={<Industries />} />
           <Route path="/industries/:slug" element={<IndustryDetail />} />

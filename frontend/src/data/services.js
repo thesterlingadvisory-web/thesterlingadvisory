@@ -7,7 +7,7 @@ export const serviceCategories = [
     services: [
       {
         id: 'proprietorship',
-        title: 'Proprietorship Compliance & Bank Setup',
+        title: 'Sole Proprietorship Registration',
         slug: 'proprietorship-setup',
         shortDesc: 'Comprehensive statutory licensing (Udyam MSME, GST, and Shops & Establishment) required to formalize commercial identity and open a bank current account under individual PAN.',
         documents: [
@@ -88,9 +88,8 @@ export const serviceCategories = [
         timeline: '3-7 Business Days (Subject to Aadhaar & Physical Verification)',
       },
       { id: 'gst-amendment', title: 'GST Amendment & Jurisdictional Transfer', slug: 'gst-amendment', shortDesc: 'Modification of core and non-core GST registration attributes including address, business type, and authorized signatory.' },
-      { id: 'pan-tan', title: 'Corporate PAN & TAN Registration', slug: 'pan-tan-application', shortDesc: 'Permanent Account & Tax Deduction Account Number allocation for newly incorporated companies and LLPs.' },
+      { id: 'pan-tan', title: 'PAN, TAN & TDS Services', slug: 'pan-tan-tds-services', shortDesc: 'Permanent Account Number, Tax Deduction Account Number allocation, and TDS registration for compliance.' },
       { id: 'pt', title: 'Professional Tax Enrolment', slug: 'professional-tax', shortDesc: 'State-mandated employer and employee professional tax registration required in applicable states.' },
-      { id: 'tds', title: 'TDS Registration', slug: 'tds-registration', shortDesc: 'Tax Deduction at Source account registration required for businesses making payments to employees, vendors, and contractors.' },
     ]
   },
   {
@@ -161,8 +160,7 @@ export const serviceCategories = [
       },
       { id: 'gem', title: 'GeM Seller Accreditation', slug: 'gem-registration', shortDesc: 'Government e-Marketplace procurement portal registration.' },
       { id: 'nsic', title: 'NSIC Enrolment', slug: 'nsic-registration', shortDesc: 'National Small Industries Corporation government purchase registration.' },
-      { id: 'startup-india', title: 'DPIIT Startup India Recognition', slug: 'startup-india-recognition', shortDesc: 'Accreditation for Section 80-IAC tax holiday and angel tax exemptions.' },
-      { id: 'dpiit', title: 'DPIIT Tax Holiday Advisory', slug: 'dpiit-recognition', shortDesc: 'Strategic guidance on Inter-Ministerial Board tax exemption applications.' },
+      { id: 'startup-india', title: 'Startup India (DPIIT) Recognition', slug: 'startup-india-recognition', shortDesc: 'Accreditation for Section 80-IAC tax holiday and angel tax exemptions.' },
       { id: 'zed', title: 'ZED Certification Support', slug: 'zed-certification', shortDesc: 'Zero Defect Zero Effect manufacturing quality accreditation.' },
     ]
   },
