@@ -114,14 +114,14 @@ export default function Industries() {
       <section style={{ backgroundColor: '#F8F8F6', paddingBottom: '6rem' }}>
         <div style={{ maxWidth: '88rem', margin: '0 auto', padding: '0 clamp(1rem, 5vw, 2rem)' }}>
           {/* Card Grid: Desktop 3+2 */}
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '1.5rem', marginBottom: '1.5rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))', gap: '1.5rem', marginBottom: '1.5rem' }}>
             {industriesData.slice(0, 3).map((ind, i) => (
               <Reveal key={ind.id} delay={i * 100}>
                 <IndustryCard industry={ind} />
               </Reveal>
             ))}
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '1.5rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))', gap: '1.5rem' }}>
             {industriesData.slice(3, 5).map((ind, i) => (
               <Reveal key={ind.id} delay={(i + 3) * 100}>
                 <IndustryCard industry={ind} />
@@ -143,7 +143,7 @@ export default function Industries() {
                 From Starting Up to Staying Compliant
               </h2>
             </div>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '2rem' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 240px), 1fr))', gap: '2rem' }}>
               {[
                 { step: '01', title: 'Start Your Business', desc: 'Company formation and initial registrations.' },
                 { step: '02', title: 'Get the Required Registrations', desc: 'GST, MSME, licences and other registrations.' },

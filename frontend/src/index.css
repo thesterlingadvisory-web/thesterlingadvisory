@@ -127,7 +127,7 @@
 @layer base {
   *, *::before, *::after { box-sizing: border-box; }
 
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: smooth; overflow-x: hidden; }
 
   @media (min-width: 768px) {
     html { zoom: 0.75; }
@@ -143,6 +143,8 @@
     font-size: 16px;
     line-height: 1.55;
     transition: background-color 300ms ease, color 300ms ease;
+    overflow-x: hidden;
+
   }
 
   ::selection {
@@ -554,3 +556,81 @@
 }
 @utility animate-spin { animation: spin 1s linear infinite; }
 @utility animate-pulse { animation: pulse 2s cubic-bezier(0.4,0,0.6,1) infinite; }
+
+
+/* ============================================================
+   GLOBAL MOBILE RESPONSIVENESS (DO NOT CHANGE DESKTOP)
+   ============================================================ */
+
+/* 1. Prevent Horizontal Scroll Globally */
+html, body {
+  overflow-x: hidden !important;
+  box-sizing: border-box;
+}
+*, *:before, *:after { box-sizing: border-box; }
+
+@media (max-width: 1024px) {
+  /* Service Detail Overrides */
+  .sd-hero-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .sd-features-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .sd-reqs-grid {
+    grid-template-columns: 1fr !important;
+  }
+  
+  /* Inputs & Forms */
+  input, select, textarea {
+    min-height: 48px !important;
+    font-size: 16px !important; /* Prevent iOS zoom */
+    width: 100% !important;
+  }
+  button, .btn-gold, .btn-primary, .btn-navy {
+    min-height: 48px !important;
+    padding-top: 12px !important;
+    padding-bottom: 12px !important;
+  }
+
+  /* General Padding Fixes for Sections */
+  section {
+    padding-top: clamp(3rem, 8vw, 4rem) !important;
+    padding-bottom: clamp(3rem, 8vw, 4rem) !important;
+  }
+
+  /* Footer Links Stacking */
+  footer .md\:flex {
+    display: flex !important;
+    flex-direction: column !important;
+  }
+  
+  /* Typography Scaling */
+  h1 { font-size: clamp(2rem, 8vw, 2.75rem) !important; line-height: 1.1 !important; }
+  h2 { font-size: clamp(1.75rem, 6vw, 2.25rem) !important; line-height: 1.2 !important; }
+  h3 { font-size: clamp(1.25rem, 5vw, 1.5rem) !important; }
+  
+  /* Make sure all grids with auto-fit don't overflow */
+  .grid-2col-equal, .grid-about-cols, .grid-contact-responsive, .grid-home-matrix, .grid-industry-card {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Force all inline grid repeat auto-fit layouts to stack nicely */
+  [style*="gridTemplateColumns: 'repeat(auto-fit"] {
+    grid-template-columns: 1fr !important;
+  }
+  [style*="grid-template-columns: repeat(auto-fit"] {
+    grid-template-columns: 1fr !important;
+  }
+  
+  /* Safe touch targets */
+  a, button {
+    min-height: 44px;
+  }
+
+  /* Hide Desktop specific things on mobile */
+  .hidden.md\:flex { display: none !important; }
+  .hidden.md\:block { display: none !important; }
+}

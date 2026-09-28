@@ -291,7 +291,7 @@ export default function Home() {
           {/* Asymmetric Institutional Grid: Left (~42% pushed left), Right (~58% expanded wider so zero scroll needed) */}
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))',
             gap: '3.5rem',
             alignItems: 'center'
           }}
@@ -648,19 +648,15 @@ export default function Home() {
 
       {/* ═══════════════════════════════════════════
           01B. STANDALONE INSTITUTIONAL HIGHLIGHT BAR
-          High-contrast standalone bar with gold icons (Exact to 3rd image purana front layout)
+          High-contrast standalone bar with gold icons
       ═══════════════════════════════════════════ */}
-      {(() => {
-      const isDark = true;
-      const th = getThDark('#0B172A');
-      return (
-  <section className={isDark ? "glass-navbar" : ""} style={{
-        backgroundColor: isDark ? 'rgba(5, 10, 20, 0.92)' : 'rgba(255, 255, 255, 0.92)',
-        borderTop: isDark ? '1px solid rgba(223, 186, 115, 0.38)' : '1px solid rgba(0, 0, 0, 0.08)',
-        borderBottom: isDark ? '1px solid rgba(255, 255, 255, 0.08)' : '1px solid rgba(0, 0, 0, 0.05)',
+      <section style={{
+        backgroundColor: 'rgba(5, 10, 20, 0.92)',
+        borderTop: '1px solid rgba(223, 186, 115, 0.38)',
+        borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
         padding: '2.25rem 0',
         position: 'relative',
-        boxShadow: isDark ? '0 12px 36px rgba(0,0,0,0.45)' : '0 4px 20px rgba(0,0,0,0.05)'
+        boxShadow: '0 12px 36px rgba(0,0,0,0.45)'
       }}>
         <div style={{ maxWidth: '92rem', margin: '0 auto', padding: '0 clamp(1rem, 5vw, 2rem)' }}>
           <Reveal delay={200}>
@@ -675,18 +671,18 @@ export default function Home() {
             <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
               <div style={{
                 width: '46px', height: '46px', flexShrink: 0,
-                backgroundColor: isDark ? 'rgba(223, 186, 115, 0.12)' : '#eef2ff',
-                border: isDark ? '1px solid rgba(223, 186, 115, 0.35)' : '1px solid #c7d2fe',
+                backgroundColor: 'rgba(223, 186, 115, 0.12)',
+                border: '1px solid rgba(223, 186, 115, 0.35)',
                 borderRadius: 'var(--radius-md)',
                 display: 'flex', alignItems: 'center', justifyContent: 'center'
               }}>
-                <Globe size={22} style={{ color: isDark ? 'var(--color-gold)' : '#0a2540' }} />
+                <Globe size={22} style={{ color: 'var(--color-gold, #C79A45)' }} />
               </div>
               <div>
-                <span style={{ fontSize: '0.98rem', color: isDark ? '#ffffff' : '#111827', fontWeight: 700, display: 'block', fontFamily: 'var(--font-heading)', lineHeight: '1.2', marginBottom: '3px' }}>
+                <span style={{ fontSize: '0.98rem', color: '#ffffff', fontWeight: 700, display: 'block', fontFamily: 'var(--font-heading)', lineHeight: '1.2', marginBottom: '3px' }}>
                   PAN India Service
                 </span>
-                <span style={{ fontSize: '0.78rem', color: isDark ? 'rgba(255,255,255,0.6)' : '#6b7280', display: 'block' }}>
+                <span style={{ fontSize: '0.78rem', color: 'rgba(255,255,255,0.6)', display: 'block' }}>
                   All states & UTs covered
                 </span>
               </div>
@@ -696,18 +692,18 @@ export default function Home() {
             <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
               <div style={{
                 width: '46px', height: '46px', flexShrink: 0,
-                backgroundColor: isDark ? 'rgba(223, 186, 115, 0.12)' : '#eef2ff',
-                border: isDark ? '1px solid rgba(223, 186, 115, 0.35)' : '1px solid #c7d2fe',
+                backgroundColor: 'rgba(223, 186, 115, 0.12)',
+                border: '1px solid rgba(223, 186, 115, 0.35)',
                 borderRadius: 'var(--radius-md)',
                 display: 'flex', alignItems: 'center', justifyContent: 'center'
               }}>
-                <CheckCircle size={22} style={{ color: isDark ? 'var(--color-gold)' : '#0a2540' }} />
+                <CheckCircle size={22} style={{ color: 'var(--color-gold, #C79A45)' }} />
               </div>
               <div>
-                <span style={{ fontSize: '0.98rem', color: isDark ? '#ffffff' : '#111827', fontWeight: 700, display: 'block', fontFamily: 'var(--font-heading)', lineHeight: '1.2', marginBottom: '3px' }}>
+                <span style={{ fontSize: '0.98rem', color: '#ffffff', fontWeight: 700, display: 'block', fontFamily: 'var(--font-heading)', lineHeight: '1.2', marginBottom: '3px' }}>
                   100% Online Process
                 </span>
-                <span style={{ fontSize: '0.78rem', color: isDark ? 'rgba(255,255,255,0.6)' : '#6b7280', display: 'block' }}>
+                <span style={{ fontSize: '0.78rem', color: 'rgba(255,255,255,0.6)', display: 'block' }}>
                   No office visit required
                 </span>
               </div>
@@ -717,18 +713,18 @@ export default function Home() {
             <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
               <div style={{
                 width: '46px', height: '46px', flexShrink: 0,
-                backgroundColor: isDark ? 'rgba(223, 186, 115, 0.12)' : '#eef2ff',
-                border: isDark ? '1px solid rgba(223, 186, 115, 0.35)' : '1px solid #c7d2fe',
+                backgroundColor: 'rgba(223, 186, 115, 0.12)',
+                border: '1px solid rgba(223, 186, 115, 0.35)',
                 borderRadius: 'var(--radius-md)',
                 display: 'flex', alignItems: 'center', justifyContent: 'center'
               }}>
-                <Award size={22} style={{ color: isDark ? 'var(--color-gold)' : '#0a2540' }} />
+                <Award size={22} style={{ color: 'var(--color-gold, #C79A45)' }} />
               </div>
               <div>
-                <span style={{ fontSize: '0.98rem', color: isDark ? '#ffffff' : '#111827', fontWeight: 700, display: 'block', fontFamily: 'var(--font-heading)', lineHeight: '1.2', marginBottom: '3px' }}>
+                <span style={{ fontSize: '0.98rem', color: '#ffffff', fontWeight: 700, display: 'block', fontFamily: 'var(--font-heading)', lineHeight: '1.2', marginBottom: '3px' }}>
                   Qualified Experts Only
                 </span>
-                <span style={{ fontSize: '0.78rem', color: isDark ? 'rgba(255,255,255,0.6)' : '#6b7280', display: 'block' }}>
+                <span style={{ fontSize: '0.78rem', color: 'rgba(255,255,255,0.6)', display: 'block' }}>
                   Senior Advisors & Legal Counsel
                 </span>
               </div>
@@ -738,18 +734,18 @@ export default function Home() {
             <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
               <div style={{
                 width: '46px', height: '46px', flexShrink: 0,
-                backgroundColor: isDark ? 'rgba(223, 186, 115, 0.12)' : '#eef2ff',
-                border: isDark ? '1px solid rgba(223, 186, 115, 0.35)' : '1px solid #c7d2fe',
+                backgroundColor: 'rgba(223, 186, 115, 0.12)',
+                border: '1px solid rgba(223, 186, 115, 0.35)',
                 borderRadius: 'var(--radius-md)',
                 display: 'flex', alignItems: 'center', justifyContent: 'center'
               }}>
-                <TrendingUp size={22} style={{ color: isDark ? 'var(--color-gold)' : '#0a2540' }} />
+                <TrendingUp size={22} style={{ color: 'var(--color-gold, #C79A45)' }} />
               </div>
               <div>
-                <span style={{ fontSize: '0.98rem', color: isDark ? 'var(--color-gold)' : '#0a2540', fontWeight: 700, display: 'block', fontFamily: 'var(--font-heading)', lineHeight: '1.2', marginBottom: '3px' }}>
+                <span style={{ fontSize: '0.98rem', color: 'var(--color-gold, #C79A45)', fontWeight: 700, display: 'block', fontFamily: 'var(--font-heading)', lineHeight: '1.2', marginBottom: '3px' }}>
                   Transparent Pricing
                 </span>
-                <span style={{ fontSize: '0.78rem', color: isDark ? 'rgba(255,255,255,0.6)' : '#6b7280', display: 'block' }}>
+                <span style={{ fontSize: '0.78rem', color: 'rgba(255,255,255,0.6)', display: 'block' }}>
                   Clear and upfront fee structures
                 </span>
               </div>
@@ -758,8 +754,6 @@ export default function Home() {
         </Reveal>
       </div>
       </section>
-      );
-    })()}
 
       {/* ═══════════════════════════════════════════
           02. FIDUCIARY SCOPE — DISCIPLINES MATRIX
@@ -973,17 +967,17 @@ export default function Home() {
       const isDark = true;
       const th = getThDark('#0B172A');
       return (
-  <section style={{ padding: '7rem 0', backgroundColor: th.sectionBg, position: 'relative' }}>
+  <section style={{ padding: '7rem 0', backgroundColor: '#0B172A', position: 'relative' }}>
         <div style={{ maxWidth: '88rem', margin: '0 auto', padding: '0 clamp(1rem, 5vw, 2rem)' }}>
           <div className="grid-home-matrix">
 
             {/* Left: Why Sterling Advisory */}
             <Reveal delay={150}>
-              <span className="section-label">Why Choose Us</span>
-              <h2 style={{ fontFamily: 'var(--font-editorial)', fontSize: 'clamp(2.4rem, 4vw, 3.4rem)', fontWeight: 500, color: th.heading, marginBottom: '1.25rem', lineHeight: 1.1, letterSpacing: '-0.02em', maxWidth: '22ch' }}>
+              <span style={{ fontSize: '0.8125rem', fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase', color: '#C79A45', marginBottom: '1rem', display: 'block' }}>Why Choose Us</span>
+              <h2 style={{ fontFamily: 'var(--font-editorial)', fontSize: 'clamp(2.4rem, 4vw, 3.4rem)', fontWeight: 600, color: '#FFFFFF', marginBottom: '1.25rem', lineHeight: 1.1, letterSpacing: '-0.02em', maxWidth: '22ch' }}>
                 Top-tier corporate advisory without the heavy overhead.
               </h2>
-              <p style={{ color: th.body, marginBottom: '2.5rem', fontSize: '1rem', lineHeight: '1.65', maxWidth: '48ch' }}>
+              <p style={{ color: '#B7C1D0', marginBottom: '2.5rem', fontSize: '1rem', lineHeight: '1.6', maxWidth: '48ch' }}>
                 We replace slow paper bureaucracy with fast, accurate digital processes. Whether you are starting a new company or managing GST returns across states, our team acts as your trusted legal and financial advisor.
               </p>
 
@@ -994,9 +988,9 @@ export default function Home() {
                   { title: 'Expert Professional Support', desc: 'Every filing is reviewed and certified by dedicated qualified professionals.' },
                   { title: 'Transparent Pricing', desc: 'Clear, upfront fee structures tailored to your specific business requirements.' },
                 ].map((item, i) => (
-                  <div key={i} className="hover-lift" style={{ borderLeft: isDark ? '2px solid var(--color-gold)' : '2px solid #0a2540', paddingLeft: '1rem' }}>
-                    <div style={{ fontWeight: 600, color: th.heading, fontSize: '0.9375rem', marginBottom: '4px' }}>{item.title}</div>
-                    <div style={{ fontSize: '0.8125rem', color: th.body, lineHeight: '1.5' }}>{item.desc}</div>
+                  <div key={i} className="hover-lift" style={{ borderLeft: '2px solid rgba(199,154,69,0.7)', paddingLeft: '1rem' }}>
+                    <div style={{ fontWeight: 600, color: '#FFFFFF', fontSize: '0.9375rem', marginBottom: '4px' }}>{item.title}</div>
+                    <div style={{ fontSize: '0.8125rem', color: '#A7B2C2', lineHeight: '1.5' }}>{item.desc}</div>
                   </div>
                 ))}
               </div>
@@ -1004,46 +998,52 @@ export default function Home() {
 
             {/* Right: How It Works Roadmap */}
             <Reveal delay={300}>
-              <div className={isDark ? "glass-panel-dark hover-lift" : "hover-lift"} style={{
+              <div className="hover-lift" style={{
                 borderRadius: 'var(--radius-xl)',
                 padding: '2.5rem',
-                backgroundColor: isDark ? undefined : 'rgba(255,255,255,0.7)',
-                border: isDark ? undefined : '1px solid rgba(0,0,0,0.06)',
-                boxShadow: isDark ? undefined : '0 12px 30px rgba(0,0,0,0.03)'
+                backgroundColor: 'rgba(255,255,255,0.03)',
+                border: '1px solid rgba(255,255,255,0.10)',
+                boxShadow: '0 4px 30px rgba(0,0,0,0.1)'
               }}>
-              <span className="section-label" style={{ marginBottom: '2rem', display: 'block' }}>HOW OUR SIMPLE 4-STEP PROCESS WORKS</span>
+              <span style={{ fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase', color: '#C79A45', marginBottom: '2rem', display: 'block' }}>HOW OUR SIMPLE 4-STEP PROCESS WORKS</span>
               
               <div style={{ display: 'flex', flexDirection: 'column', gap: '2.5rem' }}>
                 {processSteps.map((step) => (
                   <div key={step.num} style={{ display: 'flex', gap: '1.25rem', alignItems: 'flex-start' }}>
                     <div style={{
                       width: '36px', height: '36px', borderRadius: 'var(--radius-md)',
-                      backgroundColor: isDark ? 'rgba(223,186,115,0.12)' : '#eef2ff',
-                      border: isDark ? '1px solid var(--color-gold)' : '1px solid #c7d2fe',
+                      backgroundColor: 'rgba(199,154,69,0.1)',
+                      border: '1px solid #C79A45',
                       display: 'flex', alignItems: 'center', justifyContent: 'center',
-                      fontFamily: 'var(--font-body)', fontSize: '0.8125rem', fontWeight: 700, color: isDark ? 'var(--color-gold)' : '#0a2540', flexShrink: 0
+                      fontFamily: 'var(--font-body)', fontSize: '0.8125rem', fontWeight: 700, color: '#C79A45', flexShrink: 0
                     }}>
                       {step.num}
                     </div>
                     <div>
-                      <div style={{ fontSize: '1rem', fontWeight: 700, color: th.heading, marginBottom: '6px' }}>{step.title}</div>
-                      <div style={{ fontSize: '0.875rem', color: th.body, lineHeight: '1.6' }}>{step.desc}</div>
+                      <div style={{ fontSize: '1rem', fontWeight: 700, color: '#FFFFFF', marginBottom: '6px' }}>{step.title}</div>
+                      <div style={{ fontSize: '0.875rem', color: '#A7B2C2', lineHeight: '1.6' }}>{step.desc}</div>
                     </div>
                   </div>
                 ))}
               </div>
 
-              <div style={{ marginTop: '2.5rem', paddingTop: '1.75rem', borderTop: isDark ? '1px solid rgba(255,255,255,0.08)' : '1px solid rgba(0,0,0,0.08)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
-                <div style={{ fontSize: '0.875rem', color: th.body }}>Ready to get started with your initial consultation?</div>
-                <Link to="/contact" className={isDark ? "btn-gold" : ""} style={{ 
+              <div style={{ marginTop: '2.5rem', paddingTop: '1.75rem', borderTop: '1px solid rgba(255,255,255,0.08)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
+                <div style={{ fontSize: '0.875rem', color: '#A7B2C2' }}>Ready to get started with your initial consultation?</div>
+                <Link to="/contact" style={{ 
                   padding: '0.625rem 1.25rem', 
                   fontSize: '0.8125rem',
-                  backgroundColor: isDark ? undefined : '#0a2540',
-                  color: isDark ? undefined : '#ffffff',
+                  backgroundColor: '#C79A45',
+                  color: '#07101F',
                   borderRadius: '100px',
                   fontWeight: 600,
-                  textDecoration: 'none'
-                }}>
+                  border: 'none',
+                  textDecoration: 'none',
+                  boxShadow: '0 4px 14px rgba(199,154,69,0.18)',
+                  transition: 'all 200ms ease'
+                }}
+                onMouseEnter={e => { e.currentTarget.style.backgroundColor = '#B48738'; e.currentTarget.style.boxShadow = '0 5px 16px rgba(199,154,69,0.22)'; }}
+                onMouseLeave={e => { e.currentTarget.style.backgroundColor = '#C79A45'; e.currentTarget.style.boxShadow = '0 4px 14px rgba(199,154,69,0.18)'; }}
+                >
                   Talk to an Expert
                 </Link>
               </div>
@@ -1143,7 +1143,7 @@ export default function Home() {
               </Link>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))', gap: '1.5rem' }}>
               {[
                 { title: 'Private Limited vs. LLP: Which Is Right for Your Business?', excerpt: 'A clear comparison of liability protection, tax benefits, fundraising options, and annual compliance costs to help founders choose the right structure.', tag: 'Business Setup' },
                 { title: 'GST Registration: When Is It Required and How Does It Work?', excerpt: 'A simple guide to understanding GST thresholds, voluntary registration benefits, input tax credits, and e-way bill requirements for your business.', tag: 'Tax & GST' },

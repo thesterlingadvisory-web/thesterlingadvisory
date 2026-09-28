@@ -128,7 +128,7 @@ export default function Contact() {
       {/* 2. MAIN CONSULTATION SECTION (LIGHT) */}
       <section ref={formRef} style={{ backgroundColor: '#F8F8F6', padding: '6rem 0' }}>
         <div style={{ maxWidth: '1240px', margin: '0 auto', padding: '0 clamp(1rem, 5vw, 2rem)' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '4rem', alignItems: 'flex-start' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))', gap: '4rem', alignItems: 'flex-start' }}>
             
             {/* Left: Contact Info */}
             <Reveal>
@@ -375,7 +375,7 @@ export default function Contact() {
             </Reveal>
           </div>
           
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))', gap: '1.5rem' }}>
             {[
               { num: '01', title: 'Share Your Requirement', desc: 'Tell us about your business and what you need help with.' },
               { num: '02', title: 'We Review Your Requirement', desc: 'Our team reviews the details and identifies the appropriate next steps.' },

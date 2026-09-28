@@ -146,7 +146,7 @@ export default function Insights() {
           <Reveal>
             <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', flexWrap: 'wrap' }}>
               <span style={{ fontSize: '0.875rem', fontWeight: 700, color: '#475467' }}>Explore by Topic:</span>
-              <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+              <div className="no-scrollbar" style={{ display: 'flex', gap: '0.5rem', overflowX: 'auto', WebkitOverflowScrolling: 'touch', paddingBottom: '0.25rem', width: '100%' }}>
                 {CATEGORIES.map(cat => {
                   const isActive = activeCategory === cat;
                   return (
@@ -186,7 +186,7 @@ export default function Insights() {
             </Reveal>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '1.5rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 320px), 1fr))', gap: '1.5rem' }}>
             {filteredInsights.length > 0 ? filteredInsights.map((article, i) => (
               <Reveal key={article.id} delay={i * 50}>
                 <Link to={`/insights/${article.slug}`} style={{

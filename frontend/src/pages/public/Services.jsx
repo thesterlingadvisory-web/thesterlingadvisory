@@ -115,7 +115,7 @@ export default function Services() {
       {/* ── Category Navigation Bar ── */}
       {!categoryFilter && (
         <section style={{ background: '#F2F6FA', borderBottom: '1px solid #E5E7EB', padding: '1.25rem 0' }}>
-          <div style={{ maxWidth: '88rem', margin: '0 auto', padding: '0 clamp(1rem, 5vw, 2rem)', display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+          <div className="no-scrollbar" style={{ maxWidth: '88rem', margin: '0 auto', padding: '0 clamp(1rem, 5vw, 2rem)', display: 'flex', gap: '0.5rem', overflowX: 'auto', WebkitOverflowScrolling: 'touch', paddingBottom: '0.25rem' }}>
             {serviceCategories.map(cat => (
               <Link
                 key={cat.id}
@@ -149,7 +149,7 @@ export default function Services() {
             <motion.div
               initial="hidden" animate="visible"
               variants={{ visible: { transition: { staggerChildren: 0.05 } } }}
-              style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '1.5rem' }}
+              style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 320px), 1fr))', gap: '1.5rem' }}
             >
               {displayedCategories[0].services.map((service) => (
                 <motion.div key={service.id} variants={FADE_UP} style={{ display: 'flex', height: '100%' }}>
@@ -235,7 +235,7 @@ export default function Services() {
                     </div>
 
                     {/* Services within this Discipline */}
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '1rem' }}>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 260px), 1fr))', gap: '1rem' }}>
                       {category.services.map((service) => (
                         <Link
                           key={service.id}

@@ -10,7 +10,7 @@ export default function About() {
       {/* 2 & 3. HERO SECTION + TRUST PANEL (DARK) */}
       <section style={{ backgroundColor: '#07101F', paddingTop: '8rem', paddingBottom: '6rem', overflow: 'hidden' }}>
         <div style={{ maxWidth: '1240px', margin: '0 auto', padding: '0 clamp(1rem, 5vw, 2rem)' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '4rem', alignItems: 'center' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))', gap: '4rem', alignItems: 'center' }}>
             
             {/* Hero Left */}
             <Reveal>
@@ -77,7 +77,7 @@ export default function About() {
       <section style={{ backgroundColor: '#F8F8F6', padding: '6rem 0' }}>
         <div style={{ maxWidth: '1240px', margin: '0 auto', padding: '0 clamp(1rem, 5vw, 2rem)' }}>
           <Reveal>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '3rem', alignItems: 'flex-start' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))', gap: '3rem', alignItems: 'flex-start' }}>
               <div>
                 <span style={{ fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase', color: '#C79A45', marginBottom: '1rem', display: 'inline-block', padding: '4px 12px', backgroundColor: '#FBF5E8', borderRadius: '99px' }}>
                   WHO WE ARE
@@ -115,7 +115,7 @@ export default function About() {
             </Reveal>
           </div>
           
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))', gap: '1.5rem' }}>
             {[
               { num: '01', title: 'Business Setup', desc: 'Company, LLP and business registrations.' },
               { num: '02', title: 'GST & Tax', desc: 'GST registration, filings and tax-related support.' },
@@ -157,7 +157,7 @@ export default function About() {
             </h2>
           </Reveal>
           
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '2.5rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 240px), 1fr))', gap: '2.5rem' }}>
             {[
               { num: '01', title: 'Understand Your Business', desc: 'We first understand your business, structure and requirements.' },
               { num: '02', title: 'Identify What You Need', desc: 'We identify the registrations, licences and compliance requirements that apply to you.' },
@@ -194,7 +194,7 @@ export default function About() {
             </Reveal>
           </div>
           
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1.5rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 260px), 1fr))', gap: '1.5rem' }}>
             {[
               { num: '01', title: 'CLARITY', desc: 'We explain requirements, timelines and fees in simple language.' },
               { num: '02', title: 'ACCURACY', desc: 'We carefully review documents and applications before submission.' },
@@ -229,7 +229,7 @@ export default function About() {
             </div>
           </Reveal>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '3rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))', gap: '3rem' }}>
             {[
               { title: 'Business-Focused', desc: 'We understand that compliance should support your business, not slow it down.' },
               { title: 'Clear Communication', desc: 'We explain complex requirements in straightforward language.' },

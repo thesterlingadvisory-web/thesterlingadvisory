@@ -68,6 +68,7 @@ export default function PublicLayout() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isServicesOpen, setIsServicesOpen] = useState(false);
+  const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const [activeMegaTab, setActiveMegaTab] = useState(0);
   const [openFooterAccordion, setOpenFooterAccordion] = useState(null);
   const location = useLocation();
@@ -104,15 +105,14 @@ export default function PublicLayout() {
 
       {/* ── HEADER (Priority 8: Agency-Grade Stripe / Mercury / Notion Navigation) ── */}
       <header
-        className={isScrolled ? 'glass-navbar' : ''}
         style={{
           position: 'sticky',
           top: 0,
-          zIndex: 50,
+          zIndex: 9999,
           width: '100%',
-          background: isScrolled ? 'rgba(11, 23, 42, 0.95)' : '#07101F',
-          borderBottom: isScrolled ? undefined : '1px solid hsl(var(--border))',
-          boxShadow: isScrolled ? undefined : 'none',
+          background: '#07101F',
+          borderBottom: '1px solid rgba(255,255,255,0.08)',
+          boxShadow: isScrolled ? '0 4px 24px rgba(0,0,0,0.4)' : 'none',
           transition: 'all 300ms ease',
         }}
       >
@@ -494,39 +494,54 @@ export default function PublicLayout() {
               </div>
               <nav style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem', marginBottom: 'auto' }}>
                 <span style={{ fontSize: '0.7rem', color: 'var(--color-gold)', fontFamily: 'var(--font-mono)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '0.5rem' }}>Menu</span>
-                {[
-                  { label: 'Home', href: '/' },
-                  { label: 'Practice Areas', href: '/services' },
-                  { label: 'Industries We Serve', href: '/industries' },
-                  { label: 'Insights & Guides', href: '/insights' },
-                  { label: 'About Us', href: '/about' },
-                ].map((item) => (
-                  <Link
-                    key={item.href}
-                    to={item.href}
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    style={{
-                      display: 'block',
-                      padding: '0.85rem 1rem',
-                      borderRadius: '8px',
-                      background: 'rgba(255,255,255,0.03)',
-                      border: '1px solid rgba(255,255,255,0.05)',
-                      fontFamily: 'var(--font-heading)',
-                      fontSize: '1.1rem',
-                      fontWeight: 600,
-                      color: '#ffffff',
-                      textDecoration: 'none'
-                    }}
-                  >
-                    {item.label}
-                  </Link>
-                ))}
+                <Link onClick={() => setIsMobileMenuOpen(false)} to="/" style={{ display: 'block', padding: '0.85rem 1rem', borderRadius: '8px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.05)', fontFamily: 'var(--font-heading)', fontSize: '1.1rem', fontWeight: 600, color: '#ffffff', textDecoration: 'none' }}>Home</Link>
+                
+                {/* Services Accordion */}
+                <div style={{ display: 'flex', flexDirection: 'column', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.05)', borderRadius: '8px', overflow: 'hidden' }}>
+                  <button onClick={() => setMobileServicesOpen(!mobileServicesOpen)} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.85rem 1rem', background: 'transparent', border: 'none', color: '#ffffff', fontFamily: 'var(--font-heading)', fontSize: '1.1rem', fontWeight: 600, width: '100%', cursor: 'pointer' }}>
+                    Services <ChevronDown size={18} style={{ transform: mobileServicesOpen ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 200ms ease' }} />
+                  </button>
+                  {mobileServicesOpen && (
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', padding: '0 1rem 1rem', background: 'rgba(0,0,0,0.2)' }}>
+                      <Link onClick={() => setIsMobileMenuOpen(false)} to="/services" style={{ padding: '0.5rem 0', color: 'var(--color-gold)', fontSize: '0.9rem', fontWeight: 600, textDecoration: 'none', borderBottom: '1px solid rgba(255,255,255,0.05)', marginBottom: '4px' }}>View All Services →</Link>
+                      {[
+                        { label: 'Company & Business Setup', href: '/services?category=business-registrations' },
+                        { label: 'GST & Tax', href: '/services?category=tax-registrations' },
+                        { label: 'Trademark & IP', href: '/services?category=intellectual-property' },
+                        { label: 'Labour & Employment', href: '/services?category=labour-law' },
+                        { label: 'Startup & DPIIT', href: '/services?category=msme-govt' },
+                        { label: 'Industry & Trade Licensing', href: '/services?category=industry-specific' }
+                      ].map(sub => (
+                        <Link key={sub.href} onClick={() => setIsMobileMenuOpen(false)} to={sub.href} style={{ padding: '0.4rem 0', color: 'rgba(255,255,255,0.7)', fontSize: '0.9rem', textDecoration: 'none' }}>+ {sub.label}</Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                <Link onClick={() => setIsMobileMenuOpen(false)} to="/industries" style={{ display: 'block', padding: '0.85rem 1rem', borderRadius: '8px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.05)', fontFamily: 'var(--font-heading)', fontSize: '1.1rem', fontWeight: 600, color: '#ffffff', textDecoration: 'none' }}>Industries We Serve</Link>
+                <Link onClick={() => setIsMobileMenuOpen(false)} to="/insights" style={{ display: 'block', padding: '0.85rem 1rem', borderRadius: '8px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.05)', fontFamily: 'var(--font-heading)', fontSize: '1.1rem', fontWeight: 600, color: '#ffffff', textDecoration: 'none' }}>Insights & Guides</Link>
+                <Link onClick={() => setIsMobileMenuOpen(false)} to="/about" style={{ display: 'block', padding: '0.85rem 1rem', borderRadius: '8px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.05)', fontFamily: 'var(--font-heading)', fontSize: '1.1rem', fontWeight: 600, color: '#ffffff', textDecoration: 'none' }}>About Us</Link>
               </nav>
 
-              <div style={{ marginTop: '2rem' }}>
+              <div style={{ marginTop: '2rem', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
                 <Link onClick={() => setIsMobileMenuOpen(false)} to="/contact" className="btn-gold" style={{ width: '100%', padding: '0.875rem', display: 'block', textAlign: 'center', borderRadius: '8px' }}>
                   Talk to an Expert
                 </Link>
+                <button
+                  onClick={() => { setIsMobileMenuOpen(false); window.dispatchEvent(new Event('open-ai-chat')); }}
+                  style={{
+                    display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px',
+                    width: '100%', padding: '0.875rem',
+                    fontSize: '1rem', fontWeight: 600,
+                    color: '#ffffff',
+                    background: 'linear-gradient(135deg, rgba(197,168,128,0.15) 0%, rgba(197,168,128,0.03) 100%)',
+                    border: '1px solid rgba(197,168,128,0.3)',
+                    borderRadius: '8px', cursor: 'pointer',
+                  }}
+                >
+                  <Sparkles size={16} style={{ color: 'var(--color-gold)' }} />
+                  <span>Ask AI</span>
+                </button>
               </div>
             </motion.div>
           </div>
