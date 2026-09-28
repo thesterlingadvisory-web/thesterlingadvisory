@@ -159,6 +159,65 @@ export default function Home() {
   const { theme } = useTheme();
   const isDark = theme === 'dark';
 
+  const getThDark = (bgHex) => ({
+    pageBg:        bgHex,
+    cardBg:        '#101A2D',
+    cardBorder:    '#243149',
+    heading:       '#FFFFFF',
+    headingStrong: '#FFFFFF',
+    body:          '#AAB4C5',
+    bodyFaint:     'rgba(255,255,255,0.5)',
+    accent:        '#C79A45',
+    accentGold:    '#C79A45',
+    iconBg:        'rgba(199,154,69,0.12)',
+    iconBorder:    'rgba(199,154,69,0.3)',
+    sectionBg:     bgHex,
+    pillBg:        'rgba(199,154,69,0.14)',
+    pillBorder:    'rgba(199,154,69,0.35)',
+    pillText:      '#FFFFFF',
+    tabActive:     'rgba(199,154,69,0.14)',
+    tabActiveBorder: '#C79A45',
+    tabActiveText: '#C79A45',
+    tabDefault:    'rgba(255,255,255,0.04)',
+    tabDefaultBorder: 'rgba(255,255,255,0.1)',
+    tabDefaultText: 'rgba(255,255,255,0.6)',
+    divider:       '#243149',
+    highlightBar:  bgHex,
+    highlightText: '#FFFFFF',
+    highlightMuted:'rgba(255,255,255,0.6)',
+    linkHover:     '#C79A45',
+  });
+
+  const getThLight = (bgHex) => ({
+    pageBg:        bgHex,
+    cardBg:        '#FFFFFF',
+    cardBorder:    '#E5E7EB',
+    heading:       '#0B172A',
+    headingStrong: '#0B172A',
+    body:          '#475467',
+    bodyFaint:     '#667085',
+    accent:        '#C79A45',
+    accentGold:    '#C79A45',
+    iconBg:        '#FBF5E8',
+    iconBorder:    '#E7DCC5',
+    sectionBg:     bgHex,
+    pillBg:        '#FBF5E8',
+    pillBorder:    '#E7DCC5',
+    pillText:      '#0B172A',
+    tabActive:     '#FBF5E8',
+    tabActiveBorder: '#C79A45',
+    tabActiveText: '#0B172A',
+    tabDefault:    '#FFFFFF',
+    tabDefaultBorder: '#E5E7EB',
+    tabDefaultText: '#475467',
+    divider:       '#E5E7EB',
+    highlightBar:  bgHex,
+    highlightText: '#0B172A',
+    highlightMuted:'#475467',
+    linkHover:     '#C79A45',
+  });
+
+
   /* ── Theme helper: call th.bg, th.text, etc ── */
   const th = {
     pageBg:        isDark ? '#050A15'              : 'hsl(var(--background))',
@@ -196,12 +255,16 @@ export default function Home() {
     : servicesMatrix.filter(s => s.category === matrixCategory)).slice(0, 10);
 
   return (
-    <div style={{ width: '100%', background: th.pageBg }}>
+    <div style={{ width: '100%', background: '#07101F' }}>
 
       {/* ═══════════════════════════════════════════
           01. HERO — INSTITUTIONAL PRACTICE DESK
       ═══════════════════════════════════════════ */}
-      <section className={isDark ? "bg-institutional-grid" : ""} style={{
+      {(() => {
+      const isDark = true;
+      const th = getThDark('#07101F');
+      return (
+  <section className={isDark ? "bg-institutional-grid" : ""} style={{
         padding: '5rem 0 1rem',
         position: 'relative',
         overflow: 'hidden'
@@ -580,12 +643,18 @@ export default function Home() {
           </div>
         </div>
       </section>
+      );
+    })()}
 
       {/* ═══════════════════════════════════════════
           01B. STANDALONE INSTITUTIONAL HIGHLIGHT BAR
           High-contrast standalone bar with gold icons (Exact to 3rd image purana front layout)
       ═══════════════════════════════════════════ */}
-      <section className={isDark ? "glass-navbar" : ""} style={{
+      {(() => {
+      const isDark = true;
+      const th = getThDark('#0B172A');
+      return (
+  <section className={isDark ? "glass-navbar" : ""} style={{
         backgroundColor: isDark ? 'rgba(5, 10, 20, 0.92)' : 'rgba(255, 255, 255, 0.92)',
         borderTop: isDark ? '1px solid rgba(223, 186, 115, 0.38)' : '1px solid rgba(0, 0, 0, 0.08)',
         borderBottom: isDark ? '1px solid rgba(255, 255, 255, 0.08)' : '1px solid rgba(0, 0, 0, 0.05)',
@@ -689,20 +758,26 @@ export default function Home() {
         </Reveal>
       </div>
       </section>
+      );
+    })()}
 
       {/* ═══════════════════════════════════════════
           02. FIDUCIARY SCOPE — DISCIPLINES MATRIX
           Priority 3: Value-focused service cards without pricing-catalogue noise
       ═══════════════════════════════════════════ */}
-      <section style={{ 
+      {(() => {
+      const isDark = false;
+      const th = getThLight('#F2F6FA');
+      return (
+  <section style={{ 
         padding: '5.5rem 0 6.5rem', 
-        backgroundColor: th.sectionBg,
+        backgroundColor: '#f1f5f9',
         position: 'relative',
         overflow: 'hidden'
       }}>
         {/* Soft Ambient Glows */}
-        <div style={{ position: 'absolute', top: '10%', left: '-5%', width: '60vw', height: '60vw', background: isDark ? 'radial-gradient(circle at center, rgba(223,186,115,0.08) 0%, transparent 70%)' : 'radial-gradient(circle at center, rgba(91,78,232,0.06) 0%, transparent 70%)', filter: 'blur(80px)', pointerEvents: 'none', zIndex: 0 }} />
-        <div style={{ position: 'absolute', bottom: '-10%', right: '-5%', width: '50vw', height: '50vw', background: isDark ? 'radial-gradient(circle at center, rgba(13,21,39,0.03) 0%, transparent 70%)' : 'radial-gradient(circle at center, rgba(91,78,232,0.04) 0%, transparent 70%)', filter: 'blur(80px)', pointerEvents: 'none', zIndex: 0 }} />
+        <div style={{ position: 'absolute', top: '10%', left: '-5%', width: '60vw', height: '60vw', background: 'radial-gradient(circle at center, rgba(91,78,232,0.06) 0%, transparent 70%)', filter: 'blur(80px)', pointerEvents: 'none', zIndex: 0 }} />
+        <div style={{ position: 'absolute', bottom: '-10%', right: '-5%', width: '50vw', height: '50vw', background: 'radial-gradient(circle at center, rgba(91,78,232,0.04) 0%, transparent 70%)', filter: 'blur(80px)', pointerEvents: 'none', zIndex: 0 }} />
 
         {/* Expanded 108rem (1728px / 94vw) container to utilize full desktop screen width */}
         <div style={{ maxWidth: '108rem', margin: '0 auto', padding: '0 clamp(1rem, 5vw, 3rem)', position: 'relative', zIndex: 1 }}>
@@ -711,9 +786,9 @@ export default function Home() {
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: '2rem', marginBottom: '3.75rem' }}>
               <div>
               <span style={{
-                  background: th.pillBg,
-                  border: `1px solid ${th.pillBorder}`,
-                color: isDark ? th.accent : '#0a2540',
+                  background: 'rgba(223, 186, 115, 0.15)',
+                  border: '1px solid rgba(223, 186, 115, 0.4)',
+                color: '#0a2540',
                 padding: '5px 14px',
                 borderRadius: '99px',
                 fontSize: '0.78rem',
@@ -724,13 +799,13 @@ export default function Home() {
                 alignItems: 'center',
                 gap: '8px'
               }}>
-                <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: isDark ? th.accent : '#0a2540' }} />
+                <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: '#0a2540' }} />
                 Our Practice Areas
               </span>
-              <h2 style={{ fontSize: 'clamp(1.9rem, 3.8vw, 3.1rem)', fontWeight: 800, color: th.heading, marginTop: '0.85rem', lineHeight: 1.15, letterSpacing: '-0.03em', maxWidth: '32ch' }}>
-                Essential services across company setup, <span style={{ fontFamily: 'var(--font-editorial)', fontStyle: 'italic', fontWeight: 400, color: isDark ? th.accentGold : '#0a2540' }}>taxation, and licensing.</span>
+              <h2 style={{ fontSize: 'clamp(1.9rem, 3.8vw, 3.1rem)', fontWeight: 800, color: '#0a2540', marginTop: '0.85rem', lineHeight: 1.15, letterSpacing: '-0.03em', maxWidth: '32ch' }}>
+                Essential services across company setup, <span style={{ fontFamily: 'var(--font-editorial)', fontStyle: 'italic', fontWeight: 400, color: 'var(--color-gold-dark)' }}>taxation, and licensing.</span>
               </h2>
-              <p style={{ color: th.body, fontSize: '1.05rem', marginTop: '0.75rem', maxWidth: '64ch', lineHeight: '1.65' }}>
+              <p style={{ color: '#4b5563', fontSize: '1.05rem', marginTop: '0.75rem', maxWidth: '64ch', lineHeight: '1.65' }}>
                 Select a practice pillar to review what&apos;s included, statutory government requirements, and exact completion timelines.
               </p>
             </div>
@@ -755,9 +830,9 @@ export default function Home() {
                       fontSize: '0.82rem',
                       fontWeight: isSelected ? 700 : 600,
                       cursor: 'pointer',
-                      border: isSelected ? `1px solid ${th.accent}` : `1px solid ${th.cardBorder}`,
-                      backgroundColor: isSelected ? 'hsl(var(--primary))' : th.cardBg,
-                      color: isSelected ? 'hsl(var(--primary-foreground))' : th.body,
+                      border: isSelected ? '1px solid var(--color-gold-dark)' : '1px solid rgba(0,0,0,0.1)',
+                      backgroundColor: isSelected ? 'var(--color-gold)' : '#ffffff',
+                      color: isSelected ? '#0a2540' : '#4b5563',
                       backdropFilter: 'blur(12px)',
                       boxShadow: isSelected ? '0 6px 18px rgba(13, 21, 39, 0.22)' : '0 2px 4px rgba(0,0,0,0.02)',
                       transition: 'all 180ms ease'
@@ -774,6 +849,7 @@ export default function Home() {
           {/* Service Cards Grid: Sleeker horizontal columns (minmax(270px, 1fr)) across wide 108rem grid */}
           <motion.div
             layout
+            transition={{ type: 'spring', stiffness: 500, damping: 35, mass: 1 }}
             style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(270px, 1fr))', gap: '2rem' }}
           >
             <AnimatePresence mode="popLayout">
@@ -782,10 +858,10 @@ export default function Home() {
                   key={service.title}
                   layout
                   className={index >= 4 ? 'hidden md:flex' : 'flex'}
-                  initial={{ opacity: 0, scale: 0.96 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.96 }}
-                  transition={{ duration: 0.25, ease: 'easeOut' }}
+                  initial={{ opacity: 0, scale: 0.94, filter: 'blur(4px)' }}
+                  animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+                  exit={{ opacity: 0, scale: 0.94, filter: 'blur(4px)' }}
+                  transition={{ type: 'spring', stiffness: 500, damping: 35, mass: 1 }}
                   style={{ width: '100%' }}
                 >
                   <Link
@@ -806,9 +882,9 @@ export default function Home() {
                     onMouseEnter={e => {
                       e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.85)';
                       e.currentTarget.style.backgroundImage = 'linear-gradient(135deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0.5) 100%)';
-                      e.currentTarget.style.borderColor = isDark ? 'var(--color-gold)' : '#0a2540';
+                      e.currentTarget.style.borderColor = '#0a2540';
                       e.currentTarget.style.transform = 'translateY(-4px)';
-                      e.currentTarget.style.boxShadow = isDark ? '0 16px 40px -10px rgba(13, 21, 39, 0.12), 0 0 24px rgba(223, 186, 115, 0.15), inset 0 0 0 1px rgba(255, 255, 255, 0.8)' : '0 16px 40px -10px rgba(0, 0, 0, 0.1), 0 0 24px rgba(55, 48, 163, 0.15), inset 0 0 0 1px rgba(255, 255, 255, 0.8)';
+                      e.currentTarget.style.boxShadow = '0 16px 40px -10px rgba(0, 0, 0, 0.1), 0 0 24px rgba(55, 48, 163, 0.15), inset 0 0 0 1px rgba(255, 255, 255, 0.8)';
                     }}
                     onMouseLeave={e => {
                       e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.65)';
@@ -822,35 +898,35 @@ export default function Home() {
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem', gap: '8px' }}>
                       <span style={{
                         fontSize: '0.73rem', fontWeight: 700, letterSpacing: '0.12em',
-                        textTransform: 'uppercase', color: isDark ? 'var(--color-gold-dark)' : '#0a2540',
+                        textTransform: 'uppercase', color: '#0a2540',
                         fontFamily: 'var(--font-body)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis'
                       }}>
                         {service.tag}
                       </span>
                       <span style={{
-                        fontSize: '0.8rem', fontWeight: 600, color: isDark ? 'var(--color-text-light)' : '#4b5563',
+                        fontSize: '0.8rem', fontWeight: 600, color: '#4b5563',
                         fontFamily: 'var(--font-body)', whiteSpace: 'nowrap', flexShrink: 0
                       }}>
                         {service.time}
                       </span>
                     </div>
 
-                    <h3 style={{ fontSize: '1.15rem', fontWeight: 750, fontFamily: 'var(--font-heading)', color: isDark ? 'var(--color-navy)' : '#111827', marginBottom: '0.75rem', letterSpacing: '-0.02em', lineHeight: '1.3' }}>
+                    <h3 style={{ fontSize: '1.15rem', fontWeight: 750, fontFamily: 'var(--font-heading)', color: '#111827', marginBottom: '0.75rem', letterSpacing: '-0.02em', lineHeight: '1.3' }}>
                       {service.title}
                     </h3>
 
-                    <p style={{ fontSize: '0.9rem', color: isDark ? 'var(--color-text-muted)' : '#4b5563', lineHeight: '1.6', marginBottom: '1.5rem', flexGrow: 1 }}>
+                    <p style={{ fontSize: '0.9rem', color: '#4b5563', lineHeight: '1.6', marginBottom: '1.5rem', flexGrow: 1 }}>
                       {service.desc}
                     </p>
 
                     {/* Bottom Footer Row: Clean separation without wrapping */}
                     <div style={{ borderTop: '1px solid rgba(13, 21, 39, 0.07)', paddingTop: '1.1rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '12px' }}>
                       <div style={{ flex: 1, minWidth: 0 }}>
-                        <span style={{ fontSize: '0.68rem', color: isDark ? 'var(--color-text-light)' : '#6b7280', display: 'block', fontFamily: 'var(--font-body)', textTransform: 'uppercase', letterSpacing: '0.04em', fontWeight: 600, marginBottom: '3px' }}>What&apos;s Included</span>
-                        <span style={{ fontSize: '0.86rem', fontWeight: 650, color: isDark ? 'var(--color-navy)' : '#111827', display: 'block', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{service.fee}</span>
+                        <span style={{ fontSize: '0.68rem', color: '#6b7280', display: 'block', fontFamily: 'var(--font-body)', textTransform: 'uppercase', letterSpacing: '0.04em', fontWeight: 600, marginBottom: '3px' }}>What&apos;s Included</span>
+                        <span style={{ fontSize: '0.86rem', fontWeight: 650, color: '#111827', display: 'block', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{service.fee}</span>
                       </div>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.76rem', fontWeight: 700, color: isDark ? 'var(--color-navy)' : '#0a2540', letterSpacing: '0.04em', textTransform: 'uppercase', whiteSpace: 'nowrap', flexShrink: 0 }}>
-                        Learn More <ArrowRight size={14} style={{ color: isDark ? 'var(--color-gold-dark)' : '#0a2540' }} />
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.76rem', fontWeight: 700, color: '#0a2540', letterSpacing: '0.04em', textTransform: 'uppercase', whiteSpace: 'nowrap', flexShrink: 0 }}>
+                        Learn More <ArrowRight size={14} style={{ color: '#0a2540' }} />
                       </div>
                     </div>
                   </Link>
@@ -863,7 +939,7 @@ export default function Home() {
           <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '3.75rem' }}>
             <Link
               to="/services"
-              className={isDark ? "btn-gold" : ""}
+              className=""
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
@@ -872,26 +948,32 @@ export default function Home() {
                 fontSize: '0.96rem',
                 fontWeight: 700,
                 borderRadius: '99px',
-                backgroundColor: isDark ? undefined : '#0a2540',
-                color: isDark ? undefined : '#ffffff',
+                backgroundColor: '#0a2540',
+                color: '#ffffff',
                 textDecoration: 'none',
-                boxShadow: isDark ? '0 10px 28px -6px rgba(223, 186, 115, 0.45)' : '0 4px 14px 0 rgba(55, 48, 163, 0.39)',
+                boxShadow: '0 4px 14px 0 rgba(55, 48, 163, 0.39)',
                 transition: 'all 220ms cubic-bezier(0.16, 1, 0.3, 1)'
               }}
-              onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-3px)'; e.currentTarget.style.boxShadow = isDark ? '0 16px 36px -8px rgba(223, 186, 115, 0.6)' : '0 8px 20px 0 rgba(55, 48, 163, 0.5)'; }}
-              onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = isDark ? '0 10px 28px -6px rgba(223, 186, 115, 0.45)' : '0 4px 14px 0 rgba(55, 48, 163, 0.39)'; }}
+              onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-3px)'; e.currentTarget.style.boxShadow = '0 8px 20px 0 rgba(55, 48, 163, 0.5)'; }}
+              onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 14px 0 rgba(55, 48, 163, 0.39)'; }}
             >
               Explore All Services <ArrowRight size={16} />
             </Link>
           </div>
         </div>
       </section>
+      );
+    })()}
 
       {/* ═══════════════════════════════════════════
           03. INSTITUTIONAL RIGOR — ASYMMETRICAL 4-STEP ENGAGEMENT
           Priority 4 & 8: Left-aligned narrative anchoring vs execution steps
       ═══════════════════════════════════════════ */}
-      <section style={{ padding: '7rem 0', backgroundColor: th.sectionBg, position: 'relative' }}>
+      {(() => {
+      const isDark = true;
+      const th = getThDark('#0B172A');
+      return (
+  <section style={{ padding: '7rem 0', backgroundColor: th.sectionBg, position: 'relative' }}>
         <div style={{ maxWidth: '88rem', margin: '0 auto', padding: '0 clamp(1rem, 5vw, 2rem)' }}>
           <div className="grid-home-matrix">
 
@@ -971,12 +1053,18 @@ export default function Home() {
           </div>
         </div>
       </section>
+      );
+    })()}
 
       {/* ═══════════════════════════════════════════
           04. STATUTORY & SLA FAQS (COMPACT ACCORDION)
           Priority 2 & 6: Clean, non-robotic microcopy and subtle borders
       ═══════════════════════════════════════════ */}
-      <section style={{ padding: '5rem 0', backgroundColor: th.pageBg }}>
+      {(() => {
+      const isDark = false;
+      const th = getThLight('#F8F8F6');
+      return (
+  <section style={{ padding: '5rem 0', backgroundColor: th.pageBg }}>
         <div style={{ maxWidth: '64rem', margin: '0 auto', padding: '0 clamp(1rem, 5vw, 2rem)' }}>
           <Reveal delay={100}>
             <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
@@ -1029,12 +1117,18 @@ export default function Home() {
           </Reveal>
         </div>
       </section>
+      );
+    })()}
 
       {/* ═══════════════════════════════════════════
           05. ADVISORY NOTES / KNOWLEDGE HUB
           Priority 2: "Advisory Notes / Structural briefings on corporate law and taxation."
       ═══════════════════════════════════════════ */}
-      <section style={{ padding: '5rem 0', backgroundColor: th.sectionBg, borderTop: isDark ? '1px solid rgba(255,255,255,0.08)' : '1px solid rgba(0,0,0,0.06)' }}>
+      {(() => {
+      const isDark = true;
+      const th = getThDark('#0B172A');
+      return (
+  <section style={{ padding: '5rem 0', backgroundColor: th.sectionBg, borderTop: isDark ? '1px solid rgba(255,255,255,0.08)' : '1px solid rgba(0,0,0,0.06)' }}>
         <div style={{ maxWidth: '88rem', margin: '0 auto', padding: '0 clamp(1rem, 5vw, 2rem)' }}>
           <Reveal delay={150}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: '1.5rem', marginBottom: '3rem' }}>
@@ -1070,12 +1164,18 @@ export default function Home() {
           </Reveal>
         </div>
       </section>
+      );
+    })()}
 
       {/* ═══════════════════════════════════════════
           06. CTA BANNER
           Priority 2 & 7: Confident, authoritative closing command
       ═══════════════════════════════════════════ */}
-      <section style={{
+      {(() => {
+      const isDark = false;
+      const th = getThLight('#FBF5E8');
+      return (
+  <section style={{
         padding: '5.5rem 0',
         backgroundColor: th.pageBg,
         borderTop: isDark ? '1px solid rgba(255,255,255,0.08)' : '1px solid rgba(0,0,0,0.08)'
@@ -1099,6 +1199,11 @@ export default function Home() {
                 borderRadius: '100px',
                 fontWeight: 600,
                 textDecoration: 'none',
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '8px',
+                whiteSpace: 'nowrap',
                 boxShadow: isDark ? '0 0 25px rgba(223, 186, 115, 0.35), 0 8px 24px -6px rgba(223, 186, 115, 0.5)' : '0 0 25px rgba(10, 37, 64, 0.35), 0 8px 20px -6px rgba(10, 37, 64, 0.5)'
               }}>
                 Get a Consultation <ArrowRight size={15} />
@@ -1111,6 +1216,11 @@ export default function Home() {
                 borderRadius: '100px',
                 fontWeight: 600,
                 textDecoration: 'none',
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '8px',
+                whiteSpace: 'nowrap',
                 border: isDark ? undefined : '1px solid #c7d2fe'
               }}>
                 Chat on WhatsApp
@@ -1119,6 +1229,8 @@ export default function Home() {
           </div>
         </Reveal>
       </section>
+      );
+    })()}
 
     </div>
   );

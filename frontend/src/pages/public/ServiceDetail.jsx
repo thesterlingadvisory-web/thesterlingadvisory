@@ -1187,6 +1187,10 @@ const serviceContent = {
   }
 };
 
+/* â”€â”€â”€ FAQ Data â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+
+
+
 export default function ServiceDetail() {
   const { slug } = useParams();
   const navigate = useNavigate();
@@ -1220,264 +1224,329 @@ export default function ServiceDetail() {
     ?.services.filter(s => s.slug !== slug).slice(0, 4) || [];
 
   return (
-    <div style={{ width: '100%', minHeight: '100vh', background: 'var(--color-navy, #050a15)', color: '#ffffff' }}>
+    <div style={{ width: '100%', minHeight: '100vh', background: '#F8F8F6' }}>
 
-      {/* ── Professional Institutional Hero ── */}
-      <section style={{ 
-        position: 'relative',
-        paddingBottom: '2rem',
-        background: 'var(--color-navy, #050a15)',
-        overflow: 'hidden'
-      }}>
-        
-        {/* Subtle Ambient Glow for Depth (Professional & Clean) */}
-        <div style={{ position: 'absolute', top: '-20%', right: '5%', width: '800px', height: '800px', background: 'radial-gradient(circle at center, rgba(197, 168, 128, 0.05) 0%, transparent 70%)', pointerEvents: 'none', zIndex: 0 }} />
-        <div style={{ position: 'absolute', top: '20%', left: '-10%', width: '700px', height: '700px', background: 'radial-gradient(circle at center, rgba(30, 80, 160, 0.06) 0%, transparent 70%)', pointerEvents: 'none', zIndex: 0 }} />
+      {/* â”€â”€ HERO SECTION â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+      <section style={{ background: '#F8F8F6', paddingTop: '2rem', paddingBottom: '3rem', borderBottom: '1px solid #E5E7EB' }}>
+        <div style={{ maxWidth: '1240px', margin: '0 auto', padding: '0 24px' }}>
 
-        {/* Top Navbar Border Extension */}
-        <div style={{ height: '1px', width: '100%', backgroundColor: 'rgba(255,255,255,0.05)', position: 'relative', zIndex: 2 }} />
-
-        <div style={{ maxWidth: '110rem', margin: '0 auto', padding: '2rem clamp(1.25rem, 5vw, 3rem) 0', position: 'relative', zIndex: 2 }}>
-          
-          {/* Breadcrumbs - Elegant */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.8rem', color: 'rgba(255,255,255,0.5)', marginBottom: '1.5rem', fontWeight: 500 }}>
-            <Link to="/" style={{ color: 'rgba(255,255,255,0.5)', textDecoration: 'none', transition: 'color 160ms' }} onMouseEnter={e => e.currentTarget.style.color = '#ffffff'} onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.5)'}>Home</Link>
-            <span>/</span>
-            <Link to="/services" style={{ color: 'rgba(255,255,255,0.5)', textDecoration: 'none', transition: 'color 160ms' }} onMouseEnter={e => e.currentTarget.style.color = '#ffffff'} onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.5)'}>Services</Link>
-            <span>/</span>
-            <span style={{ color: '#ffffff', fontWeight: 600 }}>{serviceData.title}</span>
+          {/* Breadcrumb */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.8125rem', color: '#9CA3AF', marginBottom: '1.5rem', flexWrap: 'wrap' }}>
+            <Link to="/" style={{ color: '#9CA3AF', textDecoration: 'none', transition: 'color 160ms' }}
+              onMouseEnter={e => e.currentTarget.style.color = '#172033'}
+              onMouseLeave={e => e.currentTarget.style.color = '#9CA3AF'}>Home</Link>
+            <span style={{ color: '#D1D5DB' }}>/</span>
+            <Link to="/services" style={{ color: '#9CA3AF', textDecoration: 'none', transition: 'color 160ms' }}
+              onMouseEnter={e => e.currentTarget.style.color = '#172033'}
+              onMouseLeave={e => e.currentTarget.style.color = '#9CA3AF'}>Services</Link>
+            <span style={{ color: '#D1D5DB' }}>/</span>
+            <span style={{ color: '#374151', fontWeight: 500 }}>{serviceData.title}</span>
           </div>
 
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '4rem' }}>
-            
-            {/* Left Column */}
-            <div style={{ flex: '1 1 600px' }}>
-              
-              {/* Gold Category Label */}
-              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '0.75rem' }}>
-                <IconComponent size={16} style={{ color: 'var(--color-gold)' }} />
-                <span style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--color-gold)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
-                  {serviceData.category || 'Statutory Discipline'}
+          {/* Two-column Hero */}
+          <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0,1fr) 320px', gap: '2rem', alignItems: 'start' }}
+            className="sd-hero-grid">
+
+            {/* LEFT â€” Main Content */}
+            <div>
+              {/* Gold eyebrow */}
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '1rem' }}>
+                <IconComponent size={14} style={{ color: '#C79A45' }} />
+                <span style={{ fontSize: '0.75rem', fontWeight: 700, color: '#C79A45', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
+                  {serviceData.category || 'Statutory & Advisory'}
                 </span>
               </div>
 
-              {/* Massive Serif Title */}
-              <h1 style={{ fontFamily: '"Playfair Display", "Georgia", serif', fontSize: 'clamp(2.5rem, 4vw, 3.5rem)', fontWeight: 600, color: '#ffffff', marginBottom: '1rem', lineHeight: 1.1, letterSpacing: '-0.01em' }}>
+              {/* H1 */}
+              <h1 style={{ fontFamily: 'var(--font-editorial), Georgia, serif', fontSize: 'clamp(1.875rem, 3vw, 2.75rem)', fontWeight: 600, color: '#0B172A', lineHeight: 1.1, letterSpacing: '-0.02em', marginBottom: '1rem', maxWidth: '28ch' }}>
                 {serviceData.title}
               </h1>
 
-              {/* Lead Paragraph */}
-              <p style={{ fontSize: '1.05rem', color: 'rgba(255,255,255,0.8)', lineHeight: '1.6', margin: '0 0 1.5rem 0', fontFamily: 'var(--font-body)', fontWeight: 300, maxWidth: '100%' }}>
+              {/* Overview paragraph */}
+              <p style={{ fontSize: '0.9375rem', color: '#475467', lineHeight: '1.7', maxWidth: '100%', fontFamily: 'var(--font-body)', fontWeight: 400, marginBottom: '1.5rem' }}>
                 {content.overview}
               </p>
 
-              {/* Features Section */}
+              {/* Key Features â€” clean column grid, no dark boxes */}
               {content.features && content.features.length > 0 && (
-                <div style={{ marginBottom: '1.5rem' }}>
-                  <h3 style={{ fontSize: '1.1rem', fontFamily: '"Playfair Display", "Georgia", serif', color: '#ffffff', fontWeight: 600, margin: '0 0 1rem 0', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <Star size={16} style={{ color: 'var(--color-gold)' }} />
+                <div style={{ marginBottom: '1.75rem' }}>
+                  <h2 style={{ fontSize: '1rem', fontWeight: 700, color: '#0B172A', marginBottom: '0.875rem', fontFamily: 'var(--font-heading)', letterSpacing: '-0.01em' }}>
                     Key Features
-                  </h3>
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '0.75rem' }}>
+                  </h2>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0' }} className="sd-features-grid">
                     {content.features.map((feature, idx) => (
-                      <div key={idx} style={{ 
-                        display: 'flex', alignItems: 'flex-start', gap: '10px', 
-                        padding: '0.75rem 1rem', 
-                        backgroundColor: 'rgba(20,26,41,0.5)', 
-                        border: '1px solid rgba(255,255,255,0.06)',
-                        borderRadius: '10px',
-                        transition: 'transform 200ms ease, background-color 200ms ease'
-                      }}
-                      onMouseEnter={e => {
-                        e.currentTarget.style.transform = 'translateY(-2px)';
-                        e.currentTarget.style.backgroundColor = 'rgba(20,26,41,0.8)';
-                      }}
-                      onMouseLeave={e => {
-                        e.currentTarget.style.transform = 'translateY(0)';
-                        e.currentTarget.style.backgroundColor = 'rgba(20,26,41,0.5)';
+                      <div key={idx} style={{
+                        display: 'flex', flexDirection: 'column', gap: '0.4rem',
+                        padding: '0.875rem 1rem',
+                        borderRight: (idx + 1) % 3 !== 0 ? '1px solid #E5E7EB' : 'none',
+                        borderBottom: '1px solid #E5E7EB',
+                        borderTop: idx < 3 ? '1px solid #E5E7EB' : 'none',
                       }}>
-                        <CheckCircle2 size={16} style={{ color: 'var(--color-gold)', marginTop: '2px', flexShrink: 0 }} />
-                        <span style={{ fontSize: '0.9rem', color: 'rgba(255,255,255,0.9)', lineHeight: 1.4 }}>
-                          {feature}
-                        </span>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                          <div style={{ width: '28px', height: '28px', borderRadius: '50%', backgroundColor: '#FBF5E8', border: '1px solid rgba(199,154,69,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                            <span style={{ fontSize: '0.65rem', fontWeight: 700, color: '#C79A45', fontFamily: 'var(--font-mono)' }}>
+                              {String(idx + 1).padStart(2, '0')}
+                            </span>
+                          </div>
+                        </div>
+                        <span style={{ fontSize: '0.875rem', color: '#172033', fontWeight: 600, lineHeight: 1.4 }}>{feature}</span>
                       </div>
                     ))}
                   </div>
                 </div>
               )}
 
-              {/* Eligibility Section */}
-              {content.eligibility && content.eligibility.length > 0 && (
-                <div style={{ marginBottom: '1.5rem', marginTop: '1.5rem' }}>
-                  <h3 style={{ fontSize: '1.1rem', fontFamily: '"Playfair Display", "Georgia", serif', color: '#ffffff', fontWeight: 600, margin: '0 0 1rem 0', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <Users size={16} style={{ color: 'var(--color-gold)' }} />
-                    Eligibility Criteria
-                  </h3>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
-                    {content.eligibility.map((item, idx) => (
-                      <div key={idx} style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
-                        <div style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: 'var(--color-gold)', marginTop: '8px', flexShrink: 0 }} />
-                        <span style={{ fontSize: '0.95rem', color: 'rgba(255,255,255,0.85)', lineHeight: 1.5 }}>{item}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
+              {/* Eligibility + Documents â€” two clean columns */}
+              {((content.eligibility && content.eligibility.length > 0) || (content.clientDocuments && content.clientDocuments.length > 0) || (serviceData.documents && serviceData.documents.length > 0)) && (
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', marginBottom: '1.75rem' }}>
 
-              {/* Documents Section (New 2-Part Layout) */}
-              {((content.clientDocuments && content.clientDocuments.length > 0) || (serviceData.documents && serviceData.documents.length > 0)) && (
-                <div style={{ paddingTop: '1.5rem', marginTop: '1.5rem', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
-                  
-                  <div style={{ display: 'flex', gap: '2rem', flexWrap: 'wrap' }}>
-                    {/* Part 1: Client Documents */}
-                    <div style={{ flex: '1 1 250px' }}>
-                      <h3 style={{ fontSize: '1.05rem', color: '#ffffff', fontWeight: 600, margin: '0 0 1rem 0', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                        <FileText size={16} style={{ color: '#a0b3c6' }} />
-                        Documents You Need to Provide
-                      </h3>
-                      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
-                        {(content.clientDocuments || serviceData.documents).map((doc, idx) => (
-                          <div key={idx} style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '0.75rem 1rem', backgroundColor: 'rgba(20,26,41,0.6)', border: '1px solid rgba(255,255,255,0.06)', borderRadius: '8px' }}>
-                            <div style={{ width: '4px', height: '4px', borderRadius: '50%', backgroundColor: '#a0b3c6' }} />
-                            <span style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.9)', fontWeight: 400 }}>{doc.replace('*', '')}</span>
+                  {/* Eligibility */}
+                  {content.eligibility && content.eligibility.length > 0 && (
+                    <div>
+                      <h2 style={{ fontSize: '1rem', fontWeight: 700, color: '#0B172A', marginBottom: '0.875rem', fontFamily: 'var(--font-heading)', letterSpacing: '-0.01em' }}>
+                        Eligibility Criteria
+                      </h2>
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
+                        {content.eligibility.map((item, idx) => (
+                          <div key={idx} style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', padding: '0.5rem 0', borderBottom: idx < content.eligibility.length - 1 ? '1px solid #F3F4F6' : 'none' }}>
+                            <div style={{ width: '20px', height: '20px', borderRadius: '50%', backgroundColor: '#FBF5E8', border: '1px solid rgba(199,154,69,0.4)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, marginTop: '1px' }}>
+                              <CheckCircle2 size={11} style={{ color: '#C79A45' }} />
+                            </div>
+                            <span style={{ fontSize: '0.9rem', color: '#374151', lineHeight: 1.55 }}>{item}</span>
                           </div>
                         ))}
                       </div>
                     </div>
+                  )}
 
-                    {/* Part 2: Agency Documents */}
-                    {content.agencyDocuments && content.agencyDocuments.length > 0 && (
-                      <div style={{ flex: '1 1 250px' }}>
-                        <h3 style={{ fontSize: '1.05rem', color: 'var(--color-gold)', fontWeight: 600, margin: '0 0 1rem 0', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                          <ShieldCheck size={16} style={{ color: 'var(--color-gold)' }} />
-                          Handled by Our Team
-                        </h3>
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
-                          {content.agencyDocuments.map((doc, idx) => (
-                            <div key={idx} style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '0.75rem 1rem', backgroundColor: 'rgba(197, 168, 128, 0.05)', border: '1px solid rgba(197, 168, 128, 0.15)', borderRadius: '8px' }}>
-                              <CheckCircle2 size={15} style={{ color: 'var(--color-gold)', flexShrink: 0 }} />
-                              <span style={{ fontSize: '0.85rem', color: 'var(--color-gold)', fontWeight: 500 }}>{doc}</span>
+                  {/* Documents */}
+                  {((content.clientDocuments && content.clientDocuments.length > 0) || (serviceData.documents && serviceData.documents.length > 0)) && (
+                    <div>
+                      <h2 style={{ fontSize: '1rem', fontWeight: 700, color: '#0B172A', marginBottom: '0.875rem', fontFamily: 'var(--font-heading)', letterSpacing: '-0.01em' }}>
+                        Documents Required
+                      </h2>
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
+                        {(content.clientDocuments || serviceData.documents).map((doc, idx) => {
+                          const docs = content.clientDocuments || serviceData.documents;
+                          return (
+                            <div key={idx} style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '0.5rem 0', borderBottom: idx < docs.length - 1 ? '1px solid #F3F4F6' : 'none' }}>
+                              <FileText size={14} style={{ color: '#9CA3AF', flexShrink: 0 }} />
+                              <span style={{ fontSize: '0.9rem', color: '#374151', lineHeight: 1.55 }}>{doc.replace('*', '')}</span>
                             </div>
-                          ))}
-                        </div>
+                          );
+                        })}
                       </div>
-                    )}
-                  </div>
+                    </div>
+                  )}
                 </div>
               )}
 
-
+              {/* What Our Team Handles */}
+              {content.agencyDocuments && content.agencyDocuments.length > 0 && (
+                <div style={{ marginBottom: '1.5rem', background: '#FFFFFF', border: '1px solid #E5E7EB', borderRadius: '12px', padding: '1.25rem', boxShadow: '0 2px 8px rgba(16,24,40,0.04)' }}>
+                  <h2 style={{ fontSize: '1rem', fontWeight: 700, color: '#0B172A', marginBottom: '0.875rem', fontFamily: 'var(--font-heading)', letterSpacing: '-0.01em', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <ShieldCheck size={16} style={{ color: '#C79A45' }} />
+                    Handled by Our Team
+                  </h2>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))', gap: '0.4rem' }}>
+                    {content.agencyDocuments.map((doc, idx) => (
+                      <div key={idx} style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '0.625rem 0.75rem', background: '#FAFAFA', borderRadius: '8px' }}>
+                        <CheckCircle size={13} style={{ color: '#C79A45', flexShrink: 0 }} />
+                        <span style={{ fontSize: '0.85rem', color: '#374151', fontWeight: 500 }}>{doc}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
 
-            {/* Right Column: Glassmorphism Snapshot Panel */}
-            <div style={{ flex: '1 1 340px', maxWidth: '380px' }}>
-              <div style={{
-                backgroundColor: 'rgba(20,26,41,0.7)',
-                backdropFilter: 'blur(16px)',
-                WebkitBackdropFilter: 'blur(16px)',
-                border: '1px solid rgba(255,255,255,0.08)',
-                borderRadius: '16px',
-                boxShadow: '0 30px 60px rgba(0,0,0,0.4)',
-                display: 'flex',
-                flexDirection: 'column',
-                overflow: 'hidden'
-              }}>
-                {/* Header */}
-                <div style={{ padding: '1.5rem 1.5rem 1rem', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
-                  <h3 style={{ fontFamily: '"Playfair Display", "Georgia", serif', fontSize: '1.25rem', fontWeight: 600, color: '#ffffff', margin: 0 }}>
-                    Service Snapshot
-                  </h3>
+            {/* RIGHT â€” Service Snapshot Sidebar */}
+            <div style={{ position: 'sticky', top: '6rem', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+
+              {/* Snapshot Card */}
+              <div style={{ background: '#FFFFFF', border: '1px solid #E5E7EB', borderRadius: '14px', boxShadow: '0 8px 30px rgba(16,24,40,0.06)', overflow: 'hidden' }}>
+                <div style={{ padding: '1rem 1.25rem', borderBottom: '1px solid #F3F4F6' }}>
+                  <h3 style={{ fontSize: '0.9375rem', fontWeight: 700, color: '#0B172A', margin: 0, fontFamily: 'var(--font-heading)' }}>Service Snapshot</h3>
                 </div>
 
-                {/* Timeline Row */}
                 {serviceData.timeline && (
-                  <div style={{ padding: '1.25rem 1.5rem', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '0.5rem' }}>
-                      <Clock size={14} style={{ color: 'var(--color-gold)' }} />
-                      <span style={{ fontSize: '0.85rem', color: '#ffffff', fontWeight: 700 }}>
-                        Estimated Turnaround
-                      </span>
+                  <div style={{ padding: '0.875rem 1.25rem', borderBottom: '1px solid #F3F4F6' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '0.4rem' }}>
+                      <Clock size={13} style={{ color: '#C79A45' }} />
+                      <span style={{ fontSize: '0.75rem', fontWeight: 600, color: '#9CA3AF', textTransform: 'uppercase', letterSpacing: '0.06em' }}>Estimated Turnaround</span>
                     </div>
-                    <div style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.7)', fontWeight: 400, lineHeight: 1.4, paddingLeft: '24px' }}>
-                      {serviceData.timeline}
-                    </div>
+                    <p style={{ fontSize: '0.9rem', color: '#172033', fontWeight: 600, margin: 0, lineHeight: 1.4 }}>{serviceData.timeline}</p>
                   </div>
                 )}
 
-                {/* Fees Row */}
                 {serviceData.fees && (
-                  <div style={{ padding: '1.25rem 1.5rem', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '0.5rem' }}>
-                      <CreditCard size={14} style={{ color: 'var(--color-gold)' }} />
-                      <span style={{ fontSize: '0.85rem', color: '#ffffff', fontWeight: 700 }}>
-                        Government & Filing Fees
-                      </span>
+                  <div style={{ padding: '0.875rem 1.25rem', borderBottom: '1px solid #F3F4F6' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '0.4rem' }}>
+                      <CreditCard size={13} style={{ color: '#C79A45' }} />
+                      <span style={{ fontSize: '0.75rem', fontWeight: 600, color: '#9CA3AF', textTransform: 'uppercase', letterSpacing: '0.06em' }}>Government & Filing Fees</span>
                     </div>
-                    <div style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.7)', fontWeight: 400, lineHeight: 1.4, paddingLeft: '24px' }}>
-                      {serviceData.fees}
-                    </div>
+                    <p style={{ fontSize: '0.85rem', color: '#374151', margin: 0, lineHeight: 1.5 }}>{serviceData.fees}</p>
                   </div>
                 )}
 
-                {/* Action Buttons Row */}
-                <div style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                  <Link to="/contact" className="btn-gold" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '10px', padding: '0.85rem', width: '100%', textDecoration: 'none', fontSize: '0.9rem', fontWeight: 600, borderRadius: '8px' }}>
-                    Consult an Expert <ArrowRight size={16} />
+                <div style={{ padding: '1rem 1.25rem', display: 'flex', flexDirection: 'column', gap: '0.625rem' }}>
+                  <Link to="/contact" style={{
+                    display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '8px',
+                    padding: '0.8rem 1.25rem', width: '100%', textDecoration: 'none',
+                    fontSize: '0.875rem', fontWeight: 700, borderRadius: '9px',
+                    background: '#C79A45', color: '#0B172A',
+                    boxShadow: '0 4px 14px rgba(199,154,69,0.35)',
+                    transition: 'all 180ms ease'
+                  }}
+                    onMouseEnter={e => { e.currentTarget.style.background = '#B48738'; e.currentTarget.style.boxShadow = '0 6px 20px rgba(199,154,69,0.45)'; e.currentTarget.style.transform = 'translateY(-1px)'; }}
+                    onMouseLeave={e => { e.currentTarget.style.background = '#C79A45'; e.currentTarget.style.boxShadow = '0 4px 14px rgba(199,154,69,0.35)'; e.currentTarget.style.transform = 'translateY(0)'; }}>
+                    Consult an Expert <ArrowRight size={15} />
                   </Link>
                   <a
                     href={`https://wa.me/918448803143?text=Hi%2C%20I'm%20inquiring%20about%20${encodeURIComponent(serviceData.title)}`}
                     target="_blank" rel="noopener noreferrer"
                     style={{
-                      display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px',
-                      width: '100%', padding: '0.75rem', borderRadius: '8px',
-                      backgroundColor: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)',
-                      fontSize: '0.85rem', fontWeight: 600, color: '#ffffff', textDecoration: 'none',
-                      transition: 'all 160ms ease'
+                      display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px',
+                      padding: '0.75rem 1.25rem', width: '100%', textDecoration: 'none',
+                      fontSize: '0.875rem', fontWeight: 600, borderRadius: '9px',
+                      background: '#FFFFFF', border: '1px solid #D1D5DB',
+                      color: '#374151', transition: 'all 160ms ease'
                     }}
-                    onMouseEnter={e => { e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.08)'; }}
-                    onMouseLeave={e => { e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.03)'; }}
-                  >
-                    <MessageCircle size={16} /> Chat on WhatsApp
+                    onMouseEnter={e => { e.currentTarget.style.borderColor = '#9CA3AF'; e.currentTarget.style.background = '#F9FAFB'; }}
+                    onMouseLeave={e => { e.currentTarget.style.borderColor = '#D1D5DB'; e.currentTarget.style.background = '#FFFFFF'; }}>
+                    <MessageCircle size={15} /> Chat on WhatsApp
                   </a>
                 </div>
               </div>
 
-              {/* Engagement Process 2x2 Grid */}
-              <div style={{ marginTop: '2.5rem' }}>
-                <h3 style={{ fontFamily: '"Playfair Display", "Georgia", serif', fontSize: '1.25rem', fontWeight: 600, color: '#ffffff', marginBottom: '1.25rem', display: 'flex', alignItems: 'center', gap: '10px' }}>
-                  <TrendingUp size={18} style={{ color: 'var(--color-gold)' }} />
-                  Engagement Process
-                </h3>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem' }}>
-                  {[
-                    { num: '01', title: 'Consultation & Strategy' },
-                    { num: '02', title: 'Document Preparation' },
-                    { num: '03', title: 'Regulatory Filings' },
-                    { num: '04', title: 'Fast Delivery' }
-                  ].map((step, idx) => (
-                    <div key={idx} style={{ display: 'flex', alignItems: 'center', gap: '8px', backgroundColor: 'rgba(255, 255, 255, 0.02)', padding: '0.75rem 0.6rem', borderRadius: '10px', border: '1px solid rgba(255,255,255,0.04)', transition: 'background-color 200ms', cursor: 'default' }}
-                      onMouseEnter={e => { e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.05)'; }}
-                      onMouseLeave={e => { e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.02)'; }}
-                    >
-                      <div style={{ width: '26px', height: '26px', borderRadius: '50%', backgroundColor: 'rgba(10,15,25,1)', border: '1px solid rgba(223, 186, 115, 0.4)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-gold)', fontSize: '0.7rem', fontWeight: 700, fontFamily: 'var(--font-mono)', flexShrink: 0, boxShadow: '0 0 10px rgba(197, 168, 128, 0.1)' }}>
-                        {step.num}
-                      </div>
-                      <h4 style={{ fontSize: '0.8rem', color: '#ffffff', fontWeight: 600, margin: 0, lineHeight: 1.2 }}>{step.title}</h4>
-                    </div>
-                  ))}
+              {/* Related Services Card */}
+              {related.length > 0 && (
+                <div style={{ background: '#FFFFFF', border: '1px solid #E5E7EB', borderRadius: '14px', boxShadow: '0 2px 8px rgba(16,24,40,0.04)', overflow: 'hidden' }}>
+                  <div style={{ padding: '0.875rem 1.25rem', borderBottom: '1px solid #F3F4F6' }}>
+                    <h3 style={{ fontSize: '0.9rem', fontWeight: 700, color: '#0B172A', margin: 0 }}>Related Services</h3>
+                  </div>
+                  <div style={{ display: 'flex', flexDirection: 'column' }}>
+                    {related.map((s, idx) => (
+                      <Link key={s.slug} to={`/services/${s.slug}`} style={{
+                        display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+                        padding: '0.7rem 1.25rem', textDecoration: 'none',
+                        borderBottom: idx < related.length - 1 ? '1px solid #F3F4F6' : 'none',
+                        transition: 'background 160ms ease',
+                        color: 'inherit'
+                      }}
+                        onMouseEnter={e => { e.currentTarget.style.background = '#F9FAFB'; }}
+                        onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; }}>
+                        <span style={{ fontSize: '0.85rem', color: '#374151', fontWeight: 500 }}>{s.title}</span>
+                        <ChevronRight size={14} style={{ color: '#C79A45', flexShrink: 0 }} />
+                      </Link>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
+          </div>
+        </div>
+      </section>
 
+      {/* â”€â”€ ENGAGEMENT PROCESS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+      <section style={{ background: '#FBF5E8', padding: '3rem 0' }}>
+        <div style={{ maxWidth: '1240px', margin: '0 auto', padding: '0 24px' }}>
+          <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+            <h2 style={{ fontSize: 'clamp(1.75rem, 3vw, 2.25rem)', fontWeight: 700, color: '#0B172A', fontFamily: 'var(--font-heading)', letterSpacing: '-0.02em', marginBottom: '0.75rem', textAlign: 'center', width: '100%', margin: '0 auto', display: 'block' }}>
+              Our Engagement Process
+            </h2>
+            <p style={{ fontSize: '1rem', color: '#667085', maxWidth: '56ch', margin: '0 auto', lineHeight: '1.65' }}>
+              A simple and hassle-free process from consultation to completion.
+            </p>
+          </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '0', position: 'relative' }}>
+            {[
+              { num: '01', title: 'Consultation & Strategy', desc: 'We understand your business and assess eligibility.' },
+              { num: '02', title: 'Document Preparation', desc: 'We guide you on required documents and prepare the application.' },
+              { num: '03', title: 'Regulatory Filings', desc: 'We handle the government filing process on your behalf.' },
+              { num: '04', title: 'Fast Delivery', desc: 'You receive the registration and regular status updates.' },
+            ].map((step, idx, arr) => (
+              <div key={idx} style={{
+                padding: '1.5rem 1.25rem', position: 'relative',
+                borderRight: idx < arr.length - 1 ? '1px solid rgba(199,154,69,0.2)' : 'none',
+              }}>
+                {/* Connector arrow */}
+                {idx < arr.length - 1 && (
+                  <div style={{ position: 'absolute', top: '2.25rem', right: '-10px', zIndex: 1, color: '#C79A45', fontSize: '1.25rem', lineHeight: 1 }}>
+                    <ChevronRight size={18} style={{ color: 'rgba(199,154,69,0.6)' }} />
+                  </div>
+                )}
+                <div style={{ width: '40px', height: '40px', borderRadius: '50%', background: '#C79A45', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1rem' }}>
+                  <span style={{ fontSize: '0.7rem', fontWeight: 800, color: '#0B172A', fontFamily: 'var(--font-mono)' }}>{step.num}</span>
+                </div>
+                <h3 style={{ fontSize: '1rem', fontWeight: 700, color: '#0B172A', marginBottom: '0.5rem', fontFamily: 'var(--font-heading)', letterSpacing: '-0.01em' }}>
+                  {step.title}
+                </h3>
+                <p style={{ fontSize: '0.875rem', color: '#667085', lineHeight: '1.6', margin: 0 }}>{step.desc}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
 
+      {/* â”€â”€ BOTTOM CTA BANNER â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+      <section style={{ background: '#0B172A', padding: '3.5rem 0' }}>
+        <div style={{ maxWidth: '1240px', margin: '0 auto', padding: '0 24px', textAlign: 'center' }}>
+          <h2 style={{ fontSize: 'clamp(1.75rem, 3vw, 2.5rem)', fontWeight: 700, color: '#FFFFFF', marginBottom: '1rem', fontFamily: 'var(--font-heading)', letterSpacing: '-0.02em', textAlign: 'center', width: '100%', margin: '0 auto', display: 'block' }}>
+            Ready to Get Started?
+          </h2>
+          <p style={{ color: 'rgba(255,255,255,0.65)', fontSize: '1rem', lineHeight: '1.7', marginBottom: '2.5rem', maxWidth: '44ch', margin: '0 auto 2.5rem' }}>
+            Our team of qualified professionals is ready to help you with {serviceData.title} and all related compliance requirements.
+          </p>
+          <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+            <Link to="/contact" style={{
+              display: 'inline-flex', alignItems: 'center', gap: '8px',
+              padding: '0.875rem 2rem', fontSize: '0.9rem', fontWeight: 700, borderRadius: '9px',
+              background: '#C79A45', color: '#0B172A', textDecoration: 'none',
+              boxShadow: '0 4px 14px rgba(199,154,69,0.4)',
+              transition: 'all 180ms ease'
+            }}
+              onMouseEnter={e => { e.currentTarget.style.background = '#B48738'; e.currentTarget.style.transform = 'translateY(-1px)'; }}
+              onMouseLeave={e => { e.currentTarget.style.background = '#C79A45'; e.currentTarget.style.transform = 'translateY(0)'; }}>
+              Talk to an Expert <ArrowRight size={16} />
+            </Link>
+            <a href={`https://wa.me/918448803143?text=Hi%2C%20I'm%20inquiring%20about%20${encodeURIComponent(serviceData.title)}`}
+              target="_blank" rel="noopener noreferrer"
+              style={{
+                display: 'inline-flex', alignItems: 'center', gap: '8px',
+                padding: '0.875rem 2rem', fontSize: '0.9rem', fontWeight: 600, borderRadius: '9px',
+                background: 'transparent', border: '1px solid rgba(255,255,255,0.25)',
+                color: '#FFFFFF', textDecoration: 'none',
+                transition: 'all 160ms ease'
+              }}
+              onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.5)'; e.currentTarget.style.background = 'rgba(255,255,255,0.06)'; }}
+              onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.25)'; e.currentTarget.style.background = 'transparent'; }}>
+              <MessageCircle size={16} /> Chat on WhatsApp
+            </a>
+          </div>
+        </div>
+      </section>
 
-
-
-
+      {/* Responsive hero grid override */}
+      <style>{`
+        @media (max-width: 1023px) {
+          .sd-hero-grid {
+            grid-template-columns: 1fr !important;
+          }
+        }
+        @media (max-width: 767px) {
+          .sd-features-grid {
+            grid-template-columns: 1fr !important;
+          }
+        }
+        @media (max-width: 640px) {
+          .sd-hero-grid {
+            padding: 0 16px;
+          }
+        }
+      `}</style>
 
     </div>
   );
