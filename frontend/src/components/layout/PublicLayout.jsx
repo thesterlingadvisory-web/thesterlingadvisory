@@ -417,19 +417,14 @@ export default function PublicLayout() {
               
               <Link
                 to="/contact"
+                className="btn-gold"
                 style={{
                   padding: '0.55rem 1.2rem',
                   fontSize: '0.875rem',
                   fontWeight: 600,
-                  color: 'hsl(var(--primary-foreground))',
-                  backgroundColor: 'hsl(var(--primary))',
                   borderRadius: '99px',
                   textDecoration: 'none',
-                  transition: 'all 200ms ease',
-                  boxShadow: 'var(--shadow-primary)',
                 }}
-                onMouseEnter={e => { e.currentTarget.style.opacity = '0.9'; e.currentTarget.style.transform = 'scale(1.02)'; }}
-                onMouseLeave={e => { e.currentTarget.style.opacity = '1'; e.currentTarget.style.transform = 'scale(1)'; }}
               >
                 Talk to an Expert
               </Link>
