@@ -975,10 +975,10 @@ export default function Home() {
             <Reveal delay={150}>
               <span style={{ fontSize: '0.8125rem', fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase', color: '#C79A45', marginBottom: '1rem', display: 'block' }}>Why Choose Us</span>
               <h2 style={{ fontFamily: 'var(--font-editorial)', fontSize: 'clamp(2.4rem, 4vw, 3.4rem)', fontWeight: 600, color: '#FFFFFF', marginBottom: '1.25rem', lineHeight: 1.1, letterSpacing: '-0.02em', maxWidth: '22ch' }}>
-                Top-tier corporate advisory without the heavy overhead.
+                The Right Support for Your Business.
               </h2>
               <p style={{ color: '#B7C1D0', marginBottom: '2.5rem', fontSize: '1rem', lineHeight: '1.6', maxWidth: '48ch' }}>
-                We replace slow paper bureaucracy with fast, accurate digital processes. Whether you are starting a new company or managing GST returns across states, our team acts as your trusted legal and financial advisor.
+                Whether you are starting a new business or growing an existing one, we help you manage registrations, licences and compliance with confidence.
               </p>
 
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1.5rem' }}>
