@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import PublicLayout from './components/layout/PublicLayout';
 import AdminLayout from './components/layout/AdminLayout';
+import { ThemeProvider } from './utils/ThemeContext';
 
 // Public Pages
 import Home from './pages/public/Home';
@@ -24,6 +25,7 @@ import ScrollToTop from './components/layout/ScrollToTop';
 
 function App() {
   return (
+    <ThemeProvider>
     <Router>
       <ScrollToTop />
       <SmoothScroll>
@@ -54,6 +56,7 @@ function App() {
       </Routes>
       </SmoothScroll>
     </Router>
+    </ThemeProvider>
   );
 }
 

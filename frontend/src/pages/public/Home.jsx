@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Reveal } from '../../components/ui/Reveal';
 import { Counter } from '../../components/ui/Counter';
+import { useTheme } from '../../utils/ThemeContext';
 import {
   ArrowRight, Building2, Calculator, ShieldCheck, Scale,
   ChevronDown, User, Users, Store, CheckCircle,
@@ -155,6 +156,38 @@ export default function Home() {
   const [activeOthersSub, setActiveOthersSub] = useState('llp');
   const [matrixCategory, setMatrixCategory] = useState('all');
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
+
+  /* ── Theme helper: call th.bg, th.text, etc ── */
+  const th = {
+    pageBg:        isDark ? '#050A15'              : 'hsl(var(--background))',
+    cardBg:        isDark ? '#0D1424'              : '#ffffff',
+    cardBorder:    isDark ? 'rgba(255,255,255,0.08)': 'hsl(var(--border))',
+    heading:       isDark ? '#ffffff'              : 'hsl(var(--foreground))',
+    headingStrong: isDark ? '#ffffff'              : 'hsl(var(--foreground))',
+    body:          isDark ? 'rgba(255,255,255,0.72)': 'hsl(var(--muted-foreground))',
+    bodyFaint:     isDark ? 'rgba(255,255,255,0.5)': 'hsl(var(--muted-foreground))',
+    accent:        'hsl(var(--primary))',
+    accentGold:    isDark ? 'var(--color-gold)'   : 'hsl(var(--primary))',
+    iconBg:        isDark ? 'rgba(223,186,115,0.12)': 'hsl(var(--primary)/0.1)',
+    iconBorder:    isDark ? 'rgba(223,186,115,0.3)' : 'hsl(var(--primary)/0.25)',
+    sectionBg:     isDark ? '#0D1424'              : '#f1f5f9',
+    pillBg:        isDark ? 'rgba(223,186,115,0.14)': 'hsl(var(--primary)/0.1)',
+    pillBorder:    isDark ? 'rgba(223,186,115,0.35)': 'hsl(var(--primary)/0.3)',
+    pillText:      isDark ? '#ffffff'              : 'hsl(var(--foreground))',
+    tabActive:     isDark ? 'rgba(223,186,115,0.14)': 'hsl(var(--primary)/0.1)',
+    tabActiveBorder: isDark? 'rgba(223,186,115,0.4)': 'hsl(var(--primary)/0.4)',
+    tabActiveText: 'hsl(var(--primary))',
+    tabDefault:    isDark ? 'rgba(255,255,255,0.04)': 'hsl(var(--secondary))',
+    tabDefaultBorder: isDark?'rgba(255,255,255,0.1)': 'hsl(var(--border))',
+    tabDefaultText:isDark ? 'rgba(255,255,255,0.6)': 'hsl(var(--muted-foreground))',
+    divider:       isDark ? 'rgba(255,255,255,0.08)': 'hsl(var(--border))',
+    highlightBar:  isDark ? 'rgba(5,10,20,0.92)'  : 'hsl(var(--foreground)/0.97)',
+    highlightText: isDark ? '#ffffff'              : '#ffffff',
+    highlightMuted:isDark ? 'rgba(255,255,255,0.6)': 'rgba(255,255,255,0.75)',
+    linkHover:     'hsl(var(--primary))',
+  };
 
   const activeHubData = heroHubTabs.find(t => t.id === activeHeroTab) || heroHubTabs[0];
   const activeOthersData = othersSubOptions.find(o => o.id === activeOthersSub) || othersSubOptions[0];
@@ -163,23 +196,23 @@ export default function Home() {
     : servicesMatrix.filter(s => s.category === matrixCategory)).slice(0, 10);
 
   return (
-    <div style={{ width: '100%', background: 'var(--color-primary)' }}>
+    <div style={{ width: '100%', background: th.pageBg }}>
 
       {/* ═══════════════════════════════════════════
           01. HERO — INSTITUTIONAL PRACTICE DESK
       ═══════════════════════════════════════════ */}
-      <section className="bg-institutional-grid" style={{
-        padding: '5rem 0 7rem',
+      <section className={isDark ? "bg-institutional-grid" : ""} style={{
+        padding: '5rem 0 1rem',
         position: 'relative',
         overflow: 'hidden'
       }}>
-        {/* Ambient Gold & Sapphire Aurora Spotlights behind Hero Content */}
+        {/* Ambient Spotlights behind Hero Content */}
         <motion.div className="animate-aurora" 
           animate={{ scale: [1, 1.15, 1], opacity: [0.7, 1, 0.7] }} 
           transition={{ repeat: Infinity, duration: 8, ease: "easeInOut" }}
           style={{
-          position: 'absolute', top: '-10%', right: '2%', width: '700px', height: '700px',
-          background: 'radial-gradient(circle at center, rgba(197, 168, 128, 0.18) 0%, rgba(5, 10, 21, 0) 70%)',
+          position: 'absolute', top: isDark ? '-10%' : '-20%', right: isDark ? '2%' : '15%', width: isDark ? '700px' : '70%', height: '700px',
+          background: isDark ? 'radial-gradient(circle at center, rgba(197, 168, 128, 0.18) 0%, rgba(5, 10, 21, 0) 70%)' : 'radial-gradient(circle at center, rgba(99, 102, 241, 0.15) 0%, transparent 70%)',
           pointerEvents: 'none', zIndex: 0
         }} />
         <motion.div className="animate-aurora" 
@@ -187,7 +220,7 @@ export default function Home() {
           transition={{ repeat: Infinity, duration: 10, ease: "easeInOut", delay: 1 }}
           style={{
           position: 'absolute', top: '20%', left: '-5%', width: '600px', height: '600px',
-          background: 'radial-gradient(circle at center, rgba(30, 80, 160, 0.22) 0%, rgba(5, 10, 21, 0) 70%)',
+          background: isDark ? 'radial-gradient(circle at center, rgba(30, 80, 160, 0.22) 0%, rgba(5, 10, 21, 0) 70%)' : 'none',
           pointerEvents: 'none', zIndex: 0
         }} />
 
@@ -211,22 +244,22 @@ export default function Home() {
 
 
               <h1 className="animate-fade-up" style={{
-                fontFamily: 'var(--font-editorial)',
+                fontFamily: isDark ? 'var(--font-editorial)' : 'var(--font-heading)',
                 fontSize: 'clamp(2.6rem, 5vw, 4.4rem)',
-                fontWeight: 500,
+                fontWeight: isDark ? 500 : 800,
                 lineHeight: 1.1,
-                color: '#ffffff',
+                color: th.headingStrong,
                 marginBottom: '1.5rem',
                 letterSpacing: '-0.02em',
                 maxWidth: '18ch',
-                textShadow: '0 4px 20px rgba(0,0,0,0.5)'
+                textShadow: isDark ? '0 4px 20px rgba(0,0,0,0.5)' : 'none'
               }}>
-                You Build the Business. <span style={{ fontFamily: 'var(--font-editorial)', fontStyle: 'italic', fontWeight: 400, color: 'var(--color-gold)', textShadow: '0 0 30px rgba(197, 168, 128, 0.35)' }}>We Build the Foundation.</span>
+                You Build the Business. <span style={{ fontFamily: isDark ? 'var(--font-editorial)' : 'var(--font-heading)', fontStyle: isDark ? 'italic' : 'normal', fontWeight: isDark ? 400 : 800, color: isDark ? 'var(--color-gold)' : '#0a2540', textShadow: isDark ? '0 0 30px rgba(197, 168, 128, 0.35)' : 'none' }}>We Build the Foundation.</span>
               </h1>
 
               <p style={{
                 fontSize: '1.08rem',
-                color: 'rgba(255,255,255,0.75)',
+                color: th.body,
                 lineHeight: '1.68',
                 marginBottom: '2.25rem',
                 maxWidth: '46ch',
@@ -237,72 +270,69 @@ export default function Home() {
 
               {/* Action Pathways */}
               <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap', marginBottom: '2.75rem' }}>
-                <Link to="/contact" className="btn-gold" style={{ 
+                <Link to="/contact" className={isDark ? "btn-gold" : ""} style={{ 
                   padding: '0.92rem 1.95rem', 
                   fontSize: '0.94rem',
-                  boxShadow: '0 8px 24px -6px rgba(223, 186, 115, 0.4)'
+                  backgroundColor: isDark ? undefined : '#0a2540',
+                  color: isDark ? undefined : '#ffffff',
+                  borderRadius: '100px',
+                  fontWeight: 600,
+                  boxShadow: isDark ? '0 0 25px rgba(223, 186, 115, 0.35), 0 8px 24px -6px rgba(223, 186, 115, 0.5)' : '0 0 25px rgba(10, 37, 64, 0.35), 0 8px 20px -6px rgba(10, 37, 64, 0.5)',
+                  display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none'
                 }}>
                   Consult an Expert <ArrowRight size={16} />
                 </Link>
                 <Link to="/services" style={{ 
                   padding: '0.92rem 1.75rem', 
                   fontSize: '0.94rem', 
-                  border: '1px solid rgba(255,255,255,0.25)', 
-                  color: '#ffffff',
-                  background: 'rgba(255,255,255,0.06)',
+                  border: isDark ? '1px solid rgba(255,255,255,0.25)' : '1px solid rgba(0,0,0,0.1)', 
+                  color: th.heading,
+                  background: isDark ? 'rgba(255,255,255,0.06)' : '#ffffff',
                   backdropFilter: 'blur(12px)',
-                  borderRadius: 'var(--radius-md)',
+                  borderRadius: '100px',
                   fontWeight: 600,
                   textDecoration: 'none',
                   display: 'inline-flex',
                   alignItems: 'center',
-                  transition: 'all 160ms ease'
+                  transition: 'all 160ms ease',
+                  boxShadow: isDark ? 'none' : '0 2px 8px rgba(0,0,0,0.04)'
                 }}
-                onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.12)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.4)'; }}
-                onMouseLeave={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.06)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.25)'; }}
+                onMouseEnter={e => { 
+                  e.currentTarget.style.background = isDark ? 'rgba(255,255,255,0.12)' : '#f9fafb'; 
+                  e.currentTarget.style.borderColor = isDark ? 'rgba(255,255,255,0.4)' : 'rgba(0,0,0,0.15)'; 
+                }}
+                onMouseLeave={e => { 
+                  e.currentTarget.style.background = isDark ? 'rgba(255,255,255,0.06)' : '#ffffff'; 
+                  e.currentTarget.style.borderColor = isDark ? 'rgba(255,255,255,0.25)' : 'rgba(0,0,0,0.1)'; 
+                }}
                 >
                   Explore Practice Areas
                 </Link>
               </div>
 
-              {/* Clean Minimalist Trust Bullet Row (Exact to Image 3 yesterday layout) */}
-              <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', flexWrap: 'wrap', paddingTop: '0.5rem' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                  <span style={{ color: 'var(--color-gold)', fontWeight: 700, fontSize: '1.1rem' }}>•</span>
-                  <span style={{ fontSize: '0.88rem', color: 'rgba(255,255,255,0.82)', fontWeight: 500, fontFamily: 'var(--font-body)' }}>PAN India Service</span>
-                </div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                  <span style={{ color: 'var(--color-gold)', fontWeight: 700, fontSize: '1.1rem' }}>•</span>
-                  <span style={{ fontSize: '0.88rem', color: 'rgba(255,255,255,0.82)', fontWeight: 500, fontFamily: 'var(--font-body)' }}>100% Online Process</span>
-                </div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                  <span style={{ color: 'var(--color-gold)', fontWeight: 700, fontSize: '1.1rem' }}>•</span>
-                  <span style={{ fontSize: '0.88rem', color: 'rgba(255,255,255,0.82)', fontWeight: 500, fontFamily: 'var(--font-body)' }}>Transparent Pricing</span>
-                </div>
-              </div>
             </div>
 
             {/* Right Column: Expanded Live Retainer Hub (Wider card + compact vertical spacing = zero scroll!) */}
             <div>
-              <div className="glass-card-dark" style={{
+              <div className={isDark ? "glass-card-dark" : ""} style={{
                 borderRadius: 'var(--radius-xl)',
                 overflow: 'hidden',
                 width: '100%',
-                background: 'linear-gradient(165deg, rgba(20, 32, 58, 0.90) 0%, rgba(9, 15, 28, 0.96) 100%) !important',
-                border: '1px solid rgba(223, 186, 115, 0.42) !important',
-                borderTop: '3px solid var(--color-gold) !important',
-                boxShadow: '0 32px 80px -16px rgba(0, 0, 0, 0.8), 0 0 50px rgba(223, 186, 115, 0.18)'
+                background: isDark ? 'linear-gradient(165deg, rgba(20, 32, 58, 0.90) 0%, rgba(9, 15, 28, 0.96) 100%)' : '#ffffff',
+                border: isDark ? '1px solid rgba(223, 186, 115, 0.42)' : '1px solid rgba(0,0,0,0.08)',
+                borderTop: isDark ? '3px solid var(--color-gold)' : '3px solid #0a2540',
+                boxShadow: isDark ? '0 32px 80px -16px rgba(0, 0, 0, 0.8), 0 0 50px rgba(223, 186, 115, 0.18)' : '0 20px 40px -10px rgba(0,0,0,0.05), 0 0 20px rgba(79, 70, 229, 0.05)'
               }}>
                 {/* Header / Persona Selector */}
-                <div style={{ padding: '1.25rem 1.75rem 1rem', backgroundColor: 'rgba(0,0,0,0.25)', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
+                <div style={{ padding: '1.25rem 1.75rem 1rem', backgroundColor: isDark ? 'rgba(0,0,0,0.25)' : '#f8fafc', borderBottom: isDark ? '1px solid rgba(255,255,255,0.08)' : '1px solid rgba(0,0,0,0.05)' }}>
                   <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1rem', flexWrap: 'wrap', gap: '8px' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                      <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: 'var(--color-gold)', display: 'inline-block' }} />
-                      <span style={{ fontSize: '0.8rem', fontWeight: 700, color: '#ffffff', letterSpacing: '0.04em', textTransform: 'uppercase', fontFamily: 'var(--font-body)' }}>
+                      <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: isDark ? 'var(--color-gold)' : '#0a2540', display: 'inline-block' }} />
+                      <span style={{ fontSize: '0.8rem', fontWeight: 700, color: isDark ? '#ffffff' : '#111827', letterSpacing: '0.04em', textTransform: 'uppercase', fontFamily: 'var(--font-body)' }}>
                         Recommended Service Package
                       </span>
                     </div>
-                    <span style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.55)', fontFamily: 'var(--font-body)', fontWeight: 500 }}>
+                    <span style={{ fontSize: '0.75rem', color: isDark ? 'rgba(255,255,255,0.55)' : '#6b7280', fontFamily: 'var(--font-body)', fontWeight: 500 }}>
                       Customized for Your Business
                     </span>
                   </div>
@@ -324,9 +354,9 @@ export default function Home() {
                             fontFamily: 'var(--font-body)',
                             whiteSpace: 'nowrap',
                             cursor: 'pointer',
-                            border: isSelected ? '1px solid var(--color-gold)' : '1px solid rgba(255,255,255,0.08)',
-                            backgroundColor: isSelected ? 'var(--color-gold)' : 'rgba(255,255,255,0.03)',
-                            color: isSelected ? 'var(--color-navy)' : 'rgba(255,255,255,0.7)',
+                            border: isSelected ? (isDark ? '1px solid var(--color-gold)' : '1px solid #0a2540') : (isDark ? '1px solid rgba(255,255,255,0.08)' : '1px solid #e5e7eb'),
+                            backgroundColor: isSelected ? (isDark ? 'var(--color-gold)' : '#eef2ff') : (isDark ? 'rgba(255,255,255,0.03)' : '#ffffff'),
+                            color: isSelected ? (isDark ? 'var(--color-navy)' : '#0a2540') : (isDark ? 'rgba(255,255,255,0.7)' : '#4b5563'),
                             transition: 'all 160ms ease'
                           }}
                         >
@@ -352,9 +382,9 @@ export default function Home() {
                               fontWeight: 600,
                               fontFamily: 'var(--font-body)',
                               cursor: 'pointer',
-                              border: isSel ? '1px solid var(--color-gold)' : '1px solid rgba(255,255,255,0.14)',
-                              backgroundColor: isSel ? 'rgba(223,186,115,0.2)' : 'rgba(255,255,255,0.04)',
-                              color: isSel ? 'var(--color-gold)' : 'rgba(255,255,255,0.6)',
+                              border: isSel ? (isDark ? '1px solid var(--color-gold)' : '1px solid #0a2540') : (isDark ? '1px solid rgba(255,255,255,0.14)' : '1px solid #e5e7eb'),
+                              backgroundColor: isSel ? (isDark ? 'rgba(223,186,115,0.2)' : '#eef2ff') : (isDark ? 'rgba(255,255,255,0.04)' : '#f9fafb'),
+                              color: isSel ? (isDark ? 'var(--color-gold)' : '#0a2540') : (isDark ? 'rgba(255,255,255,0.6)' : '#6b7280'),
                               transition: 'all 150ms ease'
                             }}
                           >
@@ -381,20 +411,20 @@ export default function Home() {
                           {/* Others: title + time badge */}
                           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.6rem', flexWrap: 'wrap', gap: '10px' }}>
                             <div>
-                              <span style={{ fontSize: '0.72rem', color: 'var(--color-gold)', fontFamily: 'var(--font-body)', letterSpacing: '0.04em', textTransform: 'uppercase', fontWeight: 700, display: 'block', marginBottom: '3px' }}>
+                              <span style={{ fontSize: '0.72rem', color: isDark ? 'var(--color-gold)' : '#0a2540', fontFamily: 'var(--font-body)', letterSpacing: '0.04em', textTransform: 'uppercase', fontWeight: 700, display: 'block', marginBottom: '3px' }}>
                                 {activeOthersData.badge}
                               </span>
-                              <h3 style={{ fontSize: 'clamp(1.1rem, 4vw, 1.3rem)', color: '#ffffff', fontWeight: 700, letterSpacing: '-0.02em', margin: 0 }}>
+                              <h3 style={{ fontSize: 'clamp(1.1rem, 4vw, 1.3rem)', color: isDark ? '#ffffff' : '#111827', fontWeight: 700, letterSpacing: '-0.02em', margin: 0 }}>
                                 {activeOthersData.title}
                               </h3>
                             </div>
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', backgroundColor: 'rgba(255,255,255,0.06)', padding: '0.35rem 0.75rem', borderRadius: 'var(--radius-sm)', border: '1px solid rgba(255,255,255,0.08)' }}>
-                              <Clock size={13} color="var(--color-gold)" />
-                              <span style={{ fontSize: '0.78rem', color: '#ffffff', fontWeight: 600, fontFamily: 'var(--font-body)' }}>{activeOthersData.time}</span>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', backgroundColor: isDark ? 'rgba(255,255,255,0.06)' : '#f3f4f6', padding: '0.35rem 0.75rem', borderRadius: 'var(--radius-sm)', border: isDark ? '1px solid rgba(255,255,255,0.08)' : '1px solid #e5e7eb' }}>
+                              <Clock size={13} color={isDark ? "var(--color-gold)" : "#0a2540"} />
+                              <span style={{ fontSize: '0.78rem', color: isDark ? '#ffffff' : '#374151', fontWeight: 600, fontFamily: 'var(--font-body)' }}>{activeOthersData.time}</span>
                             </div>
                           </div>
 
-                          <p style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.68)', lineHeight: '1.55', marginBottom: '1.1rem', fontFamily: 'var(--font-body)' }}>
+                          <p style={{ fontSize: '0.85rem', color: isDark ? 'rgba(255,255,255,0.68)' : '#4b5563', lineHeight: '1.55', marginBottom: '1.1rem', fontFamily: 'var(--font-body)' }}>
                             {activeOthersData.desc}
                           </p>
 
@@ -407,27 +437,37 @@ export default function Home() {
                                 style={{
                                   display: 'flex', alignItems: 'center', justifyContent: 'space-between',
                                   padding: 'clamp(0.6rem, 3vw, 0.75rem) clamp(0.75rem, 3vw, 1rem)',
-                                  backgroundColor: 'rgba(255,255,255,0.03)',
-                                  border: '1px solid rgba(255,255,255,0.08)',
+                                  backgroundColor: isDark ? 'rgba(255,255,255,0.03)' : '#ffffff',
+                                  border: isDark ? '1px solid rgba(255,255,255,0.08)' : '1px solid #e5e7eb',
                                   borderRadius: 'var(--radius-lg)',
                                   transition: 'all 160ms ease',
-                                  gap: '12px'
+                                  gap: '12px',
+                                  boxShadow: isDark ? 'none' : '0 2px 4px rgba(0,0,0,0.02)',
+                                  textDecoration: 'none'
                                 }}
-                                onMouseEnter={e => { e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.07)'; e.currentTarget.style.borderColor = 'rgba(223,186,115,0.4)'; e.currentTarget.style.transform = 'translateX(3px)'; }}
-                                onMouseLeave={e => { e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.03)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)'; e.currentTarget.style.transform = 'translateX(0)'; }}
+                                onMouseEnter={e => { 
+                                  e.currentTarget.style.backgroundColor = isDark ? 'rgba(255,255,255,0.07)' : '#f9fafb'; 
+                                  e.currentTarget.style.borderColor = isDark ? 'rgba(223,186,115,0.4)' : '#c7d2fe'; 
+                                  e.currentTarget.style.transform = 'translateX(3px)'; 
+                                }}
+                                onMouseLeave={e => { 
+                                  e.currentTarget.style.backgroundColor = isDark ? 'rgba(255,255,255,0.03)' : '#ffffff'; 
+                                  e.currentTarget.style.borderColor = isDark ? 'rgba(255,255,255,0.08)' : '#e5e7eb'; 
+                                  e.currentTarget.style.transform = 'translateX(0)'; 
+                                }}
                               >
                                 <div style={{ display: 'flex', alignItems: 'center', gap: '11px', flex: '1 1 auto' }}>
-                                  <div style={{ width: '20px', height: '20px', borderRadius: '50%', backgroundColor: 'rgba(223,186,115,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                                    <Check size={12} color="var(--color-gold)" />
+                                  <div style={{ width: '20px', height: '20px', borderRadius: '50%', backgroundColor: isDark ? 'rgba(223,186,115,0.15)' : '#eef2ff', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                                    <Check size={12} color={isDark ? "var(--color-gold)" : "#0a2540"} />
                                   </div>
                                   <div>
-                                    <div style={{ fontSize: '0.86rem', fontWeight: 700, color: '#ffffff', lineHeight: 1.3 }}>{reg.name}</div>
-                                    <div style={{ fontSize: '0.7rem', color: 'rgba(255,255,255,0.5)', marginTop: '2px' }}>{reg.tag}</div>
+                                    <div style={{ fontSize: '0.86rem', fontWeight: 700, color: isDark ? '#ffffff' : '#111827', lineHeight: 1.3 }}>{reg.name}</div>
+                                    <div style={{ fontSize: '0.7rem', color: isDark ? 'rgba(255,255,255,0.5)' : '#6b7280', marginTop: '2px' }}>{reg.tag}</div>
                                   </div>
                                 </div>
                                 <div style={{ textAlign: 'right', flexShrink: 0 }}>
-                                  <div style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--color-gold)', fontFamily: 'var(--font-body)' }}>{reg.fee}</div>
-                                  <div style={{ fontSize: '0.68rem', color: 'rgba(255,255,255,0.5)', marginTop: '2px' }}>{reg.time}</div>
+                                  <div style={{ fontSize: '0.8rem', fontWeight: 700, color: isDark ? 'var(--color-gold)' : '#0a2540', fontFamily: 'var(--font-body)' }}>{reg.fee}</div>
+                                  <div style={{ fontSize: '0.68rem', color: isDark ? 'rgba(255,255,255,0.5)' : '#9ca3af', marginTop: '2px' }}>{reg.time}</div>
                                 </div>
                               </Link>
                             ))}
@@ -435,8 +475,15 @@ export default function Home() {
 
                           <Link
                             to="/contact"
-                            className="btn-gold"
-                            style={{ width: '100%', padding: '0.82rem', fontSize: '0.9rem', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '8px' }}
+                            className={isDark ? "btn-gold" : ""}
+                            style={{ 
+                              width: '100%', padding: '0.82rem', fontSize: '0.9rem', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '8px',
+                              backgroundColor: isDark ? undefined : '#0a2540',
+                              color: isDark ? undefined : '#ffffff',
+                              borderRadius: 'var(--radius-md)',
+                              textDecoration: 'none',
+                              fontWeight: 600
+                            }}
                           >
                             Start {activeOthersData.title} Setup <ArrowRight size={15} />
                           </Link>
@@ -446,20 +493,20 @@ export default function Home() {
                           {/* Normal tab: title + time badge */}
                           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.6rem', flexWrap: 'wrap', gap: '10px' }}>
                             <div>
-                              <span style={{ fontSize: '0.72rem', color: 'var(--color-gold)', fontFamily: 'var(--font-body)', letterSpacing: '0.04em', textTransform: 'uppercase', fontWeight: 700, display: 'block', marginBottom: '3px' }}>
+                              <span style={{ fontSize: '0.72rem', color: isDark ? 'var(--color-gold)' : '#0a2540', fontFamily: 'var(--font-body)', letterSpacing: '0.04em', textTransform: 'uppercase', fontWeight: 700, display: 'block', marginBottom: '3px' }}>
                                 {activeHubData.badge}
                               </span>
-                              <h3 style={{ fontSize: 'clamp(1.15rem, 4vw, 1.38rem)', color: '#ffffff', fontWeight: 700, letterSpacing: '-0.02em', margin: 0 }}>
+                              <h3 style={{ fontSize: 'clamp(1.15rem, 4vw, 1.38rem)', color: isDark ? '#ffffff' : '#111827', fontWeight: 700, letterSpacing: '-0.02em', margin: 0 }}>
                                 {activeHubData.title}
                               </h3>
                             </div>
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', backgroundColor: 'rgba(255,255,255,0.06)', padding: '0.35rem 0.75rem', borderRadius: 'var(--radius-sm)', border: '1px solid rgba(255,255,255,0.08)' }}>
-                              <Clock size={13} color="var(--color-gold)" />
-                              <span style={{ fontSize: '0.78rem', color: '#ffffff', fontWeight: 600, fontFamily: 'var(--font-body)' }}>{activeHubData.time}</span>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', backgroundColor: isDark ? 'rgba(255,255,255,0.06)' : '#f3f4f6', padding: '0.35rem 0.75rem', borderRadius: 'var(--radius-sm)', border: isDark ? '1px solid rgba(255,255,255,0.08)' : '1px solid #e5e7eb' }}>
+                              <Clock size={13} color={isDark ? "var(--color-gold)" : "#0a2540"} />
+                              <span style={{ fontSize: '0.78rem', color: isDark ? '#ffffff' : '#374151', fontWeight: 600, fontFamily: 'var(--font-body)' }}>{activeHubData.time}</span>
                             </div>
                           </div>
 
-                          <p style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.68)', lineHeight: '1.55', marginBottom: '1.25rem', fontFamily: 'var(--font-body)' }}>
+                          <p style={{ fontSize: '0.85rem', color: isDark ? 'rgba(255,255,255,0.68)' : '#4b5563', lineHeight: '1.55', marginBottom: '1.25rem', fontFamily: 'var(--font-body)' }}>
                             {activeHubData.desc}
                           </p>
 
@@ -472,27 +519,37 @@ export default function Home() {
                                 style={{
                                   display: 'flex', alignItems: 'center', justifyContent: 'space-between',
                                   padding: 'clamp(0.6rem, 3vw, 0.8rem) clamp(0.75rem, 3vw, 1.1rem)',
-                                  backgroundColor: 'rgba(255,255,255,0.03)',
-                                  border: '1px solid rgba(255,255,255,0.08)',
+                                  backgroundColor: isDark ? 'rgba(255,255,255,0.03)' : '#ffffff',
+                                  border: isDark ? '1px solid rgba(255,255,255,0.08)' : '1px solid #e5e7eb',
                                   borderRadius: 'var(--radius-lg)',
                                   transition: 'all 160ms ease',
-                                  gap: '12px'
+                                  gap: '12px',
+                                  boxShadow: isDark ? 'none' : '0 2px 4px rgba(0,0,0,0.02)',
+                                  textDecoration: 'none'
                                 }}
-                                onMouseEnter={e => { e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.07)'; e.currentTarget.style.borderColor = 'rgba(223,186,115,0.4)'; e.currentTarget.style.transform = 'translateX(3px)'; }}
-                                onMouseLeave={e => { e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.03)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)'; e.currentTarget.style.transform = 'translateX(0)'; }}
+                                onMouseEnter={e => { 
+                                  e.currentTarget.style.backgroundColor = isDark ? 'rgba(255,255,255,0.07)' : '#f9fafb'; 
+                                  e.currentTarget.style.borderColor = isDark ? 'rgba(223,186,115,0.4)' : '#c7d2fe'; 
+                                  e.currentTarget.style.transform = 'translateX(3px)'; 
+                                }}
+                                onMouseLeave={e => { 
+                                  e.currentTarget.style.backgroundColor = isDark ? 'rgba(255,255,255,0.03)' : '#ffffff'; 
+                                  e.currentTarget.style.borderColor = isDark ? 'rgba(255,255,255,0.08)' : '#e5e7eb'; 
+                                  e.currentTarget.style.transform = 'translateX(0)'; 
+                                }}
                               >
                                 <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flex: '1 1 auto' }}>
-                                  <div style={{ width: '22px', height: '22px', borderRadius: '50%', backgroundColor: 'rgba(223,186,115,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                                    <Check size={13} color="var(--color-gold)" />
+                                  <div style={{ width: '22px', height: '22px', borderRadius: '50%', backgroundColor: isDark ? 'rgba(223,186,115,0.15)' : '#eef2ff', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                                    <Check size={13} color={isDark ? "var(--color-gold)" : "#0a2540"} />
                                   </div>
                                   <div>
-                                    <div style={{ fontSize: '0.88rem', fontWeight: 700, color: '#ffffff', lineHeight: 1.3 }}>{reg.name}</div>
-                                    <div style={{ fontSize: '0.72rem', color: 'rgba(255,255,255,0.55)', marginTop: '2px' }}>{reg.tag}</div>
+                                    <div style={{ fontSize: '0.88rem', fontWeight: 700, color: isDark ? '#ffffff' : '#111827', lineHeight: 1.3 }}>{reg.name}</div>
+                                    <div style={{ fontSize: '0.72rem', color: isDark ? 'rgba(255,255,255,0.55)' : '#6b7280', marginTop: '2px' }}>{reg.tag}</div>
                                   </div>
                                 </div>
                                 <div style={{ textAlign: 'right', flexShrink: 0 }}>
-                                  <div style={{ fontSize: '0.82rem', fontWeight: 700, color: 'var(--color-gold)', fontFamily: 'var(--font-body)' }}>{reg.fee}</div>
-                                  <div style={{ fontSize: '0.7rem', color: 'rgba(255,255,255,0.55)', marginTop: '2px' }}>{reg.time}</div>
+                                  <div style={{ fontSize: '0.82rem', fontWeight: 700, color: isDark ? 'var(--color-gold)' : '#0a2540', fontFamily: 'var(--font-body)' }}>{reg.fee}</div>
+                                  <div style={{ fontSize: '0.7rem', color: isDark ? 'rgba(255,255,255,0.55)' : '#9ca3af', marginTop: '2px' }}>{reg.time}</div>
                                 </div>
                               </Link>
                             ))}
@@ -500,8 +557,15 @@ export default function Home() {
 
                           <Link
                             to="/contact"
-                            className="btn-gold"
-                            style={{ width: '100%', padding: '0.88rem', fontSize: '0.92rem', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '8px' }}
+                            className={isDark ? "btn-gold" : ""}
+                            style={{ 
+                              width: '100%', padding: '0.88rem', fontSize: '0.92rem', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '8px',
+                              backgroundColor: isDark ? undefined : '#0a2540',
+                              color: isDark ? undefined : '#ffffff',
+                              borderRadius: 'var(--radius-md)',
+                              textDecoration: 'none',
+                              fontWeight: 600
+                            }}
                           >
                             Start {activeHubData.title} Setup <ArrowRight size={15} />
                           </Link>
@@ -521,13 +585,13 @@ export default function Home() {
           01B. STANDALONE INSTITUTIONAL HIGHLIGHT BAR
           High-contrast standalone bar with gold icons (Exact to 3rd image purana front layout)
       ═══════════════════════════════════════════ */}
-      <section className="glass-navbar" style={{
-        backgroundColor: 'rgba(5, 10, 20, 0.92)',
-        borderTop: '1px solid rgba(223, 186, 115, 0.38)',
-        borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
+      <section className={isDark ? "glass-navbar" : ""} style={{
+        backgroundColor: isDark ? 'rgba(5, 10, 20, 0.92)' : 'rgba(255, 255, 255, 0.92)',
+        borderTop: isDark ? '1px solid rgba(223, 186, 115, 0.38)' : '1px solid rgba(0, 0, 0, 0.08)',
+        borderBottom: isDark ? '1px solid rgba(255, 255, 255, 0.08)' : '1px solid rgba(0, 0, 0, 0.05)',
         padding: '2.25rem 0',
         position: 'relative',
-        boxShadow: '0 12px 36px rgba(0,0,0,0.45)'
+        boxShadow: isDark ? '0 12px 36px rgba(0,0,0,0.45)' : '0 4px 20px rgba(0,0,0,0.05)'
       }}>
         <div style={{ maxWidth: '92rem', margin: '0 auto', padding: '0 clamp(1rem, 5vw, 2rem)' }}>
           <Reveal delay={200}>
@@ -542,18 +606,18 @@ export default function Home() {
             <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
               <div style={{
                 width: '46px', height: '46px', flexShrink: 0,
-                backgroundColor: 'rgba(223, 186, 115, 0.12)',
-                border: '1px solid rgba(223, 186, 115, 0.35)',
+                backgroundColor: isDark ? 'rgba(223, 186, 115, 0.12)' : '#eef2ff',
+                border: isDark ? '1px solid rgba(223, 186, 115, 0.35)' : '1px solid #c7d2fe',
                 borderRadius: 'var(--radius-md)',
                 display: 'flex', alignItems: 'center', justifyContent: 'center'
               }}>
-                <Globe size={22} style={{ color: 'var(--color-gold)' }} />
+                <Globe size={22} style={{ color: isDark ? 'var(--color-gold)' : '#0a2540' }} />
               </div>
               <div>
-                <span style={{ fontSize: '0.98rem', color: '#ffffff', fontWeight: 700, display: 'block', fontFamily: 'var(--font-heading)', lineHeight: '1.2', marginBottom: '3px' }}>
+                <span style={{ fontSize: '0.98rem', color: isDark ? '#ffffff' : '#111827', fontWeight: 700, display: 'block', fontFamily: 'var(--font-heading)', lineHeight: '1.2', marginBottom: '3px' }}>
                   PAN India Service
                 </span>
-                <span style={{ fontSize: '0.78rem', color: 'rgba(255,255,255,0.6)', display: 'block' }}>
+                <span style={{ fontSize: '0.78rem', color: isDark ? 'rgba(255,255,255,0.6)' : '#6b7280', display: 'block' }}>
                   All states & UTs covered
                 </span>
               </div>
@@ -563,18 +627,18 @@ export default function Home() {
             <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
               <div style={{
                 width: '46px', height: '46px', flexShrink: 0,
-                backgroundColor: 'rgba(223, 186, 115, 0.12)',
-                border: '1px solid rgba(223, 186, 115, 0.35)',
+                backgroundColor: isDark ? 'rgba(223, 186, 115, 0.12)' : '#eef2ff',
+                border: isDark ? '1px solid rgba(223, 186, 115, 0.35)' : '1px solid #c7d2fe',
                 borderRadius: 'var(--radius-md)',
                 display: 'flex', alignItems: 'center', justifyContent: 'center'
               }}>
-                <CheckCircle size={22} style={{ color: 'var(--color-gold)' }} />
+                <CheckCircle size={22} style={{ color: isDark ? 'var(--color-gold)' : '#0a2540' }} />
               </div>
               <div>
-                <span style={{ fontSize: '0.98rem', color: '#ffffff', fontWeight: 700, display: 'block', fontFamily: 'var(--font-heading)', lineHeight: '1.2', marginBottom: '3px' }}>
+                <span style={{ fontSize: '0.98rem', color: isDark ? '#ffffff' : '#111827', fontWeight: 700, display: 'block', fontFamily: 'var(--font-heading)', lineHeight: '1.2', marginBottom: '3px' }}>
                   100% Online Process
                 </span>
-                <span style={{ fontSize: '0.78rem', color: 'rgba(255,255,255,0.6)', display: 'block' }}>
+                <span style={{ fontSize: '0.78rem', color: isDark ? 'rgba(255,255,255,0.6)' : '#6b7280', display: 'block' }}>
                   No office visit required
                 </span>
               </div>
@@ -584,18 +648,18 @@ export default function Home() {
             <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
               <div style={{
                 width: '46px', height: '46px', flexShrink: 0,
-                backgroundColor: 'rgba(223, 186, 115, 0.12)',
-                border: '1px solid rgba(223, 186, 115, 0.35)',
+                backgroundColor: isDark ? 'rgba(223, 186, 115, 0.12)' : '#eef2ff',
+                border: isDark ? '1px solid rgba(223, 186, 115, 0.35)' : '1px solid #c7d2fe',
                 borderRadius: 'var(--radius-md)',
                 display: 'flex', alignItems: 'center', justifyContent: 'center'
               }}>
-                <Award size={22} style={{ color: 'var(--color-gold)' }} />
+                <Award size={22} style={{ color: isDark ? 'var(--color-gold)' : '#0a2540' }} />
               </div>
               <div>
-                <span style={{ fontSize: '0.98rem', color: '#ffffff', fontWeight: 700, display: 'block', fontFamily: 'var(--font-heading)', lineHeight: '1.2', marginBottom: '3px' }}>
+                <span style={{ fontSize: '0.98rem', color: isDark ? '#ffffff' : '#111827', fontWeight: 700, display: 'block', fontFamily: 'var(--font-heading)', lineHeight: '1.2', marginBottom: '3px' }}>
                   Qualified Experts Only
                 </span>
-                <span style={{ fontSize: '0.78rem', color: 'rgba(255,255,255,0.6)', display: 'block' }}>
+                <span style={{ fontSize: '0.78rem', color: isDark ? 'rgba(255,255,255,0.6)' : '#6b7280', display: 'block' }}>
                   Senior Advisors & Legal Counsel
                 </span>
               </div>
@@ -605,18 +669,18 @@ export default function Home() {
             <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
               <div style={{
                 width: '46px', height: '46px', flexShrink: 0,
-                backgroundColor: 'rgba(223, 186, 115, 0.12)',
-                border: '1px solid rgba(223, 186, 115, 0.35)',
+                backgroundColor: isDark ? 'rgba(223, 186, 115, 0.12)' : '#eef2ff',
+                border: isDark ? '1px solid rgba(223, 186, 115, 0.35)' : '1px solid #c7d2fe',
                 borderRadius: 'var(--radius-md)',
                 display: 'flex', alignItems: 'center', justifyContent: 'center'
               }}>
-                <TrendingUp size={22} style={{ color: 'var(--color-gold)' }} />
+                <TrendingUp size={22} style={{ color: isDark ? 'var(--color-gold)' : '#0a2540' }} />
               </div>
               <div>
-                <span style={{ fontSize: '0.98rem', color: 'var(--color-gold)', fontWeight: 700, display: 'block', fontFamily: 'var(--font-heading)', lineHeight: '1.2', marginBottom: '3px' }}>
+                <span style={{ fontSize: '0.98rem', color: isDark ? 'var(--color-gold)' : '#0a2540', fontWeight: 700, display: 'block', fontFamily: 'var(--font-heading)', lineHeight: '1.2', marginBottom: '3px' }}>
                   Transparent Pricing
                 </span>
-                <span style={{ fontSize: '0.78rem', color: 'rgba(255,255,255,0.6)', display: 'block' }}>
+                <span style={{ fontSize: '0.78rem', color: isDark ? 'rgba(255,255,255,0.6)' : '#6b7280', display: 'block' }}>
                   Clear and upfront fee structures
                 </span>
               </div>
@@ -632,13 +696,13 @@ export default function Home() {
       ═══════════════════════════════════════════ */}
       <section style={{ 
         padding: '5.5rem 0 6.5rem', 
-        backgroundColor: 'var(--color-primary)',
+        backgroundColor: th.sectionBg,
         position: 'relative',
         overflow: 'hidden'
       }}>
-        {/* Soft Ambient Glows for Light Glassmorphism */}
-        <div style={{ position: 'absolute', top: '10%', left: '-5%', width: '60vw', height: '60vw', background: 'radial-gradient(circle at center, rgba(223, 186, 115, 0.08) 0%, rgba(248, 246, 240, 0) 70%)', filter: 'blur(80px)', pointerEvents: 'none', zIndex: 0 }} />
-        <div style={{ position: 'absolute', bottom: '-10%', right: '-5%', width: '50vw', height: '50vw', background: 'radial-gradient(circle at center, rgba(13, 21, 39, 0.03) 0%, rgba(248, 246, 240, 0) 70%)', filter: 'blur(80px)', pointerEvents: 'none', zIndex: 0 }} />
+        {/* Soft Ambient Glows */}
+        <div style={{ position: 'absolute', top: '10%', left: '-5%', width: '60vw', height: '60vw', background: isDark ? 'radial-gradient(circle at center, rgba(223,186,115,0.08) 0%, transparent 70%)' : 'radial-gradient(circle at center, rgba(91,78,232,0.06) 0%, transparent 70%)', filter: 'blur(80px)', pointerEvents: 'none', zIndex: 0 }} />
+        <div style={{ position: 'absolute', bottom: '-10%', right: '-5%', width: '50vw', height: '50vw', background: isDark ? 'radial-gradient(circle at center, rgba(13,21,39,0.03) 0%, transparent 70%)' : 'radial-gradient(circle at center, rgba(91,78,232,0.04) 0%, transparent 70%)', filter: 'blur(80px)', pointerEvents: 'none', zIndex: 0 }} />
 
         {/* Expanded 108rem (1728px / 94vw) container to utilize full desktop screen width */}
         <div style={{ maxWidth: '108rem', margin: '0 auto', padding: '0 clamp(1rem, 5vw, 3rem)', position: 'relative', zIndex: 1 }}>
@@ -646,10 +710,10 @@ export default function Home() {
           <Reveal delay={100}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: '2rem', marginBottom: '3.75rem' }}>
               <div>
-                <span style={{
-                  background: 'rgba(223, 186, 115, 0.14)',
-                  border: '1px solid rgba(223, 186, 115, 0.38)',
-                color: 'var(--color-navy)',
+              <span style={{
+                  background: th.pillBg,
+                  border: `1px solid ${th.pillBorder}`,
+                color: isDark ? th.accent : '#0a2540',
                 padding: '5px 14px',
                 borderRadius: '99px',
                 fontSize: '0.78rem',
@@ -660,13 +724,13 @@ export default function Home() {
                 alignItems: 'center',
                 gap: '8px'
               }}>
-                <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: 'var(--color-gold-dark)' }} />
+                <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: isDark ? th.accent : '#0a2540' }} />
                 Our Practice Areas
               </span>
-              <h2 style={{ fontSize: 'clamp(1.9rem, 3.8vw, 3.1rem)', fontWeight: 800, color: 'var(--color-navy)', marginTop: '0.85rem', lineHeight: 1.15, letterSpacing: '-0.03em', maxWidth: '32ch' }}>
-                Essential services across company setup, <span style={{ fontFamily: 'var(--font-editorial)', fontStyle: 'italic', fontWeight: 400, color: 'var(--color-gold-dark)' }}>taxation, and licensing.</span>
+              <h2 style={{ fontSize: 'clamp(1.9rem, 3.8vw, 3.1rem)', fontWeight: 800, color: th.heading, marginTop: '0.85rem', lineHeight: 1.15, letterSpacing: '-0.03em', maxWidth: '32ch' }}>
+                Essential services across company setup, <span style={{ fontFamily: 'var(--font-editorial)', fontStyle: 'italic', fontWeight: 400, color: isDark ? th.accentGold : '#0a2540' }}>taxation, and licensing.</span>
               </h2>
-              <p style={{ color: 'var(--color-text-muted)', fontSize: '1.05rem', marginTop: '0.75rem', maxWidth: '64ch', lineHeight: '1.65' }}>
+              <p style={{ color: th.body, fontSize: '1.05rem', marginTop: '0.75rem', maxWidth: '64ch', lineHeight: '1.65' }}>
                 Select a practice pillar to review what&apos;s included, statutory government requirements, and exact completion timelines.
               </p>
             </div>
@@ -691,9 +755,9 @@ export default function Home() {
                       fontSize: '0.82rem',
                       fontWeight: isSelected ? 700 : 600,
                       cursor: 'pointer',
-                      border: isSelected ? '1px solid var(--color-navy)' : '1px solid rgba(13, 21, 39, 0.12)',
-                      backgroundColor: isSelected ? 'var(--color-navy)' : 'rgba(255, 255, 255, 0.6)',
-                      color: isSelected ? '#ffffff' : 'var(--color-text-main)',
+                      border: isSelected ? `1px solid ${th.accent}` : `1px solid ${th.cardBorder}`,
+                      backgroundColor: isSelected ? 'hsl(var(--primary))' : th.cardBg,
+                      color: isSelected ? 'hsl(var(--primary-foreground))' : th.body,
                       backdropFilter: 'blur(12px)',
                       boxShadow: isSelected ? '0 6px 18px rgba(13, 21, 39, 0.22)' : '0 2px 4px rgba(0,0,0,0.02)',
                       transition: 'all 180ms ease'
@@ -742,9 +806,9 @@ export default function Home() {
                     onMouseEnter={e => {
                       e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.85)';
                       e.currentTarget.style.backgroundImage = 'linear-gradient(135deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0.5) 100%)';
-                      e.currentTarget.style.borderColor = 'var(--color-gold)';
+                      e.currentTarget.style.borderColor = isDark ? 'var(--color-gold)' : '#0a2540';
                       e.currentTarget.style.transform = 'translateY(-4px)';
-                      e.currentTarget.style.boxShadow = '0 16px 40px -10px rgba(13, 21, 39, 0.12), 0 0 24px rgba(223, 186, 115, 0.15), inset 0 0 0 1px rgba(255, 255, 255, 0.8)';
+                      e.currentTarget.style.boxShadow = isDark ? '0 16px 40px -10px rgba(13, 21, 39, 0.12), 0 0 24px rgba(223, 186, 115, 0.15), inset 0 0 0 1px rgba(255, 255, 255, 0.8)' : '0 16px 40px -10px rgba(0, 0, 0, 0.1), 0 0 24px rgba(55, 48, 163, 0.15), inset 0 0 0 1px rgba(255, 255, 255, 0.8)';
                     }}
                     onMouseLeave={e => {
                       e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.65)';
@@ -758,35 +822,35 @@ export default function Home() {
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem', gap: '8px' }}>
                       <span style={{
                         fontSize: '0.73rem', fontWeight: 700, letterSpacing: '0.12em',
-                        textTransform: 'uppercase', color: 'var(--color-gold-dark)',
+                        textTransform: 'uppercase', color: isDark ? 'var(--color-gold-dark)' : '#0a2540',
                         fontFamily: 'var(--font-body)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis'
                       }}>
                         {service.tag}
                       </span>
                       <span style={{
-                        fontSize: '0.8rem', fontWeight: 600, color: 'var(--color-text-light)',
+                        fontSize: '0.8rem', fontWeight: 600, color: isDark ? 'var(--color-text-light)' : '#4b5563',
                         fontFamily: 'var(--font-body)', whiteSpace: 'nowrap', flexShrink: 0
                       }}>
                         {service.time}
                       </span>
                     </div>
 
-                    <h3 style={{ fontSize: '1.15rem', fontWeight: 750, fontFamily: 'var(--font-heading)', color: 'var(--color-navy)', marginBottom: '0.75rem', letterSpacing: '-0.02em', lineHeight: '1.3' }}>
+                    <h3 style={{ fontSize: '1.15rem', fontWeight: 750, fontFamily: 'var(--font-heading)', color: isDark ? 'var(--color-navy)' : '#111827', marginBottom: '0.75rem', letterSpacing: '-0.02em', lineHeight: '1.3' }}>
                       {service.title}
                     </h3>
 
-                    <p style={{ fontSize: '0.9rem', color: 'var(--color-text-muted)', lineHeight: '1.6', marginBottom: '1.5rem', flexGrow: 1 }}>
+                    <p style={{ fontSize: '0.9rem', color: isDark ? 'var(--color-text-muted)' : '#4b5563', lineHeight: '1.6', marginBottom: '1.5rem', flexGrow: 1 }}>
                       {service.desc}
                     </p>
 
                     {/* Bottom Footer Row: Clean separation without wrapping */}
                     <div style={{ borderTop: '1px solid rgba(13, 21, 39, 0.07)', paddingTop: '1.1rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '12px' }}>
                       <div style={{ flex: 1, minWidth: 0 }}>
-                        <span style={{ fontSize: '0.68rem', color: 'var(--color-text-light)', display: 'block', fontFamily: 'var(--font-body)', textTransform: 'uppercase', letterSpacing: '0.04em', fontWeight: 600, marginBottom: '3px' }}>What&apos;s Included</span>
-                        <span style={{ fontSize: '0.86rem', fontWeight: 650, color: 'var(--color-navy)', display: 'block', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{service.fee}</span>
+                        <span style={{ fontSize: '0.68rem', color: isDark ? 'var(--color-text-light)' : '#6b7280', display: 'block', fontFamily: 'var(--font-body)', textTransform: 'uppercase', letterSpacing: '0.04em', fontWeight: 600, marginBottom: '3px' }}>What&apos;s Included</span>
+                        <span style={{ fontSize: '0.86rem', fontWeight: 650, color: isDark ? 'var(--color-navy)' : '#111827', display: 'block', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{service.fee}</span>
                       </div>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.76rem', fontWeight: 700, color: 'var(--color-navy)', letterSpacing: '0.04em', textTransform: 'uppercase', whiteSpace: 'nowrap', flexShrink: 0 }}>
-                        Learn More <ArrowRight size={14} style={{ color: 'var(--color-gold-dark)' }} />
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.76rem', fontWeight: 700, color: isDark ? 'var(--color-navy)' : '#0a2540', letterSpacing: '0.04em', textTransform: 'uppercase', whiteSpace: 'nowrap', flexShrink: 0 }}>
+                        Learn More <ArrowRight size={14} style={{ color: isDark ? 'var(--color-gold-dark)' : '#0a2540' }} />
                       </div>
                     </div>
                   </Link>
@@ -799,7 +863,7 @@ export default function Home() {
           <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '3.75rem' }}>
             <Link
               to="/services"
-              className="btn-gold"
+              className={isDark ? "btn-gold" : ""}
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
@@ -808,11 +872,14 @@ export default function Home() {
                 fontSize: '0.96rem',
                 fontWeight: 700,
                 borderRadius: '99px',
-                boxShadow: '0 10px 28px -6px rgba(223, 186, 115, 0.45)',
+                backgroundColor: isDark ? undefined : '#0a2540',
+                color: isDark ? undefined : '#ffffff',
+                textDecoration: 'none',
+                boxShadow: isDark ? '0 10px 28px -6px rgba(223, 186, 115, 0.45)' : '0 4px 14px 0 rgba(55, 48, 163, 0.39)',
                 transition: 'all 220ms cubic-bezier(0.16, 1, 0.3, 1)'
               }}
-              onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-3px)'; e.currentTarget.style.boxShadow = '0 16px 36px -8px rgba(223, 186, 115, 0.6)'; }}
-              onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 10px 28px -6px rgba(223, 186, 115, 0.45)'; }}
+              onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-3px)'; e.currentTarget.style.boxShadow = isDark ? '0 16px 36px -8px rgba(223, 186, 115, 0.6)' : '0 8px 20px 0 rgba(55, 48, 163, 0.5)'; }}
+              onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = isDark ? '0 10px 28px -6px rgba(223, 186, 115, 0.45)' : '0 4px 14px 0 rgba(55, 48, 163, 0.39)'; }}
             >
               Explore All Services <ArrowRight size={16} />
             </Link>
@@ -824,17 +891,17 @@ export default function Home() {
           03. INSTITUTIONAL RIGOR — ASYMMETRICAL 4-STEP ENGAGEMENT
           Priority 4 & 8: Left-aligned narrative anchoring vs execution steps
       ═══════════════════════════════════════════ */}
-      <section style={{ padding: '7rem 0', backgroundColor: 'var(--color-navy)', position: 'relative' }}>
+      <section style={{ padding: '7rem 0', backgroundColor: th.sectionBg, position: 'relative' }}>
         <div style={{ maxWidth: '88rem', margin: '0 auto', padding: '0 clamp(1rem, 5vw, 2rem)' }}>
           <div className="grid-home-matrix">
 
             {/* Left: Why Sterling Advisory */}
             <Reveal delay={150}>
               <span className="section-label">Why Choose Us</span>
-              <h2 style={{ fontFamily: 'var(--font-editorial)', fontSize: 'clamp(2.4rem, 4vw, 3.4rem)', fontWeight: 500, color: '#ffffff', marginBottom: '1.25rem', lineHeight: 1.1, letterSpacing: '-0.02em', maxWidth: '22ch' }}>
+              <h2 style={{ fontFamily: 'var(--font-editorial)', fontSize: 'clamp(2.4rem, 4vw, 3.4rem)', fontWeight: 500, color: th.heading, marginBottom: '1.25rem', lineHeight: 1.1, letterSpacing: '-0.02em', maxWidth: '22ch' }}>
                 Top-tier corporate advisory without the heavy overhead.
               </h2>
-              <p style={{ color: 'rgba(255,255,255,0.7)', marginBottom: '2.5rem', fontSize: '1rem', lineHeight: '1.65', maxWidth: '48ch' }}>
+              <p style={{ color: th.body, marginBottom: '2.5rem', fontSize: '1rem', lineHeight: '1.65', maxWidth: '48ch' }}>
                 We replace slow paper bureaucracy with fast, accurate digital processes. Whether you are starting a new company or managing GST returns across states, our team acts as your trusted legal and financial advisor.
               </p>
 
@@ -845,9 +912,9 @@ export default function Home() {
                   { title: 'Expert Professional Support', desc: 'Every filing is reviewed and certified by dedicated qualified professionals.' },
                   { title: 'Transparent Pricing', desc: 'Clear, upfront fee structures tailored to your specific business requirements.' },
                 ].map((item, i) => (
-                  <div key={i} className="hover-lift" style={{ borderLeft: '2px solid var(--color-gold)', paddingLeft: '1rem' }}>
-                    <div style={{ fontWeight: 600, color: '#ffffff', fontSize: '0.9375rem', marginBottom: '4px' }}>{item.title}</div>
-                    <div style={{ fontSize: '0.8125rem', color: 'var(--color-text-light)', lineHeight: '1.5' }}>{item.desc}</div>
+                  <div key={i} className="hover-lift" style={{ borderLeft: isDark ? '2px solid var(--color-gold)' : '2px solid #0a2540', paddingLeft: '1rem' }}>
+                    <div style={{ fontWeight: 600, color: th.heading, fontSize: '0.9375rem', marginBottom: '4px' }}>{item.title}</div>
+                    <div style={{ fontSize: '0.8125rem', color: th.body, lineHeight: '1.5' }}>{item.desc}</div>
                   </div>
                 ))}
               </div>
@@ -855,9 +922,12 @@ export default function Home() {
 
             {/* Right: How It Works Roadmap */}
             <Reveal delay={300}>
-              <div className="glass-panel-dark hover-lift" style={{
+              <div className={isDark ? "glass-panel-dark hover-lift" : "hover-lift"} style={{
                 borderRadius: 'var(--radius-xl)',
-                padding: '2.5rem'
+                padding: '2.5rem',
+                backgroundColor: isDark ? undefined : 'rgba(255,255,255,0.7)',
+                border: isDark ? undefined : '1px solid rgba(0,0,0,0.06)',
+                boxShadow: isDark ? undefined : '0 12px 30px rgba(0,0,0,0.03)'
               }}>
               <span className="section-label" style={{ marginBottom: '2rem', display: 'block' }}>HOW OUR SIMPLE 4-STEP PROCESS WORKS</span>
               
@@ -866,24 +936,32 @@ export default function Home() {
                   <div key={step.num} style={{ display: 'flex', gap: '1.25rem', alignItems: 'flex-start' }}>
                     <div style={{
                       width: '36px', height: '36px', borderRadius: 'var(--radius-md)',
-                      backgroundColor: 'rgba(223,186,115,0.12)',
-                      border: '1px solid var(--color-gold)',
+                      backgroundColor: isDark ? 'rgba(223,186,115,0.12)' : '#eef2ff',
+                      border: isDark ? '1px solid var(--color-gold)' : '1px solid #c7d2fe',
                       display: 'flex', alignItems: 'center', justifyContent: 'center',
-                      fontFamily: 'var(--font-body)', fontSize: '0.8125rem', fontWeight: 700, color: 'var(--color-gold)', flexShrink: 0
+                      fontFamily: 'var(--font-body)', fontSize: '0.8125rem', fontWeight: 700, color: isDark ? 'var(--color-gold)' : '#0a2540', flexShrink: 0
                     }}>
                       {step.num}
                     </div>
                     <div>
-                      <div style={{ fontSize: '1rem', fontWeight: 700, color: '#ffffff', marginBottom: '6px' }}>{step.title}</div>
-                      <div style={{ fontSize: '0.875rem', color: 'var(--color-text-light)', lineHeight: '1.6' }}>{step.desc}</div>
+                      <div style={{ fontSize: '1rem', fontWeight: 700, color: th.heading, marginBottom: '6px' }}>{step.title}</div>
+                      <div style={{ fontSize: '0.875rem', color: th.body, lineHeight: '1.6' }}>{step.desc}</div>
                     </div>
                   </div>
                 ))}
               </div>
 
-              <div style={{ marginTop: '2.5rem', paddingTop: '1.75rem', borderTop: '1px solid rgba(255,255,255,0.08)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
-                <div style={{ fontSize: '0.875rem', color: 'rgba(255,255,255,0.7)' }}>Ready to get started with your initial consultation?</div>
-                <Link to="/contact" className="btn-gold" style={{ padding: '0.625rem 1.25rem', fontSize: '0.8125rem' }}>
+              <div style={{ marginTop: '2.5rem', paddingTop: '1.75rem', borderTop: isDark ? '1px solid rgba(255,255,255,0.08)' : '1px solid rgba(0,0,0,0.08)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
+                <div style={{ fontSize: '0.875rem', color: th.body }}>Ready to get started with your initial consultation?</div>
+                <Link to="/contact" className={isDark ? "btn-gold" : ""} style={{ 
+                  padding: '0.625rem 1.25rem', 
+                  fontSize: '0.8125rem',
+                  backgroundColor: isDark ? undefined : '#0a2540',
+                  color: isDark ? undefined : '#ffffff',
+                  borderRadius: '100px',
+                  fontWeight: 600,
+                  textDecoration: 'none'
+                }}>
                   Talk to an Expert
                 </Link>
               </div>
@@ -898,21 +976,21 @@ export default function Home() {
           04. STATUTORY & SLA FAQS (COMPACT ACCORDION)
           Priority 2 & 6: Clean, non-robotic microcopy and subtle borders
       ═══════════════════════════════════════════ */}
-      <section style={{ padding: '5rem 0', backgroundColor: 'var(--color-primary)' }}>
+      <section style={{ padding: '5rem 0', backgroundColor: th.pageBg }}>
         <div style={{ maxWidth: '64rem', margin: '0 auto', padding: '0 clamp(1rem, 5vw, 2rem)' }}>
           <Reveal delay={100}>
             <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
               <span className="section-label">Frequently Asked Questions</span>
-              <h2 style={{ fontSize: 'clamp(2rem, 3.8vw, 3rem)', fontWeight: 800, color: 'var(--color-navy)', lineHeight: 1.15, letterSpacing: '-0.03em' }}>
+              <h2 style={{ fontSize: 'clamp(2rem, 3.8vw, 3rem)', fontWeight: 800, color: th.heading, lineHeight: 1.15, letterSpacing: '-0.03em' }}>
                 Clear Answers for Founders & Business Owners
               </h2>
             </div>
           </Reveal>
 
           <Reveal delay={200}>
-            <div className="hover-lift" style={{ backgroundColor: 'var(--color-secondary)', borderRadius: 'var(--radius-xl)', border: '1px solid rgba(0,0,0,0.06)', padding: '0 clamp(1rem, 5vw, 2rem)', boxShadow: 'var(--shadow-sm)' }}>
+            <div className="hover-lift" style={{ backgroundColor: th.cardBg, borderRadius: 'var(--radius-xl)', border: `1px solid ${th.cardBorder}`, padding: '0 clamp(1rem, 5vw, 2rem)', boxShadow: 'var(--shadow-sm)' }}>
             {faqData.map((faq, i) => (
-              <div key={i} style={{ borderBottom: i < faqData.length - 1 ? '1px solid rgba(0,0,0,0.06)' : 'none' }}>
+              <div key={i} style={{ borderBottom: i < faqData.length - 1 ? `1px solid ${th.cardBorder}` : 'none' }}>
                 <button
                   onClick={() => setOpenFaqIndex(openFaqIndex === i ? null : i)}
                   style={{
@@ -920,16 +998,16 @@ export default function Home() {
                     padding: '1.5rem 0', background: 'transparent', border: 'none', cursor: 'pointer', textAlign: 'left',
                   }}
                 >
-                  <span style={{ fontWeight: 600, color: 'var(--color-navy)', fontSize: '1.05rem', paddingRight: '1.5rem', fontFamily: 'var(--font-body)' }}>{faq.q}</span>
+                  <span style={{ fontWeight: 600, color: th.heading, fontSize: '1.05rem', paddingRight: '1.5rem', fontFamily: 'var(--font-body)' }}>{faq.q}</span>
                   <div style={{
                     width: '28px', height: '28px', flexShrink: 0,
-                    border: '1px solid rgba(0,0,0,0.1)',
+                    border: isDark ? '1px solid rgba(255,255,255,0.1)' : '1px solid rgba(0,0,0,0.1)',
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    backgroundColor: openFaqIndex === i ? 'var(--color-navy)' : 'transparent',
+                    backgroundColor: openFaqIndex === i ? (isDark ? 'var(--color-navy)' : '#eef2ff') : 'transparent',
                     borderRadius: 'var(--radius-md)',
                     transition: 'background-color 180ms ease'
                   }}>
-                    <ChevronDown size={15} style={{ color: openFaqIndex === i ? 'var(--color-gold)' : 'var(--color-text-muted)', transform: openFaqIndex === i ? 'rotate(180deg)' : 'rotate(0)', transition: 'transform 200ms ease' }} />
+                    <ChevronDown size={15} style={{ color: openFaqIndex === i ? (isDark ? 'var(--color-gold)' : '#0a2540') : th.body, transform: openFaqIndex === i ? 'rotate(180deg)' : 'rotate(0)', transition: 'transform 200ms ease' }} />
                   </div>
                 </button>
                 <AnimatePresence initial={false}>
@@ -941,7 +1019,7 @@ export default function Home() {
                       transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
                       style={{ overflow: 'hidden' }}
                     >
-                      <p style={{ paddingBottom: '1.5rem', fontSize: '0.9375rem', color: 'var(--color-text-muted)', lineHeight: '1.65' }}>{faq.a}</p>
+                      <p style={{ paddingBottom: '1.5rem', fontSize: '0.9375rem', color: th.body, lineHeight: '1.65' }}>{faq.a}</p>
                     </motion.div>
                   )}
                 </AnimatePresence>
@@ -956,17 +1034,17 @@ export default function Home() {
           05. ADVISORY NOTES / KNOWLEDGE HUB
           Priority 2: "Advisory Notes / Structural briefings on corporate law and taxation."
       ═══════════════════════════════════════════ */}
-      <section style={{ padding: '5rem 0', backgroundColor: 'var(--color-secondary)', borderTop: '1px solid rgba(0,0,0,0.06)' }}>
+      <section style={{ padding: '5rem 0', backgroundColor: th.sectionBg, borderTop: isDark ? '1px solid rgba(255,255,255,0.08)' : '1px solid rgba(0,0,0,0.06)' }}>
         <div style={{ maxWidth: '88rem', margin: '0 auto', padding: '0 clamp(1rem, 5vw, 2rem)' }}>
           <Reveal delay={150}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: '1.5rem', marginBottom: '3rem' }}>
               <div>
                 <span className="section-label">Advisory Notes</span>
-                <h2 style={{ fontSize: 'clamp(2rem, 3.8vw, 3rem)', fontWeight: 800, color: 'var(--color-navy)', lineHeight: 1.15, letterSpacing: '-0.03em' }}>
+                <h2 style={{ fontSize: 'clamp(2rem, 3.8vw, 3rem)', fontWeight: 800, color: th.heading, lineHeight: 1.15, letterSpacing: '-0.03em' }}>
                   Guides on Business Law & Taxation
                 </h2>
               </div>
-              <Link to="/insights" style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.8125rem', fontWeight: 600, color: 'var(--color-gold-dark)', letterSpacing: '0.06em', textTransform: 'uppercase' }} className="link-underline pb-1">
+              <Link to="/insights" style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.8125rem', fontWeight: 600, color: isDark ? 'var(--color-gold-dark)' : '#0a2540', letterSpacing: '0.06em', textTransform: 'uppercase' }} className="link-underline pb-1">
                 View All Articles <ArrowRight size={14} />
               </Link>
             </div>
@@ -978,12 +1056,12 @@ export default function Home() {
                 { title: 'How to Protect Your Brand Name Before Competitors Copy It', excerpt: 'Practical steps to register your trademark, select the right classes, and secure your brand identity before raising funding or scaling operations.', tag: 'Trademark & IP' },
               ].map((post, i) => (
                 <div key={i} style={{ display: 'flex' }}>
-                  <Link to="/insights" className="card-premium" style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
-                    <span style={{ fontSize: '0.75rem', fontFamily: 'var(--font-body)', letterSpacing: '0.02em', textTransform: 'uppercase', color: 'var(--color-gold-dark)', marginBottom: '0.875rem', display: 'block', fontWeight: 600 }}>{post.tag}</span>
-                    <h3 style={{ fontSize: '1.3rem', fontWeight: 700, fontFamily: 'var(--font-heading)', color: 'var(--color-navy)', marginBottom: '0.625rem', lineHeight: 1.35, letterSpacing: '-0.02em' }}>{post.title}</h3>
-                    <p style={{ fontSize: '0.875rem', color: 'var(--color-text-muted)', marginBottom: '1.5rem', lineHeight: '1.6', flexGrow: 1 }}>{post.excerpt}</p>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.75rem', fontWeight: 600, color: 'var(--color-navy)', letterSpacing: '0.04em', textTransform: 'uppercase', borderTop: '1px solid rgba(0,0,0,0.06)', paddingTop: '1rem' }}>
-                      Read Article <ArrowRight size={13} style={{ color: 'var(--color-gold-dark)' }} />
+                  <Link to="/insights" className="card-premium" style={{ display: 'flex', flexDirection: 'column', width: '100%', backgroundColor: th.cardBg, border: `1px solid ${th.cardBorder}` }}>
+                    <span style={{ fontSize: '0.75rem', fontFamily: 'var(--font-body)', letterSpacing: '0.02em', textTransform: 'uppercase', color: isDark ? 'var(--color-gold-dark)' : '#0a2540', marginBottom: '0.875rem', display: 'block', fontWeight: 600 }}>{post.tag}</span>
+                    <h3 style={{ fontSize: '1.3rem', fontWeight: 700, fontFamily: 'var(--font-heading)', color: th.heading, marginBottom: '0.625rem', lineHeight: 1.35, letterSpacing: '-0.02em' }}>{post.title}</h3>
+                    <p style={{ fontSize: '0.875rem', color: th.body, marginBottom: '1.5rem', lineHeight: '1.6', flexGrow: 1 }}>{post.excerpt}</p>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.75rem', fontWeight: 600, color: th.heading, letterSpacing: '0.04em', textTransform: 'uppercase', borderTop: isDark ? '1px solid rgba(255,255,255,0.08)' : '1px solid rgba(0,0,0,0.06)', paddingTop: '1rem' }}>
+                      Read Article <ArrowRight size={13} style={{ color: isDark ? 'var(--color-gold-dark)' : '#0a2540' }} />
                     </div>
                   </Link>
                 </div>
@@ -999,24 +1077,42 @@ export default function Home() {
       ═══════════════════════════════════════════ */}
       <section style={{
         padding: '5.5rem 0',
-        backgroundColor: 'var(--color-navy)',
-        borderTop: '1px solid rgba(255,255,255,0.08)'
+        backgroundColor: th.pageBg,
+        borderTop: isDark ? '1px solid rgba(255,255,255,0.08)' : '1px solid rgba(0,0,0,0.08)'
       }}>
         <Reveal delay={200}>
           <div style={{ maxWidth: '56rem', margin: '0 auto', padding: '0 clamp(1rem, 5vw, 2rem)', textAlign: 'center' }}>
             <span className="section-label">Get Started</span>
-            <h2 style={{ fontSize: 'clamp(2.35rem, 4.8vw, 3.5rem)', fontWeight: 800, color: '#ffffff', marginBottom: '1.25rem', lineHeight: 1.15, letterSpacing: '-0.03em' }}>
+            <h2 style={{ fontSize: 'clamp(2.35rem, 4.8vw, 3.5rem)', fontWeight: 800, color: th.heading, marginBottom: '1.25rem', lineHeight: 1.15, letterSpacing: '-0.03em' }}>
               Set up your business <br />
-              with <span style={{ fontFamily: 'var(--font-editorial)', fontStyle: 'italic', fontWeight: 400, color: 'var(--color-gold)' }}>complete confidence.</span>
+              with <span style={{ fontFamily: 'var(--font-editorial)', fontStyle: 'italic', fontWeight: 400, color: isDark ? 'var(--color-gold)' : '#0a2540' }}>complete confidence.</span>
             </h2>
-            <p style={{ fontSize: '1.05rem', color: 'rgba(255,255,255,0.7)', marginBottom: '2.5rem', maxWidth: '48ch', margin: '0 auto 2.5rem', lineHeight: '1.65' }}>
+            <p style={{ fontSize: '1.05rem', color: th.body, marginBottom: '2.5rem', maxWidth: '48ch', margin: '0 auto 2.5rem', lineHeight: '1.65' }}>
               Talk to our qualified professionals. We handle company registrations and government licences across all 28 states and 8 Union Territories.
             </p>
             <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-              <Link to="/contact" className="btn-gold" style={{ padding: '0.875rem 2rem', fontSize: '0.9375rem' }}>
+              <Link to="/contact" className={isDark ? "btn-gold" : ""} style={{ 
+                padding: '0.875rem 2rem', 
+                fontSize: '0.9375rem',
+                backgroundColor: isDark ? undefined : '#0a2540',
+                color: isDark ? undefined : '#ffffff',
+                borderRadius: '100px',
+                fontWeight: 600,
+                textDecoration: 'none',
+                boxShadow: isDark ? '0 0 25px rgba(223, 186, 115, 0.35), 0 8px 24px -6px rgba(223, 186, 115, 0.5)' : '0 0 25px rgba(10, 37, 64, 0.35), 0 8px 20px -6px rgba(10, 37, 64, 0.5)'
+              }}>
                 Get a Consultation <ArrowRight size={15} />
               </Link>
-              <a href="https://wa.me/918448803143" target="_blank" rel="noopener noreferrer" className="btn-ghost" style={{ padding: '0.875rem 1.75rem', fontSize: '0.9375rem' }}>
+              <a href="https://wa.me/918448803143" target="_blank" rel="noopener noreferrer" className={isDark ? "btn-ghost" : ""} style={{ 
+                padding: '0.875rem 1.75rem', 
+                fontSize: '0.9375rem',
+                backgroundColor: isDark ? undefined : '#eef2ff',
+                color: isDark ? undefined : '#0a2540',
+                borderRadius: '100px',
+                fontWeight: 600,
+                textDecoration: 'none',
+                border: isDark ? undefined : '1px solid #c7d2fe'
+              }}>
                 Chat on WhatsApp
               </a>
             </div>

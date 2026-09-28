@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Outlet, Link, useLocation } from 'react-router-dom';
-import { Menu, X, ChevronDown, Sparkles } from 'lucide-react';
+import { Menu, X, ChevronDown, Sparkles, Sun, Moon } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import ChatWidget from '../ui/ChatWidget';
+import { useTheme } from '../../utils/ThemeContext';
 
 const megaMenuCategories = [
   {
@@ -70,6 +71,7 @@ export default function PublicLayout() {
   const [activeMegaTab, setActiveMegaTab] = useState(0);
   const [openFooterAccordion, setOpenFooterAccordion] = useState(null);
   const location = useLocation();
+  const { theme, toggle } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20);
@@ -97,20 +99,23 @@ export default function PublicLayout() {
   const isActive = (path) => location.pathname.startsWith(path);
 
   return (
-    <div className="min-h-screen flex flex-col font-body" style={{ background: 'var(--color-primary)' }}>
+    <div className="min-h-screen flex flex-col font-body" style={{ background: 'hsl(var(--background))' }}>
 
       {/* ── HEADER (Priority 8: Agency-Grade Stripe / Mercury / Notion Navigation) ── */}
       <header
+        className={isScrolled ? 'glass-navbar' : ''}
         style={{
-          position: 'sticky', 
-          top: 0, 
+          position: 'sticky',
+          top: 0,
           zIndex: 50,
           width: '100%',
-          background: isScrolled ? 'rgba(9, 15, 29, 0.95)' : '#0D1527',
-          backdropFilter: isScrolled ? 'blur(16px) saturate(180%)' : 'none',
-          WebkitBackdropFilter: isScrolled ? 'blur(16px) saturate(180%)' : 'none',
-          borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
-          boxShadow: isScrolled ? '0 10px 30px rgba(0,0,0,0.3)' : 'none',
+          background: isScrolled
+            ? undefined
+            : theme === 'dark'
+              ? '#0D1527'
+              : 'hsl(var(--background))',
+          borderBottom: isScrolled ? undefined : '1px solid hsl(var(--border))',
+          boxShadow: isScrolled ? undefined : 'none',
           transition: 'all 300ms ease',
         }}
       >
@@ -120,7 +125,7 @@ export default function PublicLayout() {
             margin: '0 auto',
             padding: '0 clamp(1rem, 5vw, 2rem)',
             display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-            height: isScrolled ? '64px' : '84px',
+            height: isScrolled ? '64px' : '80px',
             transition: 'height 300ms ease',
           }}
         >
@@ -142,7 +147,7 @@ export default function PublicLayout() {
               fontFamily: 'var(--font-heading)',
               fontWeight: 700,
               fontSize: '1.18rem',
-              color: '#ffffff',
+              color: theme === 'dark' ? '#ffffff' : 'hsl(var(--primary))',
               letterSpacing: '-0.02em',
               lineHeight: 1
             }}>Sterling Advisory</span>
@@ -160,7 +165,9 @@ export default function PublicLayout() {
                 display: 'flex', alignItems: 'center', gap: '6px',
                 padding: '0.5rem 0',
                 fontSize: '0.875rem', fontWeight: 500, letterSpacing: '0',
-                color: (isActive('/services') || isServicesOpen) ? '#ffffff' : 'rgba(255,255,255,0.65)',
+                color: theme === 'dark'
+                  ? ((isActive('/services') || isServicesOpen) ? '#ffffff' : 'rgba(255,255,255,0.65)')
+                  : ((isActive('/services') || isServicesOpen) ? 'hsl(var(--primary))' : 'hsl(var(--muted-foreground))'),
                 background: 'transparent',
                 border: 'none', cursor: 'pointer',
                 transition: 'color 200ms ease',
@@ -178,15 +185,15 @@ export default function PublicLayout() {
                     transition={{ duration: 0.16, ease: 'easeOut' }}
                     style={{
                       position: 'fixed',
-                      top: isScrolled ? '68px' : '84px',
+                      top: isScrolled ? '68px' : '80px',
                       left: 0,
                       right: 0,
                       width: '100vw',
-                      background: 'rgba(9, 15, 29, 0.96)',
+                      background: theme === 'dark' ? 'rgba(9,15,29,0.97)' : 'hsl(var(--background)/0.97)',
                       backdropFilter: 'blur(28px) saturate(180%)',
                       WebkitBackdropFilter: 'blur(28px) saturate(180%)',
-                      borderBottom: '1px solid rgba(223, 186, 115, 0.35)',
-                      boxShadow: '0 24px 64px rgba(0, 0, 0, 0.65)',
+                      borderBottom: theme === 'dark' ? '1px solid rgba(197,168,128,0.25)' : '1px solid hsl(var(--border))',
+                      boxShadow: theme === 'dark' ? '0 24px 64px rgba(0,0,0,0.65)' : '0 24px 64px rgba(0,0,0,0.08)',
                       zIndex: 999,
                       padding: '2.5rem 0',
                       transition: 'top 300ms ease',
@@ -368,13 +375,15 @@ export default function PublicLayout() {
                   display: 'block',
                   padding: '0.5rem 0',
                   fontSize: '0.875rem', fontWeight: 500, letterSpacing: '0',
-                  color: isActive(item.href) ? '#ffffff' : 'rgba(255,255,255,0.65)',
+                  color: theme === 'dark'
+                    ? (isActive(item.href) ? '#ffffff' : 'rgba(255,255,255,0.65)')
+                    : (isActive(item.href) ? 'hsl(var(--primary))' : 'hsl(var(--muted-foreground))'),
                   background: 'transparent',
                   textDecoration: 'none',
                   transition: 'color 200ms ease',
                 }}
-                onMouseEnter={e => { e.currentTarget.style.color = '#ffffff'; }}
-                onMouseLeave={e => { e.currentTarget.style.color = isActive(item.href) ? '#ffffff' : 'rgba(255,255,255,0.65)'; }}
+                onMouseEnter={e => { e.currentTarget.style.color = theme === 'dark' ? '#ffffff' : 'hsl(var(--primary))'; }}
+                onMouseLeave={e => { e.currentTarget.style.color = theme === 'dark' ? (isActive(item.href) ? '#ffffff' : 'rgba(255,255,255,0.65)') : (isActive(item.href) ? 'hsl(var(--primary))' : 'hsl(var(--muted-foreground))'); }}
               >
                 {item.label}
               </Link>
@@ -383,60 +392,89 @@ export default function PublicLayout() {
 
           {/* CTA + Mobile Toggle */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-            <div className="hidden md:flex items-center" style={{ gap: '0.85rem' }}>
+            <div className="hidden md:flex items-center" style={{ gap: '0.75rem' }}>
+
+              {/* Theme Toggle */}
+              <button
+                id="theme-toggle-btn"
+                onClick={toggle}
+                aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
+                title={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
+                style={{
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  width: '36px', height: '36px', borderRadius: '50%',
+                  background: theme === 'dark' ? 'rgba(255,255,255,0.08)' : 'hsl(var(--secondary))',
+                  border: theme === 'dark' ? '1px solid rgba(255,255,255,0.12)' : '1px solid hsl(var(--border))',
+                  color: theme === 'dark' ? 'rgba(255,255,255,0.8)' : 'hsl(var(--muted-foreground))',
+                  cursor: 'pointer',
+                  transition: 'all 200ms ease',
+                  flexShrink: 0,
+                }}
+                onMouseEnter={e => { e.currentTarget.style.background = 'hsl(var(--primary)/0.12)'; e.currentTarget.style.color = 'hsl(var(--primary))'; e.currentTarget.style.borderColor = 'hsl(var(--primary)/0.3)'; }}
+                onMouseLeave={e => { e.currentTarget.style.background = theme === 'dark' ? 'rgba(255,255,255,0.08)' : 'hsl(var(--secondary))'; e.currentTarget.style.color = theme === 'dark' ? 'rgba(255,255,255,0.8)' : 'hsl(var(--muted-foreground))'; e.currentTarget.style.borderColor = theme === 'dark' ? 'rgba(255,255,255,0.12)' : 'hsl(var(--border))'; }}
+              >
+                {theme === 'light' ? <Moon size={16} /> : <Sun size={16} />}
+              </button>
+
               <button
                 onClick={() => window.dispatchEvent(new Event('open-ai-chat'))}
                 style={{
                   display: 'flex', alignItems: 'center', gap: '6px',
-                  padding: '0.55rem 1rem',
+                  padding: '0.5rem 1rem',
                   fontSize: '0.8125rem', fontWeight: 600,
-                  color: '#ffffff',
-                  background: 'linear-gradient(135deg, rgba(223, 186, 115, 0.15) 0%, rgba(223, 186, 115, 0.03) 100%)',
-                  border: '1px solid rgba(223, 186, 115, 0.3)',
+                  color: theme === 'dark' ? '#ffffff' : 'hsl(var(--primary))',
+                  background: theme === 'dark'
+                    ? 'linear-gradient(135deg, rgba(197,168,128,0.15) 0%, rgba(197,168,128,0.03) 100%)'
+                    : 'hsl(var(--secondary))',
+                  border: theme === 'dark' ? '1px solid rgba(197,168,128,0.3)' : '1px solid hsl(var(--primary)/0.25)',
                   borderRadius: '99px',
                   cursor: 'pointer',
                   transition: 'all 250ms ease',
-                  boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.05)'
                 }}
-                onMouseEnter={e => { 
-                  e.currentTarget.style.background = 'linear-gradient(135deg, rgba(223, 186, 115, 0.25) 0%, rgba(223, 186, 115, 0.08) 100%)'; 
-                  e.currentTarget.style.transform = 'translateY(-1px)';
-                  e.currentTarget.style.boxShadow = '0 6px 16px rgba(223, 186, 115, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.1)'; 
-                }}
-                onMouseLeave={e => { 
-                  e.currentTarget.style.background = 'linear-gradient(135deg, rgba(223, 186, 115, 0.15) 0%, rgba(223, 186, 115, 0.03) 100%)'; 
-                  e.currentTarget.style.transform = 'translateY(0)';
-                  e.currentTarget.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.05)'; 
-                }}
+                onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-1px)'; e.currentTarget.style.boxShadow = 'var(--shadow-primary)'; }}
+                onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = 'none'; }}
               >
-                <Sparkles size={14} style={{ color: 'var(--color-gold)' }} />
+                <Sparkles size={14} style={{ color: 'hsl(var(--primary))' }} />
                 <span>Ask AI</span>
               </button>
               
               <Link
                 to="/contact"
                 style={{
-                  padding: '0.55rem 1.1rem',
+                  padding: '0.55rem 1.2rem',
                   fontSize: '0.875rem',
                   fontWeight: 600,
-                  color: 'var(--color-navy)',
-                  backgroundColor: '#ffffff',
+                  color: 'hsl(var(--primary-foreground))',
+                  backgroundColor: 'hsl(var(--primary))',
                   borderRadius: '99px',
                   textDecoration: 'none',
                   transition: 'all 200ms ease',
-                  boxShadow: '0 2px 8px rgba(255,255,255,0.1)'
+                  boxShadow: 'var(--shadow-primary)',
                 }}
-                onMouseEnter={e => { e.currentTarget.style.backgroundColor = '#f1f3f5'; e.currentTarget.style.transform = 'translateY(-1px)'; }}
-                onMouseLeave={e => { e.currentTarget.style.backgroundColor = '#ffffff'; e.currentTarget.style.transform = 'translateY(0)'; }}
+                onMouseEnter={e => { e.currentTarget.style.opacity = '0.9'; e.currentTarget.style.transform = 'scale(1.02)'; }}
+                onMouseLeave={e => { e.currentTarget.style.opacity = '1'; e.currentTarget.style.transform = 'scale(1)'; }}
               >
                 Talk to an Expert
               </Link>
             </div>
+            {/* Mobile theme toggle */}
+            <button
+              onClick={toggle}
+              className="md:hidden"
+              style={{
+                padding: '0.4rem', borderRadius: '50%',
+                color: theme === 'dark' ? 'rgba(255,255,255,0.8)' : 'hsl(var(--muted-foreground))',
+                background: 'transparent', border: 'none', cursor: 'pointer',
+              }}
+            >
+              {theme === 'light' ? <Moon size={18} /> : <Sun size={18} />}
+            </button>
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               style={{
                 padding: '0.5rem',
-                color: '#ffffff', background: 'transparent', border: 'none', cursor: 'pointer',
+                color: theme === 'dark' ? '#ffffff' : 'hsl(var(--foreground))',
+                background: 'transparent', border: 'none', cursor: 'pointer',
                 zIndex: 50,
               }}
               className="md:hidden"
@@ -533,8 +571,8 @@ export default function PublicLayout() {
         <Outlet />
       </main>
 
-      {/* ── FOOTER (Priority 2 & 4: Human-crafted copywriting & 8pt spatial grid) ── */}
-      <footer style={{ background: 'var(--color-navy)', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+      {/* ── FOOTER ── */}
+      <footer style={{ background: theme === 'dark' ? 'var(--color-navy)' : 'hsl(var(--foreground))', borderTop: theme === 'dark' ? '1px solid rgba(255,255,255,0.06)' : 'none' }}>
         <div style={{ maxWidth: '88rem', margin: '0 auto', padding: 'clamp(3rem, 10vw, 5rem) clamp(1rem, 5vw, 2rem) 3rem' }}>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '3.5rem', marginBottom: '4.5rem' }}>
 
