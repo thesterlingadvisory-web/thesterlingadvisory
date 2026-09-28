@@ -218,7 +218,7 @@
   .link-underline:hover::after { transform: scaleX(1); transform-origin: bottom left; }
 
   /* â”€â”€ BUTTONS â”€â”€ */
-  .btn-primary, .btn-gold {
+  .btn-primary {
     display: inline-flex; align-items: center; justify-content: center; gap: 8px;
     background-color: hsl(var(--primary));
     color: hsl(var(--primary-foreground));
@@ -227,9 +227,24 @@
     border-radius: var(--radius-full); border: none;
     box-shadow: var(--shadow-primary); cursor: pointer; transition: all 200ms ease;
   }
-  .btn-primary:hover, .btn-gold:hover {
+  .btn-primary:hover {
     background-color: hsl(var(--primary) / 0.9);
     transform: scale(1.02); box-shadow: var(--shadow-primary-lg);
+  }
+
+  .btn-gold {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    background-color: #C79A45;
+    color: #07101F;
+    font-family: var(--font-body); font-weight: 600; font-size: 0.875rem;
+    letter-spacing: -0.01em; padding: 0.75rem 1.5rem;
+    border-radius: var(--radius-full); border: none;
+    box-shadow: 0 4px 14px rgba(199,154,69,0.18);
+    cursor: pointer; transition: all 200ms ease;
+  }
+  .btn-gold:hover {
+    background-color: #B48738;
+    transform: scale(1.02); box-shadow: 0 5px 16px rgba(199,154,69,0.22);
   }
 
   .btn-navy {
