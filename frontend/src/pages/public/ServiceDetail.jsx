@@ -5,7 +5,7 @@ import {
   CheckCircle2, ArrowRight, FileText, Clock, CreditCard,
   ShieldAlert, Building2, Calculator, ShieldCheck, Scale,
   Landmark, BarChart2, Users, Award, TrendingUp, Star,
-  Phone, MessageCircle, ChevronRight, CheckCircle
+  Phone, MessageCircle, ChevronRight, CheckCircle, Plus, Minus, ChevronDown
 } from 'lucide-react';
 import { getServiceBySlug, serviceCategories } from '../../data/services';
 
@@ -78,8 +78,7 @@ const serviceContent = {
     ],
     agencyDocuments: [
       'Partnership Deed Drafting',
-      'Registration Application',
-      'Government Filing',
+      'Registration Application & Government Filing',
       'Application tracking and status updates'
     ],
     whyUs: ['Custom constitutional partnership deed drafting', 'State-specific Registrar of Firms representation', 'Corporate PAN & TAN allocation', 'Retainer-led statutory follow-up'],
@@ -245,9 +244,8 @@ const serviceContent = {
     ],
     agencyDocuments: [
       'Trust Deed Drafting',
-      'Registration Application',
-      'Government Filing',
-      'Supporting Declarations (where required)',
+      'Registration Application & Government Filing',
+      'Supporting Declarations',
       'Application tracking and status updates'
     ],
     whyUs: ['Fiduciary trust deed drafting by specialized counsel', 'Sub-registrar jurisdictional representation', '12A & 80G tax exemption filings', 'Multi-state charitable trust compliance'],
@@ -279,8 +277,7 @@ const serviceContent = {
     agencyDocuments: [
       'Memorandum of Association (MoA) of the Society',
       'Rules & Regulations Drafting',
-      'Registration Application',
-      'Government Filing',
+      'Registration Application & Government Filing',
       'Application tracking and status updates'
     ],
     whyUs: ['Constitutional memorandum & rules drafting', 'Registrar of Societies statutory filing', 'Governing body compliance advisory', 'Annual list of governing body filings'],
@@ -288,18 +285,18 @@ const serviceContent = {
   'gst-registration': {
     overview: 'Goods and Services Tax (GST) is an indirect tax applicable to the supply of most goods and services in India. Businesses that meet the conditions prescribed under GST law are required to obtain GST registration. Once registered, the business receives a GST Identification Number (GSTIN), which is used for GST compliance and other business transactions.',
     features: [
-      'GST Identification Number (GSTIN)',
-      'Single registration for GST compliance',
-      'Enables collection of GST (where applicable)',
-      'Eligible to claim Input Tax Credit (subject to GST law)',
-      'Online registration process',
-      'Valid across India'
+      'GST Invoicing & Tax Collection',
+      'Inter-State Trade & Pan-India Supply',
+      'Claim Tax Credit on Purchases (ITC)',
+      'Separate Registration Required Per State',
+      'Sell on E-Commerce & Marketplaces'
     ],
     eligibility: [
-      'Businesses required to register under the GST Act.',
-      'Businesses making inter-state taxable supplies, where registration is applicable.',
-      'E-commerce sellers and other businesses required to register under GST.',
-      'Persons applying for voluntary GST registration.'
+      'Service Providers with annual aggregate turnover exceeding ₹20 Lakh (₹10 Lakh for Special Category States).',
+      'Suppliers of Goods / Traders with annual aggregate turnover exceeding ₹40 Lakh (₹20 Lakh for Special Category States).',
+      'Businesses engaged in inter-state taxable supply of goods or services (mandatory registration).',
+      'E-commerce operators and sellers supplying goods/services through digital platforms.',
+      'Businesses applying for voluntary GST registration to claim ITC and expand commercially.'
     ],
     clientDocuments: [
       'PAN Card',
@@ -310,10 +307,100 @@ const serviceContent = {
       'Bank Account Details',
       'Business Constitution Details (Proprietorship, Partnership, LLP or Company)'
     ],
+    clientDocumentsByConstitution: {
+      'sole-proprietorship': {
+        label: 'Sole Proprietorship (Individual)',
+        documents: [
+          { name: 'PAN Card of the Proprietor' },
+          { name: 'Aadhaar Card of the Proprietor' },
+          { name: 'Passport-size Photograph of the Proprietor' },
+          {
+            name: 'Proof of Principal Place of Business',
+            hasSubtypes: true,
+            hint: 'Any one of the following valid documents:',
+            subtypes: [
+              'Electricity Bill / Water Bill / Property Tax Receipt (Recent, < 2 months old)',
+              'Rent Agreement / Lease Deed (If rented/leased premises)',
+              'No Objection Certificate (NOC) from Property Owner',
+              'Consent Letter from Property Owner (If premises owned by family member / relative)',
+              'Municipal Khata Copy / Property Ownership Deed (If self-owned)'
+            ]
+          },
+          { name: 'Bank Account Proof (Cancelled Cheque, Bank Statement, or First Page of Passbook)' }
+        ]
+      },
+      'partnership-firm': {
+        label: 'Partnership Firm',
+        documents: [
+          { name: 'PAN Card of the Partnership Firm' },
+          { name: 'Partnership Deed (Registered or Notarized)' },
+          { name: 'PAN Card & Aadhaar Card of all Partners' },
+          { name: 'Passport-size Photographs of all Partners & Authorized Signatory' },
+          { name: 'Letter of Authorization / Resolution in favor of Authorized Signatory' },
+          {
+            name: 'Proof of Principal Place of Business',
+            hasSubtypes: true,
+            hint: 'Any one of the following valid documents:',
+            subtypes: [
+              'Electricity Bill / Utility Bill (< 2 months old)',
+              'Rent Agreement / Lease Deed executed in the name of the Firm or Partner',
+              'No Objection Certificate (NOC) from Property Owner',
+              'Property Ownership Proof / Municipal Tax Receipt (If property is owned)'
+            ]
+          },
+          { name: 'Bank Account Proof of Firm (Cancelled Cheque or Bank Statement showing Firm Name)' }
+        ]
+      },
+      'llp': {
+        label: 'Limited Liability Partnership (LLP)',
+        documents: [
+          { name: 'PAN Card of the LLP' },
+          { name: 'Certificate of Incorporation (CoI) issued by MCA' },
+          { name: 'LLP Agreement (Executed & Approved)' },
+          { name: 'PAN & Aadhaar Cards of Designated Partners' },
+          { name: 'Passport-size Photographs of Designated Partners & Authorized Signatory' },
+          { name: 'Board Resolution / Power of Attorney for Designated Partner' },
+          {
+            name: 'Proof of Principal Place of Business',
+            hasSubtypes: true,
+            hint: 'Any one of the following valid documents:',
+            subtypes: [
+              'Recent Utility Bill (Electricity, Water, Gas < 2 months old)',
+              'Rent / Lease Agreement executed in the legal name of the LLP',
+              'No Objection Certificate (NOC) from Property Owner in favor of the LLP'
+            ]
+          },
+          { name: 'Bank Account Proof of LLP (Cancelled Cheque or Bank Statement in LLP Name)' }
+        ]
+      },
+      'private-limited-company': {
+        label: 'Private Limited Company / OPC / Public Ltd',
+        documents: [
+          { name: 'PAN Card of the Company' },
+          { name: 'Certificate of Incorporation (CoI) issued by MCA' },
+          { name: 'Memorandum of Association (MoA) & Articles of Association (AoA)' },
+          { name: 'PAN & Aadhaar Cards of all Directors' },
+          { name: 'Passport-size Photographs of Directors & Authorized Signatory' },
+          { name: 'Board Resolution authorizing Signatory with Digital Signature (DSC)' },
+          {
+            name: 'Proof of Principal Place of Business',
+            hasSubtypes: true,
+            hint: 'Any one of the following valid documents:',
+            subtypes: [
+              'Recent Utility Bill (Electricity, Water, Municipal Receipt < 2 months old)',
+              'Rent / Lease Agreement executed in the Company’s legal name',
+              'No Objection Certificate (NOC) from Property Owner for commercial operations',
+              'Ownership Title Deed / Municipal Tax Receipt (If property is owned by the Company)'
+            ]
+          },
+          { name: 'Bank Account Proof of Company (Cancelled Cheque or Bank Statement in Company Name)' }
+        ]
+      }
+    },
     agencyDocuments: [
-      'GST Registration Application',
-      'Aadhaar Authentication Assistance (where applicable)',
-      'Government Filing',
+      'GST Registration Application & Government Filing',
+      'Drafting of Supporting Declarations & NOC',
+      'HSN / SAC Code & Jurisdiction Mapping',
       'Application tracking and status updates'
     ],
     whyUs: ['Aadhaar verification and officer representation', 'Pan-India multi-jurisdictional filings', 'Principal Place of Business structuring', 'Ongoing monthly & quarterly return retainers'],
@@ -340,8 +427,7 @@ const serviceContent = {
       'Authorisation Letter (where applicable)'
     ],
     agencyDocuments: [
-      'GST Amendment Application',
-      'Government Filing',
+      'GST Amendment Application & Government Filing',
       'Application tracking and status updates'
     ],
     whyUs: ['Rapid jurisdictional amendment filings', 'Pre-cancellation liability audits', 'Final GSTR-10 statutory return filing', 'Authority notice representation'],
@@ -368,8 +454,7 @@ const serviceContent = {
       'Business Registration Proof (if applicable)'
     ],
     agencyDocuments: [
-      'PAN/TAN Application & TDS Registration',
-      'Government Filing',
+      'PAN/TAN Application, TDS Registration & Government Filing',
       'Application tracking and status updates'
     ],
     whyUs: ['Corporate PAN & TAN allotment', 'Quarterly TDS return e-filing (Form 24Q/26Q)', 'Form 16/16A generation', 'TDS mismatch resolution (Traces)'],
@@ -396,8 +481,7 @@ const serviceContent = {
       'Mobile Number & Email ID'
     ],
     agencyDocuments: [
-      'Professional Tax Registration Application',
-      'Government Filing',
+      'Professional Tax Registration Application & Government Filing',
       'Application tracking and status updates'
     ],
     whyUs: ['State-specific Employer & Employee PT Enrolment', 'Monthly salary deduction matrix setup', 'Statutory monthly & annual return filing', 'Multi-state enterprise compliance'],
@@ -441,8 +525,7 @@ const serviceContent = {
       'Mobile Number & Email ID'
     ],
     agencyDocuments: [
-      'Registration Application',
-      'Government Filing',
+      'Registration Application & Government Filing',
       'Application tracking and status updates'
     ],
     whyUs: ['Pan-India state municipal licensing', 'Commercial electricity & water tariff conversion advisory', 'Intimation of commencement filings', 'Renewal & amendment lifecycle management'],
@@ -468,8 +551,7 @@ const serviceContent = {
       'Passport-size Photograph'
     ],
     agencyDocuments: [
-      'Trade Licence Application',
-      'Government Filing',
+      'Trade Licence Application & Government Filing',
       'Application tracking and status updates'
     ],
     whyUs: ['Local municipal corporation liaising', 'Health & sanitation NOC integration', 'Zoning law compliance checks', 'Multi-outlet municipal licensing strategy'],
@@ -495,8 +577,7 @@ const serviceContent = {
       'Details of Manufacturing Activity'
     ],
     agencyDocuments: [
-      'Factory Licence Application',
-      'Government Filing',
+      'Factory Licence Application & Government Filing',
       'Application tracking and status updates'
     ],
     whyUs: ['Factory layout plan approval (Directorate of Industrial Safety)', 'State Pollution Control Board (Consent to Establish/Operate) mapping', 'Chief Inspector of Factories (CIF) representation', 'Statutory compliance registers & return setup'],
@@ -528,8 +609,7 @@ const serviceContent = {
     ],
     agencyDocuments: [
       'Trademark Search',
-      'Trademark Application',
-      'Government Filing',
+      'Trademark Application & Government Filing',
       'Application tracking and status updates'
     ],
     whyUs: ['Pre-filing trademark viability search', 'Class-wise classification advisory', 'Objection reply & hearing representation', 'Trademark watch & infringement advisory'],
@@ -558,8 +638,7 @@ const serviceContent = {
       'Mobile Number & Email ID'
     ],
     agencyDocuments: [
-      'Copyright Application',
-      'Government Filing',
+      'Copyright Application & Government Filing',
       'Application tracking and status updates'
     ],
     whyUs: ['Diary number allotment tracking', 'Work-specific class determination', 'Copyright Board hearing representation', 'NOC & deed of assignment drafting'],
@@ -588,8 +667,7 @@ const serviceContent = {
       'Mobile Number & Email ID'
     ],
     agencyDocuments: [
-      'Design Application',
-      'Government Filing',
+      'Design Application & Government Filing',
       'Application tracking and status updates'
     ],
     whyUs: ['Representation before the Controller of Designs', 'Drawing & perspective view formatting', 'Design novelty & prior art searches', 'Infringement notice drafting'],
@@ -618,9 +696,8 @@ const serviceContent = {
       'Mobile Number & Email ID'
     ],
     agencyDocuments: [
-      'Patent Application',
+      'Patent Application & Government Filing',
       'Specification Drafting Support',
-      'Government Filing',
 'Application tracking and status updates'
     ],
     whyUs: ['Provisional & complete specification drafting', 'Global prior art searches', 'Patent cooperation treaty (PCT) filings', 'FER (First Examination Report) defense'],
@@ -650,8 +727,7 @@ const serviceContent = {
       'Mobile Number & Email ID'
     ],
     agencyDocuments: [
-      'Udyam Registration Application',
-      'Government Filing',
+      'Udyam Registration Application & Government Filing',
       'Application tracking and status updates'
     ],
     whyUs: ['Aadhaar/PAN API integration', 'NIC code optimization for maximum scheme eligibility', 'Priority sector lending classification advisory', 'MSME Samadhaan delayed payment support'],
@@ -681,9 +757,8 @@ const serviceContent = {
       'Mobile Number & Email ID'
     ],
     agencyDocuments: [
-      'GeM Registration Application',
+      'GeM Registration Application & Government Filing',
       'Seller Profile Setup',
-      'Government Filing',
       'Application tracking and status updates'
     ],
     whyUs: ['OEM vs Reseller panel structuring', 'Direct purchase & L1 bidding advisory', 'Caution money & vendor assessment facilitation', 'Catalogue mapping and listing'],
@@ -709,8 +784,7 @@ const serviceContent = {
       'Mobile Number & Email ID'
     ],
     agencyDocuments: [
-      'NSIC Registration Application',
-      'Government Filing',
+      'NSIC Registration Application & Government Filing',
       'Application tracking and status updates'
     ],
     whyUs: ['Single point registration scheme (SPRS) execution', 'Earnest Money Deposit (EMD) exemption advisory', 'Tender capacity assessment mapping', 'Inspection readiness support'],
@@ -736,8 +810,7 @@ const serviceContent = {
       'Brief Description of the Business'
     ],
     agencyDocuments: [
-      'Startup India & DPIIT Recognition Application',
-      'Government Filing',
+      'Startup India & DPIIT Recognition Application & Government Filing',
       'Application tracking and status updates'
     ],
     whyUs: ['Innovation & scalability pitch drafting', 'Form-1 statutory tax holiday application', 'Section 80-IAC tax holiday filing', 'Strategic IP fast-track advisory'],
@@ -762,8 +835,7 @@ const serviceContent = {
       'Mobile Number & Email ID'
     ],
     agencyDocuments: [
-      'ZED Certification Application',
-      'Government Filing',
+      'ZED Certification Application & Government Filing',
       'Application tracking and status updates'
     ],
     whyUs: ['Quality management systems (QMS) mapping', 'Environmental compliance (EMS) structuring', 'ZED bronze/silver/gold tier progression', 'Subsidy linkage facilitation'],
@@ -789,8 +861,7 @@ const serviceContent = {
       'Details of Food Business'
     ],
     agencyDocuments: [
-      'FSSAI Registration/Licence Application',
-      'Government Filing',
+      'FSSAI Registration/Licence Application & Government Filing',
       'Application tracking and status updates'
     ],
     whyUs: ['Basic, State & Central license categorization', 'FoSCoS portal application management', 'Food safety inspection preparation', 'Annual statutory return & renewal retainers'],
@@ -818,8 +889,7 @@ const serviceContent = {
       'Details of the Business'
     ],
     agencyDocuments: [
-      'Drug Licence Application',
-      'Government Filing',
+      'Drug Licence Application & Government Filing',
       'Application tracking and status updates'
     ],
     whyUs: ['State Drug Controller representation', 'Retail, wholesale & distribution licenses', 'Pharmacist compliance auditing', 'Annual drug license renewal tracking'],
@@ -846,8 +916,7 @@ const serviceContent = {
       'Product Details'
     ],
     agencyDocuments: [
-      'Cosmetics Licence Application',
-      'Government Filing',
+      'Cosmetics Licence Application & Government Filing',
       'Application tracking and status updates'
     ],
     whyUs: ['CDSCO & State Drug Controller filing', 'GMP manufacturing facility compliance', 'Cosmetic formulation dossier auditing', 'Product label statutory compliance'],
@@ -877,8 +946,7 @@ const serviceContent = {
       'Business Details'
     ],
     agencyDocuments: [
-      'Legal Metrology Application',
-      'Government Filing',
+      'Legal Metrology Application & Government Filing',
       'Application tracking and status updates'
     ],
     whyUs: ['Packer & importer statutory registration', 'Model approval application management', 'Product label statutory declaration review', 'Weights & measures inspection defense'],
@@ -903,8 +971,7 @@ const serviceContent = {
       'Business Details'
     ],
     agencyDocuments: [
-      'Fire NOC Application',
-      'Government Filing',
+      'Fire NOC Application & Government Filing',
       'Application tracking and status updates'
     ],
     whyUs: ['Comprehensive fire safety architecture check', 'State Fire Department application filing', 'Inspection & testing representation', 'Annual Fire NOC statutory renewal'],
@@ -930,8 +997,7 @@ const serviceContent = {
       'Manufacturing Process Details'
     ],
     agencyDocuments: [
-      'SPCB Application',
-      'Government Filing',
+      'SPCB Application & Government Filing',
       'Application tracking and status updates'
     ],
     whyUs: ['CTE & CTO statutory filings', 'Environmental engineering documentation', 'Effluent treatment plant (ETP) compliance', 'Annual environmental audit reports'],
@@ -960,8 +1026,7 @@ const serviceContent = {
       'Mobile Number & Email ID'
     ],
     agencyDocuments: [
-      'IEC Application',
-      'Government Filing',
+      'IEC Application & Government Filing',
       'Application tracking and status updates'
     ],
     whyUs: ['Instant DGFT portal allocation', 'Authorized Dealer (AD) code integration', 'Pan-India customs port mapping', 'Annual DGFT IEC statutory update'],
@@ -983,8 +1048,7 @@ const serviceContent = {
       'Supporting Documents'
     ],
     agencyDocuments: [
-      'DGFT Authorization Application',
-      'Government Filing',
+      'DGFT Authorization Application & Government Filing',
       'Application tracking and status updates'
     ],
     whyUs: ['Export incentive eligibility auditing', 'Advance Authorization & EPCG filings', 'Export obligation redemption (EODC)', 'DGFT dispute representation'],
@@ -1006,8 +1070,7 @@ const serviceContent = {
       'Business Details'
     ],
     agencyDocuments: [
-      'RCMC Application',
-      'Government Filing',
+      'RCMC Application & Government Filing',
       'Application tracking and status updates'
     ],
     whyUs: ['Commodity-specific council identification', 'Export Promotion Council filing', 'Market access initiative eligibility', 'Annual RCMC membership renewal'],
@@ -1030,8 +1093,7 @@ const serviceContent = {
       'Business Details'
     ],
     agencyDocuments: [
-      'AD Code Registration',
-      'Government Filing',
+      'AD Code Registration & Government Filing',
       'Application tracking and status updates'
     ],
     whyUs: ['Bank AD code letter coordination', 'ICEGATE customs port registration', 'Multi-port EDI linking', 'Drawback account verification'],
@@ -1054,8 +1116,7 @@ const serviceContent = {
       'Authorised Signatory Details'
     ],
     agencyDocuments: [
-      'ICEGATE Registration',
-      'Government Filing',
+      'ICEGATE Registration & Government Filing',
       'Application tracking and status updates'
     ],
     whyUs: ['Complete ICEGATE user registration', 'DSC authentication linking', 'Customs broker integration advisory', 'Real-time customs clearance tracking'],
@@ -1107,8 +1168,7 @@ const serviceContent = {
       'Mobile Number & Email ID'
     ],
     agencyDocuments: [
-      'DIN Application',
-      'Government Filing',
+      'DIN Application & Government Filing',
       'Application tracking and status updates'
     ],
     whyUs: ['SPICe+ integrated DIN allotment', 'Standalone DIR-3 application filing', 'Deactivated DIN regularisation', 'DIR-3 KYC annual maintenance'],
@@ -1130,8 +1190,7 @@ const serviceContent = {
       'Mobile Number & Email ID'
     ],
     agencyDocuments: [
-      'DIR-3 KYC Filing',
-      'Government Filing',
+      'DIR-3 KYC & Government Filing',
       'Application tracking and status updates'
     ],
     whyUs: ['On-time annual statutory submission', 'DSC and OTP authenticated filing', 'Multi-director corporate bulk execution', 'Deactivated DIN restoration retainers'],
@@ -1153,8 +1212,7 @@ const serviceContent = {
       'Authorised Signatory Details'
     ],
     agencyDocuments: [
-      'LEI Application',
-      'Government Filing',
+      'LEI Application & Government Filing',
       'Application tracking and status updates'
     ],
     whyUs: ['CCIL / Global LEI foundation filing', 'Corporate documentation preparation', 'Expedited LEI code allocation', 'Annual LEI statutory renewal tracking'],
@@ -1179,8 +1237,7 @@ const serviceContent = {
       'Information required for annual filings'
     ],
     agencyDocuments: [
-      'Annual Compliance Filings',
-      'Government Filing',
+      'Annual Compliance & Government Filings',
       'Application tracking and status updates'
     ],
     whyUs: ['Dedicated Senior Advisory statutory audits', 'Automated MCA/ROC compliance calendars', 'Financial statement preparation & filing', 'Zero-penalty statutory guarantee'],
@@ -1195,6 +1252,15 @@ export default function ServiceDetail() {
   const { slug } = useParams();
   const navigate = useNavigate();
   const [serviceData, setServiceData] = useState(null);
+  const [selectedConstitution, setSelectedConstitution] = useState('sole-proprietorship');
+  const [expandedSubtypes, setExpandedSubtypes] = useState({});
+
+  const toggleSubtypes = (idx) => {
+    setExpandedSubtypes(prev => ({
+      ...prev,
+      [idx]: !prev[idx]
+    }));
+  };
 
   useEffect(() => {
     const found = getServiceBySlug(slug);
@@ -1320,21 +1386,144 @@ export default function ServiceDetail() {
                   )}
 
                   {/* Documents */}
-                  {((content.clientDocuments && content.clientDocuments.length > 0) || (serviceData.documents && serviceData.documents.length > 0)) && (
+                  {(content.clientDocumentsByConstitution || (content.clientDocuments && content.clientDocuments.length > 0) || (serviceData.documents && serviceData.documents.length > 0)) && (
                     <div>
-                      <h2 style={{ fontSize: '1rem', fontWeight: 700, color: '#0B172A', marginBottom: '0.875rem', fontFamily: 'var(--font-heading)', letterSpacing: '-0.01em' }}>
-                        Documents Required
-                      </h2>
+                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.875rem', flexWrap: 'wrap', gap: '8px' }}>
+                        <h2 style={{ fontSize: '1rem', fontWeight: 700, color: '#0B172A', margin: 0, fontFamily: 'var(--font-heading)', letterSpacing: '-0.01em' }}>
+                          Documents Required
+                        </h2>
+                      </div>
+
+                      {/* Constitution Selector (If Service supports Constitution-based docs) */}
+                      {content.clientDocumentsByConstitution && (
+                        <div style={{ marginBottom: '1rem', background: '#FAF9F6', border: '1px solid #E5E7EB', borderRadius: '10px', padding: '0.75rem 0.875rem' }}>
+                          <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 700, color: '#6B7280', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.4rem' }}>
+                            Business Constitution Type
+                          </label>
+                          <div style={{ position: 'relative' }}>
+                            <select
+                              value={selectedConstitution}
+                              onChange={(e) => {
+                                setSelectedConstitution(e.target.value);
+                                setExpandedSubtypes({});
+                              }}
+                              style={{
+                                width: '100%',
+                                padding: '0.55rem 2.25rem 0.55rem 0.75rem',
+                                fontSize: '0.875rem',
+                                fontWeight: 600,
+                                color: '#0B172A',
+                                backgroundColor: '#FFFFFF',
+                                border: '1.5px solid #D1D5DB',
+                                borderRadius: '8px',
+                                outline: 'none',
+                                cursor: 'pointer',
+                                appearance: 'none',
+                                WebkitAppearance: 'none',
+                                boxShadow: '0 1px 2px rgba(16,24,40,0.05)',
+                                transition: 'all 150ms'
+                              }}
+                              onFocus={(e) => { e.target.style.borderColor = '#C79A45'; e.target.style.boxShadow = '0 0 0 3px rgba(199,154,69,0.15)'; }}
+                              onBlur={(e) => { e.target.style.borderColor = '#D1D5DB'; e.target.style.boxShadow = '0 1px 2px rgba(16,24,40,0.05)'; }}
+                            >
+                              {Object.entries(content.clientDocumentsByConstitution).map(([cKey, cData]) => (
+                                <option key={cKey} value={cKey}>
+                                  {cData.label}
+                                </option>
+                              ))}
+                            </select>
+                            <ChevronDown size={16} style={{ position: 'absolute', right: '12px', top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none', color: '#6B7280' }} />
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Documents List */}
                       <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
-                        {(content.clientDocuments || serviceData.documents).map((doc, idx) => {
-                          const docs = content.clientDocuments || serviceData.documents;
-                          return (
-                            <div key={idx} style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '0.5rem 0', borderBottom: idx < docs.length - 1 ? '1px solid #F3F4F6' : 'none' }}>
+                        {content.clientDocumentsByConstitution ? (
+                          (content.clientDocumentsByConstitution[selectedConstitution]?.documents || []).map((docItem, idx, arr) => {
+                            const isExpanded = !!expandedSubtypes[idx];
+                            return (
+                              <div key={idx} style={{ padding: '0.5rem 0', borderBottom: idx < arr.length - 1 ? '1px solid #F3F4F6' : 'none' }}>
+                                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '10px' }}>
+                                  <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flex: 1 }}>
+                                    <FileText size={14} style={{ color: docItem.hasSubtypes ? '#C79A45' : '#9CA3AF', flexShrink: 0 }} />
+                                    <span style={{ fontSize: '0.9rem', color: docItem.hasSubtypes ? '#0B172A' : '#374151', fontWeight: docItem.hasSubtypes ? 600 : 400, lineHeight: 1.55 }}>
+                                      {docItem.name}
+                                    </span>
+                                  </div>
+                                  {docItem.hasSubtypes && (
+                                    <button
+                                      type="button"
+                                      onClick={() => toggleSubtypes(idx)}
+                                      style={{
+                                        display: 'inline-flex',
+                                        alignItems: 'center',
+                                        gap: '4px',
+                                        fontSize: '0.75rem',
+                                        fontWeight: 600,
+                                        color: isExpanded ? '#92400E' : '#0B172A',
+                                        backgroundColor: isExpanded ? '#FEF3C7' : '#F3F4F6',
+                                        border: '1px solid',
+                                        borderColor: isExpanded ? '#FDE68A' : '#E5E7EB',
+                                        padding: '3px 8px',
+                                        borderRadius: '6px',
+                                        cursor: 'pointer',
+                                        transition: 'all 150ms'
+                                      }}
+                                      onMouseEnter={(e) => { if (!isExpanded) e.currentTarget.style.backgroundColor = '#E5E7EB'; }}
+                                      onMouseLeave={(e) => { if (!isExpanded) e.currentTarget.style.backgroundColor = '#F3F4F6'; }}
+                                    >
+                                      {isExpanded ? (
+                                        <>
+                                          <Minus size={12} style={{ color: '#92400E' }} />
+                                          <span>Hide</span>
+                                        </>
+                                      ) : (
+                                        <>
+                                          <Plus size={12} style={{ color: '#C79A45' }} />
+                                          <span>Details</span>
+                                        </>
+                                      )}
+                                    </button>
+                                  )}
+                                </div>
+
+                                {/* Expandable Subtypes Drawer */}
+                                {docItem.hasSubtypes && isExpanded && (
+                                  <div style={{
+                                    marginTop: '0.5rem',
+                                    marginLeft: '24px',
+                                    padding: '0.625rem 0.875rem',
+                                    background: '#FAF9F6',
+                                    border: '1px solid #EFECE6',
+                                    borderLeft: '3px solid #C79A45',
+                                    borderRadius: '6px',
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    gap: '0.35rem'
+                                  }}>
+                                    <span style={{ fontSize: '0.725rem', fontWeight: 700, color: '#854D0E', textTransform: 'uppercase', letterSpacing: '0.04em', marginBottom: '2px' }}>
+                                      {docItem.hint || 'Any one of the following valid documents:'}
+                                    </span>
+                                    {docItem.subtypes.map((sub, sIdx) => (
+                                      <div key={sIdx} style={{ display: 'flex', alignItems: 'flex-start', gap: '8px' }}>
+                                        <span style={{ color: '#C79A45', fontSize: '0.8rem', lineHeight: '1.4' }}>•</span>
+                                        <span style={{ fontSize: '0.825rem', color: '#4B5563', lineHeight: 1.45 }}>{sub}</span>
+                                      </div>
+                                    ))}
+                                  </div>
+                                )}
+                              </div>
+                            );
+                          })
+                        ) : (
+                          (content.clientDocuments || serviceData.documents).map((doc, idx, docsArr) => (
+                            <div key={idx} style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '0.5rem 0', borderBottom: idx < docsArr.length - 1 ? '1px solid #F3F4F6' : 'none' }}>
                               <FileText size={14} style={{ color: '#9CA3AF', flexShrink: 0 }} />
                               <span style={{ fontSize: '0.9rem', color: '#374151', lineHeight: 1.55 }}>{doc.replace('*', '')}</span>
                             </div>
-                          );
-                        })}
+                          ))
+                        )}
                       </div>
                     </div>
                   )}

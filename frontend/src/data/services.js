@@ -80,7 +80,7 @@ export const serviceCategories = [
     services: [
       {
         id: 'gst',
-        title: 'GST Registration & Structuring',
+        title: 'GST Registration',
         slug: 'gst-registration',
         shortDesc: 'State and central tax registration required for inter-state commerce and threshold compliance.',
         documents: ['PAN Card of Business/Applicant', 'Aadhaar Card of Authorized Signatory', 'Proof of Business Formation', 'Premises Utility Bill / Lease Agreement', 'Bank Statement / Cancelled Cheque'],

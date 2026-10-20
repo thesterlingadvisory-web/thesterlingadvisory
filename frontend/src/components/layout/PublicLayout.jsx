@@ -4,6 +4,7 @@ import { Menu, X, ChevronDown, Sparkles, Sun, Moon } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import ChatWidget from '../ui/ChatWidget';
 import { useTheme } from '../../utils/ThemeContext';
+import ServiceSearchBar from '../ui/ServiceSearchBar';
 
 const megaMenuCategories = [
   {
@@ -27,7 +28,7 @@ const megaMenuCategories = [
     shortTitle: 'Tax & Govt Registrations',
     desc: 'GST, professional tax, and all tax-related registrations handled by qualified professionals.',
     items: [
-      { label: 'GST Registration & Structuring', href: '/services/gst-registration', badge: 'Pan-India' },
+      { label: 'GST Registration', href: '/services/gst-registration', badge: 'Pan-India' },
       { label: 'GST Amendment & Transfer', href: '/services/gst-amendment' },
       { label: 'PAN, TAN & TDS Services', href: '/services/pan-tan-tds-services' },
       { label: 'Professional Tax Enrolment', href: '/services/professional-tax' },
@@ -390,6 +391,7 @@ export default function PublicLayout() {
           {/* CTA + Mobile Toggle */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
             <div className="hidden md:flex items-center" style={{ gap: '0.75rem' }}>
+              <ServiceSearchBar />
 
 
 
@@ -486,6 +488,9 @@ export default function PublicLayout() {
                 >
                   <X size={20} />
                 </button>
+              </div>
+              <div style={{ marginBottom: '1.25rem' }}>
+                <ServiceSearchBar isMobile={true} onCloseMobile={() => setIsMobileMenuOpen(false)} />
               </div>
               <nav style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem', marginBottom: 'auto' }}>
                 <span style={{ fontSize: '0.7rem', color: 'var(--color-gold)', fontFamily: 'var(--font-mono)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '0.5rem' }}>Menu</span>
